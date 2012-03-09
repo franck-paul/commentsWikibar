@@ -21,9 +21,15 @@
 # ***** END LICENSE BLOCK *****
 
 $core->addBehavior('publicHeadContent',array('dcCommentsWikibar','publicHeadContent'));
+$core->addBehavior('coreInitWikiComment',array('dcCommentsWikibar','coreInitWikiComment'));
 
 class dcCommentsWikibar
 {
+	public static function coreInitWikiComment($wiki2xhtml)
+	{
+		$wiki2xhtml->setOpt('active_quote',1);
+	}
+
 	public static function publicHeadContent()
 	{
 		global $core;
