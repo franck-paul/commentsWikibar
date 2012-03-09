@@ -70,6 +70,8 @@ class dcCommentsWikibar
 					"jsToolBar.prototype.elements.br.title = '".html::escapeJS(__('Line break'))."'; \n".
 					"jsToolBar.prototype.elements.ul.title = '".html::escapeJS(__('Unordered list'))."'; \n".
 					"jsToolBar.prototype.elements.ol.title = '".html::escapeJS(__('Ordered list'))."'; \n".
+					"jsToolBar.prototype.elements.pre.title = '".html::escapeJS(__('Preformatted'))."'; \n".
+					"jsToolBar.prototype.elements.bquote.title = '".html::escapeJS(__('Block quote'))."'; \n".
 					"jsToolBar.prototype.elements.link.title = '".html::escapeJS(__('Link'))."'; \n".
 					"jsToolBar.prototype.elements.link.href_prompt = '".html::escapeJS(__('URL?'))."'; \n".
 					"jsToolBar.prototype.elements.link.hreflang_prompt = '".html::escapeJS(__('Language?'))."'; \n\n".

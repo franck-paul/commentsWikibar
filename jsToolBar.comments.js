@@ -381,7 +381,7 @@ jsToolBar.prototype.elements.br = {
 	type: 'button',
 	title: 'Line break',
 	fn: {
-		wiki: function() { this.encloseSelection("\n",'') }
+		wiki: function() { this.encloseSelection('%%%'+"\n",'') }
 	}
 }
 
@@ -411,6 +411,34 @@ jsToolBar.prototype.elements.ol = {
 			this.encloseSelection('','',function(str) {
 				str = str.replace(/\r/g,'');
 				return '# '+str.replace(/\n/g,"\n# ");
+			});
+		}
+	}
+}
+
+// pre
+jsToolBar.prototype.elements.pre = {
+	type: 'button',
+	title: 'Preformatted',
+	fn: {
+		wiki: function() {
+			this.encloseSelection('','',function(str) {
+				str = str.replace(/\r/g,'');
+				return ' '+str.replace(/\n/g,"\n ");
+			});
+		}
+	}
+}
+
+// blockquote
+jsToolBar.prototype.elements.bquote = {
+	type: 'button',
+	title: 'Block quote',
+	fn: {
+		wiki: function() {
+			this.encloseSelection('','',function(str) {
+				str = str.replace(/\r/g,'');
+				return '> '+str.replace(/\n/g,"\n> ");
 			});
 		}
 	}

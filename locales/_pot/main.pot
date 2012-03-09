@@ -20,55 +20,63 @@ msgstr ""
 msgid "Comments Wikibar"
 msgstr ""
 
-#: _public.php:97
+#: _public.php:63
 msgid "You can use the following shortcuts to format your text."
 msgstr ""
 
-#: _public.php:98
+#: _public.php:64
 msgid "Strong emphasis"
 msgstr ""
 
-#: _public.php:99
+#: _public.php:65
 msgid "Emphasis"
 msgstr ""
 
-#: _public.php:100
+#: _public.php:66
 msgid "Inserted"
 msgstr ""
 
-#: _public.php:101
+#: _public.php:67
 msgid "Deleted"
 msgstr ""
 
-#: _public.php:102
+#: _public.php:68
 msgid "Inline quote"
 msgstr ""
 
-#: _public.php:103
+#: _public.php:69
 msgid "Code"
 msgstr ""
 
-#: _public.php:104
+#: _public.php:70
 msgid "Line break"
 msgstr ""
 
-#: _public.php:105
+#: _public.php:71
 msgid "Unordered list"
 msgstr ""
 
-#: _public.php:106
+#: _public.php:72
 msgid "Ordered list"
 msgstr ""
 
-#: _public.php:107
+#: _public.php:73
+msgid "Preformatted"
+msgstr ""
+
+#: _public.php:74
+msgid "Block quote"
+msgstr ""
+
+#: _public.php:75
 msgid "Link"
 msgstr ""
 
-#: _public.php:108
+#: _public.php:76
 msgid "URL?"
 msgstr ""
 
-#: _public.php:109
+#: _public.php:77
 msgid "Language?"
 msgstr ""
 
