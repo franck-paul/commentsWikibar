@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-28 16:47+0200\n"
+"POT-Creation-Date: 2010-07-29 17:20+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,104 +16,124 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: _admin.php:23 index.php:74 index.php:78
+#: _admin.php:13 index.php:57 index.php:62
 msgid "Comments Wikibar"
 msgstr ""
 
-#: _public.php:63
+#: _public.php:90
 msgid "You can use the following shortcuts to format your text."
 msgstr ""
 
-#: _public.php:64
+#: _public.php:91
 msgid "Strong emphasis"
 msgstr ""
 
-#: _public.php:65
+#: _public.php:92
 msgid "Emphasis"
 msgstr ""
 
-#: _public.php:66
+#: _public.php:93
 msgid "Inserted"
 msgstr ""
 
-#: _public.php:67
+#: _public.php:94
 msgid "Deleted"
 msgstr ""
 
-#: _public.php:68
+#: _public.php:95
 msgid "Inline quote"
 msgstr ""
 
-#: _public.php:69
+#: _public.php:96
 msgid "Code"
 msgstr ""
 
-#: _public.php:70
-msgid "Line break"
-msgstr ""
-
-#: _public.php:71
+#: _public.php:97
 msgid "Unordered list"
 msgstr ""
 
-#: _public.php:72
+#: _public.php:98
 msgid "Ordered list"
 msgstr ""
 
-#: _public.php:73
-msgid "Preformatted"
-msgstr ""
-
-#: _public.php:74
-msgid "Block quote"
-msgstr ""
-
-#: _public.php:75
+#: _public.php:99
 msgid "Link"
 msgstr ""
 
-#: _public.php:76
+#: _public.php:100
 msgid "URL?"
 msgstr ""
 
-#: _public.php:77
+#: _public.php:101
 msgid "Language?"
 msgstr ""
 
-#: index.php:64
+#: index.php:47
 msgid "Configuration successfully updated."
 msgstr ""
 
-#: index.php:85
+#: index.php:67
+msgid "Plugin Activation"
+msgstr ""
+
+#: index.php:69
 msgid "Plugin activation"
 msgstr ""
 
-#: index.php:88
+#: index.php:72
 msgid "Enable Comments Wikibar"
 msgstr ""
 
-#: index.php:90
+#: index.php:74
 msgid "Activating this plugin also enforces wiki syntax in blog comments"
 msgstr ""
 
-#: index.php:94
-msgid "Options"
+#: index.php:77
+msgid "Advanced Options"
 msgstr ""
 
-#: index.php:96
+#: index.php:79
+msgid "CSS inclusion"
+msgstr ""
+
+#: index.php:82
+msgid "Include CSS"
+msgstr ""
+
+#: index.php:85
 msgid "Use custom CSS"
 msgstr ""
 
-#: index.php:99
+#: index.php:88
 msgid "You can use a custom CSS by providing its location."
 msgstr ""
 
-#: index.php:100
+#: index.php:89 index.php:103
 msgid ""
 "A location beginning with a / is treated as absolute, else it is treated as "
 "relative to the blog's current theme URL"
 msgstr ""
 
-#: index.php:106
+#: index.php:93
+msgid "Javascript inclusion"
+msgstr ""
+
+#: index.php:96
+msgid "Include JS library"
+msgstr ""
+
+#: index.php:99
+msgid "Use custom JS library"
+msgstr ""
+
+#: index.php:102
+msgid "You can use a custom JS library by providing its location."
+msgstr ""
+
+#: index.php:107
+msgid "Include JS bootstrap"
+msgstr ""
+
+#: index.php:113
 msgid "Save configuration"
 msgstr ""

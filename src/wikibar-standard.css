@@ -65,9 +65,6 @@
 .jstb_code {
 	background-image: url(?pf=commentsWikibar/img/bt_code.png);
 }
-.jstb_br {
-	background-image: url(?pf=commentsWikibar/img/bt_br.png);
-}
 .jstb_ul {
 	background-image: url(?pf=commentsWikibar/img/bt_ul.png);
 }
@@ -76,10 +73,4 @@
 }
 .jstb_link {
 	background-image: url(?pf=commentsWikibar/img/bt_link.png);
-}
-.jstb_pre {
-	background-image: url(?pf=commentsWikibar/img/bt_pre.png);
-}
-.jstb_bquote {
-	background-image: url(?pf=commentsWikibar/img/bt_bquote.png);
 }

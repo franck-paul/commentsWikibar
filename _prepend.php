@@ -8,9 +8,5 @@
 # http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 #
 # -- END LICENSE BLOCK ------------------------------------
-if (!defined('DC_CONTEXT_ADMIN')) return;
-
-$_menu['Plugins']->addItem(__('Comments Wikibar'),'plugin.php?p=commentsWikibar','index.php?pf=commentsWikibar/icon.png',
-		preg_match('/plugin.php\?p=commentsWikibar(&.*)?$/',$_SERVER['REQUEST_URI']),
-		$core->auth->check('contentadmin',$core->blog->id));
+if (version_compare(PHP_VERSION,'5.2','<')) return;
 ?>

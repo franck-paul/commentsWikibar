@@ -1,30 +1,20 @@
 <?php
-# ***** BEGIN LICENSE BLOCK *****
-# This file is part of CommentsWikibar, a plugin for DotClear2.
-# Copyright (c) 2006-2008 Pep and contributors. All rights
-# reserved.
+# -- BEGIN LICENSE BLOCK ----------------------------------
 #
-# This plugin is free software; you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation; either version 2 of the License, or
-# (at your option) any later version.
+# This file is part of commentsWikibar, a plugin for DotClear2.
+# Copyright (c) 2006-2010 Pep and contributors.
+# Licensed under the GPL version 2.0 license.
+# See LICENSE file or
+# http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 #
-# This plugin is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this plugin; if not, write to the Free Software
-# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-#
-# ***** END LICENSE BLOCK *****
+# -- END LICENSE BLOCK ------------------------------------
+if (!defined('DC_RC_PATH')) return;
 
 $this->registerModule(
 	/* Name */		"Comments Wikibar",
 	/* Description*/	"Adds a formatting toolbar when public comments use the wiki syntax",
 	/* Author */		"Pep and contributors",
-	/* Version */		'1.2',
+	/* Version */		'1.1-RC1',
 	/* Permissions */	'contentadmin'
 );
 ?>
