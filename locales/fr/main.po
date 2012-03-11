@@ -18,7 +18,7 @@ msgid "Comments Wikibar"
 msgstr "Wikibarre"
 
 msgid "Preformatted"
-msgstr "Préformatté"
+msgstr "Préformaté"
 
 msgid "Block quote"
 msgstr "Bloc de citation"
@@ -64,6 +64,9 @@ msgstr "Insertion"
 
 msgid "Deleted"
 msgstr "Suppression"
+
+msgid "Inline quote"
+msgstr "Citation"
 
 msgid "Code"
 msgstr "Code"
