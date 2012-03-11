@@ -65,6 +65,10 @@ msgid "Preformatted"
 msgstr ""
 
 #: _public.php:74
+msgid "Inline quote"
+msgstr ""
+
+#: _public.php:74
 msgid "Block quote"
 msgstr ""
 
