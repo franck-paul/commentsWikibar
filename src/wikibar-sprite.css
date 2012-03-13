@@ -48,6 +48,9 @@
 .jstb_del { background-position: 0 -216px; }
 .jstb_quote { background-position: 0 -10px; }
 .jstb_code { background-position: 0 -100px; }
+.jstb_br { background-position: 0 -336px; }
 .jstb_ul { background-position: 0 -246px; }
 .jstb_ol { background-position: 0 -70px; }
+.jstb_pre { background-position: 0 -366px; }
+.jstb_bquote { background-position: 0 -306px; }
 .jstb_link { background-position: 0 -276px; }

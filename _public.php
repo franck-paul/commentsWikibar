@@ -12,6 +12,7 @@ if (!defined('DC_RC_PATH')) return;
 
 $core->addBehavior('publicHeadContent',  array('commentsWikibarBehaviors','publicHeadContent'));
 $core->addBehavior('publicFooterContent',array('commentsWikibarBehaviors','publicFooterContent'));
+$core->addBehavior('coreInitWikiComment',array('commentsWikibarBehaviors','coreInitWikiComment'));
 
 class commentsWikibarBehaviors
 {
@@ -31,6 +32,13 @@ class commentsWikibarBehaviors
 		return false;
 	}
 	
+	public static function coreInitWikiComment($wiki2xhtml)
+	{
+		if (self::canActivate()) {
+			$wiki2xhtml->setOpt('active_quote',1);
+		}
+	}
+
 	public static function publicHeadContent()
 	{
 		global $core;
@@ -94,8 +102,11 @@ class commentsWikibarBehaviors
 					"jsToolBar.prototype.elements.del.title = '".html::escapeJS(__('Deleted'))."'; \n".
 					"jsToolBar.prototype.elements.quote.title = '".html::escapeJS(__('Inline quote'))."'; \n".
 					"jsToolBar.prototype.elements.code.title = '".html::escapeJS(__('Code'))."'; \n".
+					"jsToolBar.prototype.elements.br.title = '".html::escapeJS(__('Line break'))."'; \n".
 					"jsToolBar.prototype.elements.ul.title = '".html::escapeJS(__('Unordered list'))."'; \n".
 					"jsToolBar.prototype.elements.ol.title = '".html::escapeJS(__('Ordered list'))."'; \n".
+					"jsToolBar.prototype.elements.pre.title = '".html::escapeJS(__('Preformatted'))."'; \n".
+					"jsToolBar.prototype.elements.bquote.title = '".html::escapeJS(__('Block quote'))."'; \n".
 					"jsToolBar.prototype.elements.link.title = '".html::escapeJS(__('Link'))."'; \n".
 					"jsToolBar.prototype.elements.link.href_prompt = '".html::escapeJS(__('URL?'))."'; \n".
 					"jsToolBar.prototype.elements.link.hreflang_prompt = '".html::escapeJS(__('Language?'))."'; \n\n".

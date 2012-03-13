@@ -14,7 +14,7 @@ $this->registerModule(
 	/* Name */		"Comments Wikibar",
 	/* Description*/	"Adds a formatting toolbar when public comments use the wiki syntax",
 	/* Author */		"Pep and contributors",
-	/* Version */		'1.1-RC1',
+	/* Version */		'1.3',
 	/* Permissions */	'contentadmin'
 );
 ?>

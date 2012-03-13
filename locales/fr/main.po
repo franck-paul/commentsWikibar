@@ -137,5 +137,11 @@ msgstr "Inclure l'amorce JS"
 msgid "Save configuration"
 msgstr "Enregistrer la configuration"
 
-#~ msgid "Line break"
-#~ msgstr "Passage à la ligne"
+msgid "Line break"
+msgstr "Passage à la ligne"
+
+msgid "Block quote"
+msgstr "Bloc de citation"
+
+msgid "Preformatted"
+msgstr "Texte préformaté"
