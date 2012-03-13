@@ -28,8 +28,8 @@ if (!empty($_POST['saveconfig'])) {
 		$wb_add_css = (empty($_POST['wb_add_css']))?false:true;
 		$wb_add_jslib = (empty($_POST['wb_add_jslib']))?false:true;
 		$wb_add_jsglue = (empty($_POST['wb_add_jsglue']))?false:true;
-		$custom_css = filter_var($_POST['custom_css'],FILTER_VALIDATE_URL);
-		$custom_jslib = filter_var($_POST['custom_jslib'],FILTER_VALIDATE_URL);
+		$custom_css = (empty($_POST['custom_css']))?'':html::sanitizeURL($_POST['custom_css']);
+		$custom_jslib = (empty($_POST['custom_jslib']))?'':html::sanitizeURL($_POST['custom_jslib']);
 		$core->blog->settings->commentswikibar->put('commentswikibar_active',$active,'boolean');
 		$core->blog->settings->commentswikibar->put('commentswikibar_add_css',$wb_add_css,'boolean');
 		$core->blog->settings->commentswikibar->put('commentswikibar_add_jslib',$wb_add_jslib,'boolean');
