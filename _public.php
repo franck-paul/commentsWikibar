@@ -34,8 +34,13 @@ class commentsWikibarBehaviors
 	
 	public static function coreInitWikiComment($wiki2xhtml)
 	{
+		global $core;
+		
 		if (self::canActivate()) {
 			$wiki2xhtml->setOpt('active_quote',1);
+			if ($core->blog->settings->commentswikibar->commentswikibar_no_pre) {
+				$wiki2xhtml->setOpt('active_pre',0);
+			}
 		}
 	}
 
@@ -113,6 +118,7 @@ class commentsWikibarBehaviors
 					"if (document.getElementById) { \n".
 					"	if (document.getElementById('".html::escapeJS('c_content')."')) { \n".
 					"		var commentTb = new jsToolBar(document.getElementById('".html::escapeJS('c_content')."')); \n".
+					($core->blog->settings->commentswikibar->commentswikibar_no_pre ? "		commentTb.elements.pre.type = \"\"; \n\n" : '').
 					"		commentTb.draw(); \n".
 					"	}\n".
 					"}\n".

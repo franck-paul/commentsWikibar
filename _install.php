@@ -18,6 +18,7 @@ if (version_compare($installed_version,$this_version,'>=')) {
 
 $core->blog->settings->addNamespace('commentswikibar');
 $core->blog->settings->commentswikibar->put('commentswikibar_active',false,'boolean','',false,true);
+$core->blog->settings->commentswikibar->put('commentswikibar_no_pre',false,'boolean','',false,true);
 $core->blog->settings->commentswikibar->put('commentswikibar_add_css',true,'boolean','',false,true);
 $core->blog->settings->commentswikibar->put('commentswikibar_add_jslib',true,'boolean','',false,true);
 $core->blog->settings->commentswikibar->put('commentswikibar_add_jsglue',true,'boolean','',false,true);

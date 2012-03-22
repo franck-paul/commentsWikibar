@@ -145,3 +145,9 @@ msgstr "Bloc de citation"
 
 msgid "Preformatted"
 msgstr "Texte préformaté"
+
+msgid "Options"
+msgstr "Options"
+
+msgid "Disable preformatted text"
+msgstr "Désactiver le texte préformaté"

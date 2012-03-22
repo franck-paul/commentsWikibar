@@ -12,6 +12,7 @@ if (!defined('DC_CONTEXT_ADMIN')) return;
 
 // Getting current parameters
 $active = (boolean)$core->blog->settings->commentswikibar->commentswikibar_active;
+$no_pre = (boolean)$core->blog->settings->commentswikibar->commentswikibar_no_pre;
 $wb_add_css = (boolean)$core->blog->settings->commentswikibar->commentswikibar_add_css;
 $wb_add_jslib = (boolean)$core->blog->settings->commentswikibar->commentswikibar_add_jslib;
 $wb_add_jsglue = (boolean)$core->blog->settings->commentswikibar->commentswikibar_add_jsglue;
@@ -25,12 +26,14 @@ if (!empty($_POST['saveconfig'])) {
 		$core->blog->settings->addNameSpace('commentswikibar');
 
 		$active = (empty($_POST['active']))?false:true;
+		$no_pre = (empty($_POST['no_pre']))?false:true;
 		$wb_add_css = (empty($_POST['wb_add_css']))?false:true;
 		$wb_add_jslib = (empty($_POST['wb_add_jslib']))?false:true;
 		$wb_add_jsglue = (empty($_POST['wb_add_jsglue']))?false:true;
 		$custom_css = (empty($_POST['custom_css']))?'':html::sanitizeURL($_POST['custom_css']);
 		$custom_jslib = (empty($_POST['custom_jslib']))?'':html::sanitizeURL($_POST['custom_jslib']);
 		$core->blog->settings->commentswikibar->put('commentswikibar_active',$active,'boolean');
+		$core->blog->settings->commentswikibar->put('commentswikibar_no_pre',$no_pre,'boolean');
 		$core->blog->settings->commentswikibar->put('commentswikibar_add_css',$wb_add_css,'boolean');
 		$core->blog->settings->commentswikibar->put('commentswikibar_add_jslib',$wb_add_jslib,'boolean');
 		$core->blog->settings->commentswikibar->put('commentswikibar_add_jsglue',$wb_add_jsglue,'boolean');
@@ -72,6 +75,13 @@ if (!empty($_POST['saveconfig'])) {
 			<label class=" classic" for="active">&nbsp;<?php echo __('Enable Comments Wikibar');?></label>
 		</p>
 		<p><em><?php echo __('Activating this plugin also enforces wiki syntax in blog comments'); ?></em></p>
+	</fieldset>
+	<fieldset>
+		<legend><?php echo __('Options'); ?></legend>
+		<p class="field">
+			<?php echo form::checkbox('no_pre', 1, $no_pre); ?>
+			<label class=" classic" for="no_pre">&nbsp;<?php echo __('Disable preformatted text');?></label>
+			</p>
 	</fieldset>
 	</div>
 	<div class="multi-part" id="wikibar_advanced" title="<?php echo __('Advanced Options'); ?>">
