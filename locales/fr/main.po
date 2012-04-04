@@ -151,3 +151,18 @@ msgstr "Options"
 
 msgid "Disable preformatted text"
 msgstr "Désactiver le texte préformaté"
+
+msgid "Disable characters format"
+msgstr "Désactiver la mise en forme des caractères"
+
+msgid "Disable breakline"
+msgstr "Désactiver les sauts de ligne"
+
+msgid "Disable list"
+msgstr "Désactiver les listes"
+
+msgid "Disable blockquote"
+msgstr "Désactiver les blocs de citation"
+
+msgid "Disable link"
+msgstr "Désactiver les liens"

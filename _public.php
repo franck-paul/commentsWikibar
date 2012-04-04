@@ -37,9 +37,32 @@ class commentsWikibarBehaviors
 		global $core;
 		
 		if (self::canActivate()) {
-			$wiki2xhtml->setOpt('active_quote',1);
+			if ($core->blog->settings->commentswikibar->commentswikibar_no_format) {
+				$wiki2xhtml->setOpt('active_strong',0);
+				$wiki2xhtml->setOpt('active_em',0);
+				$wiki2xhtml->setOpt('active_ins',0);
+				$wiki2xhtml->setOpt('active_del',0);
+				$wiki2xhtml->setOpt('active_q',0);
+				$wiki2xhtml->setOpt('active_code',0);
+			}
+			if ($core->blog->settings->commentswikibar->commentswikibar_no_br) {
+				$wiki2xhtml->setOpt('active_br',0);
+			}
+			if ($core->blog->settings->commentswikibar->commentswikibar_no_list) {
+				$wiki2xhtml->setOpt('active_lists',0);
+			}
 			if ($core->blog->settings->commentswikibar->commentswikibar_no_pre) {
 				$wiki2xhtml->setOpt('active_pre',0);
+			}
+			if ($core->blog->settings->commentswikibar->commentswikibar_no_quote) {
+				$wiki2xhtml->setOpt('active_quote',0);
+			} else {
+				if ($core->blog->settings->system->wiki_comments) {
+					$wiki2xhtml->setOpt('active_quote',1);
+				}
+			}
+			if ($core->blog->settings->commentswikibar->commentswikibar_no_url) {
+				$wiki2xhtml->setOpt('active_urls',0);
 			}
 		}
 	}
@@ -118,7 +141,30 @@ class commentsWikibarBehaviors
 					"if (document.getElementById) { \n".
 					"	if (document.getElementById('".html::escapeJS('c_content')."')) { \n".
 					"		var commentTb = new jsToolBar(document.getElementById('".html::escapeJS('c_content')."')); \n".
-					($core->blog->settings->commentswikibar->commentswikibar_no_pre ? "		commentTb.elements.pre.type = \"\"; \n\n" : '').
+					($core->blog->settings->commentswikibar->commentswikibar_no_format ?
+						"		commentTb.elements.strong.type = \"\"; \n\n".
+						"		commentTb.elements.em.type = \"\"; \n\n".
+						"		commentTb.elements.ins.type = \"\"; \n\n".
+						"		commentTb.elements.del.type = \"\"; \n\n".
+						"		commentTb.elements.quote.type = \"\"; \n\n".
+						"		commentTb.elements.code.type = \"\"; \n\n".
+						"		commentTb.elements.space1.type = \"\"; \n\n" : '').
+					($core->blog->settings->commentswikibar->commentswikibar_no_br ?
+						"		commentTb.elements.br.type = \"\"; \n\n".
+						"		commentTb.elements.space2.type = \"\"; \n\n" : '').
+					($core->blog->settings->commentswikibar->commentswikibar_no_list ?
+						"		commentTb.elements.ul.type = \"\"; \n\n".
+						"		commentTb.elements.ol.type = \"\"; \n\n" : '').
+					($core->blog->settings->commentswikibar->commentswikibar_no_pre ?
+						"		commentTb.elements.pre.type = \"\"; \n\n" : '').
+					($core->blog->settings->commentswikibar->commentswikibar_no_quote ?
+						"		commentTb.elements.bquote.type = \"\"; \n\n" : '').
+					($core->blog->settings->commentswikibar->commentswikibar_no_list &&
+					 $core->blog->settings->commentswikibar->commentswikibar_no_pre &&
+					 $core->blog->settings->commentswikibar->commentswikibar_no_quote ?
+						"		commentTb.elements.space3.type = \"\"; \n\n" : '').
+					($core->blog->settings->commentswikibar->commentswikibar_no_url ?
+						"		commentTb.elements.link.type = \"\"; \n\n" : '').
 					"		commentTb.draw(); \n".
 					"	}\n".
 					"}\n".

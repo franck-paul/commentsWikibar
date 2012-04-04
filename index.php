@@ -12,7 +12,12 @@ if (!defined('DC_CONTEXT_ADMIN')) return;
 
 // Getting current parameters
 $active = (boolean)$core->blog->settings->commentswikibar->commentswikibar_active;
+$no_format = (boolean)$core->blog->settings->commentswikibar->commentswikibar_no_format;
+$no_br = (boolean)$core->blog->settings->commentswikibar->commentswikibar_no_br;
+$no_list = (boolean)$core->blog->settings->commentswikibar->commentswikibar_no_list;
 $no_pre = (boolean)$core->blog->settings->commentswikibar->commentswikibar_no_pre;
+$no_quote = (boolean)$core->blog->settings->commentswikibar->commentswikibar_no_quote;
+$no_url = (boolean)$core->blog->settings->commentswikibar->commentswikibar_no_url;
 $wb_add_css = (boolean)$core->blog->settings->commentswikibar->commentswikibar_add_css;
 $wb_add_jslib = (boolean)$core->blog->settings->commentswikibar->commentswikibar_add_jslib;
 $wb_add_jsglue = (boolean)$core->blog->settings->commentswikibar->commentswikibar_add_jsglue;
@@ -26,14 +31,24 @@ if (!empty($_POST['saveconfig'])) {
 		$core->blog->settings->addNameSpace('commentswikibar');
 
 		$active = (empty($_POST['active']))?false:true;
+		$no_format = (empty($_POST['no_format']))?false:true;
+		$no_br = (empty($_POST['no_br']))?false:true;
+		$no_list = (empty($_POST['no_list']))?false:true;
 		$no_pre = (empty($_POST['no_pre']))?false:true;
+		$no_quote = (empty($_POST['no_quote']))?false:true;
+		$no_url = (empty($_POST['no_url']))?false:true;
 		$wb_add_css = (empty($_POST['wb_add_css']))?false:true;
 		$wb_add_jslib = (empty($_POST['wb_add_jslib']))?false:true;
 		$wb_add_jsglue = (empty($_POST['wb_add_jsglue']))?false:true;
 		$custom_css = (empty($_POST['custom_css']))?'':html::sanitizeURL($_POST['custom_css']);
 		$custom_jslib = (empty($_POST['custom_jslib']))?'':html::sanitizeURL($_POST['custom_jslib']);
 		$core->blog->settings->commentswikibar->put('commentswikibar_active',$active,'boolean');
+		$core->blog->settings->commentswikibar->put('commentswikibar_no_format',$no_format,'boolean');
+		$core->blog->settings->commentswikibar->put('commentswikibar_no_br',$no_br,'boolean');
+		$core->blog->settings->commentswikibar->put('commentswikibar_no_list',$no_list,'boolean');
 		$core->blog->settings->commentswikibar->put('commentswikibar_no_pre',$no_pre,'boolean');
+		$core->blog->settings->commentswikibar->put('commentswikibar_no_quote',$no_quote,'boolean');
+		$core->blog->settings->commentswikibar->put('commentswikibar_no_url',$no_url,'boolean');
 		$core->blog->settings->commentswikibar->put('commentswikibar_add_css',$wb_add_css,'boolean');
 		$core->blog->settings->commentswikibar->put('commentswikibar_add_jslib',$wb_add_jslib,'boolean');
 		$core->blog->settings->commentswikibar->put('commentswikibar_add_jsglue',$wb_add_jsglue,'boolean');
@@ -78,9 +93,41 @@ if (!empty($_POST['saveconfig'])) {
 	</fieldset>
 	<fieldset>
 		<legend><?php echo __('Options'); ?></legend>
-		<p class="field">
-			<?php echo form::checkbox('no_pre', 1, $no_pre); ?>
-			<label class=" classic" for="no_pre">&nbsp;<?php echo __('Disable preformatted text');?></label>
+			<p class="field">
+				<?php echo form::checkbox('no_format', 1, $no_format); ?>
+				<label class=" classic" for="no_format">&nbsp;<?php echo __('Disable characters format');?></label>
+				<img src="index.php?pf=commentsWikibar/img/bt_strong.png" alt="" />&nbsp;
+				<img src="index.php?pf=commentsWikibar/img/bt_em.png" alt="" />&nbsp;
+				<img src="index.php?pf=commentsWikibar/img/bt_ins.png" alt="" />&nbsp;
+				<img src="index.php?pf=commentsWikibar/img/bt_del.png" alt="" />&nbsp;
+				<img src="index.php?pf=commentsWikibar/img/bt_quote.png" alt="" />&nbsp;
+				<img src="index.php?pf=commentsWikibar/img/bt_code.png" alt="" />
+			</p>
+			<p class="field">
+				<?php echo form::checkbox('no_br', 1, $no_br); ?>
+				<label class=" classic" for="no_br">&nbsp;<?php echo __('Disable breakline');?></label>
+				<img src="index.php?pf=commentsWikibar/img/bt_br.png" alt="" />
+			</p>
+			<p class="field">
+				<?php echo form::checkbox('no_list', 1, $no_list); ?>
+				<label class=" classic" for="no_list">&nbsp;<?php echo __('Disable list');?></label>
+				<img src="index.php?pf=commentsWikibar/img/bt_ul.png" alt="" />&nbsp;
+				<img src="index.php?pf=commentsWikibar/img/bt_ol.png" alt="" />
+			</p>
+			<p class="field">
+				<?php echo form::checkbox('no_pre', 1, $no_pre); ?>
+				<label class=" classic" for="no_pre">&nbsp;<?php echo __('Disable preformatted text');?></label>
+				<img src="index.php?pf=commentsWikibar/img/bt_pre.png" alt="" />
+			</p>
+			<p class="field">
+				<?php echo form::checkbox('no_quote', 1, $no_quote); ?>
+				<label class=" classic" for="no_quote">&nbsp;<?php echo __('Disable blockquote');?></label>
+				<img src="index.php?pf=commentsWikibar/img/bt_bquote.png" alt="" />
+			</p>
+			<p class="field">
+				<?php echo form::checkbox('no_url', 1, $no_url); ?>
+				<label class=" classic" for="no_url">&nbsp;<?php echo __('Disable link');?></label>
+				<img src="index.php?pf=commentsWikibar/img/bt_link.png" alt="" />
 			</p>
 	</fieldset>
 	</div>
