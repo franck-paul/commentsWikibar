@@ -11,8 +11,8 @@
 if (!defined('DC_RC_PATH')) return;
 
 $this->registerModule(
-	/* Name */		"Comments Wikibar",
-	/* Description*/	"Adds a formatting toolbar when public comments use the wiki syntax",
+	/* Name */			__("Comments Wikibar"),
+	/* Description*/	__("Adds a formatting toolbar when public comments use the wiki syntax"),
 	/* Author */		"Pep and contributors",
 	/* Version */		'1.5',
 	/* Permissions */	'contentadmin'

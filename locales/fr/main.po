@@ -1,156 +1,50 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: Dotclear 2 commentsWikibar module\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-29 17:20+0200\n"
+"POT-Creation-Date: 2012-11-05 16:42+0100\n"
 "PO-Revision-Date: \n"
-"Last-Translator: Pep <pep@dotclear.net>\n"
+"Last-Translator: Franck Paul <carnet.franck.paul@gmail.com>\n"
 "Language-Team: \n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: French\n"
-"X-Poedit-Country: FRANCE\n"
-"X-Poedit-SourceCharset: iso-8859-1\n"
+"X-Generator: Poedit 1.5.4\n"
 
-#: _admin.php:13
-#: index.php:57
-#: index.php:62
 msgid "Comments Wikibar"
 msgstr "Wikibarre"
 
-#: _public.php:90
-msgid "You can use the following shortcuts to format your text."
-msgstr "Vous pouvez utiliser les raccourcis suivant pour mettre en forme votre texte."
-
-#: _public.php:91
-msgid "Strong emphasis"
-msgstr "Emphase forte"
-
-#: _public.php:92
-msgid "Emphasis"
-msgstr "Emphase"
-
-#: _public.php:93
-msgid "Inserted"
-msgstr "Insertion"
-
-#: _public.php:94
-msgid "Deleted"
-msgstr "Suppression"
-
-#: _public.php:95
-msgid "Inline quote"
-msgstr "Citation en ligne"
-
-#: _public.php:96
-msgid "Code"
-msgstr "Code"
-
-#: _public.php:97
-msgid "Unordered list"
-msgstr "Liste à puces"
-
-#: _public.php:98
-msgid "Ordered list"
-msgstr "Liste numérotée"
-
-#: _public.php:99
-msgid "Link"
-msgstr "Lien"
-
-#: _public.php:100
-msgid "URL?"
-msgstr "URL ?"
-
-#: _public.php:101
-msgid "Language?"
-msgstr "Langue ?"
-
-#: index.php:47
-msgid "Configuration successfully updated."
-msgstr "Configuration mise à jour avec succès."
-
-#: index.php:67
-#, fuzzy
-msgid "Plugin Activation"
-msgstr "Activation de l'extension"
-
-#: index.php:69
-msgid "Plugin activation"
-msgstr "Activation de l'extension"
-
-#: index.php:72
-msgid "Enable Comments Wikibar"
-msgstr "Activer la Wikibarre"
-
-#: index.php:74
-msgid "Activating this plugin also enforces wiki syntax in blog comments"
-msgstr "L'activation de cette extension force la syntaxe wiki dans les commentaires du blog"
-
-#: index.php:77
-msgid "Advanced Options"
-msgstr "Options avancées"
-
-#: index.php:79
-msgid "CSS inclusion"
-msgstr "Inclusion des CSS"
-
-#: index.php:82
-msgid "Include CSS"
-msgstr "Inclure les CSS"
-
-#: index.php:85
-msgid "Use custom CSS"
-msgstr "CSS personnalisée"
-
-#: index.php:88
-msgid "You can use a custom CSS by providing its location."
-msgstr "Vous pouvez utiliser une CSS personnalisée en fournissant son adresse."
-
-#: index.php:89
-#: index.php:103
-msgid "A location beginning with a / is treated as absolute, else it is treated as relative to the blog's current theme URL"
-msgstr "Une adresse commençant par un / est considérée comme absolue, sinon elle est traitée comme relative à l'adresse du thème actuellement en usage sur le blog."
-
-#: index.php:93
-msgid "Javascript inclusion"
-msgstr "Inclusion de Javascript"
-
-#: index.php:96
-msgid "Include JS library"
-msgstr "Inclure la librairie JS"
-
-#: index.php:99
-msgid "Use custom JS library"
-msgstr "Librairie JS personnalisée"
-
-#: index.php:102
-msgid "You can use a custom JS library by providing its location."
-msgstr "Vous pouvez utiliser une librairie Javascript personnalisée en fournissant son adresse."
-
-#: index.php:107
-msgid "Include JS bootstrap"
-msgstr "Inclure l'amorce JS"
-
-#: index.php:113
-msgid "Save configuration"
-msgstr "Enregistrer la configuration"
-
-msgid "Line break"
-msgstr "Passage à la ligne"
-
-msgid "Block quote"
-msgstr "Bloc de citation"
+msgid "Adds a formatting toolbar when public comments use the wiki syntax"
+msgstr ""
+"Ajoute une barre d'outils de formatage pour les commentaires publics "
+"utilisant la syntaxe wiki"
 
 msgid "Preformatted"
 msgstr "Texte préformaté"
 
+msgid "Block quote"
+msgstr "Bloc de citation"
+
+msgid "Configuration successfully updated."
+msgstr "Configuration mise à jour avec succès."
+
+msgid "Plugin Activation"
+msgstr "Activation de l'extension"
+
+msgid "Plugin activation"
+msgstr "Activation de l'extension"
+
+msgid "Enable Comments Wikibar"
+msgstr "Activer la Wikibarre"
+
+msgid "Activating this plugin also enforces wiki syntax in blog comments"
+msgstr ""
+"L'activation de cette extension force la syntaxe wiki dans les commentaires "
+"du blog"
+
 msgid "Options"
 msgstr "Options"
-
-msgid "Disable preformatted text"
-msgstr "Désactiver le texte préformaté"
 
 msgid "Disable characters format"
 msgstr "Désactiver la mise en forme des caractères"
@@ -161,8 +55,95 @@ msgstr "Désactiver les sauts de ligne"
 msgid "Disable list"
 msgstr "Désactiver les listes"
 
+msgid "Disable preformatted text"
+msgstr "Désactiver le texte préformaté"
+
 msgid "Disable blockquote"
 msgstr "Désactiver les blocs de citation"
 
 msgid "Disable link"
 msgstr "Désactiver les liens"
+
+msgid "Advanced Options"
+msgstr "Options avancées"
+
+msgid "CSS inclusion"
+msgstr "Inclusion des CSS"
+
+msgid "Include CSS"
+msgstr "Inclure les CSS"
+
+msgid "Use custom CSS"
+msgstr "CSS personnalisée"
+
+msgid "You can use a custom CSS by providing its location."
+msgstr "Vous pouvez utiliser une CSS personnalisée en fournissant son adresse."
+
+msgid ""
+"A location beginning with a / is treated as absolute, else it is treated as "
+"relative to the blog's current theme URL"
+msgstr ""
+"Une adresse commençant par un / est considérée comme absolue, sinon elle est "
+"traitée comme relative à l'adresse du thème actuellement en usage sur le "
+"blog."
+
+msgid "Javascript inclusion"
+msgstr "Inclusion de Javascript"
+
+msgid "Include JS library"
+msgstr "Inclure la librairie JS"
+
+msgid "Use custom JS library"
+msgstr "Librairie JS personnalisée"
+
+msgid "You can use a custom JS library by providing its location."
+msgstr ""
+"Vous pouvez utiliser une librairie Javascript personnalisée en fournissant "
+"son adresse."
+
+msgid "Include JS bootstrap"
+msgstr "Inclure l'amorce JS"
+
+msgid "Save configuration"
+msgstr "Enregistrer la configuration"
+
+#~ msgid "You can use the following shortcuts to format your text."
+#~ msgstr ""
+#~ "Vous pouvez utiliser les raccourcis suivant pour mettre en forme votre "
+#~ "texte."
+
+#~ msgid "Strong emphasis"
+#~ msgstr "Emphase forte"
+
+#~ msgid "Emphasis"
+#~ msgstr "Emphase"
+
+#~ msgid "Inserted"
+#~ msgstr "Insertion"
+
+#~ msgid "Deleted"
+#~ msgstr "Suppression"
+
+#~ msgid "Inline quote"
+#~ msgstr "Citation en ligne"
+
+#~ msgid "Code"
+#~ msgstr "Code"
+
+#~ msgid "Unordered list"
+#~ msgstr "Liste à puces"
+
+#~ msgid "Ordered list"
+#~ msgstr "Liste numérotée"
+
+#~ msgid "Link"
+#~ msgstr "Lien"
+
+#~ msgid "URL?"
+#~ msgstr "URL ?"
+
+#~ msgid "Language?"
+#~ msgstr "Langue ?"
+
+#~ msgid "Line break"
+#~ msgstr "Passage à la ligne"
