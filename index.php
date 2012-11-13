@@ -79,7 +79,7 @@ if (!empty($_POST['saveconfig'])) {
 <body>
 <h2><?php echo html::escapeHTML($core->blog->name); ?> &rsaquo; <?php echo __('Comments Wikibar'); ?></h2>
 
-<?php if (!empty($msg)) echo '<p class="message">'.$msg.'</p>'; ?>
+<?php if (!empty($msg)) dcPage::message($msg); ?>
 <div id="wikibar_panel">
 <form method="post" action="plugin.php">
 	<div class="multi-part" id="wikibar_options" title="<?php echo __('Plugin Activation'); ?>">
