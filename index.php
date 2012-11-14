@@ -87,7 +87,7 @@ if (!empty($_POST['saveconfig'])) {
 		<legend><?php echo __('Plugin activation'); ?></legend>
 		<p class="field">
 			<?php echo form::checkbox('active', 1, $active); ?>
-			<label class=" classic" for="active">&nbsp;<?php echo __('Enable Comments Wikibar');?></label>
+			<label class="classic" for="active">&nbsp;<?php echo __('Enable Comments Wikibar');?></label>
 		</p>
 		<p><em><?php echo __('Activating this plugin also enforces wiki syntax in blog comments'); ?></em></p>
 	</fieldset>
@@ -95,7 +95,7 @@ if (!empty($_POST['saveconfig'])) {
 		<legend><?php echo __('Options'); ?></legend>
 			<p class="field">
 				<?php echo form::checkbox('no_format', 1, $no_format); ?>
-				<label class=" classic" for="no_format">&nbsp;<?php echo __('Disable characters format');?></label>
+				<label class="classic" for="no_format">&nbsp;<?php echo __('Disable characters format');?></label>
 				<img src="index.php?pf=commentsWikibar/img/bt_strong.png" alt="" />&nbsp;
 				<img src="index.php?pf=commentsWikibar/img/bt_em.png" alt="" />&nbsp;
 				<img src="index.php?pf=commentsWikibar/img/bt_ins.png" alt="" />&nbsp;
