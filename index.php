@@ -105,28 +105,28 @@ if (!empty($_POST['saveconfig'])) {
 			</p>
 			<p class="field">
 				<?php echo form::checkbox('no_br', 1, $no_br); ?>
-				<label class=" classic" for="no_br">&nbsp;<?php echo __('Disable breakline');?></label>
+				<label class="classic" for="no_br">&nbsp;<?php echo __('Disable breakline');?></label>
 				<img src="index.php?pf=commentsWikibar/img/bt_br.png" alt="" />
 			</p>
 			<p class="field">
 				<?php echo form::checkbox('no_list', 1, $no_list); ?>
-				<label class=" classic" for="no_list">&nbsp;<?php echo __('Disable list');?></label>
+				<label class="classic" for="no_list">&nbsp;<?php echo __('Disable list');?></label>
 				<img src="index.php?pf=commentsWikibar/img/bt_ul.png" alt="" />&nbsp;
 				<img src="index.php?pf=commentsWikibar/img/bt_ol.png" alt="" />
 			</p>
 			<p class="field">
 				<?php echo form::checkbox('no_pre', 1, $no_pre); ?>
-				<label class=" classic" for="no_pre">&nbsp;<?php echo __('Disable preformatted text');?></label>
+				<label class="classic" for="no_pre">&nbsp;<?php echo __('Disable preformatted text');?></label>
 				<img src="index.php?pf=commentsWikibar/img/bt_pre.png" alt="" />
 			</p>
 			<p class="field">
 				<?php echo form::checkbox('no_quote', 1, $no_quote); ?>
-				<label class=" classic" for="no_quote">&nbsp;<?php echo __('Disable blockquote');?></label>
+				<label class="classic" for="no_quote">&nbsp;<?php echo __('Disable blockquote');?></label>
 				<img src="index.php?pf=commentsWikibar/img/bt_bquote.png" alt="" />
 			</p>
 			<p class="field">
 				<?php echo form::checkbox('no_url', 1, $no_url); ?>
-				<label class=" classic" for="no_url">&nbsp;<?php echo __('Disable link');?></label>
+				<label class="classic" for="no_url">&nbsp;<?php echo __('Disable link');?></label>
 				<img src="index.php?pf=commentsWikibar/img/bt_link.png" alt="" />
 			</p>
 	</fieldset>
@@ -136,10 +136,10 @@ if (!empty($_POST['saveconfig'])) {
 		<legend><?php echo __('CSS inclusion'); ?></legend>
 		<p class="field">
 			<?php echo form::checkbox('wb_add_css', 1, $wb_add_css); ?>
-			<label class=" classic" for="wb_add_css">&nbsp;<?php echo __('Include CSS');?></label>
+			<label class="classic" for="wb_add_css">&nbsp;<?php echo __('Include CSS');?></label>
 		</p>
 		<p class="field">
-			<label class=" classic"><?php echo __('Use custom CSS') ; ?> : </label>
+			<label class="classic" for="custom_css"><?php echo __('Use custom CSS') ; ?> : </label>
 			<?php echo form::field('custom_css',40,128,$custom_css); ?>
 		</p>
 		<p><em><?php echo __('You can use a custom CSS by providing its location.'); ?><br />
@@ -150,10 +150,10 @@ if (!empty($_POST['saveconfig'])) {
 		<legend><?php echo __('Javascript inclusion'); ?></legend>
 		<p class="field">
 			<?php echo form::checkbox('wb_add_jslib', 1, $wb_add_jslib); ?>
-			<label class=" classic" for="wb_add_jslib">&nbsp;<?php echo __('Include JS library');?></label>
+			<label class="classic" for="wb_add_jslib">&nbsp;<?php echo __('Include JS library');?></label>
 		</p>
 		<p class="field">
-			<label class=" classic"><?php echo __('Use custom JS library') ; ?> : </label>
+			<label class="classic" for="custom_jslib"><?php echo __('Use custom JS library') ; ?> : </label>
 			<?php echo form::field('custom_jslib',40,128,$custom_jslib); ?>
 		</p>
 		<p><em><?php echo __('You can use a custom JS library by providing its location.'); ?><br />
@@ -161,7 +161,7 @@ if (!empty($_POST['saveconfig'])) {
 		</em></p>
 		<p class="field">
 			<?php echo form::checkbox('wb_add_jsglue', 1, $wb_add_jsglue); ?>
-			<label class=" classic" for="wb_add_jsglue">&nbsp;<?php echo __('Include JS bootstrap');?></label>
+			<label class="classic" for="wb_add_jsglue">&nbsp;<?php echo __('Include JS bootstrap');?></label>
 		</p>
 	</fieldset>
 	</div>
