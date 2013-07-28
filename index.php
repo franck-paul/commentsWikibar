@@ -77,7 +77,7 @@ if (!empty($_POST['saveconfig'])) {
 </head>
 
 <body>
-<h2><?php echo html::escapeHTML($core->blog->name); ?> &rsaquo; <?php echo __('Comments Wikibar'); ?></h2>
+<h2><?php echo html::escapeHTML($core->blog->name); ?> &rsaquo; <span class="page-title"><?php echo __('Comments Wikibar'); ?></span></h2>
 
 <?php if (!empty($msg)) dcPage::message($msg); ?>
 <div id="wikibar_panel">
