@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Dotclear 2 commentsWikibar module\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-05 16:52+0100\n"
+"POT-Creation-Date: 2013-09-19 17:44+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,9 +17,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 msgid "Comments Wikibar"
-msgstr ""
-
-msgid "Adds a formatting toolbar when public comments use the wiki syntax"
 msgstr ""
 
 msgid "Preformatted"
@@ -34,16 +31,10 @@ msgstr ""
 msgid "Plugin Activation"
 msgstr ""
 
-msgid "Plugin activation"
-msgstr ""
-
 msgid "Enable Comments Wikibar"
 msgstr ""
 
 msgid "Activating this plugin also enforces wiki syntax in blog comments"
-msgstr ""
-
-msgid "Options"
 msgstr ""
 
 msgid "Disable characters format"

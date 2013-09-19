@@ -21,7 +21,7 @@ class commentsWikibarBehaviors
 	protected static function canActivate()
 	{
 		global $core;
-		
+
 		if ( $core->blog->settings->commentswikibar->commentswikibar_active &&
 			$core->blog->settings->system->wiki_comments)
 		{
@@ -33,11 +33,11 @@ class commentsWikibarBehaviors
 		}
 		return false;
 	}
-	
+
 	public static function coreInitWikiComment($wiki2xhtml)
 	{
 		global $core;
-		
+
 		if (self::canActivate()) {
 			if ($core->blog->settings->commentswikibar->commentswikibar_no_format) {
 				$wiki2xhtml->setOpt('active_strong',0);
@@ -72,7 +72,7 @@ class commentsWikibarBehaviors
 	public static function publicHeadContent()
 	{
 		global $core;
-		
+
 		if (self::canActivate()) {
 			if ($core->blog->settings->commentswikibar->commentswikibar_add_css) {
 				$custom_css = trim($core->blog->settings->commentswikibar->commentswikibar_custom_css);
@@ -94,11 +94,11 @@ class commentsWikibarBehaviors
 			}
 		}
 	}
-	
+
 	public static function publicFooterContent()
 	{
 		global $core;
-		
+
 		if (self::canActivate()) {
 			if ($core->blog->settings->commentswikibar->commentswikibar_add_jslib) {
 				$custom_jslib = trim($core->blog->settings->commentswikibar->commentswikibar_custom_jslib);
@@ -118,7 +118,7 @@ class commentsWikibarBehaviors
 				}
 				echo '<script type="text/javascript" src="'.$js.'"></script>'."\n";
 			}
-			
+
 			if ($core->blog->settings->commentswikibar->commentswikibar_add_jsglue) {
 				echo
 					'<script type="text/javascript">'."\n".

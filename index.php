@@ -56,7 +56,7 @@ if (!empty($_POST['saveconfig'])) {
 		$core->blog->settings->commentswikibar->put('commentswikibar_add_jsglue',$wb_add_jsglue,'boolean');
 		$core->blog->settings->commentswikibar->put('commentswikibar_custom_css',$custom_css,'string');
 		$core->blog->settings->commentswikibar->put('commentswikibar_custom_jslib',$custom_jslib,'string');
-		
+
 		// Active wikibar enforces wiki syntax in blog comments
 		$wiki_comments = (boolean)$core->blog->settings->system->wiki_comments;
 		if ($active && !$wiki_comments) {
@@ -79,63 +79,67 @@ if (!empty($_POST['saveconfig'])) {
 </head>
 
 <body>
-<h2><?php echo html::escapeHTML($core->blog->name); ?> &rsaquo; <span class="page-title"><?php echo __('Comments Wikibar'); ?></span></h2>
+<?php
+echo dcPage::breadcrumb(
+	array(
+		html::escapeHTML($core->blog->name) => '',
+		'<span class="page-title">'.__('Comments Wikibar').'</span>' => ''
+	));
+?>
 
-<?php if (!empty($msg)) dcPage::message($msg); ?>
+<?php if (!empty($msg)) dcPage::success($msg); ?>
+
 <div id="wikibar_panel">
 <form method="post" action="plugin.php">
 	<div class="multi-part" id="wikibar_options" title="<?php echo __('Plugin Activation'); ?>">
-	<fieldset>
-		<legend><?php echo __('Plugin activation'); ?></legend>
 		<p class="field">
 			<?php echo form::checkbox('active', 1, $active); ?>
 			<label class="classic" for="active">&nbsp;<?php echo __('Enable Comments Wikibar');?></label>
 		</p>
 		<p><em><?php echo __('Activating this plugin also enforces wiki syntax in blog comments'); ?></em></p>
-	</fieldset>
-	<fieldset>
-		<legend><?php echo __('Options'); ?></legend>
-			<p class="field">
-				<?php echo form::checkbox('no_format', 1, $no_format); ?>
-				<label class="classic" for="no_format">&nbsp;<?php echo __('Disable characters format');?></label>
-				<img src="index.php?pf=commentsWikibar/img/bt_strong.png" alt="" />&nbsp;
-				<img src="index.php?pf=commentsWikibar/img/bt_em.png" alt="" />&nbsp;
-				<img src="index.php?pf=commentsWikibar/img/bt_ins.png" alt="" />&nbsp;
-				<img src="index.php?pf=commentsWikibar/img/bt_del.png" alt="" />&nbsp;
-				<img src="index.php?pf=commentsWikibar/img/bt_quote.png" alt="" />&nbsp;
-				<img src="index.php?pf=commentsWikibar/img/bt_code.png" alt="" />
-			</p>
-			<p class="field">
-				<?php echo form::checkbox('no_br', 1, $no_br); ?>
-				<label class="classic" for="no_br">&nbsp;<?php echo __('Disable breakline');?></label>
-				<img src="index.php?pf=commentsWikibar/img/bt_br.png" alt="" />
-			</p>
-			<p class="field">
-				<?php echo form::checkbox('no_list', 1, $no_list); ?>
-				<label class="classic" for="no_list">&nbsp;<?php echo __('Disable list');?></label>
-				<img src="index.php?pf=commentsWikibar/img/bt_ul.png" alt="" />&nbsp;
-				<img src="index.php?pf=commentsWikibar/img/bt_ol.png" alt="" />
-			</p>
-			<p class="field">
-				<?php echo form::checkbox('no_pre', 1, $no_pre); ?>
-				<label class="classic" for="no_pre">&nbsp;<?php echo __('Disable preformatted text');?></label>
-				<img src="index.php?pf=commentsWikibar/img/bt_pre.png" alt="" />
-			</p>
-			<p class="field">
-				<?php echo form::checkbox('no_quote', 1, $no_quote); ?>
-				<label class="classic" for="no_quote">&nbsp;<?php echo __('Disable blockquote');?></label>
-				<img src="index.php?pf=commentsWikibar/img/bt_bquote.png" alt="" />
-			</p>
-			<p class="field">
-				<?php echo form::checkbox('no_url', 1, $no_url); ?>
-				<label class="classic" for="no_url">&nbsp;<?php echo __('Disable link');?></label>
-				<img src="index.php?pf=commentsWikibar/img/bt_link.png" alt="" />
-			</p>
-	</fieldset>
+
+		<h3><?php echo __('Options'); ?></h3>
+		<p class="field">
+			<?php echo form::checkbox('no_format', 1, $no_format); ?>
+			<label class="classic" for="no_format">&nbsp;<?php echo __('Disable characters format');?></label>
+			<img src="index.php?pf=commentsWikibar/img/bt_strong.png" alt="" />&nbsp;
+			<img src="index.php?pf=commentsWikibar/img/bt_em.png" alt="" />&nbsp;
+			<img src="index.php?pf=commentsWikibar/img/bt_ins.png" alt="" />&nbsp;
+			<img src="index.php?pf=commentsWikibar/img/bt_del.png" alt="" />&nbsp;
+			<img src="index.php?pf=commentsWikibar/img/bt_quote.png" alt="" />&nbsp;
+			<img src="index.php?pf=commentsWikibar/img/bt_code.png" alt="" />
+		</p>
+		<p class="field">
+			<?php echo form::checkbox('no_br', 1, $no_br); ?>
+			<label class="classic" for="no_br">&nbsp;<?php echo __('Disable breakline');?></label>
+			<img src="index.php?pf=commentsWikibar/img/bt_br.png" alt="" />
+		</p>
+		<p class="field">
+			<?php echo form::checkbox('no_list', 1, $no_list); ?>
+			<label class="classic" for="no_list">&nbsp;<?php echo __('Disable list');?></label>
+			<img src="index.php?pf=commentsWikibar/img/bt_ul.png" alt="" />&nbsp;
+			<img src="index.php?pf=commentsWikibar/img/bt_ol.png" alt="" />
+		</p>
+		<p class="field">
+			<?php echo form::checkbox('no_pre', 1, $no_pre); ?>
+			<label class="classic" for="no_pre">&nbsp;<?php echo __('Disable preformatted text');?></label>
+			<img src="index.php?pf=commentsWikibar/img/bt_pre.png" alt="" />
+		</p>
+		<p class="field">
+			<?php echo form::checkbox('no_quote', 1, $no_quote); ?>
+			<label class="classic" for="no_quote">&nbsp;<?php echo __('Disable blockquote');?></label>
+			<img src="index.php?pf=commentsWikibar/img/bt_bquote.png" alt="" />
+		</p>
+		<p class="field">
+			<?php echo form::checkbox('no_url', 1, $no_url); ?>
+			<label class="classic" for="no_url">&nbsp;<?php echo __('Disable link');?></label>
+			<img src="index.php?pf=commentsWikibar/img/bt_link.png" alt="" />
+		</p>
 	</div>
+
 	<div class="multi-part" id="wikibar_advanced" title="<?php echo __('Advanced Options'); ?>">
-	<fieldset>
-		<legend><?php echo __('CSS inclusion'); ?></legend>
+
+		<h3><?php echo __('CSS inclusion'); ?></h3>
 		<p class="field">
 			<?php echo form::checkbox('wb_add_css', 1, $wb_add_css); ?>
 			<label class="classic" for="wb_add_css">&nbsp;<?php echo __('Include CSS');?></label>
@@ -147,9 +151,8 @@ if (!empty($_POST['saveconfig'])) {
 		<p><em><?php echo __('You can use a custom CSS by providing its location.'); ?><br />
 		<?php echo __('A location beginning with a / is treated as absolute, else it is treated as relative to the blog\'s current theme URL'); ?>
 		</em></p>
-	</fieldset>
-	<fieldset>
-		<legend><?php echo __('Javascript inclusion'); ?></legend>
+
+		<h3><?php echo __('Javascript inclusion'); ?></h3>
 		<p class="field">
 			<?php echo form::checkbox('wb_add_jslib', 1, $wb_add_jslib); ?>
 			<label class="classic" for="wb_add_jslib">&nbsp;<?php echo __('Include JS library');?></label>
@@ -165,7 +168,7 @@ if (!empty($_POST['saveconfig'])) {
 			<?php echo form::checkbox('wb_add_jsglue', 1, $wb_add_jsglue); ?>
 			<label class="classic" for="wb_add_jsglue">&nbsp;<?php echo __('Include JS bootstrap');?></label>
 		</p>
-	</fieldset>
+
 	</div>
 	<p><input type="hidden" name="p" value="commentsWikibar" />
 	<?php echo $core->formNonce(); ?>
