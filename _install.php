@@ -34,4 +34,3 @@ $core->blog->settings->commentswikibar->put('commentswikibar_custom_jslib','','s
 
 $core->setVersion('commentsWikibar',$this_version);
 return true;
-?>

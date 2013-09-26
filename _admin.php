@@ -18,4 +18,3 @@ __('Comments Wikibar').__('Adds a formatting toolbar when public comments use th
 $_menu['Blog']->addItem(__('Comments Wikibar'),'plugin.php?p=commentsWikibar','index.php?pf=commentsWikibar/icon.png',
 		preg_match('/plugin.php\?p=commentsWikibar(&.*)?$/',$_SERVER['REQUEST_URI']),
 		$core->auth->check('contentadmin',$core->blog->id));
-?>

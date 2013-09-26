@@ -13,4 +13,3 @@
 if (!defined('DC_RC_PATH')) { return; }
 
 if (version_compare(PHP_VERSION,'5.2','<')) return;
-?>
