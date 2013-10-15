@@ -25,7 +25,7 @@ msgid "Block quote"
 msgstr "Bloc de citation"
 
 msgid "Configuration successfully updated."
-msgstr "Configuration mise à jour avec succès."
+msgstr "La configuration a été mise à jour."
 
 msgid "Plugin Activation"
 msgstr "Activation de l'extension"
