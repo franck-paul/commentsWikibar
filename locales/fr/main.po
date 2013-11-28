@@ -90,47 +90,47 @@ msgstr "Inclure l'amorce JS"
 msgid "Save configuration"
 msgstr "Enregistrer la configuration"
 
-#~ msgid "Plugin activation"
-#~ msgstr "Activation de l'extension"
+msgid "Plugin activation"
+msgstr "Activation du plugin"
 
-#~ msgid "Options"
-#~ msgstr "Options"
+msgid "Options"
+msgstr "Options"
 
-#~ msgid "You can use the following shortcuts to format your text."
-#~ msgstr "Vous pouvez utiliser les raccourcis suivant pour mettre en forme votre texte."
+msgid "You can use the following shortcuts to format your text."
+msgstr "Vous pouvez utiliser les raccourcis suivant pour mettre en forme votre texte."
 
-#~ msgid "Strong emphasis"
-#~ msgstr "Emphase forte"
+msgid "Strong emphasis"
+msgstr "Emphase forte"
 
-#~ msgid "Emphasis"
-#~ msgstr "Emphase"
+msgid "Emphasis"
+msgstr "Emphase"
 
-#~ msgid "Inserted"
-#~ msgstr "Insertion"
+msgid "Inserted"
+msgstr "Insertion"
 
-#~ msgid "Deleted"
-#~ msgstr "Suppression"
+msgid "Deleted"
+msgstr "Suppression"
 
-#~ msgid "Inline quote"
-#~ msgstr "Citation en ligne"
+msgid "Inline quote"
+msgstr "Citation en ligne"
 
-#~ msgid "Code"
-#~ msgstr "Code"
+msgid "Code"
+msgstr "Code"
 
-#~ msgid "Unordered list"
-#~ msgstr "Liste à puces"
+msgid "Unordered list"
+msgstr "Liste à puces"
 
-#~ msgid "Ordered list"
-#~ msgstr "Liste numérotée"
+msgid "Ordered list"
+msgstr "Liste numérotée"
 
-#~ msgid "Link"
-#~ msgstr "Lien"
+msgid "Link"
+msgstr "Lien"
 
-#~ msgid "URL?"
-#~ msgstr "URL ?"
+msgid "URL?"
+msgstr "URL ?"
 
-#~ msgid "Language?"
-#~ msgstr "Langue ?"
+msgid "Language?"
+msgstr "Langue ?"
 
-#~ msgid "Line break"
-#~ msgstr "Passage à la ligne"
+msgid "Line break"
+msgstr "Passage à la ligne"
