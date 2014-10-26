@@ -120,6 +120,13 @@ class commentsWikibarBehaviors
 			}
 
 			if ($core->blog->settings->commentswikibar->commentswikibar_add_jsglue) {
+				$mode = 'wiki';
+				if ($core->plugins->moduleExists('formatting-markdown')) {
+					// Formatting Markdown activated
+					if ($core->blog->settings->system->markdown_comments) {
+						$mode = 'markdown';
+					}
+				}
 				echo
 					'<script type="text/javascript">'."\n".
 					"//<![CDATA[\n".
@@ -167,7 +174,7 @@ class commentsWikibarBehaviors
 						"		commentTb.elements.space3.type = \"\"; \n\n" : '').
 					($core->blog->settings->commentswikibar->commentswikibar_no_url ?
 						"		commentTb.elements.link.type = \"\"; \n\n" : '').
-					"		commentTb.draw(); \n".
+					"		commentTb.draw('".$mode."'); \n".
 					"	}\n".
 					"}\n".
 					"});\n".

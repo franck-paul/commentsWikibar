@@ -324,6 +324,9 @@ jsToolBar.prototype.elements.strong = {
     fn: {
         wiki: function() {
             this.singleTag("__")
+        },
+        markdown: function() {
+            this.singleTag("**")
         }
     }
 };
@@ -333,6 +336,9 @@ jsToolBar.prototype.elements.em = {
     fn: {
         wiki: function() {
             this.singleTag("''")
+        },
+        markdown: function() {
+            this.singleTag("*")
         }
     }
 };
@@ -342,6 +348,9 @@ jsToolBar.prototype.elements.ins = {
     fn: {
         wiki: function() {
             this.singleTag("++")
+        },
+        markdown: function() {
+            this.singleTag("<ins>", "</ins>")
         }
     }
 };
@@ -351,6 +360,9 @@ jsToolBar.prototype.elements.del = {
     fn: {
         wiki: function() {
             this.singleTag("--")
+        },
+        markdown: function() {
+            this.singleTag("<del>", "</del>")
         }
     }
 };
@@ -360,6 +372,9 @@ jsToolBar.prototype.elements.quote = {
     fn: {
         wiki: function() {
             this.singleTag("{{", "}}")
+        },
+        markdown: function() {
+            this.singleTag("<q>", "</q>")
         }
     }
 };
@@ -369,6 +384,9 @@ jsToolBar.prototype.elements.code = {
     fn: {
         wiki: function() {
             this.singleTag("@@")
+        },
+        markdown: function() {
+            this.singleTag("`")
         }
     }
 };
@@ -381,7 +399,10 @@ jsToolBar.prototype.elements.br = {
 	fn: {
 		wiki: function() {
 			this.encloseSelection('%%%'+"\n",'')
-		}
+		},
+        markdown: function() {
+            this.encloseSelection('  '+"\n",'')
+        }
 	}
 };
 jsToolBar.prototype.elements.space2 = {
@@ -397,6 +418,12 @@ jsToolBar.prototype.elements.ul = {
                 a = a.replace(/\r/g, "");
                 return "* " + a.replace(/\n/g, "\n* ")
             })
+        },
+        markdown: function() {
+            this.encloseSelection('','',function(str) {
+                str = str.replace(/\r/g,'');
+                return '* '+str.replace(/\n/g,"\n* ");
+            });
         }
     }
 };
@@ -410,6 +437,12 @@ jsToolBar.prototype.elements.ol = {
                 a = a.replace(/\r/g, "");
                 return "# " + a.replace(/\n/g, "\n# ")
             })
+        },
+        markdown: function() {
+            this.encloseSelection('','',function(str) {
+                str = str.replace(/\r/g,'');
+                return '1. '+str.replace(/\n/g,"\n1. ");
+            });
         }
     }
 };
@@ -422,7 +455,14 @@ jsToolBar.prototype.elements.pre = {
 				a = a.replace(/\r/g,'');
 				return ' '+a.replace(/\n/g,"\n ");
 			});
-		}
+		},
+        markdown: function() {
+            this.encloseSelection("\n",'',
+            function(str) {
+                str = str.replace(/\r/g,'');
+                return '    '+str.replace(/\n/g,"\n    ");
+            });
+        }
 	}
 };
 jsToolBar.prototype.elements.bquote = {
@@ -434,7 +474,14 @@ jsToolBar.prototype.elements.bquote = {
 				a = a.replace(/\r/g,'');
 				return '> '+a.replace(/\n/g,"\n> ");
 			});
-		}
+		},
+        markdown: function() {
+            this.encloseSelection("\n",'',
+            function(str) {
+                str = str.replace(/\r/g,'');
+                return '> '+str.replace(/\n/g,"\n> ");
+            });
+        }
 	}
 };
 jsToolBar.prototype.elements.space3 = {
@@ -471,5 +518,16 @@ jsToolBar.prototype.elements.link.fn.wiki = function() {
         }
         a = a + "]";
         this.encloseSelection(c, a)
+    }
+};
+jsToolBar.prototype.elements.link.fn.markdown = function() {
+    var link = this.elements.link.prompt.call(this);
+    if (link) {
+        var stag = '[';
+        var etag = ']('+link.href;
+        if (link.title) { etag = etag+' "'+link.title+'"'; }
+        etag = etag+')';
+
+        this.encloseSelection(stag,etag);
     }
 };
