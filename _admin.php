@@ -1,26 +1,38 @@
 <?php
-# ***** BEGIN LICENSE BLOCK *****
-# This file is part of CommentsWikibar, a plugin for DotClear2.
-# Copyright (c) 2006-2008 Pep and contributors. All rights
-# reserved.
+# -- BEGIN LICENSE BLOCK ----------------------------------
+# This file is part of commentsWikibar, a plugin for Dotclear 2.
 #
-# This plugin is free software; you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation; either version 2 of the License, or
-# (at your option) any later version.
+# Copyright (c) Pep, Franck Paul and contributors
+# carnet.franck.paul@gmail.com
 #
-# This plugin is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this plugin; if not, write to the Free Software
-# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-#
-# ***** END LICENSE BLOCK *****
+# Licensed under the GPL version 2.0 license.
+# A copy of this license is available in LICENSE file or at
+# http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+# -- END LICENSE BLOCK ------------------------------------
 
-$_menu['Plugins']->addItem(__('Comments Wikibar'),'plugin.php?p=commentsWikibar','index.php?pf=commentsWikibar/icon.png',
+if (!defined('DC_CONTEXT_ADMIN')) { return; }
+
+// dead but useful code, in order to have translations
+__('Comments Wikibar').__('Adds a formatting toolbar when public comments use the wiki syntax');
+
+$_menu['Blog']->addItem(__('Comments Wikibar'),'plugin.php?p=commentsWikibar','index.php?pf=commentsWikibar/icon.png',
 		preg_match('/plugin.php\?p=commentsWikibar(&.*)?$/',$_SERVER['REQUEST_URI']),
 		$core->auth->check('contentadmin',$core->blog->id));
-?>
+
+/* Register favorite */
+$core->addBehavior('adminDashboardFavorites',array('commentsWikibarAdmin','adminDashboardFavorites'));
+
+class commentsWikibarAdmin
+{
+	public static function adminDashboardFavorites($core,$favs)
+	{
+		$favs->register('commentsWikibar', array(
+			'title' => __('Comments Wikibar'),
+			'url' => 'plugin.php?p=commentsWikibar',
+			'small-icon' => 'index.php?pf=commentsWikibar/icon.png',
+			'large-icon' => 'index.php?pf=commentsWikibar/icon-big.png',
+			'permissions' => 'admin'
+		));
+	}
+
+}

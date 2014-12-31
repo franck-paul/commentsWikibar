@@ -1,123 +1,129 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is put in the public domain.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: Dotclear 2 commentsWikibar module\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-28 16:47+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2013-09-24 13:35+0200\n"
+"PO-Revision-Date: 2014-10-27 16:55+0100\n"
+"Last-Translator: Franck Paul <carnet.franck.paul@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.6.10\n"
 
-#: _admin.php:23 index.php:74 index.php:78
+#: ../hg-plugins/commentsWikibar/_admin.php:16
+msgid "Adds a formatting toolbar when public comments use the wiki syntax"
+msgstr ""
+
+#: ../hg-plugins/commentsWikibar/_admin.php:16
+#: ../hg-plugins/commentsWikibar/_admin.php:18
+#: ../hg-plugins/commentsWikibar//index.php:77
+#: ../hg-plugins/commentsWikibar/_admin.php:30
+#: ../hg-plugins/commentsWikibar/index.php:77
+#: ../hg-plugins/commentsWikibar/index.php:86
 msgid "Comments Wikibar"
 msgstr ""
 
-#: _public.php:63
-msgid "You can use the following shortcuts to format your text."
-msgstr ""
-
-#: _public.php:64
-msgid "Strong emphasis"
-msgstr ""
-
-#: _public.php:65
-msgid "Emphasis"
-msgstr ""
-
-#: _public.php:66
-msgid "Inserted"
-msgstr ""
-
-#: _public.php:67
-msgid "Deleted"
-msgstr ""
-
-#: _public.php:68
-msgid "Inline quote"
-msgstr ""
-
-#: _public.php:69
-msgid "Code"
-msgstr ""
-
-#: _public.php:70
-msgid "Line break"
-msgstr ""
-
-#: _public.php:71
-msgid "Unordered list"
-msgstr ""
-
-#: _public.php:72
-msgid "Ordered list"
-msgstr ""
-
-#: _public.php:73
+#: ../hg-plugins/commentsWikibar/_public.php:145
 msgid "Preformatted"
 msgstr ""
 
-#: _public.php:74
-msgid "Inline quote"
-msgstr ""
-
-#: _public.php:74
+#: ../hg-plugins/commentsWikibar/_public.php:146
 msgid "Block quote"
 msgstr ""
 
-#: _public.php:75
-msgid "Link"
-msgstr ""
-
-#: _public.php:76
-msgid "URL?"
-msgstr ""
-
-#: _public.php:77
-msgid "Language?"
-msgstr ""
-
-#: index.php:64
+#: ../hg-plugins/commentsWikibar/index.php:67
 msgid "Configuration successfully updated."
 msgstr ""
 
-#: index.php:85
-msgid "Plugin activation"
+#: ../hg-plugins/commentsWikibar/index.php:94
+msgid "Plugin Activation"
 msgstr ""
 
-#: index.php:88
+#: ../hg-plugins/commentsWikibar/index.php:97
 msgid "Enable Comments Wikibar"
 msgstr ""
 
-#: index.php:90
+#: ../hg-plugins/commentsWikibar/index.php:99
 msgid "Activating this plugin also enforces wiki syntax in blog comments"
 msgstr ""
 
-#: index.php:94
-msgid "Options"
+#: ../hg-plugins/commentsWikibar/index.php:104
+msgid "Disable characters format"
 msgstr ""
 
-#: index.php:96
+#: ../hg-plugins/commentsWikibar/index.php:114
+msgid "Disable breakline"
+msgstr ""
+
+#: ../hg-plugins/commentsWikibar/index.php:119
+msgid "Disable list"
+msgstr ""
+
+#: ../hg-plugins/commentsWikibar/index.php:125
+msgid "Disable preformatted text"
+msgstr ""
+
+#: ../hg-plugins/commentsWikibar/index.php:130
+msgid "Disable blockquote"
+msgstr ""
+
+#: ../hg-plugins/commentsWikibar/index.php:135
+msgid "Disable link"
+msgstr ""
+
+#: ../hg-plugins/commentsWikibar/index.php:140
+msgid "Advanced Options"
+msgstr ""
+
+#: ../hg-plugins/commentsWikibar/index.php:142
+msgid "CSS inclusion"
+msgstr ""
+
+#: ../hg-plugins/commentsWikibar/index.php:145
+msgid "Include CSS"
+msgstr ""
+
+#: ../hg-plugins/commentsWikibar/index.php:148
 msgid "Use custom CSS"
 msgstr ""
 
-#: index.php:99
+#: ../hg-plugins/commentsWikibar/index.php:151
 msgid "You can use a custom CSS by providing its location."
 msgstr ""
 
-#: index.php:100
+#: ../hg-plugins/commentsWikibar/index.php:152
+#: ../hg-plugins/commentsWikibar/index.php:165
 msgid ""
 "A location beginning with a / is treated as absolute, else it is treated as "
 "relative to the blog's current theme URL"
 msgstr ""
 
-#: index.php:106
+#: ../hg-plugins/commentsWikibar/index.php:155
+msgid "Javascript inclusion"
+msgstr ""
+
+#: ../hg-plugins/commentsWikibar/index.php:158
+msgid "Include JS library"
+msgstr ""
+
+#: ../hg-plugins/commentsWikibar/index.php:161
+msgid "Use custom JS library"
+msgstr ""
+
+#: ../hg-plugins/commentsWikibar/index.php:164
+msgid "You can use a custom JS library by providing its location."
+msgstr ""
+
+#: ../hg-plugins/commentsWikibar/index.php:169
+msgid "Include JS bootstrap"
+msgstr ""
+
+#: ../hg-plugins/commentsWikibar/index.php:175
 msgid "Save configuration"
 msgstr ""

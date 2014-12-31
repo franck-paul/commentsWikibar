@@ -12,13 +12,4 @@
 
 if (!defined('DC_RC_PATH')) { return; }
 
-$this->registerModule(
-	/* Name */		"Comments Wikibar",
-	/* Description*/	"Adds a formatting toolbar when public comments use the wiki syntax",
-	/* Author */		"Pep and contributors",
-	/* Version */		'1.8',
-	array(
-		/* Permissions */	'permissions' =>	'contentadmin',
-		/* Type */			'type' =>			'plugin'
-	)
-);
+if (version_compare(PHP_VERSION,'5.2','<')) return;
