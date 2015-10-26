@@ -102,38 +102,38 @@ echo dcPage::breadcrumb(
 		<p class="field">
 			<?php echo form::checkbox('no_format', 1, $no_format); ?>
 			<label class="classic" for="no_format">&nbsp;<?php echo __('Disable characters format');?></label>
-			<img src="index.php?pf=commentsWikibar/img/bt_strong.png" alt="" />&nbsp;
-			<img src="index.php?pf=commentsWikibar/img/bt_em.png" alt="" />&nbsp;
-			<img src="index.php?pf=commentsWikibar/img/bt_ins.png" alt="" />&nbsp;
-			<img src="index.php?pf=commentsWikibar/img/bt_del.png" alt="" />&nbsp;
-			<img src="index.php?pf=commentsWikibar/img/bt_quote.png" alt="" />&nbsp;
-			<img src="index.php?pf=commentsWikibar/img/bt_code.png" alt="" />
+			<img src="<?php echo urldecode(dcPage::getPF('commentsWikibar/img/bt_strong.png')); ?>" alt="" />&nbsp;
+			<img src="<?php echo urldecode(dcPage::getPF('commentsWikibar/img/bt_em.png')); ?>" alt="" />&nbsp;
+			<img src="<?php echo urldecode(dcPage::getPF('commentsWikibar/img/bt_ins.png')); ?>" alt="" />&nbsp;
+			<img src="<?php echo urldecode(dcPage::getPF('commentsWikibar/img/bt_del.png')); ?>" alt="" />&nbsp;
+			<img src="<?php echo urldecode(dcPage::getPF('commentsWikibar/img/bt_quote.png')); ?>" alt="" />&nbsp;
+			<img src="<?php echo urldecode(dcPage::getPF('commentsWikibar/img/bt_code.png')); ?>" alt="" />
 		</p>
 		<p class="field">
 			<?php echo form::checkbox('no_br', 1, $no_br); ?>
 			<label class="classic" for="no_br">&nbsp;<?php echo __('Disable breakline');?></label>
-			<img src="index.php?pf=commentsWikibar/img/bt_br.png" alt="" />
+			<img src="<?php echo urldecode(dcPage::getPF('commentsWikibar/img/bt_br.png')); ?>" alt="" />
 		</p>
 		<p class="field">
 			<?php echo form::checkbox('no_list', 1, $no_list); ?>
 			<label class="classic" for="no_list">&nbsp;<?php echo __('Disable list');?></label>
-			<img src="index.php?pf=commentsWikibar/img/bt_ul.png" alt="" />&nbsp;
-			<img src="index.php?pf=commentsWikibar/img/bt_ol.png" alt="" />
+			<img src="<?php echo urldecode(dcPage::getPF('commentsWikibar/img/bt_ul.png')); ?>" alt="" />&nbsp;
+			<img src="<?php echo urldecode(dcPage::getPF('commentsWikibar/img/bt_ol.png')); ?>" alt="" />
 		</p>
 		<p class="field">
 			<?php echo form::checkbox('no_pre', 1, $no_pre); ?>
 			<label class="classic" for="no_pre">&nbsp;<?php echo __('Disable preformatted text');?></label>
-			<img src="index.php?pf=commentsWikibar/img/bt_pre.png" alt="" />
+			<img src="<?php echo urldecode(dcPage::getPF('commentsWikibar/img/bt_pre.png')); ?>" alt="" />
 		</p>
 		<p class="field">
 			<?php echo form::checkbox('no_quote', 1, $no_quote); ?>
 			<label class="classic" for="no_quote">&nbsp;<?php echo __('Disable blockquote');?></label>
-			<img src="index.php?pf=commentsWikibar/img/bt_bquote.png" alt="" />
+			<img src="<?php echo urldecode(dcPage::getPF('commentsWikibar/img/bt_bquote.png')); ?>" alt="" />
 		</p>
 		<p class="field">
 			<?php echo form::checkbox('no_url', 1, $no_url); ?>
 			<label class="classic" for="no_url">&nbsp;<?php echo __('Disable link');?></label>
-			<img src="index.php?pf=commentsWikibar/img/bt_link.png" alt="" />
+			<img src="<?php echo urldecode(dcPage::getPF('commentsWikibar/img/bt_link.png')); ?>" alt="" />
 		</p>
 	</div>
 
