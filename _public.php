@@ -88,9 +88,9 @@ class commentsWikibarBehaviors
 					}
 				}
 				else {
-					$css = html::stripHostURL($core->blog->getQmarkURL().'pf=commentsWikibar/wikibar.min.css');
+					$css = $core->blog->getPF('commentsWikibar/wikibar.min.css');
 				}
-				echo '<link rel="stylesheet" type="text/css" media="screen" href="'.$css.'"/>';
+				echo dcUtils::cssLoad($css);
 			}
 		}
 	}
@@ -114,9 +114,9 @@ class commentsWikibarBehaviors
 					}
 				}
 				else {
-					$js = html::stripHostURL($core->blog->getQmarkURL().'pf=commentsWikibar/wikibar.min.js');
+					$js = $core->blog->getPF('commentsWikibar/wikibar.min.js');
 				}
-				echo '<script type="text/javascript" src="'.$js.'"></script>'."\n";
+				echo dcUtils::jsLoad($js);
 			}
 
 			if ($core->blog->settings->commentswikibar->commentswikibar_add_jsglue) {
