@@ -1,25 +1,26 @@
 <?php
-# -- BEGIN LICENSE BLOCK ----------------------------------
-# This file is part of commentsWikibar, a plugin for Dotclear 2.
-#
-# Copyright (c) Pep, Franck Paul and contributors
-# carnet.franck.paul@gmail.com
-#
-# Licensed under the GPL version 2.0 license.
-# A copy of this license is available in LICENSE file or at
-# http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
-# -- END LICENSE BLOCK ------------------------------------
+/**
+ * @brief commentsWikibar, a plugin for Dotclear 2
+ *
+ * @package Dotclear
+ * @subpackage Plugins
+ *
+ * @author Pep, Franck Paul and contributors
+ *
+ * @copyright Pep
+ * @copyright GPL-2.0 https://www.gnu.org/licenses/gpl-2.0.html
+ */
 
-if (!defined('DC_RC_PATH')) { return; }
+if (!defined('DC_RC_PATH')) {return;}
 
 $this->registerModule(
-	/* Name */		"Comments Wikibar",
-	/* Description*/	"Adds a formatting toolbar when public comments use the wiki syntax",
-	/* Author */		"Pep and contributors",
-	/* Version */		'1.9',
-	array(
-		/* Dependencies */	'requires' =>		array(array('core','2.9')),
-		/* Permissions */	'permissions' =>	'contentadmin',
-		/* Type */			'type' =>			'plugin'
-	)
+    "Comments Wikibar",                                                   // Name
+    "Adds a formatting toolbar when public comments use the wiki syntax", // Description
+    "Pep and contributors",                                               // Author
+    '1.9',                                                                // Version
+    array(
+        'requires'    => array(array('core', '2.9')), // Dependencies
+        'permissions' => 'contentadmin',              // Permissions
+        'type'        => 'plugin'                    // Type
+    )
 );
