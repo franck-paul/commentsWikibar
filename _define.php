@@ -17,10 +17,10 @@ $this->registerModule(
     "Comments Wikibar",                                                   // Name
     "Adds a formatting toolbar when public comments use the wiki syntax", // Description
     "Pep and contributors",                                               // Author
-    '1.9',                                                                // Version
-    array(
-        'requires'    => array(array('core', '2.9')), // Dependencies
-        'permissions' => 'contentadmin',              // Permissions
-        'type'        => 'plugin'                    // Type
-    )
+    '1.10',                                                               // Version
+    [
+        'requires'    => [['core', '2.13']], // Dependencies
+        'permissions' => 'contentadmin',     // Permissions
+        'type'        => 'plugin'           // Type
+    ]
 );

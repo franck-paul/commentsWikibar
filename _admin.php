@@ -23,19 +23,19 @@ $_menu['Blog']->addItem(__('Comments Wikibar'),
     $core->auth->check('contentadmin', $core->blog->id));
 
 /* Register favorite */
-$core->addBehavior('adminDashboardFavorites', array('commentsWikibarAdmin', 'adminDashboardFavorites'));
+$core->addBehavior('adminDashboardFavorites', ['commentsWikibarAdmin', 'adminDashboardFavorites']);
 
 class commentsWikibarAdmin
 {
     public static function adminDashboardFavorites($core, $favs)
     {
-        $favs->register('commentsWikibar', array(
+        $favs->register('commentsWikibar', [
             'title'       => __('Comments Wikibar'),
             'url'         => 'plugin.php?p=commentsWikibar',
             'small-icon'  => urldecode(dcPage::getPF('commentsWikibar/icon.png')),
             'large-icon'  => urldecode(dcPage::getPF('commentsWikibar/icon-big.png')),
             'permissions' => 'admin'
-        ));
+        ]);
     }
 
 }

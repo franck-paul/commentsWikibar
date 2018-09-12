@@ -13,9 +13,9 @@
 
 if (!defined('DC_RC_PATH')) {return;}
 
-$core->addBehavior('publicHeadContent', array('commentsWikibarBehaviors', 'publicHeadContent'));
-$core->addBehavior('publicFooterContent', array('commentsWikibarBehaviors', 'publicFooterContent'));
-$core->addBehavior('coreInitWikiComment', array('commentsWikibarBehaviors', 'coreInitWikiComment'));
+$core->addBehavior('publicHeadContent', ['commentsWikibarBehaviors', 'publicHeadContent']);
+$core->addBehavior('publicFooterContent', ['commentsWikibarBehaviors', 'publicFooterContent']);
+$core->addBehavior('coreInitWikiComment', ['commentsWikibarBehaviors', 'coreInitWikiComment']);
 
 class commentsWikibarBehaviors
 {
@@ -25,7 +25,7 @@ class commentsWikibarBehaviors
 
         if ($core->blog->settings->commentswikibar->commentswikibar_active &&
             $core->blog->settings->system->wiki_comments) {
-            $supported_modes = new ArrayObject(array('post', 'pages', 'gal', 'galitem'));
+            $supported_modes = new ArrayObject(['post', 'pages', 'gal', 'galitem']);
             $core->callBehavior('initCommentsWikibar', $supported_modes);
             if (in_array($core->url->type, (array) $supported_modes)) {
                 return true;

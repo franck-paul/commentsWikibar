@@ -80,10 +80,10 @@ if (!empty($_POST['saveconfig'])) {
 <body>
 <?php
 echo dcPage::breadcrumb(
-    array(
+    [
         html::escapeHTML($core->blog->name) => '',
         __('Comments Wikibar')              => ''
-    ));
+    ]);
 ?>
 
 <?php if (!empty($msg)) {
