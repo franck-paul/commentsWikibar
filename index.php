@@ -96,46 +96,58 @@ echo dcPage::breadcrumb(
   <div class="multi-part" id="wikibar_options" title="<?php echo __('Plugin Activation'); ?>">
     <p class="field">
       <?php echo form::checkbox('active', 1, $active); ?>
-      <label class="classic" for="active">&nbsp;<?php echo __('Enable Comments Wikibar'); ?></label>
+      <label class="classic" for="active"><?php echo __('Enable Comments Wikibar'); ?></label>
     </p>
     <p><em><?php echo __('Activating this plugin also enforces wiki syntax in blog comments'); ?></em></p>
 
     <h3><?php echo __('Options'); ?></h3>
-    <p class="field">
+    <p class="field wide">
       <?php echo form::checkbox('no_format', 1, $no_format); ?>
-      <label class="classic" for="no_format">&nbsp;<?php echo __('Disable characters format'); ?></label>
-      <img src="<?php echo urldecode(dcPage::getPF('commentsWikibar/img/bt_strong.png')); ?>" alt="" />&nbsp;
-      <img src="<?php echo urldecode(dcPage::getPF('commentsWikibar/img/bt_em.png')); ?>" alt="" />&nbsp;
-      <img src="<?php echo urldecode(dcPage::getPF('commentsWikibar/img/bt_ins.png')); ?>" alt="" />&nbsp;
-      <img src="<?php echo urldecode(dcPage::getPF('commentsWikibar/img/bt_del.png')); ?>" alt="" />&nbsp;
-      <img src="<?php echo urldecode(dcPage::getPF('commentsWikibar/img/bt_quote.png')); ?>" alt="" />&nbsp;
-      <img src="<?php echo urldecode(dcPage::getPF('commentsWikibar/img/bt_code.png')); ?>" alt="" />
+      <label class="classic" for="no_format"><?php echo __('Disable characters format'); ?></label>
+      <span class="info" aria-hidden="true">
+          <img src="<?php echo urldecode(dcPage::getPF('commentsWikibar/img/bt_strong.png')); ?>" alt="" />&nbsp;
+          <img src="<?php echo urldecode(dcPage::getPF('commentsWikibar/img/bt_em.png')); ?>" alt="" />&nbsp;
+          <img src="<?php echo urldecode(dcPage::getPF('commentsWikibar/img/bt_ins.png')); ?>" alt="" />&nbsp;
+          <img src="<?php echo urldecode(dcPage::getPF('commentsWikibar/img/bt_del.png')); ?>" alt="" />&nbsp;
+          <img src="<?php echo urldecode(dcPage::getPF('commentsWikibar/img/bt_quote.png')); ?>" alt="" />&nbsp;
+          <img src="<?php echo urldecode(dcPage::getPF('commentsWikibar/img/bt_code.png')); ?>" alt="" />
+      </span>
     </p>
-    <p class="field">
+    <p class="field wide">
       <?php echo form::checkbox('no_br', 1, $no_br); ?>
-      <label class="classic" for="no_br">&nbsp;<?php echo __('Disable breakline'); ?></label>
-      <img src="<?php echo urldecode(dcPage::getPF('commentsWikibar/img/bt_br.png')); ?>" alt="" />
+      <label class="classic" for="no_br"><?php echo __('Disable breakline'); ?></label>
+      <span class="info" aria-hidden="true">
+          <img src="<?php echo urldecode(dcPage::getPF('commentsWikibar/img/bt_br.png')); ?>" alt="" />
+      </span>
     </p>
-    <p class="field">
+    <p class="field wide">
       <?php echo form::checkbox('no_list', 1, $no_list); ?>
-      <label class="classic" for="no_list">&nbsp;<?php echo __('Disable list'); ?></label>
-      <img src="<?php echo urldecode(dcPage::getPF('commentsWikibar/img/bt_ul.png')); ?>" alt="" />&nbsp;
-      <img src="<?php echo urldecode(dcPage::getPF('commentsWikibar/img/bt_ol.png')); ?>" alt="" />
+      <label class="classic" for="no_list"><?php echo __('Disable list'); ?></label>
+      <span class="info" aria-hidden="true">
+          <img src="<?php echo urldecode(dcPage::getPF('commentsWikibar/img/bt_ul.png')); ?>" alt="" />&nbsp;
+          <img src="<?php echo urldecode(dcPage::getPF('commentsWikibar/img/bt_ol.png')); ?>" alt="" />
+      </span>
     </p>
-    <p class="field">
+    <p class="field wide">
       <?php echo form::checkbox('no_pre', 1, $no_pre); ?>
-      <label class="classic" for="no_pre">&nbsp;<?php echo __('Disable preformatted text'); ?></label>
-      <img src="<?php echo urldecode(dcPage::getPF('commentsWikibar/img/bt_pre.png')); ?>" alt="" />
+      <label class="classic" for="no_pre"><?php echo __('Disable preformatted text'); ?></label>
+      <span class="info" aria-hidden="true">
+          <img src="<?php echo urldecode(dcPage::getPF('commentsWikibar/img/bt_pre.png')); ?>" alt="" />
+      </span>
     </p>
-    <p class="field">
+    <p class="field wide">
       <?php echo form::checkbox('no_quote', 1, $no_quote); ?>
-      <label class="classic" for="no_quote">&nbsp;<?php echo __('Disable blockquote'); ?></label>
-      <img src="<?php echo urldecode(dcPage::getPF('commentsWikibar/img/bt_bquote.png')); ?>" alt="" />
+      <label class="classic" for="no_quote"><?php echo __('Disable blockquote'); ?></label>
+      <span class="info" aria-hidden="true">
+          <img src="<?php echo urldecode(dcPage::getPF('commentsWikibar/img/bt_bquote.png')); ?>" alt="" />
+      </span>
     </p>
-    <p class="field">
+    <p class="field wide">
       <?php echo form::checkbox('no_url', 1, $no_url); ?>
-      <label class="classic" for="no_url">&nbsp;<?php echo __('Disable link'); ?></label>
-      <img src="<?php echo urldecode(dcPage::getPF('commentsWikibar/img/bt_link.png')); ?>" alt="" />
+      <label class="classic" for="no_url"><?php echo __('Disable link'); ?></label>
+      <span class="info" aria-hidden="true">
+          <img src="<?php echo urldecode(dcPage::getPF('commentsWikibar/img/bt_link.png')); ?>" alt="" />
+      </span>
     </p>
   </div>
 
@@ -144,7 +156,7 @@ echo dcPage::breadcrumb(
     <h3><?php echo __('CSS inclusion'); ?></h3>
     <p class="field">
       <?php echo form::checkbox('wb_add_css', 1, $wb_add_css); ?>
-      <label class="classic" for="wb_add_css">&nbsp;<?php echo __('Include CSS'); ?></label>
+      <label class="classic" for="wb_add_css"><?php echo __('Include CSS'); ?></label>
     </p>
     <p class="field">
       <label class="classic" for="custom_css"><?php echo __('Use custom CSS'); ?> : </label>
@@ -157,7 +169,7 @@ echo dcPage::breadcrumb(
     <h3><?php echo __('Javascript inclusion'); ?></h3>
     <p class="field">
       <?php echo form::checkbox('wb_add_jslib', 1, $wb_add_jslib); ?>
-      <label class="classic" for="wb_add_jslib">&nbsp;<?php echo __('Include JS library'); ?></label>
+      <label class="classic" for="wb_add_jslib"><?php echo __('Include JS library'); ?></label>
     </p>
     <p class="field">
       <label class="classic" for="custom_jslib"><?php echo __('Use custom JS library'); ?> : </label>
@@ -168,7 +180,7 @@ echo dcPage::breadcrumb(
     </em></p>
     <p class="field">
       <?php echo form::checkbox('wb_add_jsglue', 1, $wb_add_jsglue); ?>
-      <label class="classic" for="wb_add_jsglue">&nbsp;<?php echo __('Include JS bootstrap'); ?></label>
+      <label class="classic" for="wb_add_jsglue"><?php echo __('Include JS bootstrap'); ?></label>
     </p>
 
   </div>
