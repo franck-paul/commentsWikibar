@@ -41,6 +41,9 @@ function jsToolBar(b) {
 
     this.toolbar = document.createElement('div');
     this.toolbar.className = 'jstElements';
+    this.toolbar.setAttribute('role', 'toolbar');
+    this.toolbar.setAttribute('aria-label', this.label);
+    this.toolbar.setAttribute('aria-controls','c_content');
     this.editor.parentNode.insertBefore(this.toolbar, this.editor);
 
     this.handle = document.createElement('div');
@@ -72,18 +75,29 @@ jsButton.prototype.draw = function() {
     if (!this.scope) {
         return null;
     }
+    var container = document.createElement('span');
+    container.className = 'jsBtnContainer';    
     var a = document.createElement('button');
+    container.appendChild(a);
     a.setAttribute('type', 'button');
     if (this.className) {
         a.className = this.className;
     }
-    a.title = this.title;
-    var b = document.createElement('span');
+    var b = document.createElement('div');
+    b.setAttribute('id', a.className+'label');
+    b.setAttribute('role', 'tooltip');
+    b.className = 'sr-only';
+    a.setAttribute('aria-labelledby', a.className+'label');    
     b.appendChild(document.createTextNode(this.title));
-    a.appendChild(b);
+    container.appendChild(b);
     if (this.icon != undefined) {
         a.style.backgroundImage = 'url(" + this.icon + ")';
     }
+    addListener(a, 'keydown', jsButton.prototype.keyDown);
+    addListener(a, 'focus', jsButton.prototype.focus);
+    addListener(a, 'blur', jsButton.prototype.blur);
+    addListener(a, 'mouseover', jsButton.prototype.mouseOver);
+    addListener(a, 'mouseleave', jsButton.prototype.mouseLeave);    
     if (typeof(this.fn) == 'function') {
         var c = this;
         a.onclick = function() {
@@ -93,7 +107,71 @@ jsButton.prototype.draw = function() {
             return false;
         };
     }
-    return a;
+    return container;
+};
+jsButton.prototype.keyDown = function (event) {
+    var stopPropagation = false;
+  
+    switch (event.keyCode) {
+      case 13: // ENTER
+      case 32: // SPACE
+        break;
+      case 39: // RIGHT
+        document.commentTb.moveFocus(this, 'next');
+        stopPropagation = true;
+        break;
+      case 37: // LEFT
+        document.commentTb.moveFocus(this, 'previous');
+        stopPropagation = true;
+        break;
+      case 36: // HOME
+        document.commentTb.setFocus(document.commentTb.firstItem);
+        stopPropagation = true;
+        break;
+      case 35: // END
+        document.commentTb.setFocus(document.commentTb.lastItem);
+        stopPropagation = true;
+        break;
+      case 38: // UP
+        document.commentTb.moveFocus(this, 'previous');
+        stopPropagation = true;
+        break;
+      case 40: // DOWN
+        document.commentTb.moveFocus(this, 'next');
+        stopPropagation = true;
+        break;
+      case 27: // ESC
+        document.commentTb.hideAllTooltips();
+        stopPropagation = true;  
+      default:
+        break;
+    }  
+    if (stopPropagation) {
+      event.stopPropagation();
+      event.preventDefault();
+    }
+};
+jsButton.prototype.blur = function (event) {
+    document.getElementById(event.target.className+'label').classList.add('sr-only');
+    document.querySelector('.jstElements').classList.remove('focus');
+};
+jsButton.prototype.focus = function (event) {
+    document.commentTb.hideAllTooltips();
+    document.getElementById(event.target.className+'label').classList.remove('sr-only');
+    document.querySelector('.jstElements').classList.add('focus');
+};
+jsButton.prototype.mouseLeave = function (event) {
+    event.target.classList.remove('hovered');
+    setTimeout(function() {
+        if (!event.target.classList.contains('hovered')) {
+            document.getElementById(event.target.className+'label').classList.add('sr-only');
+        }
+    }, 800);
+};
+jsButton.prototype.mouseOver = function (event) {
+    document.commentTb.hideAllTooltips();
+    document.getElementById(event.target.className+'label').classList.remove('sr-only');
+    event.target.classList.add('hovered');
 };
 function jsSpace(a) {
     this.id = a || null;
@@ -214,6 +292,10 @@ jsToolBar.prototype = {
                 }
             }
         }
+        this.firstItem = document.querySelector('.jstElements .jsBtnContainer:first-child button');
+        this.lastItem = document.querySelector('.jstElements .jsBtnContainer:last-child button');
+        this.items = Array.from(document.querySelectorAll('.jstElements button'));
+        this.initTabindex();
     },
     singleTag: function(b, a) {
         b = b || null;
@@ -277,6 +359,37 @@ jsToolBar.prototype = {
         }
         return a;
     }
+};
+jsToolBar.prototype.initTabindex = function () {
+    for (var i = 1; i < this.items.length; i++) {
+        this.items[i].setAttribute('tabindex', '-1');
+    }
+    this.items[0].setAttribute('tabindex', '0');
+};
+jsToolBar.prototype.setFocus = function (item) {
+    for (var i = 0; i < this.items.length; i++) {
+        this.items[i].setAttribute('tabindex', '-1');
+    }
+    item.setAttribute('tabindex', '0');
+    item.focus();
+};
+jsToolBar.prototype.moveFocus = function (currentItem, direction) {
+    var newItem;
+
+    if (direction == 'previous') {
+            newItem = (currentItem === this.firstItem)?this.lastItem:this.items[this.items.indexOf(currentItem) - 1];
+    } else {
+            newItem = (currentItem === this.lastItem)?this.firstItem:this.items[this.items.indexOf(currentItem) + 1];
+    }
+
+    this.setFocus(newItem);
+};
+jsToolBar.prototype.hideAllTooltips = function () {
+    Array.from(document.querySelectorAll('.jstElements [role=tooltip]')).forEach(element => {
+        if (!element.classList.contains('sr-only')) {
+            element.classList.add('sr-only');
+        }
+    });
 };
 jsToolBar.prototype.resizeSetStartH = function() {
     this.dragStartH = this.textarea.offsetHeight + 0;
