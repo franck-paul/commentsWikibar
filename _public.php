@@ -144,7 +144,8 @@ class commentsWikibarBehaviors
                 "jsToolBar.prototype.elements.link.hreflang_prompt = '" . html::escapeJS(__('Language?')) . "'; \n\n" .
                 "if (document.getElementById) { \n" .
                 " if (document.getElementById('" . html::escapeJS('c_content') . "')) { \n" .
-                "   var commentTb = new jsToolBar(document.getElementById('" . html::escapeJS('c_content') . "')); \n" .
+				"   var commentTb = new jsToolBar(document.getElementById('" . html::escapeJS('c_content') . "')); \n" .
+				"       document.commentTb = commentTb;\n".
                     ($core->blog->settings->commentswikibar->commentswikibar_no_format ?
                     "   commentTb.elements.strong.type = \"\"; \n\n" .
                     "   commentTb.elements.em.type = \"\"; \n\n" .
