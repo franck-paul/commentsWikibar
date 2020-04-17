@@ -14,8 +14,25 @@
 	}
 
 .jstElements {
-	padding: 3px 3px;
+	padding: 3px 5px 5px 5px;
+	border-bottom: 5px;
+	margin-left: 5px;
 	}
+
+	.jstElements .sr-only {
+		clip-path: inset(100%);
+		clip: rect(1px, 1px, 1px, 1px);
+		height: 1px;
+		overflow: hidden;
+		position: absolute;
+		white-space: nowrap;
+		width: 1px;
+		}
+		.jstElements.focus {
+			border: 2px solid dodgerblue;
+			padding: 1px 3px 3px 3px;
+			}
+
 	.jstElements button {
 		margin-right : 6px;
 		width : 24px;
@@ -27,16 +44,21 @@
 		background-color : #f7f7f7;
 		background-image: url(?pf=commentsWikibar/img/wikibar.png);
 		background-repeat: no-repeat;
+		outline-color: dodgerblue;		
 		}
-	.jstElements button:hover {
-		border-color : #000;
-		}
-		.jstElements button span {
-			display : none;
+		.jstElements [role="tooltip"] {
+			position:absolute;
+			bottom: 30px;
+			left: 12px;
+			background-color: lightyellow;
+			padding: 5px;
+			filter: drop-shadow(0 0 2px grey);
+			white-space: nowrap;
 			}
-	.jstElements span {
-		display : inline;
-		}
+					  
+		.jsBtnContainer {
+			position: relative;
+			}
 
 .jstSpacer {
 	width : 0px;
