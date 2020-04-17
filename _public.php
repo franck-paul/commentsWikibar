@@ -127,7 +127,8 @@ class commentsWikibarBehaviors
                 '<script type="text/javascript">' . "\n" .
                 "addListener(window,'load',function() {\n" .
                 "jsToolBar.prototype.base_url = '" . html::escapeJS($core->blog->host) . "'; \n" .
-                "jsToolBar.prototype.legend_msg = '" . html::escapeJS(__('You can use the following shortcuts to format your text.')) . "'; \n" .
+				"jsToolBar.prototype.legend_msg = '" . html::escapeJS(__('You can use the following shortcuts to format your text.')) . "'; \n" .
+				"jsToolBar.prototype.label = '".html::escapeJS(__('Text formatting'))."'; \n".
                 "jsToolBar.prototype.elements.strong.title = '" . html::escapeJS(__('Strong emphasis')) . "'; \n" .
                 "jsToolBar.prototype.elements.em.title = '" . html::escapeJS(__('Emphasis')) . "'; \n" .
                 "jsToolBar.prototype.elements.ins.title = '" . html::escapeJS(__('Inserted')) . "'; \n" .
