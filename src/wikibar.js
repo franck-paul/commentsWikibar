@@ -183,6 +183,7 @@ jsSpace.prototype.draw = function() {
         a.id = this.id;
     }
     a.appendChild(document.createTextNode(String.fromCharCode(160)));
+    a.setAttribute('aria-hidden', 'true');
     a.className = 'jstSpacer';
     if (this.width) {
         a.style.marginRight = this.width + 'px';
