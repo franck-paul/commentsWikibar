@@ -76,21 +76,16 @@ jsButton.prototype.draw = function() {
     if (!this.scope) {
         return null;
     }
-    var container = document.createElement('span');
-    container.className = 'jsBtnContainer';    
     var a = document.createElement('button');
-    container.appendChild(a);
     a.setAttribute('type', 'button');
     if (this.className) {
         a.className = this.className;
     }
-    var b = document.createElement('div');
-    b.setAttribute('id', a.className+'label');
-    b.setAttribute('role', 'tooltip');
+    var b = document.createElement('span');
     b.className = 'sr-only';
-    a.setAttribute('aria-labelledby', a.className+'label');    
     b.appendChild(document.createTextNode(this.title));
-    container.appendChild(b);
+    a.appendChild(b);
+
     if (this.icon != undefined) {
         a.style.backgroundImage = 'url(" + this.icon + ")';
     }
@@ -108,7 +103,7 @@ jsButton.prototype.draw = function() {
             return false;
         };
     }
-    return container;
+    return a;
 };
 jsButton.prototype.keyDown = function (event) {
     var stopPropagation = false;
@@ -150,26 +145,30 @@ jsButton.prototype.keyDown = function (event) {
     }
 };
 jsButton.prototype.blur = function (event) {
-    document.getElementById(event.target.className+'label').classList.add('sr-only');
+    event.target.firstChild.classList.add('sr-only');
     document.querySelector('.jstElements').classList.remove('focus');
 };
 jsButton.prototype.focus = function (event) {
     document.commentTb.hideAllTooltips();
-    document.getElementById(event.target.className+'label').classList.remove('sr-only');
+    event.target.firstChild.classList.remove('sr-only');
     document.querySelector('.jstElements').classList.add('focus');
 };
 jsButton.prototype.mouseLeave = function (event) {
-    event.target.classList.remove('hovered');
-    setTimeout(function() {
-        if (!event.target.classList.contains('hovered')) {
-            document.getElementById(event.target.className+'label').classList.add('sr-only');
-        }
-    }, 800);
+    if (event.target.nodeName === "BUTTON") {
+        event.target.classList.remove('hovered');
+        setTimeout(function() {
+            if (!event.target.classList.contains('hovered')) {
+                event.target.firstChild.classList.add('sr-only');
+            }
+        }, 800);
+    }
 };
 jsButton.prototype.mouseOver = function (event) {
-    document.commentTb.hideAllTooltips();
-    document.getElementById(event.target.className+'label').classList.remove('sr-only');
-    event.target.classList.add('hovered');
+    if (event.target.nodeName === "BUTTON") {
+        document.commentTb.hideAllTooltips();
+        event.target.firstChild.classList.remove('sr-only');
+        event.target.classList.add('hovered');
+    }
 };
 function jsSpace(a) {
     this.id = a || null;
@@ -291,10 +290,12 @@ jsToolBar.prototype = {
                 }
             }
         }
-        this.firstItem = document.querySelector('.jstElements .jsBtnContainer:first-child button');
-        this.lastItem = document.querySelector('.jstElements .jsBtnContainer:last-child button');
+
+        this.firstItem = document.querySelector('.jstElements button:first-child');
+        this.lastItem = document.querySelector('.jstElements button:last-child');
         this.items = Array.from(document.querySelectorAll('.jstElements button'));
         this.initTabindex();
+        this.updateTooltipsPos();
         addListener(document.body, 'keydown', jsToolBar.prototype.keyDown);
     },
     keyDown: function(event){
@@ -392,7 +393,7 @@ jsToolBar.prototype.moveFocus = function (currentItem, direction) {
     this.setFocus(newItem);
 };
 jsToolBar.prototype.hideAllTooltips = function () {
-    Array.from(document.querySelectorAll('.jstElements [role=tooltip]')).forEach(element => {
+    Array.from(document.querySelectorAll('.jstElements button span')).forEach(element => {
         if (!element.classList.contains('sr-only')) {
             element.classList.add('sr-only');
         }

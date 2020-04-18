@@ -44,9 +44,10 @@
 		background-color : #f7f7f7;
 		background-image: url(?pf=commentsWikibar/img/wikibar.png);
 		background-repeat: no-repeat;
-		outline-color: dodgerblue;		
+		outline-color: dodgerblue;
+		position: relative;	
 		}
-		.jstElements [role="tooltip"] {
+		.jstElements button span {
 			position:absolute;
 			bottom: 30px;
 			left: 12px;
@@ -56,10 +57,6 @@
 			-moz-box-shadow: 0px 0px 3px 0px rgba(112,112,112,1);
 			box-shadow: 0px 0px 3px 0px rgba(112,112,112,1);
 			white-space: nowrap;
-			}
-					  
-		.jsBtnContainer {
-			position: relative;
 			}
 
 .jstSpacer {
