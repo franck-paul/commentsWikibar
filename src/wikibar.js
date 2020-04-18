@@ -1,4 +1,5 @@
 'use strict';
+// support of ARIA toolbar design pattern largely inspired from https://www.w3.org/TR/wai-aria-practices-1.1/examples/toolbar/toolbar.html
 
 function addListener(b, a, c) {
     if (b.addEventListener) {
@@ -140,9 +141,6 @@ jsButton.prototype.keyDown = function (event) {
         document.commentTb.moveFocus(this, 'next');
         stopPropagation = true;
         break;
-      case 27: // ESC
-        document.commentTb.hideAllTooltips();
-        stopPropagation = true;  
       default:
         break;
     }  
@@ -297,6 +295,14 @@ jsToolBar.prototype = {
         this.lastItem = document.querySelector('.jstElements .jsBtnContainer:last-child button');
         this.items = Array.from(document.querySelectorAll('.jstElements button'));
         this.initTabindex();
+        addListener(document.body, 'keydown', jsToolBar.prototype.keyDown);
+    },
+    keyDown: function(event){
+        if (event.keyCode == 27) { //ESC
+            document.commentTb.hideAllTooltips();
+            event.stopPropagation();
+            event.preventDefault();
+        }
     },
     singleTag: function(b, a) {
         b = b || null;
