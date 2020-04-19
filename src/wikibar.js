@@ -392,11 +392,37 @@ jsToolBar.prototype.moveFocus = function (currentItem, direction) {
 
     this.setFocus(newItem);
 };
+jsToolBar.prototype.updateTooltipsPos = function() {
+    Array.from(document.querySelectorAll('.jstElements button span')).forEach(function(e) {
+        // move to the left all tooltips that are too close from the right border of the viewport
+        var currentPos = e.getBoundingClientRect().left;
+        e.style.left = '0px'; // we reset all positions
+        // we need to switch between sr-only and hidden to be able to get the width of the tooltips
+        e.classList.add('hidden');
+        e.classList.remove('sr-only');
+        var width = e.clientWidth;
+        e.classList.add('sr-only');
+        e.classList.remove('hidden');
+        if ((width + currentPos) > (document.documentElement.clientWidth - 10)) {
+            var diff = Math.trunc(-1 * (width + currentPos - document.documentElement.clientWidth + 10))
+            e.style.left = diff + 'px';
+        } 
+  });
+};
+var resizeTimer;
+var prevWidth = 0;
+window.addEventListener('resize', function() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function() {
+        if (document.documentElement.clientWidth !== prevWidth) {
+            jsToolBar.prototype.updateTooltipsPos();
+            prevWidth = document.documentElement.clientWidth;  
+        }
+    }, 250); 
+});
 jsToolBar.prototype.hideAllTooltips = function () {
     Array.from(document.querySelectorAll('.jstElements button span')).forEach(element => {
-        if (!element.classList.contains('sr-only')) {
-            element.classList.add('sr-only');
-        }
+        element.classList.add('sr-only');
     });
 };
 jsToolBar.prototype.resizeSetStartH = function() {

@@ -4,7 +4,7 @@
 	.jstEditor textarea, .jstEditor iframe {
 		margin: 0;
 		border: 0;
-	}
+		}
 
 .jstHandle {
 	height: 16px;
@@ -27,6 +27,10 @@
 		position: absolute;
 		white-space: nowrap;
 		width: 1px;
+		top: -10000em;
+		}
+		.jstElements .hidden {
+			visibility: hidden;
 		}
 		.jstElements.focus {
 			border: 2px solid dodgerblue;
@@ -35,28 +39,33 @@
 
 	.jstElements button {
 		margin-right : 6px;
-		width : 24px;
+		width: 24px;
 		height: 24px;
 		padding: 4px;
 		border-style: solid;
-		border-width: 1px;
+		border-width: 2px;
 		border-color: #ddd;
-		background-color : #f7f7f7;
+		background-color: #f7f7f7;
 		background-image: url(?pf=commentsWikibar/img/wikibar.png);
 		background-repeat: no-repeat;
-		outline-color: dodgerblue;
 		position: relative;	
+		outline: 0;
 		}
+		.jstElements button:hover {
+			border-color : dodgerblue;
+			}		
 		.jstElements button span {
-			position:absolute;
+			position: absolute;
 			bottom: 30px;
-			left: 12px;
 			background-color: lightyellow;
 			padding: 5px;
 			-webkit-box-shadow: 0px 0px 3px 0px rgba(112,112,112,1);
 			-moz-box-shadow: 0px 0px 3px 0px rgba(112,112,112,1);
 			box-shadow: 0px 0px 3px 0px rgba(112,112,112,1);
 			white-space: nowrap;
+			}
+			.jstElements button:focus {
+				border-color: dodgerblue;		
 			}
 
 .jstSpacer {
