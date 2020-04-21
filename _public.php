@@ -14,7 +14,6 @@
 if (!defined('DC_RC_PATH')) {return;}
 
 $core->addBehavior('publicHeadContent', ['commentsWikibarBehaviors', 'publicHeadContent']);
-$core->addBehavior('publicFooterContent', ['commentsWikibarBehaviors', 'publicFooterContent']);
 $core->addBehavior('coreInitWikiComment', ['commentsWikibarBehaviors', 'coreInitWikiComment']);
 
 class commentsWikibarBehaviors
@@ -74,6 +73,7 @@ class commentsWikibarBehaviors
         global $core;
 
         if (self::canActivate()) {
+            // CSS
             if ($core->blog->settings->commentswikibar->commentswikibar_add_css) {
                 $custom_css = trim($core->blog->settings->commentswikibar->commentswikibar_custom_css);
                 if (!empty($custom_css)) {
@@ -90,14 +90,7 @@ class commentsWikibarBehaviors
                 }
                 echo dcUtils::cssLoad($css);
             }
-        }
-    }
-
-    public static function publicFooterContent()
-    {
-        global $core;
-
-        if (self::canActivate()) {
+            // JS
             if ($core->blog->settings->commentswikibar->commentswikibar_add_jslib) {
                 $custom_jslib = trim($core->blog->settings->commentswikibar->commentswikibar_custom_jslib);
                 if (!empty($custom_jslib)) {
@@ -124,58 +117,40 @@ class commentsWikibarBehaviors
                     }
                 }
                 echo
-                '<script>' . "\n" .
-                "addListener(window,'load',function() {\n" .
-                "jsToolBar.prototype.base_url = '" . html::escapeJS($core->blog->host) . "'; \n" .
-				"jsToolBar.prototype.legend_msg = '" . html::escapeJS(__('You can use the following shortcuts to format your text.')) . "'; \n" .
-				"jsToolBar.prototype.label = '".html::escapeJS(__('Text formatting'))."'; \n".
-                "jsToolBar.prototype.elements.strong.title = '" . html::escapeJS(__('Strong emphasis')) . "'; \n" .
-                "jsToolBar.prototype.elements.em.title = '" . html::escapeJS(__('Emphasis')) . "'; \n" .
-                "jsToolBar.prototype.elements.ins.title = '" . html::escapeJS(__('Inserted')) . "'; \n" .
-                "jsToolBar.prototype.elements.del.title = '" . html::escapeJS(__('Deleted')) . "'; \n" .
-                "jsToolBar.prototype.elements.quote.title = '" . html::escapeJS(__('Inline quote')) . "'; \n" .
-                "jsToolBar.prototype.elements.code.title = '" . html::escapeJS(__('Code')) . "'; \n" .
-                "jsToolBar.prototype.elements.br.title = '" . html::escapeJS(__('Line break')) . "'; \n" .
-                "jsToolBar.prototype.elements.ul.title = '" . html::escapeJS(__('Unordered list')) . "'; \n" .
-                "jsToolBar.prototype.elements.ol.title = '" . html::escapeJS(__('Ordered list')) . "'; \n" .
-                "jsToolBar.prototype.elements.pre.title = '" . html::escapeJS(__('Preformatted')) . "'; \n" .
-                "jsToolBar.prototype.elements.bquote.title = '" . html::escapeJS(__('Block quote')) . "'; \n" .
-                "jsToolBar.prototype.elements.link.title = '" . html::escapeJS(__('Link')) . "'; \n" .
-                "jsToolBar.prototype.elements.link.href_prompt = '" . html::escapeJS(__('URL?')) . "'; \n" .
-                "jsToolBar.prototype.elements.link.hreflang_prompt = '" . html::escapeJS(__('Language?')) . "'; \n\n" .
-                "if (document.getElementById) { \n" .
-                " if (document.getElementById('" . html::escapeJS('c_content') . "')) { \n" .
-				"   var commentTb = new jsToolBar(document.getElementById('" . html::escapeJS('c_content') . "')); \n" .
-				"       document.commentTb = commentTb;\n".
-                    ($core->blog->settings->commentswikibar->commentswikibar_no_format ?
-                    "   commentTb.elements.strong.type = \"\"; \n\n" .
-                    "   commentTb.elements.em.type = \"\"; \n\n" .
-                    "   commentTb.elements.ins.type = \"\"; \n\n" .
-                    "   commentTb.elements.del.type = \"\"; \n\n" .
-                    "   commentTb.elements.quote.type = \"\"; \n\n" .
-                    "   commentTb.elements.code.type = \"\"; \n\n" .
-                    "   commentTb.elements.space1.type = \"\"; \n\n" : '') .
-                    ($core->blog->settings->commentswikibar->commentswikibar_no_br ?
-                    "   commentTb.elements.br.type = \"\"; \n\n" .
-                    "   commentTb.elements.space2.type = \"\"; \n\n" : '') .
-                    ($core->blog->settings->commentswikibar->commentswikibar_no_list ?
-                    "   commentTb.elements.ul.type = \"\"; \n\n" .
-                    "   commentTb.elements.ol.type = \"\"; \n\n" : '') .
-                    ($core->blog->settings->commentswikibar->commentswikibar_no_pre ?
-                    "   commentTb.elements.pre.type = \"\"; \n\n" : '') .
-                    ($core->blog->settings->commentswikibar->commentswikibar_no_quote ?
-                    "   commentTb.elements.bquote.type = \"\"; \n\n" : '') .
-                    ($core->blog->settings->commentswikibar->commentswikibar_no_list &&
-                    $core->blog->settings->commentswikibar->commentswikibar_no_pre &&
-                    $core->blog->settings->commentswikibar->commentswikibar_no_quote ?
-                    "   commentTb.elements.space3.type = \"\"; \n\n" : '') .
-                    ($core->blog->settings->commentswikibar->commentswikibar_no_url ?
-                    "   commentTb.elements.link.type = \"\"; \n\n" : '') .
-                    "   commentTb.draw('" . $mode . "'); \n" .
-                    " }\n" .
-                    "}\n" .
-                    "});\n" .
-                    "</script>\n";
+                dcUtils::jsJson('commentswikibar', [
+                    'base_url'   => $core->blog->host,
+                    'id'         => 'c_content',
+                    'mode'       => $mode,
+                    'legend_msg' => __('You can use the following shortcuts to format your text.'),
+                    'label'      => __('Text formatting'),
+                    'elements'   => [
+                        'strong' => ['title' => __('Strong emphasis')],
+                        'em'     => ['title' => __('Emphasis')],
+                        'ins'    => ['title' => __('Inserted')],
+                        'del'    => ['title' => __('Deleted')],
+                        'quote'  => ['title' => __('Inline quote')],
+                        'code'   => ['title' => __('Code')],
+                        'br'     => ['title' => __('Line break')],
+                        'ul'     => ['title' => __('Unordered list')],
+                        'ol'     => ['title' => __('Ordered list')],
+                        'pre'    => ['title' => __('Preformatted')],
+                        'bquote' => ['title' => __('Block quote')],
+                        'link'   => [
+                            'title'           => __('Link'),
+                            'href_prompt'     => __('URL?'),
+                            'hreflang_prompt' => __('Language?')
+                        ]
+                    ],
+                    'options'    => [
+                        'no_format' => $core->blog->settings->commentswikibar->commentswikibar_no_format,
+                        'no_br'     => $core->blog->settings->commentswikibar->commentswikibar_no_br,
+                        'no_list'   => $core->blog->settings->commentswikibar->commentswikibar_no_list,
+                        'no_pre'    => $core->blog->settings->commentswikibar->commentswikibar_no_pre,
+                        'no_quote'  => $core->blog->settings->commentswikibar->commentswikibar_no_quote,
+                        'no_url'    => $core->blog->settings->commentswikibar->commentswikibar_no_url
+                    ]
+                ]) .
+                dcUtils::jsLoad($core->blog->getPF('commentsWikibar/bootstrap.min.js'));
             }
         }
     }

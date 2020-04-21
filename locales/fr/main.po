@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Dotclear 2 commentsWikibar module\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-27 17:03+0100\n"
+"POT-Creation-Date: 2020-04-21 17:18+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Franck Paul <carnet.franck.paul@gmail.com>\n"
 "Language-Team: \n"
@@ -23,9 +23,6 @@ msgstr "Texte préformaté"
 
 msgid "Block quote"
 msgstr "Bloc de citation"
-
-msgid "Configuration successfully updated."
-msgstr "La configuration a été mise à jour."
 
 msgid "Plugin Activation"
 msgstr "Activation de l'extension"
@@ -86,54 +83,3 @@ msgstr "Vous pouvez utiliser une librairie Javascript personnalisée en fourniss
 
 msgid "Include JS bootstrap"
 msgstr "Inclure l'amorce JS"
-
-msgid "Save configuration"
-msgstr "Enregistrer la configuration"
-
-msgid "Text formatting"
-msgstr "Formatage de texte"
-
-#~ msgid "Plugin activation"
-#~ msgstr "Activation du plugin"
-
-#~ msgid "Options"
-#~ msgstr "Options"
-
-#~ msgid "You can use the following shortcuts to format your text."
-#~ msgstr "Vous pouvez utiliser les raccourcis suivant pour mettre en forme votre texte."
-
-#~ msgid "Strong emphasis"
-#~ msgstr "Emphase forte"
-
-#~ msgid "Emphasis"
-#~ msgstr "Emphase"
-
-#~ msgid "Inserted"
-#~ msgstr "Insertion"
-
-#~ msgid "Deleted"
-#~ msgstr "Suppression"
-
-#~ msgid "Inline quote"
-#~ msgstr "Citation en ligne"
-
-#~ msgid "Code"
-#~ msgstr "Code"
-
-#~ msgid "Unordered list"
-#~ msgstr "Liste à puces"
-
-#~ msgid "Ordered list"
-#~ msgstr "Liste numérotée"
-
-#~ msgid "Link"
-#~ msgstr "Lien"
-
-#~ msgid "URL?"
-#~ msgstr "URL ?"
-
-#~ msgid "Language?"
-#~ msgstr "Langue ?"
-
-#~ msgid "Line break"
-#~ msgstr "Passage à la ligne"

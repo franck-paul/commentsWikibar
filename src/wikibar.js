@@ -11,16 +11,6 @@ function addListener(b, a, c) {
   }
 }
 
-function removeListener(b, a, c) {
-  if (b.removeEventListener) {
-    b.removeEventListener(a, c, false);
-  } else {
-    if (b.detachEvent) {
-      b.detachEvent('on' + a, c);
-    }
-  }
-}
-
 function jsToolBar(b) {
   /* jshint validthis: true */
   if (!document.createElement) {
@@ -48,21 +38,6 @@ function jsToolBar(b) {
   this.toolbar.setAttribute('aria-controls', 'c_content');
   this.editor.parentNode.insertBefore(this.toolbar, this.editor);
 
-  this.handle = document.createElement('div');
-  this.handle.className = 'jstHandle';
-  var a = this.resizeDragStart;
-  var c = this;
-  addListener(this.handle, 'mousedown',
-    function(d) {
-      a.call(c, d);
-    });
-  // fix memory leak in Firefox (bug #241518)
-  addListener(window, 'unload',
-    function() {
-      c.handle.parentNode.removeChild(c.handle);
-      delete(c.handle);
-    });
-  this.editor.parentNode.insertBefore(this.handle, this.editor.nextSibling);
   this.context = null;
   this.toolNodes = {};
 }
@@ -431,27 +406,6 @@ jsToolBar.prototype.hideAllTooltips = function() {
   Array.from(document.querySelectorAll('.jstElements button span')).forEach(element => {
     element.classList.add('sr-only');
   });
-};
-jsToolBar.prototype.resizeSetStartH = function() {
-  this.dragStartH = this.textarea.offsetHeight + 0;
-};
-jsToolBar.prototype.resizeDragStart = function(a) {
-  var b = this;
-  this.dragStartY = a.clientY;
-  this.resizeSetStartH();
-  addListener(document, 'mousemove', this.dragMoveHdlr = function(c) {
-    b.resizeDragMove(c);
-  });
-  addListener(document, 'mouseup', this.dragStopHdlr = function(c) {
-    b.resizeDragStop(c);
-  });
-};
-jsToolBar.prototype.resizeDragMove = function(a) {
-  this.textarea.style.height = (this.dragStartH + a.clientY - this.dragStartY) + 'px';
-};
-jsToolBar.prototype.resizeDragStop = function() {
-  removeListener(document, 'mousemove', this.dragMoveHdlr);
-  removeListener(document, 'mouseup', this.dragStopHdlr);
 };
 jsToolBar.prototype.elements.strong = {
   type: 'button',

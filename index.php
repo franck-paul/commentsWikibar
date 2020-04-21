@@ -74,6 +74,8 @@ if (!empty($_POST['saveconfig'])) {
 <html>
 <head>
   <title><?php echo __('Comments Wikibar'); ?></title>
+  <?php echo dcPage::cssLoad(urldecode(dcPage::getPF('commentsWikibar/wikibar.min.css'))); ?>
+  <?php echo dcPage::cssLoad(urldecode(dcPage::getPF('commentsWikibar/src/admin.css'))); ?>
   <?php echo dcPage::jsPageTabs(''); ?>
 </head>
 
@@ -104,49 +106,73 @@ echo dcPage::breadcrumb(
     <p class="field wide">
       <?php echo form::checkbox('no_format', 1, $no_format); ?>
       <label class="classic" for="no_format"><?php echo __('Disable characters format'); ?></label>
-      <span class="info" aria-hidden="true">
-          <img src="<?php echo urldecode(dcPage::getPF('commentsWikibar/img/bt_strong.png')); ?>" alt="" />&nbsp;
-          <img src="<?php echo urldecode(dcPage::getPF('commentsWikibar/img/bt_em.png')); ?>" alt="" />&nbsp;
-          <img src="<?php echo urldecode(dcPage::getPF('commentsWikibar/img/bt_ins.png')); ?>" alt="" />&nbsp;
-          <img src="<?php echo urldecode(dcPage::getPF('commentsWikibar/img/bt_del.png')); ?>" alt="" />&nbsp;
-          <img src="<?php echo urldecode(dcPage::getPF('commentsWikibar/img/bt_quote.png')); ?>" alt="" />&nbsp;
-          <img src="<?php echo urldecode(dcPage::getPF('commentsWikibar/img/bt_code.png')); ?>" alt="" />
+      <span class="jstElements" aria-hidden="true">
+        <button disabled class="jstb_strong" title="<?php echo __('Strong emphasis'); ?>">
+          <span class="sr-only"><?php echo __('Strong emphasis'); ?></span>
+        </button>
+        <button disabled class="jstb_em" title="<?php echo __('Emphasis'); ?>">
+          <span class="sr-only"><?php echo __('Emphasis'); ?></span>
+        </button>
+        <button disabled class="jstb_ins" title="<?php echo __('Inserted'); ?>">
+          <span class="sr-only"><?php echo __('Inserted'); ?></span>
+        </button>
+        <button disabled class="jstb_del" title="<?php echo __('Deleted'); ?>">
+          <span class="sr-only"><?php echo __('Deleted'); ?></span>
+        </button>
+        <button disabled class="jstb_quote" title="<?php echo __('Inline quote'); ?>">
+          <span class="sr-only"><?php echo __('Inline quote'); ?></span>
+        </button>
+        <button disabled class="jstb_code" title="<?php echo __('Code'); ?>">
+          <span class="sr-only"><?php echo __('Code'); ?></span>
+        </button>
       </span>
     </p>
     <p class="field wide">
       <?php echo form::checkbox('no_br', 1, $no_br); ?>
       <label class="classic" for="no_br"><?php echo __('Disable breakline'); ?></label>
-      <span class="info" aria-hidden="true">
-          <img src="<?php echo urldecode(dcPage::getPF('commentsWikibar/img/bt_br.png')); ?>" alt="" />
+      <span class="jstElements" aria-hidden="true">
+        <button disabled class="jstb_br" title="<?php echo __('Line break'); ?>">
+          <span class="sr-only"><?php echo __('Line break'); ?></span>
+        </button>
       </span>
     </p>
     <p class="field wide">
       <?php echo form::checkbox('no_list', 1, $no_list); ?>
       <label class="classic" for="no_list"><?php echo __('Disable list'); ?></label>
-      <span class="info" aria-hidden="true">
-          <img src="<?php echo urldecode(dcPage::getPF('commentsWikibar/img/bt_ul.png')); ?>" alt="" />&nbsp;
-          <img src="<?php echo urldecode(dcPage::getPF('commentsWikibar/img/bt_ol.png')); ?>" alt="" />
+      <span class="jstElements" aria-hidden="true">
+        <button disabled class="jstb_ul" title="<?php echo __('Unordered list'); ?>">
+          <span class="sr-only"><?php echo __('Unordered list'); ?></span>
+        </button>
+        <button disabled class="jstb_ol" title="<?php echo __('Ordered list'); ?>">
+          <span class="sr-only"><?php echo __('Ordered list'); ?></span>
+        </button>
       </span>
     </p>
     <p class="field wide">
       <?php echo form::checkbox('no_pre', 1, $no_pre); ?>
       <label class="classic" for="no_pre"><?php echo __('Disable preformatted text'); ?></label>
-      <span class="info" aria-hidden="true">
-          <img src="<?php echo urldecode(dcPage::getPF('commentsWikibar/img/bt_pre.png')); ?>" alt="" />
+      <span class="jstElements" aria-hidden="true">
+        <button disabled class="jstb_pre" title="<?php echo __('Preformatted'); ?>">
+          <span class="sr-only"><?php echo __('Preformatted'); ?></span>
+        </button>
       </span>
     </p>
     <p class="field wide">
       <?php echo form::checkbox('no_quote', 1, $no_quote); ?>
       <label class="classic" for="no_quote"><?php echo __('Disable blockquote'); ?></label>
-      <span class="info" aria-hidden="true">
-          <img src="<?php echo urldecode(dcPage::getPF('commentsWikibar/img/bt_bquote.png')); ?>" alt="" />
+      <span class="jstElements" aria-hidden="true">
+        <button disabled class="jstb_bquote" title="<?php echo __('Block quote'); ?>">
+          <span class="sr-only"><?php echo __('Block quote'); ?></span>
+        </button>
       </span>
     </p>
     <p class="field wide">
       <?php echo form::checkbox('no_url', 1, $no_url); ?>
       <label class="classic" for="no_url"><?php echo __('Disable link'); ?></label>
-      <span class="info" aria-hidden="true">
-          <img src="<?php echo urldecode(dcPage::getPF('commentsWikibar/img/bt_link.png')); ?>" alt="" />
+      <span class="jstElements" aria-hidden="true">
+        <button disabled class="jstb_link" title="<?php echo __('Link'); ?>">
+          <span class="sr-only"><?php echo __('Link'); ?></span>
+        </button>
       </span>
     </p>
   </div>

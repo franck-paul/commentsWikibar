@@ -5,14 +5,8 @@
   margin: 0;
   border: 0;
 }
-.jstHandle {
-  height: 16px;
-  font-size: 0.1em;
-  cursor: s-resize;
-  background: transparent url(?pf=commentsWikibar/img/resizer.png) no-repeat 45% 50%;
-}
 .jstElements {
-  padding: 3px 5px 5px 0;
+  padding: 3px 5px 5px 5px;
   border-bottom: 5px;
   margin-left: 5px;
 }
