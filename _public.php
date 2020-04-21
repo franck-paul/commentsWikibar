@@ -124,7 +124,7 @@ class commentsWikibarBehaviors
                     }
                 }
                 echo
-                '<script type="text/javascript">' . "\n" .
+                '<script>' . "\n" .
                 "addListener(window,'load',function() {\n" .
                 "jsToolBar.prototype.base_url = '" . html::escapeJS($core->blog->host) . "'; \n" .
 				"jsToolBar.prototype.legend_msg = '" . html::escapeJS(__('You can use the following shortcuts to format your text.')) . "'; \n" .

@@ -16,8 +16,8 @@ if (!defined('DC_RC_PATH')) {return;}
 $this->registerModule(
     "Comments Wikibar",                                                   // Name
     "Adds a formatting toolbar when public comments use the wiki syntax", // Description
-    "Pep and contributors",                                               // Author
-    '1.10',                                                               // Version
+    "Pep, Biou and contributors",                                         // Author
+    '1.11',                                                               // Version
     [
         'requires'    => [['core', '2.13']], // Dependencies
         'permissions' => 'contentadmin',     // Permissions
