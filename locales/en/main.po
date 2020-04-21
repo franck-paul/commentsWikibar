@@ -93,3 +93,6 @@ msgstr ""
 
 msgid "Save configuration"
 msgstr ""
+
+msgid "Text formatting"
+msgstr ""
