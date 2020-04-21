@@ -90,6 +90,9 @@ msgstr "Inclure l'amorce JS"
 msgid "Save configuration"
 msgstr "Enregistrer la configuration"
 
+msgid "Text formatting"
+msgstr "Formatage de texte"
+
 #~ msgid "Plugin activation"
 #~ msgstr "Activation du plugin"
 

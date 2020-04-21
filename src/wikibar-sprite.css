@@ -4,7 +4,7 @@
 	.jstEditor textarea, .jstEditor iframe {
 		margin: 0;
 		border: 0;
-	}
+		}
 
 .jstHandle {
 	height: 16px;
@@ -14,29 +14,59 @@
 	}
 
 .jstElements {
-	padding: 3px 3px;
+	padding: 3px 5px 5px 5px;
+	border-bottom: 5px;
+	margin-left: 5px;
 	}
+
+	.jstElements .sr-only {
+		clip-path: inset(100%);
+		clip: rect(1px, 1px, 1px, 1px);
+		height: 1px;
+		overflow: hidden;
+		position: absolute;
+		white-space: nowrap;
+		width: 1px;
+		top: -10000em;
+		}
+		.jstElements .hidden {
+			visibility: hidden;
+		}
+		.jstElements.focus {
+			border: 2px solid dodgerblue;
+			padding: 1px 3px 3px 3px;
+			}
+
 	.jstElements button {
 		margin-right : 6px;
-		width : 24px;
+		width: 24px;
 		height: 24px;
 		padding: 4px;
 		border-style: solid;
-		border-width: 1px;
+		border-width: 2px;
 		border-color: #ddd;
-		background-color : #f7f7f7;
+		background-color: #f7f7f7;
 		background-image: url(?pf=commentsWikibar/img/wikibar.png);
 		background-repeat: no-repeat;
+		position: relative;	
+		outline: 0;
 		}
-	.jstElements button:hover {
-		border-color : #000;
-		}
+		.jstElements button:hover {
+			border-color : dodgerblue;
+			}		
 		.jstElements button span {
-			display : none;
+			position: absolute;
+			bottom: 30px;
+			background-color: lightyellow;
+			padding: 5px;
+			-webkit-box-shadow: 0px 0px 3px 0px rgba(112,112,112,1);
+			-moz-box-shadow: 0px 0px 3px 0px rgba(112,112,112,1);
+			box-shadow: 0px 0px 3px 0px rgba(112,112,112,1);
+			white-space: nowrap;
 			}
-	.jstElements span {
-		display : inline;
-		}
+			.jstElements button:focus {
+				border-color: dodgerblue;		
+			}
 
 .jstSpacer {
 	width : 0px;

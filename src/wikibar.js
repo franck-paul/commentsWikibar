@@ -1,4 +1,5 @@
 'use strict';
+// support of ARIA toolbar design pattern largely inspired from https://www.w3.org/TR/wai-aria-practices-1.1/examples/toolbar/toolbar.html
 
 function addListener(b, a, c) {
     if (b.addEventListener) {
@@ -41,6 +42,9 @@ function jsToolBar(b) {
 
     this.toolbar = document.createElement('div');
     this.toolbar.className = 'jstElements';
+    this.toolbar.setAttribute('role', 'toolbar');
+    this.toolbar.setAttribute('aria-label', this.label);
+    this.toolbar.setAttribute('aria-controls','c_content');
     this.editor.parentNode.insertBefore(this.toolbar, this.editor);
 
     this.handle = document.createElement('div');
@@ -77,13 +81,19 @@ jsButton.prototype.draw = function() {
     if (this.className) {
         a.className = this.className;
     }
-    a.title = this.title;
     var b = document.createElement('span');
+    b.className = 'sr-only';
     b.appendChild(document.createTextNode(this.title));
     a.appendChild(b);
+
     if (this.icon != undefined) {
         a.style.backgroundImage = 'url(" + this.icon + ")';
     }
+    addListener(a, 'keydown', jsButton.prototype.keyDown);
+    addListener(a, 'focus', jsButton.prototype.focus);
+    addListener(a, 'blur', jsButton.prototype.blur);
+    addListener(a, 'mouseover', jsButton.prototype.mouseOver);
+    addListener(a, 'mouseleave', jsButton.prototype.mouseLeave);    
     if (typeof(this.fn) == 'function') {
         var c = this;
         a.onclick = function() {
@@ -95,6 +105,71 @@ jsButton.prototype.draw = function() {
     }
     return a;
 };
+jsButton.prototype.keyDown = function (event) {
+    var stopPropagation = false;
+  
+    switch (event.keyCode) {
+      case 13: // ENTER
+      case 32: // SPACE
+        break;
+      case 39: // RIGHT
+        document.commentTb.moveFocus(this, 'next');
+        stopPropagation = true;
+        break;
+      case 37: // LEFT
+        document.commentTb.moveFocus(this, 'previous');
+        stopPropagation = true;
+        break;
+      case 36: // HOME
+        document.commentTb.setFocus(document.commentTb.firstItem);
+        stopPropagation = true;
+        break;
+      case 35: // END
+        document.commentTb.setFocus(document.commentTb.lastItem);
+        stopPropagation = true;
+        break;
+      case 38: // UP
+        document.commentTb.moveFocus(this, 'previous');
+        stopPropagation = true;
+        break;
+      case 40: // DOWN
+        document.commentTb.moveFocus(this, 'next');
+        stopPropagation = true;
+        break;
+      default:
+        break;
+    }  
+    if (stopPropagation) {
+      event.stopPropagation();
+      event.preventDefault();
+    }
+};
+jsButton.prototype.blur = function (event) {
+    event.target.firstChild.classList.add('sr-only');
+    document.querySelector('.jstElements').classList.remove('focus');
+};
+jsButton.prototype.focus = function (event) {
+    document.commentTb.hideAllTooltips();
+    event.target.firstChild.classList.remove('sr-only');
+    document.querySelector('.jstElements').classList.add('focus');
+};
+jsButton.prototype.mouseLeave = function (event) {
+    if (event.target.nodeName === "BUTTON") {
+        event.target.classList.remove('hovered');
+        setTimeout(function() {
+            if (!event.target.classList.contains('hovered')) {
+                event.target.firstChild.classList.add('sr-only');
+            }
+        }, 800);
+    }
+};
+jsButton.prototype.mouseOver = function (event) {
+    if (event.target.nodeName === "BUTTON") {
+        document.commentTb.hideAllTooltips();
+        event.target.firstChild.classList.remove('sr-only');
+        event.target.classList.add('hovered');
+    }
+};
 function jsSpace(a) {
     this.id = a || null;
     this.width = null;
@@ -105,6 +180,7 @@ jsSpace.prototype.draw = function() {
         a.id = this.id;
     }
     a.appendChild(document.createTextNode(String.fromCharCode(160)));
+    a.setAttribute('aria-hidden', 'true');
     a.className = 'jstSpacer';
     if (this.width) {
         a.style.marginRight = this.width + 'px';
@@ -214,6 +290,20 @@ jsToolBar.prototype = {
                 }
             }
         }
+
+        this.firstItem = document.querySelector('.jstElements button:first-child');
+        this.lastItem = document.querySelector('.jstElements button:last-child');
+        this.items = Array.from(document.querySelectorAll('.jstElements button'));
+        this.initTabindex();
+        this.updateTooltipsPos();
+        addListener(document.body, 'keydown', jsToolBar.prototype.keyDown);
+    },
+    keyDown: function(event){
+        if (event.keyCode == 27) { //ESC
+            document.commentTb.hideAllTooltips();
+            event.stopPropagation();
+            event.preventDefault();
+        }
     },
     singleTag: function(b, a) {
         b = b || null;
@@ -277,6 +367,63 @@ jsToolBar.prototype = {
         }
         return a;
     }
+};
+jsToolBar.prototype.initTabindex = function () {
+    for (var i = 1; i < this.items.length; i++) {
+        this.items[i].setAttribute('tabindex', '-1');
+    }
+    this.items[0].setAttribute('tabindex', '0');
+};
+jsToolBar.prototype.setFocus = function (item) {
+    for (var i = 0; i < this.items.length; i++) {
+        this.items[i].setAttribute('tabindex', '-1');
+    }
+    item.setAttribute('tabindex', '0');
+    item.focus();
+};
+jsToolBar.prototype.moveFocus = function (currentItem, direction) {
+    var newItem;
+
+    if (direction == 'previous') {
+            newItem = (currentItem === this.firstItem)?this.lastItem:this.items[this.items.indexOf(currentItem) - 1];
+    } else {
+            newItem = (currentItem === this.lastItem)?this.firstItem:this.items[this.items.indexOf(currentItem) + 1];
+    }
+
+    this.setFocus(newItem);
+};
+jsToolBar.prototype.updateTooltipsPos = function() {
+    Array.from(document.querySelectorAll('.jstElements button span')).forEach(function(e) {
+        // move to the left all tooltips that are too close from the right border of the viewport
+        var currentPos = e.getBoundingClientRect().left;
+        e.style.left = '0px'; // we reset all positions
+        // we need to switch between sr-only and hidden to be able to get the width of the tooltips
+        e.classList.add('hidden');
+        e.classList.remove('sr-only');
+        var width = e.clientWidth;
+        e.classList.add('sr-only');
+        e.classList.remove('hidden');
+        if ((width + currentPos) > (document.documentElement.clientWidth - 10)) {
+            var diff = Math.trunc(-1 * (width + currentPos - document.documentElement.clientWidth + 10))
+            e.style.left = diff + 'px';
+        } 
+  });
+};
+var resizeTimer;
+var prevWidth = 0;
+window.addEventListener('resize', function() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function() {
+        if (document.documentElement.clientWidth !== prevWidth) {
+            jsToolBar.prototype.updateTooltipsPos();
+            prevWidth = document.documentElement.clientWidth;  
+        }
+    }, 250); 
+});
+jsToolBar.prototype.hideAllTooltips = function () {
+    Array.from(document.querySelectorAll('.jstElements button span')).forEach(element => {
+        element.classList.add('sr-only');
+    });
 };
 jsToolBar.prototype.resizeSetStartH = function() {
     this.dragStartH = this.textarea.offsetHeight + 0;
