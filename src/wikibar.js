@@ -377,7 +377,7 @@ jsToolBar.prototype.moveFocus = function(currentItem, direction) {
 jsToolBar.prototype.updateTooltipsPos = function() {
   Array.from(document.querySelectorAll('.jstElements button span')).forEach(function(e) {
     // move to the left all tooltips that are too close from the right border of the viewport
-    var currentPos = e.getBoundingClientRect().left;
+    var currentPos = e.parentNode.getBoundingClientRect().left;
     e.style.left = '0px'; // we reset all positions
     // we need to switch between sr-only and hidden to be able to get the width of the tooltips
     e.classList.add('hidden');
@@ -385,8 +385,8 @@ jsToolBar.prototype.updateTooltipsPos = function() {
     var width = e.clientWidth;
     e.classList.add('sr-only');
     e.classList.remove('hidden');
-    if ((width + currentPos) > (document.documentElement.clientWidth - 10)) {
-      var diff = Math.trunc(-1 * (width + currentPos - document.documentElement.clientWidth + 10));
+    if ((width + currentPos) > (document.documentElement.clientWidth - 15)) {
+      var diff = Math.trunc(-1 * (width + currentPos - document.documentElement.clientWidth + 15));
       e.style.left = diff + 'px';
     }
   });
