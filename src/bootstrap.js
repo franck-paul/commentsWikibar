@@ -1,9 +1,8 @@
-/*global addListener, jsToolBar, getData, mergeDeep */
-/*exported commentTb */
+/*global jsToolBar, getData, mergeDeep */
 'use strict';
 
-addListener(window, 'load', function() {
-  let data = getData('commentswikibar');
+window.addEventListener('load', () => {
+  const data = getData('commentswikibar');
 
   jsToolBar.prototype.base_url = data.host;
   jsToolBar.prototype.legend_msg = data.legend_msg;
@@ -12,8 +11,7 @@ addListener(window, 'load', function() {
   mergeDeep(jsToolBar.prototype.elements, data.elements);
 
   if (document.getElementById(data.id)) {
-    var commentTb = new jsToolBar(document.getElementById(data.id));
-    document.commentTb = commentTb;
+    const commentTb = new jsToolBar(document.getElementById(data.id));
     if (data.options.no_format) {
       commentTb.elements.strong.type = '';
       commentTb.elements.em.type = '';

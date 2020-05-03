@@ -87,6 +87,7 @@ class commentsWikibarBehaviors
                     }
                 } else {
                     $css = $core->blog->getPF('commentsWikibar/wikibar.min.css');
+//                    $css = $core->blog->getPF('commentsWikibar/src/wikibar.css'); // FOR DEBUG PURPOSE
                 }
                 echo dcUtils::cssLoad($css);
             }
@@ -104,6 +105,7 @@ class commentsWikibarBehaviors
                     }
                 } else {
                     $js = $core->blog->getPF('commentsWikibar/wikibar.min.js');
+//                    $js = $core->blog->getPF('commentsWikibar/src/wikibar.js'); // FOR DEBUG PURPOSE
                 }
                 echo dcUtils::jsLoad($js);
             }

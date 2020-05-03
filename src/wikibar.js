@@ -1,16 +1,6 @@
 'use strict';
 // support of ARIA toolbar design pattern largely inspired from https://www.w3.org/TR/wai-aria-practices-1.1/examples/toolbar/toolbar.html
 
-function addListener(b, a, c) {
-  if (b.addEventListener) {
-    b.addEventListener(a, c, false);
-  } else {
-    if (b.attachEvent) {
-      b.attachEvent('on' + a, c);
-    }
-  }
-}
-
 function jsToolBar(b) {
   /* jshint validthis: true */
   if (!document.createElement) {
@@ -49,6 +39,7 @@ function jsButton(d, c, b, a) {
     function() {};
   this.scope = b || null;
   this.className = a || null;
+  this.toolbarNode = null;
 }
 jsButton.prototype.draw = function() {
   if (!this.scope) {
@@ -67,11 +58,11 @@ jsButton.prototype.draw = function() {
   if (this.icon != undefined) {
     a.style.backgroundImage = 'url(" + this.icon + ")';
   }
-  addListener(a, 'keydown', jsButton.prototype.keyDown);
-  addListener(a, 'focus', jsButton.prototype.focus);
-  addListener(a, 'blur', jsButton.prototype.blur);
-  addListener(a, 'mouseover', jsButton.prototype.mouseOver);
-  addListener(a, 'mouseleave', jsButton.prototype.mouseLeave);
+  a.addEventListener('keydown', jsButton.prototype.keyDown);
+  a.addEventListener('focus', jsButton.prototype.focus);
+  a.addEventListener('blur', jsButton.prototype.blur);
+  a.addEventListener('mouseover', jsButton.prototype.mouseOver);
+  a.addEventListener('mouseleave', jsButton.prototype.mouseLeave);
   if (typeof(this.fn) == 'function') {
     var c = this;
     a.onclick = function() {
@@ -91,27 +82,27 @@ jsButton.prototype.keyDown = function(event) {
     case 32: // SPACE
       break;
     case 39: // RIGHT
-      document.commentTb.moveFocus(this, 'next');
+      this.toolbarNode.moveFocus(this, 'next');
       stopPropagation = true;
       break;
     case 37: // LEFT
-      document.commentTb.moveFocus(this, 'previous');
+      this.toolbarNode.moveFocus(this, 'previous');
       stopPropagation = true;
       break;
     case 36: // HOME
-      document.commentTb.setFocus(document.commentTb.firstItem);
+      this.toolbarNode.setFocus(this.toolbarNode.firstItem);
       stopPropagation = true;
       break;
     case 35: // END
-      document.commentTb.setFocus(document.commentTb.lastItem);
+      this.toolbarNode.setFocus(this.toolbarNode.lastItem);
       stopPropagation = true;
       break;
     case 38: // UP
-      document.commentTb.moveFocus(this, 'previous');
+      this.toolbarNode.moveFocus(this, 'previous');
       stopPropagation = true;
       break;
     case 40: // DOWN
-      document.commentTb.moveFocus(this, 'next');
+      this.toolbarNode.moveFocus(this, 'next');
       stopPropagation = true;
       break;
     default:
@@ -127,7 +118,7 @@ jsButton.prototype.blur = function(event) {
   document.querySelector('.jstElements').classList.remove('focus');
 };
 jsButton.prototype.focus = function(event) {
-  document.commentTb.hideAllTooltips();
+  this.toolbarNode.hideAllTooltips();
   event.target.firstChild.classList.remove('sr-only');
   document.querySelector('.jstElements').classList.add('focus');
 };
@@ -143,7 +134,7 @@ jsButton.prototype.mouseLeave = function(event) {
 };
 jsButton.prototype.mouseOver = function(event) {
   if (event.target.nodeName === "BUTTON") {
-    document.commentTb.hideAllTooltips();
+    this.toolbarNode.hideAllTooltips();
     event.target.firstChild.classList.remove('sr-only');
     event.target.classList.add('hovered');
   }
@@ -203,6 +194,7 @@ jsCombo.prototype.draw = function() {
   };
   return a;
 };
+
 jsToolBar.prototype = {
   base_url: '',
   mode: 'wiki',
@@ -269,6 +261,7 @@ jsToolBar.prototype = {
         if (c) {
           this.toolNodes[e] = c;
           this.toolbar.appendChild(c);
+          c.toolbarNode = this;
         }
       }
     }
@@ -278,11 +271,11 @@ jsToolBar.prototype = {
     this.items = Array.from(document.querySelectorAll('.jstElements button'));
     this.initTabindex();
     this.updateTooltipsPos();
-    addListener(document.body, 'keydown', jsToolBar.prototype.keyDown);
+    document.body.addEventListener('keydown', this.keyDown.bind(this));
   },
   keyDown: function(event) {
     if (event.keyCode == 27) { //ESC
-      document.commentTb.hideAllTooltips();
+      this.hideAllTooltips();
       event.stopPropagation();
       event.preventDefault();
     }
