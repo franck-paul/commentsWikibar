@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Dotclear 2 commentsWikibar module\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-03 17:54+0200\n"
+"POT-Creation-Date: 2020-05-04 10:48+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,6 +38,10 @@ msgstr ""
 #: ../git-plugins/commentsWikibar/index.php:164
 #: ../git-plugins/commentsWikibar/index.php:165
 msgid "Block quote"
+msgstr ""
+
+#: ../git-plugins/commentsWikibar/_public.php:144
+msgid "Title?"
 msgstr ""
 
 #: ../git-plugins/commentsWikibar/index.php:98

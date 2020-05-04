@@ -1,17 +1,17 @@
-/*global jsToolBar, getData, mergeDeep */
+/*global dotclear, getData, mergeDeep */
 'use strict';
 
 window.addEventListener('load', () => {
   const data = getData('commentswikibar');
 
-  jsToolBar.prototype.base_url = data.host;
-  jsToolBar.prototype.legend_msg = data.legend_msg;
-  jsToolBar.prototype.label = data.label;
+  dotclear.jsToolBar.prototype.base_url = data.host;
+  dotclear.jsToolBar.prototype.legend_msg = data.legend_msg;
+  dotclear.jsToolBar.prototype.label = data.label;
 
-  mergeDeep(jsToolBar.prototype.elements, data.elements);
+  mergeDeep(dotclear.jsToolBar.prototype.elements, data.elements);
 
   if (document.getElementById(data.id)) {
-    const commentTb = new jsToolBar(document.getElementById(data.id));
+    const commentTb = new dotclear.jsToolBar(document.getElementById(data.id));
     if (data.options.no_format) {
       commentTb.elements.strong.type = '';
       commentTb.elements.em.type = '';

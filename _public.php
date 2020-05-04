@@ -140,7 +140,8 @@ class commentsWikibarBehaviors
                         'link'   => [
                             'title'           => __('Link'),
                             'href_prompt'     => __('URL?'),
-                            'hreflang_prompt' => __('Language?')
+                            'hreflang_prompt' => __('Language?'),
+                            'title_prompt'    => __('Title?')
                         ]
                     ],
                     'options'    => [

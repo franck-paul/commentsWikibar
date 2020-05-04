@@ -1,29 +1,27 @@
 # SOME DESCRIPTIVE TITLE.
 # This file is put in the public domain.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 # Translators:
 # Franck Paul <carnet.franck.paul@gmail.com>, 2020
-# 
+#
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Dotclear 2 commentsWikibar module\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-03 17:54+0200\n"
+"POT-Creation-Date: 2020-05-04 10:48+0200\n"
 "PO-Revision-Date: 2020-05-03 16:01+0000\n"
 "Last-Translator: Franck Paul <carnet.franck.paul@gmail.com>, 2020\n"
 "Language-Team: French (https://www.transifex.com/open-time/teams/109573/fr/)\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: fr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 msgid "Adds a formatting toolbar when public comments use the wiki syntax"
-msgstr ""
-"Ajoute une barre d'outils de formatage pour les commentaires publics "
-"utilisant la syntaxe wiki"
+msgstr "Ajoute une barre d'outils de formatage pour les commentaires publics utilisant la syntaxe wiki"
 
 msgid "Comments Wikibar"
 msgstr "Wikibarre"
@@ -34,6 +32,9 @@ msgstr "Texte préformaté"
 msgid "Block quote"
 msgstr "Bloc de citation"
 
+msgid "Title?"
+msgstr "Titre ?"
+
 msgid "Plugin Activation"
 msgstr "Activation de l'extension"
 
@@ -41,9 +42,7 @@ msgid "Enable Comments Wikibar"
 msgstr "Activer la Wikibarre"
 
 msgid "Activating this plugin also enforces wiki syntax in blog comments"
-msgstr ""
-"L'activation de cette extension force la syntaxe wiki dans les commentaires "
-"du blog"
+msgstr "L'activation de cette extension force la syntaxe wiki dans les commentaires du blog"
 
 msgid "Disable characters format"
 msgstr "Désactiver la mise en forme des caractères"
@@ -76,16 +75,10 @@ msgid "Use custom CSS"
 msgstr "CSS personnalisée"
 
 msgid "You can use a custom CSS by providing its location."
-msgstr ""
-"Vous pouvez utiliser une CSS personnalisée en fournissant son adresse."
+msgstr "Vous pouvez utiliser une CSS personnalisée en fournissant son adresse."
 
-msgid ""
-"A location beginning with a / is treated as absolute, else it is treated as "
-"relative to the blog's current theme URL"
-msgstr ""
-"Une adresse commençant par un / est considérée comme absolue, sinon elle est"
-" traitée comme relative à l'adresse du thème actuellement en usage sur le "
-"blog."
+msgid "A location beginning with a / is treated as absolute, else it is treated as relative to the blog's current theme URL"
+msgstr "Une adresse commençant par un / est considérée comme absolue, sinon elle est traitée comme relative à l'adresse du thème actuellement en usage sur le blog."
 
 msgid "Javascript inclusion"
 msgstr "Inclusion de Javascript"
@@ -97,9 +90,7 @@ msgid "Use custom JS library"
 msgstr "Librairie JS personnalisée"
 
 msgid "You can use a custom JS library by providing its location."
-msgstr ""
-"Vous pouvez utiliser une librairie Javascript personnalisée en fournissant "
-"son adresse."
+msgstr "Vous pouvez utiliser une librairie Javascript personnalisée en fournissant son adresse."
 
 msgid "Include JS bootstrap"
 msgstr "Inclure l'amorce JS"
