@@ -100,3 +100,6 @@ msgstr "Vous pouvez utiliser une librairie Javascript personnalisée en fourniss
 
 msgid "Include JS bootstrap"
 msgstr "Inclure l'amorce JS"
+
+msgid "Text formatting"
+msgstr "Formatage de texte"
