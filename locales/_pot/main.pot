@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Dotclear 2 commentsWikibar module\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-04 10:48+0200\n"
+"POT-Creation-Date: 2020-05-07 22:49+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,6 +26,10 @@ msgstr ""
 #: ../git-plugins/commentsWikibar/index.php:76
 #: ../git-plugins/commentsWikibar/index.php:87
 msgid "Comments Wikibar"
+msgstr ""
+
+#: ../git-plugins/commentsWikibar/_public.php:127
+msgid "Text formatting"
 msgstr ""
 
 #: ../git-plugins/commentsWikibar/_public.php:138
@@ -54,6 +58,10 @@ msgstr ""
 
 #: ../git-plugins/commentsWikibar/index.php:103
 msgid "Activating this plugin also enforces wiki syntax in blog comments"
+msgstr ""
+
+#: ../git-plugins/commentsWikibar/index.php:105
+msgid "Options"
 msgstr ""
 
 #: ../git-plugins/commentsWikibar/index.php:108
