@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Dotclear 2 commentsWikibar module\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-07 22:49+0200\n"
+"POT-Creation-Date: 2020-05-09 09:21+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,14 +33,14 @@ msgid "Text formatting"
 msgstr ""
 
 #: ../git-plugins/commentsWikibar/_public.php:138
-#: ../git-plugins/commentsWikibar/index.php:155
-#: ../git-plugins/commentsWikibar/index.php:156
+#: ../git-plugins/commentsWikibar/index.php:164
+#: ../git-plugins/commentsWikibar/index.php:165
 msgid "Preformatted"
 msgstr ""
 
 #: ../git-plugins/commentsWikibar/_public.php:139
-#: ../git-plugins/commentsWikibar/index.php:164
-#: ../git-plugins/commentsWikibar/index.php:165
+#: ../git-plugins/commentsWikibar/index.php:173
+#: ../git-plugins/commentsWikibar/index.php:174
 msgid "Block quote"
 msgstr ""
 
@@ -57,78 +57,83 @@ msgid "Enable Comments Wikibar"
 msgstr ""
 
 #: ../git-plugins/commentsWikibar/index.php:103
-msgid "Activating this plugin also enforces wiki syntax in blog comments"
-msgstr ""
-
-#: ../git-plugins/commentsWikibar/index.php:105
-msgid "Options"
+msgid "Activating this plugin also <strong>enforces</strong> Dotclear wiki syntax in blog comments"
 msgstr ""
 
 #: ../git-plugins/commentsWikibar/index.php:108
+#, php-format
+msgid "It also <strong>enforces</strong> Markdown syntax if it's <a href=\"%s\">enabled</a> for comments"
+msgstr ""
+
+#: ../git-plugins/commentsWikibar/index.php:114
+msgid "Options"
+msgstr ""
+
+#: ../git-plugins/commentsWikibar/index.php:117
 msgid "Disable characters format"
 msgstr ""
 
-#: ../git-plugins/commentsWikibar/index.php:132
+#: ../git-plugins/commentsWikibar/index.php:141
 msgid "Disable breakline"
 msgstr ""
 
-#: ../git-plugins/commentsWikibar/index.php:141
+#: ../git-plugins/commentsWikibar/index.php:150
 msgid "Disable list"
 msgstr ""
 
-#: ../git-plugins/commentsWikibar/index.php:153
+#: ../git-plugins/commentsWikibar/index.php:162
 msgid "Disable preformatted text"
 msgstr ""
 
-#: ../git-plugins/commentsWikibar/index.php:162
+#: ../git-plugins/commentsWikibar/index.php:171
 msgid "Disable blockquote"
 msgstr ""
 
-#: ../git-plugins/commentsWikibar/index.php:171
+#: ../git-plugins/commentsWikibar/index.php:180
 msgid "Disable link"
 msgstr ""
 
-#: ../git-plugins/commentsWikibar/index.php:180
+#: ../git-plugins/commentsWikibar/index.php:189
 msgid "Advanced Options"
 msgstr ""
 
-#: ../git-plugins/commentsWikibar/index.php:182
+#: ../git-plugins/commentsWikibar/index.php:191
 msgid "CSS inclusion"
 msgstr ""
 
-#: ../git-plugins/commentsWikibar/index.php:185
+#: ../git-plugins/commentsWikibar/index.php:194
 msgid "Include CSS"
 msgstr ""
 
-#: ../git-plugins/commentsWikibar/index.php:188
+#: ../git-plugins/commentsWikibar/index.php:197
 msgid "Use custom CSS"
 msgstr ""
 
-#: ../git-plugins/commentsWikibar/index.php:191
+#: ../git-plugins/commentsWikibar/index.php:200
 msgid "You can use a custom CSS by providing its location."
 msgstr ""
 
-#: ../git-plugins/commentsWikibar/index.php:192
-#: ../git-plugins/commentsWikibar/index.php:205
+#: ../git-plugins/commentsWikibar/index.php:201
+#: ../git-plugins/commentsWikibar/index.php:214
 msgid "A location beginning with a / is treated as absolute, else it is treated as relative to the blog's current theme URL"
 msgstr ""
 
-#: ../git-plugins/commentsWikibar/index.php:195
+#: ../git-plugins/commentsWikibar/index.php:204
 msgid "Javascript inclusion"
 msgstr ""
 
-#: ../git-plugins/commentsWikibar/index.php:198
+#: ../git-plugins/commentsWikibar/index.php:207
 msgid "Include JS library"
 msgstr ""
 
-#: ../git-plugins/commentsWikibar/index.php:201
+#: ../git-plugins/commentsWikibar/index.php:210
 msgid "Use custom JS library"
 msgstr ""
 
-#: ../git-plugins/commentsWikibar/index.php:204
+#: ../git-plugins/commentsWikibar/index.php:213
 msgid "You can use a custom JS library by providing its location."
 msgstr ""
 
-#: ../git-plugins/commentsWikibar/index.php:209
+#: ../git-plugins/commentsWikibar/index.php:218
 msgid "Include JS bootstrap"
 msgstr ""

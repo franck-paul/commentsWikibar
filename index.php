@@ -100,7 +100,16 @@ echo dcPage::breadcrumb(
       <?php echo form::checkbox('active', 1, $active); ?>
       <label class="classic" for="active"><?php echo __('Enable Comments Wikibar'); ?></label>
     </p>
-    <p><em><?php echo __('Activating this plugin also enforces wiki syntax in blog comments'); ?></em></p>
+    <p><em><?php echo __('Activating this plugin also <strong>enforces</strong> Dotclear wiki syntax in blog comments'); ?>
+        <?php
+            if ($core->plugins->moduleExists('formatting-markdown')) {
+                echo
+                    '<br />' .
+                    sprintf(__('It also <strong>enforces</strong> Markdown syntax if it\'s <a href="%s">enabled</a> for comments'),
+                    $core->adminurl->get('admin.blog.pref') . '#params.formatting_markdown');
+            }
+        ?>
+    </em></p>
 
     <h3><?php echo __('Options'); ?></h3>
     <p class="field wide">
