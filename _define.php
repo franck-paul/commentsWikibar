@@ -19,7 +19,7 @@ $this->registerModule(
     "Pep, Biou, Franck Paul and contributors",                            // Author
     '1.12.2',                                                             // Version
     [
-        'requires'    => [['core', '2.15']], // Dependencies
+        'requires'    => [['core', '2.13']], // Dependencies
         'permissions' => 'contentadmin',     // Permissions
         'type'        => 'plugin'           // Type
     ]
