@@ -1,14 +1,6 @@
-.jstEditor {
-  padding-left: 5px;
-}
-.jstEditor textarea, .jstEditor iframe {
-  margin: 0;
-  border: 0;
-}
 .jstElements {
   padding: 3px 5px 5px 5px;
   border-bottom: 5px;
-  margin-left: 5px;
 }
 .jstElements .sr-only {
   clip-path: inset(100%);
