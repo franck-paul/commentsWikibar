@@ -1,14 +1,14 @@
-/*global dotclear, getData, mergeDeep */
+/*global dotclear */
 'use strict';
 
 window.addEventListener('load', () => {
-  const data = getData('commentswikibar');
+  const data = dotclear.getData('commentswikibar');
 
   dotclear.jsToolBar.prototype.base_url = data.host;
   dotclear.jsToolBar.prototype.legend_msg = data.legend_msg;
   dotclear.jsToolBar.prototype.label = data.label;
 
-  mergeDeep(dotclear.jsToolBar.prototype.elements, data.elements);
+  dotclear.mergeDeep(dotclear.jsToolBar.prototype.elements, data.elements);
 
   if (document.getElementById(data.id)) {
     const commentTb = new dotclear.jsToolBar(document.getElementById(data.id));
