@@ -26,6 +26,6 @@ $this->registerModule(
 
         'details'    => 'https://open-time.net/?q=commentsWikibar',       // Details URL
         'support'    => 'https://github.com/franck-paul/commentsWikibar', // Support URL
-        'repository' => 'https://raw.githubusercontent.com/franck-paul/commentsWikibar/main/dcstore.xml'
+        'repository' => 'https://raw.githubusercontent.com/franck-paul/commentsWikibar/master/dcstore.xml'
     ]
 );
