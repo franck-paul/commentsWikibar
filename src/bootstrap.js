@@ -4,14 +4,14 @@
 window.addEventListener('load', () => {
   const data = dotclear.getData('commentswikibar');
 
-  dotclear.jsToolBar.prototype.base_url = data.host;
-  dotclear.jsToolBar.prototype.legend_msg = data.legend_msg;
-  dotclear.jsToolBar.prototype.label = data.label;
-
-  dotclear.mergeDeep(dotclear.jsToolBar.prototype.elements, data.elements);
-
   if (document.getElementById(data.id)) {
-    const commentTb = new dotclear.jsToolBar(document.getElementById(data.id));
+    const commentTb = new dotclear.jsToolBar(
+      document.getElementById(data.id),
+      data.host,
+      data.legend_msg,
+      data.label,
+      data.elements,
+    );
     if (data.options.no_format) {
       commentTb.elements.strong.type = '';
       commentTb.elements.em.type = '';

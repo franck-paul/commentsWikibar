@@ -10,8 +10,9 @@
  * @copyright Pep
  * @copyright GPL-2.0 https://www.gnu.org/licenses/gpl-2.0.html
  */
-
-if (!defined('DC_CONTEXT_ADMIN')) {return;}
+if (!defined('DC_CONTEXT_ADMIN')) {
+    return;
+}
 
 $this_version      = $core->plugins->moduleInfo('commentsWikibar', 'version');
 $installed_version = $core->getVersion('commentsWikibar');
@@ -34,4 +35,5 @@ $core->blog->settings->commentswikibar->put('commentswikibar_custom_css', '', 's
 $core->blog->settings->commentswikibar->put('commentswikibar_custom_jslib', '', 'string', '', false, true);
 
 $core->setVersion('commentsWikibar', $this_version);
+
 return true;

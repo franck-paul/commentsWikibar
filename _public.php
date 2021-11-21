@@ -10,8 +10,9 @@
  * @copyright Pep
  * @copyright GPL-2.0 https://www.gnu.org/licenses/gpl-2.0.html
  */
-
-if (!defined('DC_RC_PATH')) {return;}
+if (!defined('DC_RC_PATH')) {
+    return;
+}
 
 $core->addBehavior('publicHeadContent', ['commentsWikibarBehaviors', 'publicHeadContent']);
 $core->addBehavior('coreInitWikiComment', ['commentsWikibarBehaviors', 'coreInitWikiComment']);
@@ -22,14 +23,14 @@ class commentsWikibarBehaviors
     {
         global $core;
 
-        if ($core->blog->settings->commentswikibar->commentswikibar_active &&
-            $core->blog->settings->system->wiki_comments) {
+        if ($core->blog->settings->commentswikibar->commentswikibar_active && $core->blog->settings->system->wiki_comments) {
             $supported_modes = new ArrayObject(['post', 'pages', 'gal', 'galitem']);
             $core->callBehavior('initCommentsWikibar', $supported_modes);
             if (in_array($core->url->type, (array) $supported_modes)) {
                 return true;
             }
         }
+
         return false;
     }
 
@@ -80,9 +81,8 @@ class commentsWikibarBehaviors
                     if (strpos('/', $custom_css) === 0 || preg_match('!^http[s]?://.+!', $custom_css)) {
                         $css = $custom_css;
                     } else {
-                        $css =
-                        $core->blog->settings->system->themes_url . "/" .
-                        $core->blog->settings->system->theme . "/" .
+                        $css = $core->blog->settings->system->themes_url . '/' .
+                        $core->blog->settings->system->theme . '/' .
                             $custom_css;
                     }
                 } else {
@@ -98,9 +98,8 @@ class commentsWikibarBehaviors
                     if (strpos('/', $custom_jslib) === 0 || preg_match('!^http[s]?://.+!', $custom_jslib)) {
                         $js = $custom_jslib;
                     } else {
-                        $js =
-                        $core->blog->settings->system->themes_url . "/" .
-                        $core->blog->settings->system->theme . "/" .
+                        $js = $core->blog->settings->system->themes_url . '/' .
+                        $core->blog->settings->system->theme . '/' .
                             $custom_jslib;
                     }
                 } else {
@@ -141,19 +140,20 @@ class commentsWikibarBehaviors
                             'title'           => __('Link'),
                             'href_prompt'     => __('URL?'),
                             'hreflang_prompt' => __('Language?'),
-                            'title_prompt'    => __('Title?')
-                        ]
+                            'title_prompt'    => __('Title?'),
+                        ],
                     ],
-                    'options'    => [
+                    'options' => [
                         'no_format' => $core->blog->settings->commentswikibar->commentswikibar_no_format,
                         'no_br'     => $core->blog->settings->commentswikibar->commentswikibar_no_br,
                         'no_list'   => $core->blog->settings->commentswikibar->commentswikibar_no_list,
                         'no_pre'    => $core->blog->settings->commentswikibar->commentswikibar_no_pre,
                         'no_quote'  => $core->blog->settings->commentswikibar->commentswikibar_no_quote,
-                        'no_url'    => $core->blog->settings->commentswikibar->commentswikibar_no_url
-                    ]
+                        'no_url'    => $core->blog->settings->commentswikibar->commentswikibar_no_url,
+                    ],
                 ]) .
                 dcUtils::jsLoad($core->blog->getPF('commentsWikibar/bootstrap.min.js'));
+//                dcUtils::jsLoad($core->blog->getPF('commentsWikibar/src/bootstrap.js')); // FOR DEBUG PURPOSE
             }
         }
     }

@@ -10,27 +10,27 @@
  * @copyright Pep
  * @copyright GPL-2.0 https://www.gnu.org/licenses/gpl-2.0.html
  */
-
-if (!defined('DC_CONTEXT_ADMIN')) {return;}
+if (!defined('DC_CONTEXT_ADMIN')) {
+    return;
+}
 
 // Getting current parameters
-$active        = (boolean) $core->blog->settings->commentswikibar->commentswikibar_active;
-$no_format     = (boolean) $core->blog->settings->commentswikibar->commentswikibar_no_format;
-$no_br         = (boolean) $core->blog->settings->commentswikibar->commentswikibar_no_br;
-$no_list       = (boolean) $core->blog->settings->commentswikibar->commentswikibar_no_list;
-$no_pre        = (boolean) $core->blog->settings->commentswikibar->commentswikibar_no_pre;
-$no_quote      = (boolean) $core->blog->settings->commentswikibar->commentswikibar_no_quote;
-$no_url        = (boolean) $core->blog->settings->commentswikibar->commentswikibar_no_url;
-$wb_add_css    = (boolean) $core->blog->settings->commentswikibar->commentswikibar_add_css;
-$wb_add_jslib  = (boolean) $core->blog->settings->commentswikibar->commentswikibar_add_jslib;
-$wb_add_jsglue = (boolean) $core->blog->settings->commentswikibar->commentswikibar_add_jsglue;
+$active        = (bool) $core->blog->settings->commentswikibar->commentswikibar_active;
+$no_format     = (bool) $core->blog->settings->commentswikibar->commentswikibar_no_format;
+$no_br         = (bool) $core->blog->settings->commentswikibar->commentswikibar_no_br;
+$no_list       = (bool) $core->blog->settings->commentswikibar->commentswikibar_no_list;
+$no_pre        = (bool) $core->blog->settings->commentswikibar->commentswikibar_no_pre;
+$no_quote      = (bool) $core->blog->settings->commentswikibar->commentswikibar_no_quote;
+$no_url        = (bool) $core->blog->settings->commentswikibar->commentswikibar_no_url;
+$wb_add_css    = (bool) $core->blog->settings->commentswikibar->commentswikibar_add_css;
+$wb_add_jslib  = (bool) $core->blog->settings->commentswikibar->commentswikibar_add_jslib;
+$wb_add_jsglue = (bool) $core->blog->settings->commentswikibar->commentswikibar_add_jsglue;
 $custom_css    = (string) $core->blog->settings->commentswikibar->commentswikibar_custom_css;
 $custom_jslib  = (string) $core->blog->settings->commentswikibar->commentswikibar_custom_jslib;
 
 // Saving new configuration
 if (!empty($_POST['saveconfig'])) {
-    try
-    {
+    try {
         $core->blog->settings->addNameSpace('commentswikibar');
 
         $active        = (empty($_POST['active'])) ? false : true;
@@ -59,7 +59,7 @@ if (!empty($_POST['saveconfig'])) {
         $core->blog->settings->commentswikibar->put('commentswikibar_custom_jslib', $custom_jslib, 'string');
 
         // Active wikibar enforces wiki syntax in blog comments
-        $wiki_comments = (boolean) $core->blog->settings->system->wiki_comments;
+        $wiki_comments = (bool) $core->blog->settings->system->wiki_comments;
         if ($active && !$wiki_comments) {
             $core->blog->settings->system->put('wiki_comments', true, 'boolean');
         }
@@ -84,8 +84,9 @@ if (!empty($_POST['saveconfig'])) {
 echo dcPage::breadcrumb(
     [
         html::escapeHTML($core->blog->name) => '',
-        __('Comments Wikibar')              => ''
-    ]);
+        __('Comments Wikibar')              => '',
+    ]
+);
 ?>
 
 <?php if (!empty($msg)) {
@@ -105,8 +106,10 @@ echo dcPage::breadcrumb(
             if ($core->plugins->moduleExists('formatting-markdown')) {
                 echo
                     '<br />' .
-                    sprintf(__('It also <strong>enforces</strong> Markdown syntax if it\'s <a href="%s">enabled</a> for comments'),
-                    $core->adminurl->get('admin.blog.pref') . '#params.formatting_markdown');
+                    sprintf(
+                        __('It also <strong>enforces</strong> Markdown syntax if it\'s <a href="%s">enabled</a> for comments'),
+                        $core->adminurl->get('admin.blog.pref') . '#params.formatting_markdown'
+                    );
             }
         ?>
     </em></p>
