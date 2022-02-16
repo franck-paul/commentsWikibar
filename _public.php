@@ -76,7 +76,7 @@ class commentsWikibarBehaviors
         if (self::canActivate()) {
             // CSS
             if ($core->blog->settings->commentswikibar->commentswikibar_add_css) {
-                $custom_css = trim($core->blog->settings->commentswikibar->commentswikibar_custom_css);
+                $custom_css = trim((string) $core->blog->settings->commentswikibar->commentswikibar_custom_css);
                 if (!empty($custom_css)) {
                     if (strpos('/', $custom_css) === 0 || preg_match('!^http[s]?://.+!', $custom_css)) {
                         $css = $custom_css;
@@ -93,7 +93,7 @@ class commentsWikibarBehaviors
             }
             // JS
             if ($core->blog->settings->commentswikibar->commentswikibar_add_jslib) {
-                $custom_jslib = trim($core->blog->settings->commentswikibar->commentswikibar_custom_jslib);
+                $custom_jslib = trim((string) $core->blog->settings->commentswikibar->commentswikibar_custom_jslib);
                 if (!empty($custom_jslib)) {
                     if (strpos('/', $custom_jslib) === 0 || preg_match('!^http[s]?://.+!', $custom_jslib)) {
                         $js = $custom_jslib;
@@ -152,8 +152,8 @@ class commentsWikibarBehaviors
                         'no_url'    => $core->blog->settings->commentswikibar->commentswikibar_no_url,
                     ],
                 ]) .
-                dcUtils::jsLoad($core->blog->getPF('commentsWikibar/bootstrap.min.js'));
-//                dcUtils::jsLoad($core->blog->getPF('commentsWikibar/src/bootstrap.js')); // FOR DEBUG PURPOSE
+                dcUtils::jsModuleLoad('commentsWikibar/bootstrap.min.js');
+//                dcUtils::jsModuleLoad('commentsWikibar/src/bootstrap.js'); // FOR DEBUG PURPOSE
             }
         }
     }

@@ -149,13 +149,13 @@ dotclear.jsCombo = class {
       node.className = this.className;
     }
     node.title = this.title;
-    for (let item in this.options) {
+    for (const item in this.options) {
       const option = document.createElement('option');
       option.value = item;
       option.appendChild(document.createTextNode(this.options[item]));
       node.appendChild(option);
     }
-    let combo = this;
+    const combo = this;
     node.onchange = function () {
       try {
         combo.fn.call(combo.scope, this.value);
@@ -374,7 +374,7 @@ dotclear.jsToolBar = class {
           wiki() {
             const link = this.elements.link.prompt.call(this);
             if (link) {
-              let stag = '[';
+              const stag = '[';
               let etag = `|${link.href}`;
               if (link.hreflang) {
                 etag = `${etag}|${link.hreflang}`;
@@ -386,7 +386,7 @@ dotclear.jsToolBar = class {
           markdown() {
             const link = this.elements.link.prompt.call(this);
             if (link) {
-              let stag = '[';
+              const stag = '[';
               let etag = `](${link.href}`;
               if (link.title) {
                 etag = `${etag} "${link.title}"`;
@@ -472,7 +472,7 @@ dotclear.jsToolBar = class {
     if (typeof select[this.mode].fn != 'function' || len == 0) {
       return null;
     }
-    let options = {};
+    const options = {};
     for (let i = 0; i < len; i++) {
       const elt = select[this.mode].list[i];
       options[elt] = select.options[elt];
@@ -485,7 +485,7 @@ dotclear.jsToolBar = class {
       this.toolbar.removeChild(this.toolbar.firstChild);
     }
     this.toolNodes = {};
-    for (let elt in this.elements) {
+    for (const elt in this.elements) {
       const btn = this.elements[elt];
       const ignore =
         btn.type == undefined ||

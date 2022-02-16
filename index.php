@@ -74,8 +74,8 @@ if (!empty($_POST['saveconfig'])) {
 <html>
 <head>
   <title><?php echo __('Comments Wikibar'); ?></title>
-  <?php echo dcPage::cssLoad(urldecode(dcPage::getPF('commentsWikibar/wikibar.min.css'))); ?>
-  <?php echo dcPage::cssLoad(urldecode(dcPage::getPF('commentsWikibar/admin.min.css'))); ?>
+  <?php echo dcPage::cssModuleLoad('commentsWikibar/wikibar.min.css'); ?>
+  <?php echo dcPage::cssModuleLoad('commentsWikibar/admin.min.css'); ?>
   <?php echo dcPage::jsPageTabs(''); ?>
 </head>
 
