@@ -1,11 +1,11 @@
 <modules xmlns:da="http://dotaddict.org/da/">
   <module id="commentsWikibar">
     <name>Comments Wikibar</name>
-    <version>1.14</version>
+    <version>1.15</version>
     <author>Pep, Biou, Franck Paul and contributors</author>
     <desc>Adds a formatting toolbar when public comments use the wiki syntax</desc>
-    <file>https://github.com/franck-paul/commentsWikibar/releases/download/1.14/plugin-commentsWikibar-1.14.zip</file>
-    <da:dcmin>2.21</da:dcmin>
+    <file>https://github.com/franck-paul/commentsWikibar/releases/download/1.15/plugin-commentsWikibar-1.15.zip</file>
+    <da:dcmin>2.23</da:dcmin>
     <da:details>https://open-time.net/?q=commentsWikibar</da:details>
     <da:support>https://github.com/franck-paul/commentsWikibar</da:support>
   </module>
