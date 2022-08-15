@@ -22,11 +22,11 @@ $_menu['Blog']->addItem(
     'plugin.php?p=commentsWikibar',
     [urldecode(dcPage::getPF('commentsWikibar/icon.svg')), urldecode(dcPage::getPF('commentsWikibar/icon-dark.svg'))],
     preg_match('/plugin.php\?p=commentsWikibar(&.*)?$/', $_SERVER['REQUEST_URI']),
-    $core->auth->check('contentadmin', $core->blog->id)
+    dcCore::app()->auth->check('contentadmin', dcCore::app()->blog->id)
 );
 
 /* Register favorite */
-$core->addBehavior('adminDashboardFavorites', ['commentsWikibarAdmin', 'adminDashboardFavorites']);
+dcCore::app()->addBehavior('adminDashboardFavorites', ['commentsWikibarAdmin', 'adminDashboardFavorites']);
 
 class commentsWikibarAdmin
 {

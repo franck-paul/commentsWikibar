@@ -15,23 +15,23 @@ if (!defined('DC_CONTEXT_ADMIN')) {
 }
 
 // Getting current parameters
-$active        = (bool) $core->blog->settings->commentswikibar->commentswikibar_active;
-$no_format     = (bool) $core->blog->settings->commentswikibar->commentswikibar_no_format;
-$no_br         = (bool) $core->blog->settings->commentswikibar->commentswikibar_no_br;
-$no_list       = (bool) $core->blog->settings->commentswikibar->commentswikibar_no_list;
-$no_pre        = (bool) $core->blog->settings->commentswikibar->commentswikibar_no_pre;
-$no_quote      = (bool) $core->blog->settings->commentswikibar->commentswikibar_no_quote;
-$no_url        = (bool) $core->blog->settings->commentswikibar->commentswikibar_no_url;
-$wb_add_css    = (bool) $core->blog->settings->commentswikibar->commentswikibar_add_css;
-$wb_add_jslib  = (bool) $core->blog->settings->commentswikibar->commentswikibar_add_jslib;
-$wb_add_jsglue = (bool) $core->blog->settings->commentswikibar->commentswikibar_add_jsglue;
-$custom_css    = (string) $core->blog->settings->commentswikibar->commentswikibar_custom_css;
-$custom_jslib  = (string) $core->blog->settings->commentswikibar->commentswikibar_custom_jslib;
+$active        = (bool) dcCore::app()->blog->settings->commentswikibar->commentswikibar_active;
+$no_format     = (bool) dcCore::app()->blog->settings->commentswikibar->commentswikibar_no_format;
+$no_br         = (bool) dcCore::app()->blog->settings->commentswikibar->commentswikibar_no_br;
+$no_list       = (bool) dcCore::app()->blog->settings->commentswikibar->commentswikibar_no_list;
+$no_pre        = (bool) dcCore::app()->blog->settings->commentswikibar->commentswikibar_no_pre;
+$no_quote      = (bool) dcCore::app()->blog->settings->commentswikibar->commentswikibar_no_quote;
+$no_url        = (bool) dcCore::app()->blog->settings->commentswikibar->commentswikibar_no_url;
+$wb_add_css    = (bool) dcCore::app()->blog->settings->commentswikibar->commentswikibar_add_css;
+$wb_add_jslib  = (bool) dcCore::app()->blog->settings->commentswikibar->commentswikibar_add_jslib;
+$wb_add_jsglue = (bool) dcCore::app()->blog->settings->commentswikibar->commentswikibar_add_jsglue;
+$custom_css    = (string) dcCore::app()->blog->settings->commentswikibar->commentswikibar_custom_css;
+$custom_jslib  = (string) dcCore::app()->blog->settings->commentswikibar->commentswikibar_custom_jslib;
 
 // Saving new configuration
 if (!empty($_POST['saveconfig'])) {
     try {
-        $core->blog->settings->addNameSpace('commentswikibar');
+        dcCore::app()->blog->settings->addNameSpace('commentswikibar');
 
         $active        = (empty($_POST['active'])) ? false : true;
         $no_format     = (empty($_POST['no_format'])) ? false : true;
@@ -45,29 +45,29 @@ if (!empty($_POST['saveconfig'])) {
         $wb_add_jsglue = (empty($_POST['wb_add_jsglue'])) ? false : true;
         $custom_css    = (empty($_POST['custom_css'])) ? '' : html::sanitizeURL($_POST['custom_css']);
         $custom_jslib  = (empty($_POST['custom_jslib'])) ? '' : html::sanitizeURL($_POST['custom_jslib']);
-        $core->blog->settings->commentswikibar->put('commentswikibar_active', $active, 'boolean');
-        $core->blog->settings->commentswikibar->put('commentswikibar_no_format', $no_format, 'boolean');
-        $core->blog->settings->commentswikibar->put('commentswikibar_no_br', $no_br, 'boolean');
-        $core->blog->settings->commentswikibar->put('commentswikibar_no_list', $no_list, 'boolean');
-        $core->blog->settings->commentswikibar->put('commentswikibar_no_pre', $no_pre, 'boolean');
-        $core->blog->settings->commentswikibar->put('commentswikibar_no_quote', $no_quote, 'boolean');
-        $core->blog->settings->commentswikibar->put('commentswikibar_no_url', $no_url, 'boolean');
-        $core->blog->settings->commentswikibar->put('commentswikibar_add_css', $wb_add_css, 'boolean');
-        $core->blog->settings->commentswikibar->put('commentswikibar_add_jslib', $wb_add_jslib, 'boolean');
-        $core->blog->settings->commentswikibar->put('commentswikibar_add_jsglue', $wb_add_jsglue, 'boolean');
-        $core->blog->settings->commentswikibar->put('commentswikibar_custom_css', $custom_css, 'string');
-        $core->blog->settings->commentswikibar->put('commentswikibar_custom_jslib', $custom_jslib, 'string');
+        dcCore::app()->blog->settings->commentswikibar->put('commentswikibar_active', $active, 'boolean');
+        dcCore::app()->blog->settings->commentswikibar->put('commentswikibar_no_format', $no_format, 'boolean');
+        dcCore::app()->blog->settings->commentswikibar->put('commentswikibar_no_br', $no_br, 'boolean');
+        dcCore::app()->blog->settings->commentswikibar->put('commentswikibar_no_list', $no_list, 'boolean');
+        dcCore::app()->blog->settings->commentswikibar->put('commentswikibar_no_pre', $no_pre, 'boolean');
+        dcCore::app()->blog->settings->commentswikibar->put('commentswikibar_no_quote', $no_quote, 'boolean');
+        dcCore::app()->blog->settings->commentswikibar->put('commentswikibar_no_url', $no_url, 'boolean');
+        dcCore::app()->blog->settings->commentswikibar->put('commentswikibar_add_css', $wb_add_css, 'boolean');
+        dcCore::app()->blog->settings->commentswikibar->put('commentswikibar_add_jslib', $wb_add_jslib, 'boolean');
+        dcCore::app()->blog->settings->commentswikibar->put('commentswikibar_add_jsglue', $wb_add_jsglue, 'boolean');
+        dcCore::app()->blog->settings->commentswikibar->put('commentswikibar_custom_css', $custom_css, 'string');
+        dcCore::app()->blog->settings->commentswikibar->put('commentswikibar_custom_jslib', $custom_jslib, 'string');
 
         // Active wikibar enforces wiki syntax in blog comments
-        $wiki_comments = (bool) $core->blog->settings->system->wiki_comments;
+        $wiki_comments = (bool) dcCore::app()->blog->settings->system->wiki_comments;
         if ($active && !$wiki_comments) {
-            $core->blog->settings->system->put('wiki_comments', true, 'boolean');
+            dcCore::app()->blog->settings->system->put('wiki_comments', true, 'boolean');
         }
-        $core->blog->triggerBlog();
+        dcCore::app()->blog->triggerBlog();
 
         $msg = __('Configuration successfully updated.');
     } catch (Exception $e) {
-        $core->error->add($e->getMessage());
+        dcCore::app()->error->add($e->getMessage());
     }
 }
 ?>
@@ -83,8 +83,8 @@ if (!empty($_POST['saveconfig'])) {
 <?php
 echo dcPage::breadcrumb(
     [
-        html::escapeHTML($core->blog->name) => '',
-        __('Comments Wikibar')              => '',
+        html::escapeHTML(dcCore::app()->blog->name) => '',
+        __('Comments Wikibar')                      => '',
     ]
 );
 ?>
@@ -103,15 +103,15 @@ echo dcPage::breadcrumb(
     </p>
     <p><em><?php echo __('Activating this plugin also <strong>enforces</strong> Dotclear wiki syntax in blog comments'); ?>
         <?php
-            if ($core->plugins->moduleExists('formatting-markdown')) {
+            if (dcCore::app()->plugins->moduleExists('formatting-markdown')) {
                 echo
                     '<br />' .
                     sprintf(
                         __('It also <strong>enforces</strong> Markdown syntax if it\'s <a href="%s">enabled</a> for comments'),
-                        $core->adminurl->get('admin.blog.pref') . '#params.formatting_markdown'
+                        dcCore::app()->adminurl->get('admin.blog.pref') . '#params.formatting_markdown'
                     );
             }
-        ?>
+?>
     </em></p>
 
     <h3><?php echo __('Options'); ?></h3>
@@ -223,7 +223,7 @@ echo dcPage::breadcrumb(
 
   </div>
   <p><input type="hidden" name="p" value="commentsWikibar" />
-  <?php echo $core->formNonce(); ?>
+  <?php echo dcCore::app()->formNonce(); ?>
   <input type="submit" name="saveconfig" value="<?php echo __('Save configuration'); ?>" />
   </p>
 </form>

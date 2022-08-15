@@ -473,8 +473,7 @@ dotclear.jsToolBar = class {
       return null;
     }
     const options = {};
-    for (let i = 0; i < len; i++) {
-      const elt = select[this.mode].list[i];
+    for (const elt of select[this.mode].list) {
       options[elt] = select.options[elt];
     }
     return new dotclear.jsCombo(select.title, options, this, select[this.mode].fn);
@@ -578,8 +577,8 @@ dotclear.jsToolBar = class {
     this.items[0].setAttribute('tabindex', '0');
   }
   setFocus(item) {
-    for (let i = 0; i < this.items.length; i++) {
-      this.items[i].setAttribute('tabindex', '-1');
+    for (const element of this.items) {
+      element.setAttribute('tabindex', '-1');
     }
     item.setAttribute('tabindex', '0');
     item.focus();
