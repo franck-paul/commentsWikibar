@@ -8,7 +8,7 @@ Note: The markdown syntax is also take into account if the according syntax is i
 
 Run `tools/build.sh` from main directory of the plugin
 
-Note: minify (nodejs) must be installed to build production js/css (see https://www.npmjs.com/package/minify)
+Note: minify (nodejs) must be installed to build production js/css (see <https://www.npmjs.com/package/minify>)
 
 ## Support
 

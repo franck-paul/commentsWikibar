@@ -55,10 +55,12 @@ dotclear.jsButton = class {
       case 32: // SPACE
         break;
       case 39: // RIGHT
+      case 40: // DOWN
         this.toolbarNode.moveFocus(this, 'next');
         stopPropagation = true;
         break;
       case 37: // LEFT
+      case 38: // UP
         this.toolbarNode.moveFocus(this, 'previous');
         stopPropagation = true;
         break;
@@ -68,14 +70,6 @@ dotclear.jsButton = class {
         break;
       case 35: // END
         this.toolbarNode.setFocus(this.toolbarNode.lastItem);
-        stopPropagation = true;
-        break;
-      case 38: // UP
-        this.toolbarNode.moveFocus(this, 'previous');
-        stopPropagation = true;
-        break;
-      case 40: // DOWN
-        this.toolbarNode.moveFocus(this, 'next');
         stopPropagation = true;
         break;
       default:

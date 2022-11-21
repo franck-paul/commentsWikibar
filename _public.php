@@ -14,9 +14,6 @@ if (!defined('DC_RC_PATH')) {
     return;
 }
 
-dcCore::app()->addBehavior('publicHeadContent', ['commentsWikibarBehaviors', 'publicHeadContent']);
-dcCore::app()->addBehavior('coreInitWikiComment', ['commentsWikibarBehaviors', 'coreInitWikiComment']);
-
 class commentsWikibarBehaviors
 {
     protected static function canActivate()
@@ -72,7 +69,7 @@ class commentsWikibarBehaviors
             if (dcCore::app()->blog->settings->commentswikibar->commentswikibar_add_css) {
                 $custom_css = trim((string) dcCore::app()->blog->settings->commentswikibar->commentswikibar_custom_css);
                 if (!empty($custom_css)) {
-                    if (strpos('/', $custom_css) === 0 || preg_match('!^http[s]?://.+!', $custom_css)) {
+                    if (strpos('/', $custom_css) === 0 || preg_match('!^https?://.+!', $custom_css)) {
                         $css = $custom_css;
                     } else {
                         $css = dcCore::app()->blog->settings->system->themes_url . '/' .
@@ -89,7 +86,7 @@ class commentsWikibarBehaviors
             if (dcCore::app()->blog->settings->commentswikibar->commentswikibar_add_jslib) {
                 $custom_jslib = trim((string) dcCore::app()->blog->settings->commentswikibar->commentswikibar_custom_jslib);
                 if (!empty($custom_jslib)) {
-                    if (strpos('/', $custom_jslib) === 0 || preg_match('!^http[s]?://.+!', $custom_jslib)) {
+                    if (strpos('/', $custom_jslib) === 0 || preg_match('!^https?://.+!', $custom_jslib)) {
                         $js = $custom_jslib;
                     } else {
                         $js = dcCore::app()->blog->settings->system->themes_url . '/' .
@@ -152,3 +149,6 @@ class commentsWikibarBehaviors
         }
     }
 }
+
+dcCore::app()->addBehavior('publicHeadContent', [commentsWikibarBehaviors::class, 'publicHeadContent']);
+dcCore::app()->addBehavior('coreInitWikiComment', [commentsWikibarBehaviors::class, 'coreInitWikiComment']);

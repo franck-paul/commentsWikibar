@@ -15,17 +15,19 @@ if (!defined('DC_RC_PATH')) {
 }
 
 $this->registerModule(
-    'Comments Wikibar',                                                   // Name
-    'Adds a formatting toolbar when public comments use the wiki syntax', // Description
-    'Pep, Biou, Franck Paul and contributors',                            // Author
-    '1.15',                                                               // Version
+    'Comments Wikibar',
+    'Adds a formatting toolbar when public comments use the wiki syntax',
+    'Pep, Biou, Franck Paul and contributors',
+    '1.16',
     [
-        'requires'    => [['core', '2.23']], // Dependencies
-        'permissions' => 'contentadmin',     // Permissions
-        'type'        => 'plugin',           // Type
+        'requires'    => [['core', '2.24']],
+        'permissions' => dcCore::app()->auth->makePermissions([
+            dcAuth::PERMISSION_CONTENT_ADMIN,
+        ]),
+        'type' => 'plugin',
 
-        'details'    => 'https://open-time.net/?q=commentsWikibar',       // Details URL
-        'support'    => 'https://github.com/franck-paul/commentsWikibar', // Support URL
+        'details'    => 'https://open-time.net/?q=commentsWikibar',
+        'support'    => 'https://github.com/franck-paul/commentsWikibar',
         'repository' => 'https://raw.githubusercontent.com/franck-paul/commentsWikibar/master/dcstore.xml',
     ]
 );
