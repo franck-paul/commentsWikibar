@@ -18,7 +18,7 @@ $this->registerModule(
     'Comments Wikibar',
     'Adds a formatting toolbar when public comments use the wiki syntax',
     'Pep, Biou, Franck Paul and contributors',
-    '1.16',
+    '2.0',
     [
         'requires'    => [['core', '2.24']],
         'permissions' => dcCore::app()->auth->makePermissions([
