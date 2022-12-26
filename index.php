@@ -31,8 +31,6 @@ $custom_jslib  = (string) dcCore::app()->blog->settings->commentswikibar->commen
 // Saving new configuration
 if (!empty($_POST['saveconfig'])) {
     try {
-        dcCore::app()->blog->settings->addNameSpace('commentswikibar');
-
         $active        = (empty($_POST['active'])) ? false : true;
         $no_format     = (empty($_POST['no_format'])) ? false : true;
         $no_br         = (empty($_POST['no_br'])) ? false : true;
