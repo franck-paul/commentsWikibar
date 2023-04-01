@@ -10,6 +10,9 @@
  * @copyright Pep
  * @copyright GPL-2.0 https://www.gnu.org/licenses/gpl-2.0.html
  */
+
+use Dotclear\Helper\Html\Html;
+
 if (!defined('DC_CONTEXT_ADMIN')) {
     return;
 }
@@ -41,8 +44,8 @@ if (!empty($_POST['saveconfig'])) {
         $wb_add_css    = (empty($_POST['wb_add_css'])) ? false : true;
         $wb_add_jslib  = (empty($_POST['wb_add_jslib'])) ? false : true;
         $wb_add_jsglue = (empty($_POST['wb_add_jsglue'])) ? false : true;
-        $custom_css    = (empty($_POST['custom_css'])) ? '' : html::sanitizeURL($_POST['custom_css']);
-        $custom_jslib  = (empty($_POST['custom_jslib'])) ? '' : html::sanitizeURL($_POST['custom_jslib']);
+        $custom_css    = (empty($_POST['custom_css'])) ? '' : Html::sanitizeURL($_POST['custom_css']);
+        $custom_jslib  = (empty($_POST['custom_jslib'])) ? '' : Html::sanitizeURL($_POST['custom_jslib']);
         dcCore::app()->blog->settings->commentswikibar->put('commentswikibar_active', $active, 'boolean');
         dcCore::app()->blog->settings->commentswikibar->put('commentswikibar_no_format', $no_format, 'boolean');
         dcCore::app()->blog->settings->commentswikibar->put('commentswikibar_no_br', $no_br, 'boolean');
@@ -81,7 +84,7 @@ if (!empty($_POST['saveconfig'])) {
 <?php
 echo dcPage::breadcrumb(
     [
-        html::escapeHTML(dcCore::app()->blog->name) => '',
+        Html::escapeHTML(dcCore::app()->blog->name) => '',
         __('Comments Wikibar')                      => '',
     ]
 );

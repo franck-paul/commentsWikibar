@@ -14,13 +14,10 @@ if (!defined('DC_CONTEXT_ADMIN')) {
     return;
 }
 
-$this_version      = dcCore::app()->plugins->moduleInfo('commentsWikibar', 'version');
-$installed_version = dcCore::app()->getVersion('commentsWikibar');
-if (version_compare((string) $installed_version, $this_version, '>=')) {
+if (!dcCore::app()->newVersion(basename(__DIR__), dcCore::app()->plugins->moduleInfo(basename(__DIR__), 'version'))) {
     return;
 }
 
-dcCore::app()->blog->settings->addNamespace('commentswikibar');
 dcCore::app()->blog->settings->commentswikibar->put('commentswikibar_active', false, 'boolean', '', false, true);
 dcCore::app()->blog->settings->commentswikibar->put('commentswikibar_no_format', false, 'boolean', '', false, true);
 dcCore::app()->blog->settings->commentswikibar->put('commentswikibar_no_br', false, 'boolean', '', false, true);
@@ -33,7 +30,5 @@ dcCore::app()->blog->settings->commentswikibar->put('commentswikibar_add_jslib',
 dcCore::app()->blog->settings->commentswikibar->put('commentswikibar_add_jsglue', true, 'boolean', '', false, true);
 dcCore::app()->blog->settings->commentswikibar->put('commentswikibar_custom_css', '', 'string', '', false, true);
 dcCore::app()->blog->settings->commentswikibar->put('commentswikibar_custom_jslib', '', 'string', '', false, true);
-
-dcCore::app()->setVersion('commentsWikibar', $this_version);
 
 return true;

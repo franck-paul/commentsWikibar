@@ -10,10 +10,6 @@
  * @copyright Pep
  * @copyright GPL-2.0 https://www.gnu.org/licenses/gpl-2.0.html
  */
-if (!defined('DC_RC_PATH')) {
-    return;
-}
-
 class commentsWikibarBehaviors
 {
     protected static function canActivate()
@@ -29,35 +25,35 @@ class commentsWikibarBehaviors
         return false;
     }
 
-    public static function coreInitWikiComment($wiki2xhtml)
+    public static function coreInitWikiComment($wiki)
     {
         if (self::canActivate()) {
             if (dcCore::app()->blog->settings->commentswikibar->commentswikibar_no_format) {
-                $wiki2xhtml->setOpt('active_strong', 0);
-                $wiki2xhtml->setOpt('active_em', 0);
-                $wiki2xhtml->setOpt('active_ins', 0);
-                $wiki2xhtml->setOpt('active_del', 0);
-                $wiki2xhtml->setOpt('active_q', 0);
-                $wiki2xhtml->setOpt('active_code', 0);
+                $wiki->setOpt('active_strong', 0);
+                $wiki->setOpt('active_em', 0);
+                $wiki->setOpt('active_ins', 0);
+                $wiki->setOpt('active_del', 0);
+                $wiki->setOpt('active_q', 0);
+                $wiki->setOpt('active_code', 0);
             }
             if (dcCore::app()->blog->settings->commentswikibar->commentswikibar_no_br) {
-                $wiki2xhtml->setOpt('active_br', 0);
+                $wiki->setOpt('active_br', 0);
             }
             if (dcCore::app()->blog->settings->commentswikibar->commentswikibar_no_list) {
-                $wiki2xhtml->setOpt('active_lists', 0);
+                $wiki->setOpt('active_lists', 0);
             }
             if (dcCore::app()->blog->settings->commentswikibar->commentswikibar_no_pre) {
-                $wiki2xhtml->setOpt('active_pre', 0);
+                $wiki->setOpt('active_pre', 0);
             }
             if (dcCore::app()->blog->settings->commentswikibar->commentswikibar_no_quote) {
-                $wiki2xhtml->setOpt('active_quote', 0);
+                $wiki->setOpt('active_quote', 0);
             } else {
                 if (dcCore::app()->blog->settings->system->wiki_comments) {
-                    $wiki2xhtml->setOpt('active_quote', 1);
+                    $wiki->setOpt('active_quote', 1);
                 }
             }
             if (dcCore::app()->blog->settings->commentswikibar->commentswikibar_no_url) {
-                $wiki2xhtml->setOpt('active_urls', 0);
+                $wiki->setOpt('active_urls', 0);
             }
         }
     }
@@ -150,5 +146,7 @@ class commentsWikibarBehaviors
     }
 }
 
-dcCore::app()->addBehavior('publicHeadContent', [commentsWikibarBehaviors::class, 'publicHeadContent']);
-dcCore::app()->addBehavior('coreInitWikiComment', [commentsWikibarBehaviors::class, 'coreInitWikiComment']);
+dcCore::app()->addBehaviors([
+    'publicHeadContent'   => [commentsWikibarBehaviors::class, 'publicHeadContent'],
+    'coreInitWikiComment' => [commentsWikibarBehaviors::class, 'coreInitWikiComment'],
+]);
