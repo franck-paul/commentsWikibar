@@ -5,16 +5,25 @@
  * @package Dotclear
  * @subpackage Plugins
  *
- * @author Pep, Franck Paul and contributors
+ * @author Franck Paul and contributors
  *
- * @copyright Pep
+ * @copyright Franck Paul carnet.franck.paul@gmail.com
  * @copyright GPL-2.0 https://www.gnu.org/licenses/gpl-2.0.html
  */
-class commentsWikibarBehaviors
+declare(strict_types=1);
+
+namespace Dotclear\Plugin\commentsWikibar;
+
+use ArrayObject;
+use dcCore;
+use dcUtils;
+
+class FrontendBehaviors
 {
     protected static function canActivate()
     {
-        if (dcCore::app()->blog->settings->commentswikibar->commentswikibar_active && dcCore::app()->blog->settings->system->wiki_comments) {
+        $settings = dcCore::app()->blog->settings->get(My::id());
+        if ($settings->active && dcCore::app()->blog->settings->system->wiki_comments) {
             $supported_modes = new ArrayObject(['post', 'pages', 'gal', 'galitem']);
             dcCore::app()->callBehavior('initCommentsWikibar', $supported_modes);
             if (in_array(dcCore::app()->url->type, (array) $supported_modes)) {
@@ -28,7 +37,8 @@ class commentsWikibarBehaviors
     public static function coreInitWikiComment($wiki)
     {
         if (self::canActivate()) {
-            if (dcCore::app()->blog->settings->commentswikibar->commentswikibar_no_format) {
+            $settings = dcCore::app()->blog->settings->get(My::id());
+            if ($settings->no_format) {
                 $wiki->setOpt('active_strong', 0);
                 $wiki->setOpt('active_em', 0);
                 $wiki->setOpt('active_ins', 0);
@@ -36,23 +46,23 @@ class commentsWikibarBehaviors
                 $wiki->setOpt('active_q', 0);
                 $wiki->setOpt('active_code', 0);
             }
-            if (dcCore::app()->blog->settings->commentswikibar->commentswikibar_no_br) {
+            if ($settings->no_br) {
                 $wiki->setOpt('active_br', 0);
             }
-            if (dcCore::app()->blog->settings->commentswikibar->commentswikibar_no_list) {
+            if ($settings->no_list) {
                 $wiki->setOpt('active_lists', 0);
             }
-            if (dcCore::app()->blog->settings->commentswikibar->commentswikibar_no_pre) {
+            if ($settings->no_pre) {
                 $wiki->setOpt('active_pre', 0);
             }
-            if (dcCore::app()->blog->settings->commentswikibar->commentswikibar_no_quote) {
+            if ($settings->no_quote) {
                 $wiki->setOpt('active_quote', 0);
             } else {
                 if (dcCore::app()->blog->settings->system->wiki_comments) {
                     $wiki->setOpt('active_quote', 1);
                 }
             }
-            if (dcCore::app()->blog->settings->commentswikibar->commentswikibar_no_url) {
+            if ($settings->no_url) {
                 $wiki->setOpt('active_urls', 0);
             }
         }
@@ -61,48 +71,49 @@ class commentsWikibarBehaviors
     public static function publicHeadContent()
     {
         if (self::canActivate()) {
+            $settings = dcCore::app()->blog->settings->get(My::id());
             // CSS
-            if (dcCore::app()->blog->settings->commentswikibar->commentswikibar_add_css) {
-                $custom_css = trim((string) dcCore::app()->blog->settings->commentswikibar->commentswikibar_custom_css);
+            if ($settings->add_css) {
+                $custom_css = trim((string) $settings->custom_css);
                 if (!empty($custom_css)) {
-                    if (strpos('/', $custom_css) === 0 || preg_match('!^https?://.+!', $custom_css)) {
-                        $css = $custom_css;
+                    if (strpos($custom_css, '/') === 0 || preg_match('!^https?://.+!', $custom_css)) {
+                        // Absolute URL
+                        $css_file = $custom_css;
                     } else {
-                        $css = dcCore::app()->blog->settings->system->themes_url . '/' .
+                        // Relative URL
+                        $css_file = dcCore::app()->blog->settings->system->themes_url . '/' .
                         dcCore::app()->blog->settings->system->theme . '/' .
                             $custom_css;
                     }
+                    $css = dcUtils::cssLoad($css_file);
                 } else {
-                    $css = dcCore::app()->blog->getPF('commentsWikibar/wikibar.min.css');
-//                    $css = dcCore::app()->blog->getPF('commentsWikibar/src/wikibar.css'); // FOR DEBUG PURPOSE
+                    $css = dcUtils::cssModuleLoad(My::id() . '/css/wikibar.css');
                 }
-                echo dcUtils::cssLoad($css);
+                echo $css;
             }
             // JS
-            if (dcCore::app()->blog->settings->commentswikibar->commentswikibar_add_jslib) {
-                $custom_jslib = trim((string) dcCore::app()->blog->settings->commentswikibar->commentswikibar_custom_jslib);
+            if ($settings->add_jslib) {
+                $custom_jslib = trim((string) $settings->custom_jslib);
                 if (!empty($custom_jslib)) {
-                    if (strpos('/', $custom_jslib) === 0 || preg_match('!^https?://.+!', $custom_jslib)) {
-                        $js = $custom_jslib;
+                    if (strpos($custom_jslib, '/') === 0 || preg_match('!^https?://.+!', $custom_jslib)) {
+                        $js_file = $custom_jslib;
                     } else {
-                        $js = dcCore::app()->blog->settings->system->themes_url . '/' .
+                        $js_file = dcCore::app()->blog->settings->system->themes_url . '/' .
                         dcCore::app()->blog->settings->system->theme . '/' .
                             $custom_jslib;
                     }
+                    $js = dcUtils::jsLoad($js_file);
                 } else {
-                    $js = dcCore::app()->blog->getPF('commentsWikibar/wikibar.min.js');
-//                    $js = dcCore::app()->blog->getPF('commentsWikibar/src/wikibar.js'); // FOR DEBUG PURPOSE
+                    $js = dcUtils::jsModuleLoad(My::id() . '/js/wikibar.js');
                 }
-                echo dcUtils::jsLoad($js);
+                echo $js;
             }
 
-            if (dcCore::app()->blog->settings->commentswikibar->commentswikibar_add_jsglue) {
+            if ($settings->add_jsglue) {
                 $mode = 'wiki';
-                if (dcCore::app()->plugins->moduleExists('formatting-markdown')) {
-                    // Formatting Markdown activated
-                    if (dcCore::app()->blog->settings->system->markdown_comments) {
-                        $mode = 'markdown';
-                    }
+                // Formatting Markdown activated
+                if (dcCore::app()->blog->settings->system->markdown_comments) {
+                    $mode = 'markdown';
                 }
                 echo
                 dcUtils::jsJson('commentswikibar', [
@@ -131,22 +142,16 @@ class commentsWikibarBehaviors
                         ],
                     ],
                     'options' => [
-                        'no_format' => dcCore::app()->blog->settings->commentswikibar->commentswikibar_no_format,
-                        'no_br'     => dcCore::app()->blog->settings->commentswikibar->commentswikibar_no_br,
-                        'no_list'   => dcCore::app()->blog->settings->commentswikibar->commentswikibar_no_list,
-                        'no_pre'    => dcCore::app()->blog->settings->commentswikibar->commentswikibar_no_pre,
-                        'no_quote'  => dcCore::app()->blog->settings->commentswikibar->commentswikibar_no_quote,
-                        'no_url'    => dcCore::app()->blog->settings->commentswikibar->commentswikibar_no_url,
+                        'no_format' => $settings->no_format,
+                        'no_br'     => $settings->no_br,
+                        'no_list'   => $settings->no_list,
+                        'no_pre'    => $settings->no_pre,
+                        'no_quote'  => $settings->no_quote,
+                        'no_url'    => $settings->no_url,
                     ],
                 ]) .
-                dcUtils::jsModuleLoad('commentsWikibar/bootstrap.min.js');
-//                dcUtils::jsModuleLoad('commentsWikibar/src/bootstrap.js'); // FOR DEBUG PURPOSE
+                dcUtils::jsModuleLoad(My::id() . '/js/bootstrap.js');
             }
         }
     }
 }
-
-dcCore::app()->addBehaviors([
-    'publicHeadContent'   => [commentsWikibarBehaviors::class, 'publicHeadContent'],
-    'coreInitWikiComment' => [commentsWikibarBehaviors::class, 'coreInitWikiComment'],
-]);
