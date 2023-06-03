@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Dotclear 2 commentsWikibar module\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-24 07:48+0200\n"
+"POT-Creation-Date: 2023-06-03 09:57+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -99,6 +99,12 @@ msgstr ""
 
 #: ../git-plugins/commentsWikibar/src/Manage.php:240
 msgid "CSS inclusion"
+msgstr ""
+
+#: ../git-plugins/commentsWikibar/src/Manage.php:244
+#: ../git-plugins/commentsWikibar/src/Manage.php:264
+#: ../git-plugins/commentsWikibar/src/Manage.php:283
+msgid "(recommended)"
 msgstr ""
 
 #: ../git-plugins/commentsWikibar/src/Manage.php:244

@@ -241,7 +241,7 @@ class Manage extends dcNsProcess
                         (new Para())->items([
                             (new Checkbox('wb_add_css', $wb_add_css))
                                 ->value(1)
-                                ->label((new Label(__('Include CSS'), Label::INSIDE_TEXT_AFTER))),
+                                ->label((new Label(__('Include CSS') . ' ' . __('(recommended)'), Label::INSIDE_TEXT_AFTER))),
                         ]),
                         (new Para())->items([
                             (new Input('custom_css'))
@@ -261,7 +261,7 @@ class Manage extends dcNsProcess
                         (new Para())->items([
                             (new Checkbox('wb_add_jslib', $wb_add_jslib))
                                 ->value(1)
-                                ->label((new Label(__('Include JS library'), Label::INSIDE_TEXT_AFTER))),
+                                ->label((new Label(__('Include JS library') . ' ' . __('(recommended)'), Label::INSIDE_TEXT_AFTER))),
                         ]),
                         (new Para())->items([
                             (new Input('custom_jslib'))
@@ -280,7 +280,7 @@ class Manage extends dcNsProcess
                         (new Para())->items([
                             (new Checkbox('wb_add_jsglue', $wb_add_jsglue))
                                 ->value(1)
-                                ->label((new Label(__('Include JS bootstrap'), Label::INSIDE_TEXT_AFTER))),
+                                ->label((new Label(__('Include JS bootstrap') . ' ' . __('(recommended)'), Label::INSIDE_TEXT_AFTER))),
                         ]),
                     ]),
 

@@ -30,6 +30,7 @@ L10n::$locales['Disable blockquote'] = '';
 L10n::$locales['Disable link'] = '';
 L10n::$locales['Advanced Options'] = '';
 L10n::$locales['CSS inclusion'] = '';
+L10n::$locales['(recommended)'] = '';
 L10n::$locales['Include CSS'] = '';
 L10n::$locales['Use custom CSS:'] = '';
 L10n::$locales['You can use a custom CSS by providing its location.'] = '';
