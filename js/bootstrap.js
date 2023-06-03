@@ -25,20 +25,20 @@ window.addEventListener('load', () => {
       commentTb.elements.br.type = '';
       commentTb.elements.space2.type = '';
     }
-    if (data.no_list) {
+    if (data.options.no_list) {
       commentTb.elements.ul.type = '';
       commentTb.elements.ol.type = '';
     }
-    if (data.no_pre) {
+    if (data.options.no_pre) {
       commentTb.elements.pre.type = '';
     }
-    if (data.no_quote) {
+    if (data.options.no_quote) {
       commentTb.elements.bquote.type = '';
     }
-    if (data.no_list && data.no_pre && data.no_quote) {
+    if (data.options.no_list && data.options.no_pre && data.options.no_quote) {
       commentTb.elements.space3.type = '';
     }
-    if (data.no_url) {
+    if (data.options.no_url) {
       commentTb.elements.link.type = '';
     }
     commentTb.draw(data.mode);
