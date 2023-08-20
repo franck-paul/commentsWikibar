@@ -16,8 +16,9 @@ namespace Dotclear\Plugin\commentsWikibar;
 
 use dcCore;
 use dcNamespace;
-use dcNsProcess;
-use dcPage;
+use Dotclear\Core\Backend\Notices;
+use Dotclear\Core\Backend\Page;
+use Dotclear\Core\Process;
 use Dotclear\Helper\Html\Form\Checkbox;
 use Dotclear\Helper\Html\Form\Div;
 use Dotclear\Helper\Html\Form\Form;
@@ -29,17 +30,14 @@ use Dotclear\Helper\Html\Form\Text;
 use Dotclear\Helper\Html\Html;
 use Exception;
 
-class Manage extends dcNsProcess
+class Manage extends Process
 {
-    protected static $init = false; /** @deprecated since 2.27 */
     /**
      * Initializes the page.
      */
     public static function init(): bool
     {
-        static::$init = My::checkContext(My::MANAGE);
-
-        return static::$init;
+        return self::status(My::checkContext(My::MANAGE));
     }
 
     /**
@@ -47,7 +45,7 @@ class Manage extends dcNsProcess
      */
     public static function process(): bool
     {
-        if (!static::$init) {
+        if (!self::status()) {
             return false;
         }
 
@@ -88,8 +86,8 @@ class Manage extends dcNsProcess
                 }
                 dcCore::app()->blog->triggerBlog();
 
-                dcPage::addSuccessNotice(__('Configuration successfully updated.'));
-                dcCore::app()->adminurl->redirect('admin.plugin.' . My::id());
+                Notices::addSuccessNotice(__('Configuration successfully updated.'));
+                dcCore::app()->admin->url->redirect('admin.plugin.' . My::id());
             } catch (Exception $e) {
                 dcCore::app()->error->add($e->getMessage());
             }
@@ -103,7 +101,7 @@ class Manage extends dcNsProcess
      */
     public static function render(): void
     {
-        if (!static::$init) {
+        if (!self::status()) {
             return;
         }
 
@@ -123,20 +121,20 @@ class Manage extends dcNsProcess
         $custom_css    = (string) $settings->custom_css;
         $custom_jslib  = (string) $settings->custom_jslib;
 
-        dcPage::openModule(
+        Page::openModule(
             __('Comments Wikibar'),
-            dcPage::cssModuleLoad('commentsWikibar/css/wikibar.css') .
-            dcPage::cssModuleLoad('commentsWikibar/css/admin.css') .
-            dcPage::jsPageTabs('')
+            My::cssLoad('wikibar.css') .
+            My::cssLoad('admin.css') .
+            Page::jsPageTabs('')
         );
 
-        echo dcPage::breadcrumb(
+        echo Page::breadcrumb(
             [
                 Html::escapeHTML(dcCore::app()->blog->name) => '',
                 __('Comments Wikibar')                      => '',
             ]
         );
-        echo dcPage::notices();
+        echo Notices::getNotices();
 
         // Form
         echo (new Form('options-form'))
@@ -159,7 +157,7 @@ class Manage extends dcNsProcess
                                 __('Activating this plugin also <strong>enforces</strong> Dotclear wiki syntax in blog comments') . '<br />' .
                                 sprintf(
                                     __('It also <strong>enforces</strong> Markdown syntax if it\'s <a href="%s">enabled</a> for comments'),
-                                    dcCore::app()->adminurl->get('admin.blog.pref') . '#params.legacy_markdown'
+                                    dcCore::app()->admin->url->get('admin.blog.pref') . '#params.legacy_markdown'
                                 )
                             )),
                         ]),
@@ -293,6 +291,6 @@ class Manage extends dcNsProcess
             ])
             ->render();
 
-        dcPage::closeModule();
+        Page::closeModule();
     }
 }

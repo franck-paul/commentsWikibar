@@ -14,43 +14,40 @@ declare(strict_types=1);
 
 namespace Dotclear\Plugin\commentsWikibar;
 
-use dcAdmin;
 use dcCore;
-use dcFavorites;
-use dcNsProcess;
+use Dotclear\Core\Backend\Favorites;
+use Dotclear\Core\Backend\Menus;
+use Dotclear\Core\Process;
 
-class Backend extends dcNsProcess
+class Backend extends Process
 {
-    protected static $init = false; /** @deprecated since 2.27 */
     public static function init(): bool
     {
-        static::$init = My::checkContext(My::BACKEND);
-
         // dead but useful code, in order to have translations
         __('Comments Wikibar') . __('Adds a formatting toolbar when public comments use the wiki syntax');
 
-        return static::$init;
+        return self::status(My::checkContext(My::BACKEND));
     }
 
     public static function process(): bool
     {
-        if (!static::$init) {
+        if (!self::status()) {
             return false;
         }
 
-        dcCore::app()->menu[dcAdmin::MENU_BLOG]->addItem(
+        dcCore::app()->admin->menus[Menus::MENU_BLOG]->addItem(
             __('Comments Wikibar'),
-            My::makeUrl(),
+            My::manageUrl(),
             My::icons(),
             preg_match(My::urlScheme(), $_SERVER['REQUEST_URI']),
             My::checkContext(My::MENU)
         );
 
         /* Register favorite */
-        dcCore::app()->addBehavior('adminDashboardFavoritesV2', function (dcFavorites $favs) {
+        dcCore::app()->addBehavior('adminDashboardFavoritesV2', function (Favorites $favs) {
             $favs->register('commentsWikibar', [
                 'title'      => __('Comments Wikibar'),
-                'url'        => My::makeUrl(),
+                'url'        => My::manageUrl(),
                 'small-icon' => My::icons(),
                 'large-icon' => My::icons(),
                 My::checkContext(My::MENU),

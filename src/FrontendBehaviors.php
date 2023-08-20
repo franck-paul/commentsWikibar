@@ -87,7 +87,7 @@ class FrontendBehaviors
                     }
                     $css = dcUtils::cssLoad($css_file);
                 } else {
-                    $css = dcUtils::cssModuleLoad(My::id() . '/css/wikibar.css');
+                    $css = My::cssLoad('wikibar.css');
                 }
                 echo $css;
             }
@@ -104,7 +104,7 @@ class FrontendBehaviors
                     }
                     $js = dcUtils::jsLoad($js_file);
                 } else {
-                    $js = dcUtils::jsModuleLoad(My::id() . '/js/wikibar.js');
+                    $js = My::jsLoad('wikibar.js');
                 }
                 echo $js;
             }
@@ -150,7 +150,7 @@ class FrontendBehaviors
                         'no_url'    => $settings->no_url,
                     ],
                 ]) .
-                dcUtils::jsModuleLoad(My::id() . '/js/bootstrap.js');
+                My::jsLoad('bootstrap.js');
             }
         }
     }
