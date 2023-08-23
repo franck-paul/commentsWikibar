@@ -22,7 +22,7 @@ class FrontendBehaviors
 {
     protected static function canActivate()
     {
-        $settings = dcCore::app()->blog->settings->get(My::id());
+        $settings = My::settings();
         if ($settings->active && dcCore::app()->blog->settings->system->wiki_comments) {
             $supported_modes = new ArrayObject(['post', 'pages', 'gal', 'galitem']);
             dcCore::app()->callBehavior('initCommentsWikibar', $supported_modes);
@@ -37,7 +37,7 @@ class FrontendBehaviors
     public static function coreInitWikiComment($wiki)
     {
         if (self::canActivate()) {
-            $settings = dcCore::app()->blog->settings->get(My::id());
+            $settings = My::settings();
             if ($settings->no_format) {
                 $wiki->setOpt('active_strong', 0);
                 $wiki->setOpt('active_em', 0);
@@ -71,7 +71,7 @@ class FrontendBehaviors
     public static function publicHeadContent()
     {
         if (self::canActivate()) {
-            $settings = dcCore::app()->blog->settings->get(My::id());
+            $settings = My::settings();
             // CSS
             if ($settings->add_css) {
                 $custom_css = trim((string) $settings->custom_css);

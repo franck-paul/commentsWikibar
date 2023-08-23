@@ -51,7 +51,7 @@ class Manage extends Process
 
         if (!empty($_POST['saveconfig'])) {
             try {
-                $settings = dcCore::app()->blog->settings->get(My::id());
+                $settings = My::settings();
 
                 $active        = (empty($_POST['active'])) ? false : true;
                 $no_format     = (empty($_POST['no_format'])) ? false : true;
@@ -105,7 +105,7 @@ class Manage extends Process
             return;
         }
 
-        $settings = dcCore::app()->blog->settings->get(My::id());
+        $settings = My::settings();
 
         // Getting current parameters
         $active        = (bool) $settings->active;
@@ -286,7 +286,7 @@ class Manage extends Process
                 (new Para())->items([
                     (new Submit(['saveconfig'], __('Save configuration')))
                         ->accesskey('s'),
-                    dcCore::app()->formNonce(false),
+                    ... My::hiddenFields(),
                 ]),
             ])
             ->render();

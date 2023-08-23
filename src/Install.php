@@ -49,7 +49,7 @@ class Install extends Process
                     }
                 };
 
-                $settings = dcCore::app()->blog->settings->get(My::id());
+                $settings = My::settings();
 
                 foreach ([
                     'active',
@@ -70,7 +70,7 @@ class Install extends Process
             }
 
             // Init
-            $settings = dcCore::app()->blog->settings->get(My::id());
+            $settings = My::settings();
 
             $settings->put('active', false, dcNamespace::NS_BOOL, '', false, true);
             $settings->put('no_format', false, dcNamespace::NS_BOOL, '', false, true);
