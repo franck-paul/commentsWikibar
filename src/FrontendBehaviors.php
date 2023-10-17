@@ -17,10 +17,11 @@ namespace Dotclear\Plugin\commentsWikibar;
 use ArrayObject;
 use dcCore;
 use dcUtils;
+use Dotclear\Helper\Html\WikiToHtml;
 
 class FrontendBehaviors
 {
-    protected static function canActivate()
+    protected static function canActivate(): bool
     {
         $settings = My::settings();
         if ($settings->active && dcCore::app()->blog->settings->system->wiki_comments) {
@@ -34,7 +35,7 @@ class FrontendBehaviors
         return false;
     }
 
-    public static function coreInitWikiComment($wiki)
+    public static function coreInitWikiComment(WikiToHtml $wiki): string
     {
         if (self::canActivate()) {
             $settings = My::settings();
@@ -66,9 +67,11 @@ class FrontendBehaviors
                 $wiki->setOpt('active_urls', 0);
             }
         }
+
+        return '';
     }
 
-    public static function publicHeadContent()
+    public static function publicHeadContent(): string
     {
         if (self::canActivate()) {
             $settings = My::settings();
@@ -76,7 +79,7 @@ class FrontendBehaviors
             if ($settings->add_css) {
                 $custom_css = trim((string) $settings->custom_css);
                 if (!empty($custom_css)) {
-                    if (strpos($custom_css, '/') === 0 || preg_match('!^https?://.+!', $custom_css)) {
+                    if (str_starts_with($custom_css, '/') || preg_match('!^https?://.+!', $custom_css)) {
                         // Absolute URL
                         $css_file = $custom_css;
                     } else {
@@ -95,7 +98,7 @@ class FrontendBehaviors
             if ($settings->add_jslib) {
                 $custom_jslib = trim((string) $settings->custom_jslib);
                 if (!empty($custom_jslib)) {
-                    if (strpos($custom_jslib, '/') === 0 || preg_match('!^https?://.+!', $custom_jslib)) {
+                    if (str_starts_with($custom_jslib, '/') || preg_match('!^https?://.+!', $custom_jslib)) {
                         $js_file = $custom_jslib;
                     } else {
                         $js_file = dcCore::app()->blog->settings->system->themes_url . '/' .
@@ -153,5 +156,7 @@ class FrontendBehaviors
                 My::jsLoad('bootstrap.js');
             }
         }
+
+        return '';
     }
 }

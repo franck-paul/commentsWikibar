@@ -87,7 +87,7 @@ class Manage extends Process
                 dcCore::app()->blog->triggerBlog();
 
                 Notices::addSuccessNotice(__('Configuration successfully updated.'));
-                dcCore::app()->admin->url->redirect('admin.plugin.' . My::id());
+                dcCore::app()->adminurl->redirect('admin.plugin.' . My::id());
             } catch (Exception $e) {
                 dcCore::app()->error->add($e->getMessage());
             }
@@ -157,7 +157,7 @@ class Manage extends Process
                                 __('Activating this plugin also <strong>enforces</strong> Dotclear wiki syntax in blog comments') . '<br />' .
                                 sprintf(
                                     __('It also <strong>enforces</strong> Markdown syntax if it\'s <a href="%s">enabled</a> for comments'),
-                                    dcCore::app()->admin->url->get('admin.blog.pref') . '#params.legacy_markdown'
+                                    dcCore::app()->adminurl->get('admin.blog.pref') . '#params.legacy_markdown'
                                 )
                             )),
                         ]),
