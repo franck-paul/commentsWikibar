@@ -17,6 +17,7 @@ namespace Dotclear\Plugin\commentsWikibar;
 use ArrayObject;
 use dcCore;
 use dcUtils;
+use Dotclear\App;
 use Dotclear\Helper\Html\WikiToHtml;
 
 class FrontendBehaviors
@@ -24,7 +25,7 @@ class FrontendBehaviors
     protected static function canActivate(): bool
     {
         $settings = My::settings();
-        if ($settings->active && dcCore::app()->blog->settings->system->wiki_comments) {
+        if ($settings->active && App::blog()->settings()->system->wiki_comments) {
             $supported_modes = new ArrayObject(['post', 'pages', 'gal', 'galitem']);
             dcCore::app()->callBehavior('initCommentsWikibar', $supported_modes);
             if (in_array(dcCore::app()->url->type, (array) $supported_modes)) {
@@ -59,7 +60,7 @@ class FrontendBehaviors
             if ($settings->no_quote) {
                 $wiki->setOpt('active_quote', 0);
             } else {
-                if (dcCore::app()->blog->settings->system->wiki_comments) {
+                if (App::blog()->settings()->system->wiki_comments) {
                     $wiki->setOpt('active_quote', 1);
                 }
             }
@@ -84,8 +85,8 @@ class FrontendBehaviors
                         $css_file = $custom_css;
                     } else {
                         // Relative URL
-                        $css_file = dcCore::app()->blog->settings->system->themes_url . '/' .
-                        dcCore::app()->blog->settings->system->theme . '/' .
+                        $css_file = App::blog()->settings()->system->themes_url . '/' .
+                        App::blog()->settings()->system->theme . '/' .
                             $custom_css;
                     }
                     $css = dcUtils::cssLoad($css_file);
@@ -101,8 +102,8 @@ class FrontendBehaviors
                     if (str_starts_with($custom_jslib, '/') || preg_match('!^https?://.+!', $custom_jslib)) {
                         $js_file = $custom_jslib;
                     } else {
-                        $js_file = dcCore::app()->blog->settings->system->themes_url . '/' .
-                        dcCore::app()->blog->settings->system->theme . '/' .
+                        $js_file = App::blog()->settings()->system->themes_url . '/' .
+                        App::blog()->settings()->system->theme . '/' .
                             $custom_jslib;
                     }
                     $js = dcUtils::jsLoad($js_file);
@@ -115,12 +116,12 @@ class FrontendBehaviors
             if ($settings->add_jsglue) {
                 $mode = 'wiki';
                 // Formatting Markdown activated
-                if (dcCore::app()->blog->settings->system->markdown_comments) {
+                if (App::blog()->settings()->system->markdown_comments) {
                     $mode = 'markdown';
                 }
                 echo
                 dcUtils::jsJson('commentswikibar', [
-                    'base_url'   => dcCore::app()->blog->host,
+                    'base_url'   => App::blog()->host(),
                     'id'         => 'c_content',
                     'mode'       => $mode,
                     'legend_msg' => __('You can use the following shortcuts to format your text.'),

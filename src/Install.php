@@ -16,6 +16,7 @@ namespace Dotclear\Plugin\commentsWikibar;
 
 use dcCore;
 use dcNamespace;
+use Dotclear\App;
 use Dotclear\Core\Process;
 use Exception;
 
@@ -37,9 +38,9 @@ class Install extends Process
             $old_version = dcCore::app()->getVersion(My::id());
             if (version_compare((string) $old_version, '3.0', '<')) {
                 // Rename settings namespace
-                if (dcCore::app()->blog->settings->exists('commentswikibar')) {
-                    dcCore::app()->blog->settings->delNamespace(My::id());
-                    dcCore::app()->blog->settings->renNamespace('commentswikibar', My::id());
+                if (App::blog()->settings()->exists('commentswikibar')) {
+                    App::blog()->settings()->delNamespace(My::id());
+                    App::blog()->settings()->renNamespace('commentswikibar', My::id());
                 }
 
                 // Change settings names (remove commentswikibar_ prefix in them)

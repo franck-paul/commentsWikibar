@@ -40,11 +40,11 @@ class Backend extends Process
         /* Register favorite */
         dcCore::app()->addBehavior('adminDashboardFavoritesV2', function (Favorites $favs) {
             $favs->register('commentsWikibar', [
-                'title'      => __('Comments Wikibar'),
-                'url'        => My::manageUrl(),
-                'small-icon' => My::icons(),
-                'large-icon' => My::icons(),
-                My::checkContext(My::MENU),
+                'title'       => __('Comments Wikibar'),
+                'url'         => My::manageUrl(),
+                'small-icon'  => My::icons(),
+                'large-icon'  => My::icons(),
+                'permissions' => My::checkContext(My::MENU),
             ]);
         });
 

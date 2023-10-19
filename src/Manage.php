@@ -16,6 +16,7 @@ namespace Dotclear\Plugin\commentsWikibar;
 
 use dcCore;
 use dcNamespace;
+use Dotclear\App;
 use Dotclear\Core\Backend\Notices;
 use Dotclear\Core\Backend\Page;
 use Dotclear\Core\Process;
@@ -80,11 +81,11 @@ class Manage extends Process
                 $settings->put('custom_jslib', $custom_jslib, dcNamespace::NS_STRING);
 
                 // Active wikibar enforces wiki syntax in blog comments
-                $wiki_comments = (bool) dcCore::app()->blog->settings->system->wiki_comments;
+                $wiki_comments = (bool) App::blog()->settings()->system->wiki_comments;
                 if ($active && !$wiki_comments) {
-                    dcCore::app()->blog->settings->system->put('wiki_comments', true, dcNamespace::NS_BOOL);
+                    App::blog()->settings()->system->put('wiki_comments', true, dcNamespace::NS_BOOL);
                 }
-                dcCore::app()->blog->triggerBlog();
+                App::blog()->triggerBlog();
 
                 Notices::addSuccessNotice(__('Configuration successfully updated.'));
                 dcCore::app()->adminurl->redirect('admin.plugin.' . My::id());
@@ -130,8 +131,8 @@ class Manage extends Process
 
         echo Page::breadcrumb(
             [
-                Html::escapeHTML(dcCore::app()->blog->name) => '',
-                __('Comments Wikibar')                      => '',
+                Html::escapeHTML(App::blog()->name()) => '',
+                __('Comments Wikibar')                => '',
             ]
         );
         echo Notices::getNotices();
