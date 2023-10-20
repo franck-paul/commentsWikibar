@@ -15,9 +15,8 @@ declare(strict_types=1);
 namespace Dotclear\Plugin\commentsWikibar;
 
 use ArrayObject;
-use dcCore;
-use dcUtils;
 use Dotclear\App;
+use Dotclear\Helper\Html\Html;
 use Dotclear\Helper\Html\WikiToHtml;
 
 class FrontendBehaviors
@@ -27,8 +26,8 @@ class FrontendBehaviors
         $settings = My::settings();
         if ($settings->active && App::blog()->settings()->system->wiki_comments) {
             $supported_modes = new ArrayObject(['post', 'pages', 'gal', 'galitem']);
-            dcCore::app()->callBehavior('initCommentsWikibar', $supported_modes);
-            if (in_array(dcCore::app()->url->type, (array) $supported_modes)) {
+            App::behavior()->callBehavior('initCommentsWikibar', $supported_modes);
+            if (in_array(App::url()->type, (array) $supported_modes)) {
                 return true;
             }
         }
@@ -89,7 +88,7 @@ class FrontendBehaviors
                         App::blog()->settings()->system->theme . '/' .
                             $custom_css;
                     }
-                    $css = dcUtils::cssLoad($css_file);
+                    $css = App::plugins()->cssLoad($css_file);
                 } else {
                     $css = My::cssLoad('wikibar.css');
                 }
@@ -106,7 +105,7 @@ class FrontendBehaviors
                         App::blog()->settings()->system->theme . '/' .
                             $custom_jslib;
                     }
-                    $js = dcUtils::jsLoad($js_file);
+                    $js = App::plugins()->jsLoad($js_file);
                 } else {
                     $js = My::jsLoad('wikibar.js');
                 }
@@ -120,7 +119,7 @@ class FrontendBehaviors
                     $mode = 'markdown';
                 }
                 echo
-                dcUtils::jsJson('commentswikibar', [
+                Html::jsJson('commentswikibar', [
                     'base_url'   => App::blog()->host(),
                     'id'         => 'c_content',
                     'mode'       => $mode,

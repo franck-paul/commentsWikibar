@@ -17,10 +17,8 @@ $this->registerModule(
     '4.0',
     [
         'requires'    => [['core', '2.28']],
-        'permissions' => dcCore::app()->auth->makePermissions([
-            dcAuth::PERMISSION_CONTENT_ADMIN,
-        ]),
-        'type' => 'plugin',
+        'permissions' => 'My',
+        'type'        => 'plugin',
 
         'details'    => 'https://open-time.net/?q=commentsWikibar',
         'support'    => 'https://github.com/franck-paul/commentsWikibar',

@@ -14,7 +14,7 @@ declare(strict_types=1);
 
 namespace Dotclear\Plugin\commentsWikibar;
 
-use dcCore;
+use Dotclear\App;
 use Dotclear\Core\Backend\Favorites;
 use Dotclear\Core\Backend\Menus;
 use Dotclear\Core\Process;
@@ -38,15 +38,17 @@ class Backend extends Process
         My::addBackendMenuItem(Menus::MENU_BLOG);
 
         /* Register favorite */
-        dcCore::app()->addBehavior('adminDashboardFavoritesV2', function (Favorites $favs) {
-            $favs->register('commentsWikibar', [
-                'title'       => __('Comments Wikibar'),
-                'url'         => My::manageUrl(),
-                'small-icon'  => My::icons(),
-                'large-icon'  => My::icons(),
-                'permissions' => My::checkContext(My::MENU),
-            ]);
-        });
+        App::behavior()->addBehaviors([
+            'adminDashboardFavoritesV2' => function (Favorites $favs) {
+                $favs->register('commentsWikibar', [
+                    'title'       => __('Comments Wikibar'),
+                    'url'         => My::manageUrl(),
+                    'small-icon'  => My::icons(),
+                    'large-icon'  => My::icons(),
+                    'permissions' => My::checkContext(My::MENU),
+                ]);
+            },
+        ]);
 
         return true;
     }

@@ -14,8 +14,6 @@ declare(strict_types=1);
 
 namespace Dotclear\Plugin\commentsWikibar;
 
-use dcCore;
-use dcNamespace;
 use Dotclear\App;
 use Dotclear\Core\Backend\Notices;
 use Dotclear\Core\Backend\Page;
@@ -67,30 +65,30 @@ class Manage extends Process
                 $custom_css    = (empty($_POST['custom_css'])) ? '' : Html::sanitizeURL($_POST['custom_css']);
                 $custom_jslib  = (empty($_POST['custom_jslib'])) ? '' : Html::sanitizeURL($_POST['custom_jslib']);
 
-                $settings->put('active', $active, dcNamespace::NS_BOOL);
-                $settings->put('no_format', $no_format, dcNamespace::NS_BOOL);
-                $settings->put('no_br', $no_br, dcNamespace::NS_BOOL);
-                $settings->put('no_list', $no_list, dcNamespace::NS_BOOL);
-                $settings->put('no_pre', $no_pre, dcNamespace::NS_BOOL);
-                $settings->put('no_quote', $no_quote, dcNamespace::NS_BOOL);
-                $settings->put('no_url', $no_url, dcNamespace::NS_BOOL);
-                $settings->put('add_css', $wb_add_css, dcNamespace::NS_BOOL);
-                $settings->put('add_jslib', $wb_add_jslib, dcNamespace::NS_BOOL);
-                $settings->put('add_jsglue', $wb_add_jsglue, dcNamespace::NS_BOOL);
-                $settings->put('custom_css', $custom_css, dcNamespace::NS_STRING);
-                $settings->put('custom_jslib', $custom_jslib, dcNamespace::NS_STRING);
+                $settings->put('active', $active, App::blogWorkspace()::NS_BOOL);
+                $settings->put('no_format', $no_format, App::blogWorkspace()::NS_BOOL);
+                $settings->put('no_br', $no_br, App::blogWorkspace()::NS_BOOL);
+                $settings->put('no_list', $no_list, App::blogWorkspace()::NS_BOOL);
+                $settings->put('no_pre', $no_pre, App::blogWorkspace()::NS_BOOL);
+                $settings->put('no_quote', $no_quote, App::blogWorkspace()::NS_BOOL);
+                $settings->put('no_url', $no_url, App::blogWorkspace()::NS_BOOL);
+                $settings->put('add_css', $wb_add_css, App::blogWorkspace()::NS_BOOL);
+                $settings->put('add_jslib', $wb_add_jslib, App::blogWorkspace()::NS_BOOL);
+                $settings->put('add_jsglue', $wb_add_jsglue, App::blogWorkspace()::NS_BOOL);
+                $settings->put('custom_css', $custom_css, App::blogWorkspace()::NS_STRING);
+                $settings->put('custom_jslib', $custom_jslib, App::blogWorkspace()::NS_STRING);
 
                 // Active wikibar enforces wiki syntax in blog comments
                 $wiki_comments = (bool) App::blog()->settings()->system->wiki_comments;
                 if ($active && !$wiki_comments) {
-                    App::blog()->settings()->system->put('wiki_comments', true, dcNamespace::NS_BOOL);
+                    App::blog()->settings()->system->put('wiki_comments', true, App::blogWorkspace()::NS_BOOL);
                 }
                 App::blog()->triggerBlog();
 
                 Notices::addSuccessNotice(__('Configuration successfully updated.'));
-                dcCore::app()->adminurl->redirect('admin.plugin.' . My::id());
+                My::redirect();
             } catch (Exception $e) {
-                dcCore::app()->error->add($e->getMessage());
+                App::error()->add($e->getMessage());
             }
         }
 
@@ -139,7 +137,7 @@ class Manage extends Process
 
         // Form
         echo (new Form('options-form'))
-            ->action(dcCore::app()->admin->getPageURL())
+            ->action(App::backend()->getPageURL())
             ->method('post')
             ->fields([
                 // First tab (options)
@@ -158,7 +156,7 @@ class Manage extends Process
                                 __('Activating this plugin also <strong>enforces</strong> Dotclear wiki syntax in blog comments') . '<br />' .
                                 sprintf(
                                     __('It also <strong>enforces</strong> Markdown syntax if it\'s <a href="%s">enabled</a> for comments'),
-                                    dcCore::app()->adminurl->get('admin.blog.pref') . '#params.legacy_markdown'
+                                    App::backend()->url()->get('admin.blog.pref') . '#params.legacy_markdown'
                                 )
                             )),
                         ]),
