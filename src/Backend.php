@@ -16,7 +16,6 @@ namespace Dotclear\Plugin\commentsWikibar;
 
 use Dotclear\App;
 use Dotclear\Core\Backend\Favorites;
-use Dotclear\Core\Backend\Menus;
 use Dotclear\Core\Process;
 
 class Backend extends Process
@@ -35,7 +34,7 @@ class Backend extends Process
             return false;
         }
 
-        My::addBackendMenuItem(Menus::MENU_BLOG);
+        My::addBackendMenuItem(App::backend()->menus()::MENU_BLOG);
 
         /* Register favorite */
         App::behavior()->addBehaviors([
