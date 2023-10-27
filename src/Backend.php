@@ -38,7 +38,7 @@ class Backend extends Process
 
         /* Register favorite */
         App::behavior()->addBehaviors([
-            'adminDashboardFavoritesV2' => function (Favorites $favs) {
+            'adminDashboardFavoritesV2' => static function (Favorites $favs) {
                 $favs->register('commentsWikibar', [
                     'title'       => __('Comments Wikibar'),
                     'url'         => My::manageUrl(),

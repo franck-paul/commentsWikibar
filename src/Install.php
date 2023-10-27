@@ -43,7 +43,7 @@ class Install extends Process
                 }
 
                 // Change settings names (remove commentswikibar_ prefix in them)
-                $rename = function (string $name, BlogWorkspaceInterface $settings): void {
+                $rename = static function (string $name, BlogWorkspaceInterface $settings) : void {
                     if ($settings->settingExists('commentswikibar_' . $name, true)) {
                         $settings->rename('commentswikibar_' . $name, $name);
                     }
@@ -84,8 +84,8 @@ class Install extends Process
             $settings->put('add_jsglue', true, App::blogWorkspace()::NS_BOOL, '', false, true);
             $settings->put('custom_css', '', App::blogWorkspace()::NS_STRING, '', false, true);
             $settings->put('custom_jslib', '', App::blogWorkspace()::NS_STRING, '', false, true);
-        } catch (Exception $e) {
-            App::error()->add($e->getMessage());
+        } catch (Exception $exception) {
+            App::error()->add($exception->getMessage());
         }
 
         return true;

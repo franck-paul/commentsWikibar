@@ -52,16 +52,16 @@ class Manage extends Process
             try {
                 $settings = My::settings();
 
-                $active        = (empty($_POST['active'])) ? false : true;
-                $no_format     = (empty($_POST['no_format'])) ? false : true;
-                $no_br         = (empty($_POST['no_br'])) ? false : true;
-                $no_list       = (empty($_POST['no_list'])) ? false : true;
-                $no_pre        = (empty($_POST['no_pre'])) ? false : true;
-                $no_quote      = (empty($_POST['no_quote'])) ? false : true;
-                $no_url        = (empty($_POST['no_url'])) ? false : true;
-                $wb_add_css    = (empty($_POST['wb_add_css'])) ? false : true;
-                $wb_add_jslib  = (empty($_POST['wb_add_jslib'])) ? false : true;
-                $wb_add_jsglue = (empty($_POST['wb_add_jsglue'])) ? false : true;
+                $active        = !empty($_POST['active']);
+                $no_format     = !empty($_POST['no_format']);
+                $no_br         = !empty($_POST['no_br']);
+                $no_list       = !empty($_POST['no_list']);
+                $no_pre        = !empty($_POST['no_pre']);
+                $no_quote      = !empty($_POST['no_quote']);
+                $no_url        = !empty($_POST['no_url']);
+                $wb_add_css    = !empty($_POST['wb_add_css']);
+                $wb_add_jslib  = !empty($_POST['wb_add_jslib']);
+                $wb_add_jsglue = !empty($_POST['wb_add_jsglue']);
                 $custom_css    = (empty($_POST['custom_css'])) ? '' : Html::sanitizeURL($_POST['custom_css']);
                 $custom_jslib  = (empty($_POST['custom_jslib'])) ? '' : Html::sanitizeURL($_POST['custom_jslib']);
 
@@ -83,6 +83,7 @@ class Manage extends Process
                 if ($active && !$wiki_comments) {
                     App::blog()->settings()->system->put('wiki_comments', true, App::blogWorkspace()::NS_BOOL);
                 }
+
                 App::blog()->triggerBlog();
 
                 Notices::addSuccessNotice(__('Configuration successfully updated.'));

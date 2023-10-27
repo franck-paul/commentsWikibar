@@ -27,7 +27,7 @@ class FrontendBehaviors
         if ($settings->active && App::blog()->settings()->system->wiki_comments) {
             $supported_modes = new ArrayObject(['post', 'pages', 'gal', 'galitem']);
             App::behavior()->callBehavior('initCommentsWikibar', $supported_modes);
-            if (in_array(App::url()->type, (array) $supported_modes)) {
+            if (in_array(App::url()->getType(), (array) $supported_modes)) {
                 return true;
             }
         }
@@ -47,22 +47,25 @@ class FrontendBehaviors
                 $wiki->setOpt('active_q', 0);
                 $wiki->setOpt('active_code', 0);
             }
+
             if ($settings->no_br) {
                 $wiki->setOpt('active_br', 0);
             }
+
             if ($settings->no_list) {
                 $wiki->setOpt('active_lists', 0);
             }
+
             if ($settings->no_pre) {
                 $wiki->setOpt('active_pre', 0);
             }
+
             if ($settings->no_quote) {
                 $wiki->setOpt('active_quote', 0);
-            } else {
-                if (App::blog()->settings()->system->wiki_comments) {
-                    $wiki->setOpt('active_quote', 1);
-                }
+            } elseif (App::blog()->settings()->system->wiki_comments) {
+                $wiki->setOpt('active_quote', 1);
             }
+
             if ($settings->no_url) {
                 $wiki->setOpt('active_urls', 0);
             }
@@ -78,7 +81,7 @@ class FrontendBehaviors
             // CSS
             if ($settings->add_css) {
                 $custom_css = trim((string) $settings->custom_css);
-                if (!empty($custom_css)) {
+                if ($custom_css !== '') {
                     if (str_starts_with($custom_css, '/') || preg_match('!^https?://.+!', $custom_css)) {
                         // Absolute URL
                         $css_file = $custom_css;
@@ -88,16 +91,19 @@ class FrontendBehaviors
                         App::blog()->settings()->system->theme . '/' .
                             $custom_css;
                     }
+
                     $css = App::plugins()->cssLoad($css_file);
                 } else {
                     $css = My::cssLoad('wikibar.css');
                 }
+
                 echo $css;
             }
+
             // JS
             if ($settings->add_jslib) {
                 $custom_jslib = trim((string) $settings->custom_jslib);
-                if (!empty($custom_jslib)) {
+                if ($custom_jslib !== '') {
                     if (str_starts_with($custom_jslib, '/') || preg_match('!^https?://.+!', $custom_jslib)) {
                         $js_file = $custom_jslib;
                     } else {
@@ -105,10 +111,12 @@ class FrontendBehaviors
                         App::blog()->settings()->system->theme . '/' .
                             $custom_jslib;
                     }
+
                     $js = App::plugins()->jsLoad($js_file);
                 } else {
                     $js = My::jsLoad('wikibar.js');
                 }
+
                 echo $js;
             }
 
@@ -118,6 +126,7 @@ class FrontendBehaviors
                 if (App::blog()->settings()->system->markdown_comments) {
                     $mode = 'markdown';
                 }
+
                 echo
                 Html::jsJson('commentswikibar', [
                     'base_url'   => App::blog()->host(),
