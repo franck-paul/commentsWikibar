@@ -154,7 +154,7 @@ class Manage extends Process
                         (new Para())->class('form-note')->items([
                             (new Text(
                                 null,
-                                __('Activating this plugin also <strong>enforces</strong> Dotclear wiki syntax in blog comments') . '<br />' .
+                                __('Activating this plugin also <strong>enforces</strong> Dotclear wiki syntax in blog comments') . '<br>' .
                                 sprintf(
                                     __('It also <strong>enforces</strong> Markdown syntax if it\'s <a href="%s">enabled</a> for comments'),
                                     App::backend()->url()->get('admin.blog.pref') . '#params.legacy_markdown'
@@ -251,7 +251,7 @@ class Manage extends Process
                         (new Para())->class('form-note')->items([
                             (new Text(
                                 null,
-                                __('You can use a custom CSS by providing its location.') . '<br />' .
+                                __('You can use a custom CSS by providing its location.') . '<br>' .
                                 __('A location beginning with a / is treated as absolute, else it is treated as relative to the blog\'s current theme URL'),
                             )),
                         ]),
@@ -271,7 +271,7 @@ class Manage extends Process
                         (new Para())->class('form-note')->items([
                             (new Text(
                                 null,
-                                __('You can use a custom JS library by providing its location.') . '<br />' .
+                                __('You can use a custom JS library by providing its location.') . '<br>' .
                                 __('A location beginning with a / is treated as absolute, else it is treated as relative to the blog\'s current theme URL'),
                             )),
                         ]),
@@ -286,7 +286,7 @@ class Manage extends Process
                 (new Para())->items([
                     (new Submit(['saveconfig'], __('Save configuration')))
                         ->accesskey('s'),
-                    ... My::hiddenFields(),
+                    ...My::hiddenFields(),
                 ]),
             ])
             ->render();

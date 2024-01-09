@@ -19,11 +19,9 @@ window.addEventListener('load', () => {
       commentTb.elements.del.type = '';
       commentTb.elements.quote.type = '';
       commentTb.elements.code.type = '';
-      commentTb.elements.space1.type = '';
     }
     if (data.options.no_br) {
       commentTb.elements.br.type = '';
-      commentTb.elements.space2.type = '';
     }
     if (data.options.no_list) {
       commentTb.elements.ul.type = '';
@@ -34,9 +32,6 @@ window.addEventListener('load', () => {
     }
     if (data.options.no_quote) {
       commentTb.elements.bquote.type = '';
-    }
-    if (data.options.no_list && data.options.no_pre && data.options.no_quote) {
-      commentTb.elements.space3.type = '';
     }
     if (data.options.no_url) {
       commentTb.elements.link.type = '';

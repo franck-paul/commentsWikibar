@@ -268,9 +268,6 @@ dotclear.jsToolBar = class {
           },
         },
       },
-      space1: {
-        type: 'space',
-      },
       br: {
         type: 'button',
         title: 'Line break',
@@ -282,9 +279,6 @@ dotclear.jsToolBar = class {
             this.encloseSelection('  \n', '');
           },
         },
-      },
-      space2: {
-        type: 'space',
       },
       ul: {
         type: 'button',
@@ -357,9 +351,6 @@ dotclear.jsToolBar = class {
             });
           },
         },
-      },
-      space3: {
-        type: 'space',
       },
       link: {
         type: 'button',
