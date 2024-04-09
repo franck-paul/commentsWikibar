@@ -2,7 +2,9 @@
 // support of ARIA toolbar design pattern largely inspired from https://www.w3.org/TR/wai-aria-practices-1.1/examples/toolbar/toolbar.html
 
 /* Dotclear common object */
-var dotclear = dotclear || {};
+if (typeof dotclear === 'undefined') {
+  var dotclear = {};
+}
 
 dotclear.resizeTimer = undefined;
 dotclear.prevWidth = 0;
@@ -551,7 +553,7 @@ dotclear.jsToolBar = class {
   }
   stripBaseURL(url) {
     if (this.base_url != '' && url.indexOf(this.base_url) == 0) {
-      return url.substr(this.base_url.length);
+      return url.substring(this.base_url.length);
     }
     return url;
   }
