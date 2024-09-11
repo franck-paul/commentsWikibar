@@ -14,7 +14,7 @@ $this->registerModule(
     'Comments Wikibar',
     'Adds a formatting toolbar when public comments use the wiki syntax',
     'Pep, Biou, Franck Paul and contributors',
-    '5.3',
+    '5.4',
     [
         'requires'    => [['core', '2.28']],
         'permissions' => 'My',
