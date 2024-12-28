@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @brief commentsWikibar, a plugin for Dotclear 2
  *
@@ -23,7 +24,8 @@ class Backend extends Process
     public static function init(): bool
     {
         // dead but useful code, in order to have translations
-        __('Comments Wikibar') . __('Adds a formatting toolbar when public comments use the wiki syntax');
+        __('Comments Wikibar');
+        __('Adds a formatting toolbar when public comments use the wiki syntax');
 
         return self::status(My::checkContext(My::BACKEND));
     }
@@ -38,7 +40,7 @@ class Backend extends Process
 
         /* Register favorite */
         App::behavior()->addBehaviors([
-            'adminDashboardFavoritesV2' => static function (Favorites $favs) {
+            'adminDashboardFavoritesV2' => static function (Favorites $favs): string {
                 $favs->register('commentsWikibar', [
                     'title'       => __('Comments Wikibar'),
                     'url'         => My::manageUrl(),
@@ -46,6 +48,8 @@ class Backend extends Process
                     'large-icon'  => My::icons(),
                     'permissions' => My::checkContext(My::MENU),
                 ]);
+
+                return '';
             },
         ]);
 
