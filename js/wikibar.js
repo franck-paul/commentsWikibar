@@ -2,9 +2,7 @@
 // support of ARIA toolbar design pattern largely inspired from https://www.w3.org/TR/wai-aria-practices-1.1/examples/toolbar/toolbar.html
 
 /* Dotclear common object */
-if (typeof dotclear === 'undefined') {
-  var dotclear = {};
-}
+dotclear = dotclear || {};
 
 dotclear.resizeTimer = undefined;
 dotclear.prevWidth = 0;
@@ -31,21 +29,21 @@ dotclear.jsButton = class {
     label.appendChild(document.createTextNode(this.title));
     node.appendChild(label);
 
-    if (this.icon != undefined) {
-      node.style.backgroundImage = 'url(" + this.icon + ")';
+    if (this.icon !== undefined) {
+      node.style.backgroundImage = `url("${this.icon}")`;
     }
     node.addEventListener('keydown', this.keyDown);
     node.addEventListener('focus', this.focus);
     node.addEventListener('blur', this.blur);
     node.addEventListener('mouseover', this.mouseOver);
     node.addEventListener('mouseleave', this.mouseLeave);
-    if (typeof this.fn == 'function') {
-      node.onclick = () => {
+    if (typeof this.fn === 'function') {
+      node.addEventListener('click', (event) => {
         try {
-          this.fn.apply(this.scope, arguments);
+          this.fn.apply(this.scope, event);
         } catch (error) {}
         return false;
-      };
+      });
     }
     return node;
   }
@@ -67,11 +65,11 @@ dotclear.jsButton = class {
         stopPropagation = true;
         break;
       case 36: // HOME
-        this.toolbarNode.setFocus(this.toolbarNode.firstItem);
+        this.toolbarNode.firstItem.focus();
         stopPropagation = true;
         break;
       case 35: // END
-        this.toolbarNode.setFocus(this.toolbarNode.lastItem);
+        this.toolbarNode.lastItem.focus();
         stopPropagation = true;
         break;
       default:
@@ -109,6 +107,7 @@ dotclear.jsButton = class {
     }
   }
 };
+
 dotclear.jsSpace = class {
   constructor(id) {
     this.id = id || null;
@@ -128,6 +127,7 @@ dotclear.jsSpace = class {
     return node;
   }
 };
+
 dotclear.jsCombo = class {
   constructor(title, options, scope, fn, className) {
     this.title = title || null;
@@ -163,6 +163,7 @@ dotclear.jsCombo = class {
     return node;
   }
 };
+
 dotclear.jsToolBar = class {
   constructor(target, base_url = '', mode = 'wiki', label = '', elts = null) {
     if (!document.createElement) {
@@ -171,7 +172,7 @@ dotclear.jsToolBar = class {
     if (!target) {
       return;
     }
-    if (typeof document.selection == 'undefined' && typeof target.setSelectionRange == 'undefined') {
+    if (typeof document.selection === 'undefined' && typeof target.setSelectionRange === 'undefined') {
       return;
     }
 
@@ -270,6 +271,41 @@ dotclear.jsToolBar = class {
           },
         },
       },
+      foreign: {
+        type: 'button',
+        title: 'Foreign text',
+        fn: {
+          wiki() {
+            const lang = this.elements.foreign.prompt.call(this);
+            if (lang) {
+              if (lang.code) {
+                const stag = '££';
+                const etag = `|${lang.code}££`;
+                this.encloseSelection(stag, etag);
+              }
+            }
+          },
+          markdown() {
+            const lang = this.elements.foreign.prompt.call(this);
+            if (lang) {
+              if (lang.code) {
+                const stag = `<i lang="${lang.code}">`;
+                const etag = '</i>';
+                this.encloseSelection(stag, etag);
+              }
+            }
+          },
+        },
+        lang_prompt: 'Language of this text:',
+        default_lang: '',
+        prompt(lang = '') {
+          lang = lang || this.elements.foreign.default_lang;
+          lang = window.prompt(this.elements.foreign.lang_prompt, lang);
+          return {
+            code: lang,
+          };
+        },
+      },
       br: {
         type: 'button',
         title: 'Line break',
@@ -288,14 +324,12 @@ dotclear.jsToolBar = class {
         fn: {
           wiki() {
             this.encloseSelection('', '', (selection) => {
-              selection = selection.replace(/\r/g, '');
-              return `* ${selection.replace(/\n/g, '\n* ')}`;
+              return `* ${selection.replace(/\r/g, '').replace(/\n/g, '\n* ')}`;
             });
           },
           markdown() {
             this.encloseSelection('', '', (selection) => {
-              selection = selection.replace(/\r/g, '');
-              return `* ${selection.replace(/\n/g, '\n* ')}`;
+              return `* ${selection.replace(/\r/g, '').replace(/\n/g, '\n* ')}`;
             });
           },
         },
@@ -306,14 +340,12 @@ dotclear.jsToolBar = class {
         fn: {
           wiki() {
             this.encloseSelection('', '', (selection) => {
-              selection = selection.replace(/\r/g, '');
-              return `# ${selection.replace(/\n/g, '\n# ')}`;
+              return `# ${selection.replace(/\r/g, '').replace(/\n/g, '\n# ')}`;
             });
           },
           markdown() {
             this.encloseSelection('', '', (selection) => {
-              selection = selection.replace(/\r/g, '');
-              return `1. ${selection.replace(/\n/g, '\n1. ')}`;
+              return `1. ${selection.replace(/\r/g, '').replace(/\n/g, '\n1. ')}`;
             });
           },
         },
@@ -324,14 +356,12 @@ dotclear.jsToolBar = class {
         fn: {
           wiki() {
             this.encloseSelection('', '', (selection) => {
-              selection = selection.replace(/\r/g, '');
-              return ` ${selection.replace(/\n/g, '\n ')}`;
+              return ` ${selection.replace(/\r/g, '').replace(/\n/g, '\n ')}`;
             });
           },
           markdown() {
             this.encloseSelection('\n', '', (selection) => {
-              selection = selection.replace(/\r/g, '');
-              return `    ${selection.replace(/\n/g, '\n    ')}`;
+              return `    ${selection.replace(/\r/g, '').replace(/\n/g, '\n    ')}`;
             });
           },
         },
@@ -342,14 +372,12 @@ dotclear.jsToolBar = class {
         fn: {
           wiki() {
             this.encloseSelection('', '', (selection) => {
-              selection = selection.replace(/\r/g, '');
-              return `> ${selection.replace(/\n/g, '\n> ')}`;
+              return `> ${selection.replace(/\r/g, '').replace(/\n/g, '\n> ')}`;
             });
           },
           markdown() {
             this.encloseSelection('\n', '', (selection) => {
-              selection = selection.replace(/\r/g, '');
-              return `> ${selection.replace(/\n/g, '\n> ')}`;
+              return `> ${selection.replace(/\r/g, '').replace(/\n/g, '\n> ')}`;
             });
           },
         },
@@ -426,26 +454,31 @@ dotclear.jsToolBar = class {
       }, 250);
     });
   }
+
   getMode() {
     return this.mode;
   }
+
   setMode(mode) {
     this.mode = mode || 'wiki';
   }
+
   switchMode(mode = 'wiki') {
     this.draw(mode);
   }
+
   button(id) {
     const elt = this.elements[id];
-    if (typeof elt.fn[this.mode] != 'function') {
+    if (typeof elt.fn[this.mode] !== 'function') {
       return null;
     }
     const btn = new dotclear.jsButton(elt.title, elt.fn[this.mode], this, `jstb_${id}`);
-    if (elt.icon != undefined) {
+    if (elt.icon !== undefined) {
       btn.icon = elt.icon;
     }
     return btn;
   }
+
   space(id) {
     const elt = new dotclear.jsSpace(id);
     if (this.elements[id].width !== undefined) {
@@ -453,10 +486,11 @@ dotclear.jsToolBar = class {
     }
     return elt;
   }
+
   combo(id) {
     const select = this.elements[id];
     const len = select[this.mode].list.length;
-    if (typeof select[this.mode].fn != 'function' || len == 0) {
+    if (typeof select[this.mode].fn !== 'function' || len === 0) {
       return null;
     }
     const options = {};
@@ -465,6 +499,7 @@ dotclear.jsToolBar = class {
     }
     return new dotclear.jsCombo(select.title, options, this, select[this.mode].fn);
   }
+
   draw(mode) {
     this.setMode(mode);
     while (this.toolbar.hasChildNodes()) {
@@ -474,11 +509,11 @@ dotclear.jsToolBar = class {
     for (const elt in this.elements) {
       const btn = this.elements[elt];
       const ignore =
-        btn.type == undefined ||
-        btn.type == '' ||
-        (btn.disabled != undefined && btn.disabled) ||
-        (btn.context != undefined && btn.context != null && btn.context != this.context);
-      if (!ignore && typeof this[btn.type] == 'function') {
+        btn.type === undefined ||
+        btn.type === '' ||
+        (btn.disabled !== undefined && btn.disabled) ||
+        (btn.context !== undefined && btn.context != null && btn.context !== this.context);
+      if (!ignore && typeof this[btn.type] === 'function') {
         const obj = this[btn.type](elt);
         if (obj) {
           const node = obj.draw();
@@ -494,24 +529,26 @@ dotclear.jsToolBar = class {
     this.firstItem = document.querySelector('.jstElements button:first-child');
     this.lastItem = document.querySelector('.jstElements button:last-child');
     this.items = Array.from(document.querySelectorAll('.jstElements button'));
-    this.initTabindex();
     this.updateTooltipsPos();
     document.body.addEventListener('keydown', this.keyDown.bind(this));
   }
+
   keyDown(event) {
-    if (event.keyCode == 27) {
+    if (event.keyCode === 27) {
       //ESC
       this.hideAllTooltips();
       event.stopPropagation();
       event.preventDefault();
     }
   }
+
   singleTag(stag = null, etag = stag) {
     if (!stag || !etag) {
       return;
     }
     this.encloseSelection(stag, etag);
   }
+
   encloseSelection(stag = '', etag = '', fn = null) {
     this.textarea.focus();
     let selstart;
@@ -520,9 +557,9 @@ dotclear.jsToolBar = class {
     let position;
     let text;
     let enclosed;
-    if (typeof document.selection != 'undefined') {
+    if (typeof document.selection !== 'undefined') {
       selection = document.selection.createRange().text;
-    } else if (typeof this.textarea.setSelectionRange != 'undefined') {
+    } else if (typeof this.textarea.setSelectionRange !== 'undefined') {
       selstart = this.textarea.selectionStart;
       selend = this.textarea.selectionEnd;
       position = this.textarea.scrollTop;
@@ -532,16 +569,16 @@ dotclear.jsToolBar = class {
       selection = selection.substring(0, selection.length - 1);
       etag += ' ';
     }
-    if (typeof fn == 'function') {
+    if (typeof fn === 'function') {
       enclosed = selection ? fn.call(this, selection) : fn('');
     } else {
       enclosed = selection ? selection : '';
     }
     text = stag + enclosed + etag;
-    if (typeof document.selection != 'undefined') {
+    if (typeof document.selection !== 'undefined') {
       document.selection.createRange().text = text;
       this.textarea.caretPos -= etag.length;
-    } else if (typeof this.textarea.setSelectionRange != 'undefined') {
+    } else if (typeof this.textarea.setSelectionRange !== 'undefined') {
       this.textarea.value = this.textarea.value.substring(0, selstart) + text + this.textarea.value.substring(selend);
       if (selection) {
         this.textarea.setSelectionRange(selstart + text.length, selstart + text.length);
@@ -551,55 +588,46 @@ dotclear.jsToolBar = class {
       this.textarea.scrollTop = position;
     }
   }
+
   stripBaseURL(url) {
-    if (this.base_url != '' && url.indexOf(this.base_url) == 0) {
+    if (this.base_url !== '' && url.indexOf(this.base_url) === 0) {
       return url.substring(this.base_url.length);
     }
     return url;
   }
-  initTabindex() {
-    for (let i = 1; i < this.items.length; i++) {
-      this.items[i].setAttribute('tabindex', '-1');
-    }
-    this.items[0].setAttribute('tabindex', '0');
-  }
-  setFocus(item) {
-    for (const element of this.items) {
-      element.setAttribute('tabindex', '-1');
-    }
-    item.setAttribute('tabindex', '0');
-    item.focus();
-  }
+
   moveFocus(currentItem, direction) {
     let newItem;
-    if (direction == 'previous') {
+    if (direction === 'previous') {
       newItem = currentItem === this.firstItem ? this.lastItem : this.items[this.items.indexOf(currentItem) - 1];
     } else {
       newItem = currentItem === this.lastItem ? this.firstItem : this.items[this.items.indexOf(currentItem) + 1];
     }
-    this.setFocus(newItem);
+    newItem.focus();
   }
+
   updateTooltipsPos() {
-    Array.from(document.querySelectorAll('.jstElements button span')).forEach((elt) => {
+    for (const element of document.querySelectorAll('.jstElements button span')) {
       // move to the left all tooltips that are too close from the right border of the viewport
-      const currentPos = elt.parentNode.getBoundingClientRect().left;
-      elt.style.left = '0px'; // we reset all positions
+      const currentPos = element.parentNode.getBoundingClientRect().left;
+      element.style.left = '0px'; // we reset all positions
 
       // we need to switch between sr-only and hidden to be able to get the width of the tooltips
-      elt.classList.add('hidden');
-      elt.classList.remove('sr-only');
-      const width = elt.clientWidth;
-      elt.classList.add('sr-only');
-      elt.classList.remove('hidden');
+      element.classList.add('hidden');
+      element.classList.remove('sr-only');
+      const width = element.clientWidth;
+      element.classList.add('sr-only');
+      element.classList.remove('hidden');
       if (width + currentPos > document.documentElement.clientWidth - 15) {
         const diff = Math.trunc(-1 * (width + currentPos - document.documentElement.clientWidth + 15));
-        elt.style.left = `${diff}px`;
+        element.style.left = `${diff}px`;
       }
-    });
+    }
   }
+
   hideAllTooltips() {
-    Array.from(document.querySelectorAll('.jstElements button span')).forEach((element) => {
+    for (const element of document.querySelectorAll('.jstElements button span')) {
       element.classList.add('sr-only');
-    });
+    }
   }
 };

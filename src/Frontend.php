@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @brief commentsWikibar, a plugin for Dotclear 2
  *

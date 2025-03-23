@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Dotclear 2 commentsWikibar module\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-03 09:57+0200\n"
+"POT-Creation-Date: 2025-03-23 10:03+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,13 +16,16 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-msgid "Adds a formatting toolbar when public comments use the wiki syntax"
-msgstr ""
-
 msgid "Comments Wikibar"
 msgstr ""
 
+msgid "Adds a formatting toolbar when public comments use the wiki syntax"
+msgstr ""
+
 msgid "Text formatting"
+msgstr ""
+
+msgid "Foreign text"
 msgstr ""
 
 msgid "Preformatted"

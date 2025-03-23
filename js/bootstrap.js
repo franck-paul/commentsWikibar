@@ -21,6 +21,7 @@ window.addEventListener('load', () => {
     commentTb.elements.del.type = '';
     commentTb.elements.quote.type = '';
     commentTb.elements.code.type = '';
+    commentTb.elements.foreign.type = '';
   }
   if (data.options.no_br) {
     commentTb.elements.br.type = '';

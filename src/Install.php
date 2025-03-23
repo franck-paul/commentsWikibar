@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @brief commentsWikibar, a plugin for Dotclear 2
  *
@@ -43,7 +44,7 @@ class Install extends Process
                 }
 
                 // Change settings names (remove commentswikibar_ prefix in them)
-                $rename = static function (string $name, BlogWorkspaceInterface $settings) : void {
+                $rename = static function (string $name, BlogWorkspaceInterface $settings): void {
                     if ($settings->settingExists('commentswikibar_' . $name, true)) {
                         $settings->rename('commentswikibar_' . $name, $name);
                     }

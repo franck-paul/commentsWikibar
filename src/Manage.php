@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @brief commentsWikibar, a plugin for Dotclear 2
  *
@@ -179,6 +180,8 @@ class Manage extends Process
                                     ->items([(new Text('span', __('Inline quote')))->class('sr-only')]),
                                 (new Para(null, 'button'))->disabled(true)->class('jstb_code')->title(__('Code'))
                                     ->items([(new Text('span', __('Code')))->class('sr-only')]),
+                                (new Para(null, 'button'))->disabled(true)->class('jstb_foreign')->title(__('Foreign text'))
+                                    ->items([(new Text('span', __('Foreign text')))->class('sr-only')]),
                             ]),
                         ]),
                         (new Para())->items([

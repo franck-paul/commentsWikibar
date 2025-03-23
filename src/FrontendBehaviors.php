@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @brief commentsWikibar, a plugin for Dotclear 2
  *
@@ -46,6 +47,7 @@ class FrontendBehaviors
                 $wiki->setOpt('active_del', 0);
                 $wiki->setOpt('active_q', 0);
                 $wiki->setOpt('active_code', 0);
+                $wiki->setOpt('active_i', 0);
             }
 
             if ($settings->no_br) {
@@ -135,18 +137,19 @@ class FrontendBehaviors
                     'legend_msg' => __('You can use the following shortcuts to format your text.'),
                     'label'      => __('Text formatting'),
                     'elements'   => [
-                        'strong' => ['title' => __('Strong emphasis')],
-                        'em'     => ['title' => __('Emphasis')],
-                        'ins'    => ['title' => __('Inserted')],
-                        'del'    => ['title' => __('Deleted')],
-                        'quote'  => ['title' => __('Inline quote')],
-                        'code'   => ['title' => __('Code')],
-                        'br'     => ['title' => __('Line break')],
-                        'ul'     => ['title' => __('Unordered list')],
-                        'ol'     => ['title' => __('Ordered list')],
-                        'pre'    => ['title' => __('Preformatted')],
-                        'bquote' => ['title' => __('Block quote')],
-                        'link'   => [
+                        'strong'  => ['title' => __('Strong emphasis')],
+                        'em'      => ['title' => __('Emphasis')],
+                        'ins'     => ['title' => __('Inserted')],
+                        'del'     => ['title' => __('Deleted')],
+                        'quote'   => ['title' => __('Inline quote')],
+                        'code'    => ['title' => __('Code')],
+                        'foreign' => ['title' => __('Foreign text')],
+                        'br'      => ['title' => __('Line break')],
+                        'ul'      => ['title' => __('Unordered list')],
+                        'ol'      => ['title' => __('Ordered list')],
+                        'pre'     => ['title' => __('Preformatted')],
+                        'bquote'  => ['title' => __('Block quote')],
+                        'link'    => [
                             'title'           => __('Link'),
                             'href_prompt'     => __('URL?'),
                             'hreflang_prompt' => __('Language?'),
