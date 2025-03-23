@@ -10,9 +10,10 @@
 
 use Dotclear\Helper\L10n;
 
-L10n::$locales['Adds a formatting toolbar when public comments use the wiki syntax'] = 'Ajoute une barre d\'outils de formatage pour les commentaires publics utilisant la syntaxe wiki';
 L10n::$locales['Comments Wikibar'] = 'Wikibarre';
+L10n::$locales['Adds a formatting toolbar when public comments use the wiki syntax'] = 'Ajoute une barre d\'outils de formatage pour les commentaires publics utilisant la syntaxe wiki';
 L10n::$locales['Text formatting'] = 'Formatage de texte';
+L10n::$locales['Foreign text'] = 'Locution étrangère';
 L10n::$locales['Preformatted'] = 'Texte préformaté';
 L10n::$locales['Block quote'] = 'Bloc de citation';
 L10n::$locales['Title?'] = 'Titre ?';
