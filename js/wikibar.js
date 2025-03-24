@@ -2,7 +2,7 @@
 // support of ARIA toolbar design pattern largely inspired from https://www.w3.org/TR/wai-aria-practices-1.1/examples/toolbar/toolbar.html
 
 /* Dotclear common object */
-dotclear = dotclear || {};
+var dotclear = dotclear || {};
 
 dotclear.resizeTimer = undefined;
 dotclear.prevWidth = 0;
@@ -100,11 +100,12 @@ dotclear.jsButton = class {
     }
   }
   mouseOver(event) {
-    if (event.target.nodeName === 'BUTTON') {
-      this.toolbarNode.hideAllTooltips();
-      event.target.firstChild.classList.remove('sr-only');
-      event.target.classList.add('hovered');
+    if (event.target.nodeName !== 'BUTTON') {
+      return;
     }
+    this.toolbarNode.hideAllTooltips();
+    event.target.firstChild.classList.remove('sr-only');
+    event.target.classList.add('hovered');
   }
 };
 
@@ -277,32 +278,30 @@ dotclear.jsToolBar = class {
         fn: {
           wiki() {
             const lang = this.elements.foreign.prompt.call(this);
-            if (lang) {
-              if (lang.code) {
-                const stag = '££';
-                const etag = `|${lang.code}££`;
-                this.encloseSelection(stag, etag);
-              }
+            if (!lang.code) {
+              return;
             }
+            const stag = '££';
+            const etag = `|${lang.code}££`;
+            this.encloseSelection(stag, etag);
           },
           markdown() {
             const lang = this.elements.foreign.prompt.call(this);
-            if (lang) {
-              if (lang.code) {
-                const stag = `<i lang="${lang.code}">`;
-                const etag = '</i>';
-                this.encloseSelection(stag, etag);
-              }
+            if (!lang.code) {
+              return;
             }
+            const stag = `<i lang="${lang.code}">`;
+            const etag = '</i>';
+            this.encloseSelection(stag, etag);
           },
         },
         lang_prompt: 'Language of this text:',
         default_lang: '',
         prompt(lang = '') {
-          lang = lang || this.elements.foreign.default_lang;
-          lang = window.prompt(this.elements.foreign.lang_prompt, lang);
+          let language = lang || this.elements.foreign.default_lang;
+          language = window.prompt(this.elements.foreign.lang_prompt, language);
           return {
-            code: lang,
+            code: language,
           };
         },
       },
@@ -323,14 +322,10 @@ dotclear.jsToolBar = class {
         title: 'Unordered list',
         fn: {
           wiki() {
-            this.encloseSelection('', '', (selection) => {
-              return `* ${selection.replace(/\r/g, '').replace(/\n/g, '\n* ')}`;
-            });
+            this.encloseSelection('', '', (selection) => `* ${selection.replace(/\r/g, '').replace(/\n/g, '\n* ')}`);
           },
           markdown() {
-            this.encloseSelection('', '', (selection) => {
-              return `* ${selection.replace(/\r/g, '').replace(/\n/g, '\n* ')}`;
-            });
+            this.encloseSelection('', '', (selection) => `* ${selection.replace(/\r/g, '').replace(/\n/g, '\n* ')}`);
           },
         },
       },
@@ -339,14 +334,10 @@ dotclear.jsToolBar = class {
         title: 'Ordered list',
         fn: {
           wiki() {
-            this.encloseSelection('', '', (selection) => {
-              return `# ${selection.replace(/\r/g, '').replace(/\n/g, '\n# ')}`;
-            });
+            this.encloseSelection('', '', (selection) => `# ${selection.replace(/\r/g, '').replace(/\n/g, '\n# ')}`);
           },
           markdown() {
-            this.encloseSelection('', '', (selection) => {
-              return `1. ${selection.replace(/\r/g, '').replace(/\n/g, '\n1. ')}`;
-            });
+            this.encloseSelection('', '', (selection) => `1. ${selection.replace(/\r/g, '').replace(/\n/g, '\n1. ')}`);
           },
         },
       },
@@ -355,14 +346,10 @@ dotclear.jsToolBar = class {
         title: 'Preformatted',
         fn: {
           wiki() {
-            this.encloseSelection('', '', (selection) => {
-              return ` ${selection.replace(/\r/g, '').replace(/\n/g, '\n ')}`;
-            });
+            this.encloseSelection('', '', (selection) => ` ${selection.replace(/\r/g, '').replace(/\n/g, '\n ')}`);
           },
           markdown() {
-            this.encloseSelection('\n', '', (selection) => {
-              return `    ${selection.replace(/\r/g, '').replace(/\n/g, '\n    ')}`;
-            });
+            this.encloseSelection('\n', '', (selection) => `    ${selection.replace(/\r/g, '').replace(/\n/g, '\n    ')}`);
           },
         },
       },
@@ -371,14 +358,10 @@ dotclear.jsToolBar = class {
         title: 'Block quote',
         fn: {
           wiki() {
-            this.encloseSelection('', '', (selection) => {
-              return `> ${selection.replace(/\r/g, '').replace(/\n/g, '\n> ')}`;
-            });
+            this.encloseSelection('', '', (selection) => `> ${selection.replace(/\r/g, '').replace(/\n/g, '\n> ')}`);
           },
           markdown() {
-            this.encloseSelection('\n', '', (selection) => {
-              return `> ${selection.replace(/\r/g, '').replace(/\n/g, '\n> ')}`;
-            });
+            this.encloseSelection('\n', '', (selection) => `> ${selection.replace(/\r/g, '').replace(/\n/g, '\n> ')}`);
           },
         },
       },
@@ -388,28 +371,30 @@ dotclear.jsToolBar = class {
         fn: {
           wiki() {
             const link = this.elements.link.prompt.call(this);
-            if (link) {
-              const stag = '[';
-              let etag = `|${link.href}`;
-              if (link.hreflang) {
-                etag = `${etag}|${link.hreflang}`;
-              }
-              etag = `${etag}]`;
-              this.encloseSelection(stag, etag);
+            if (!link) {
+              return;
             }
+            const stag = '[';
+            let etag = `|${link.href}`;
+            if (link.hreflang) {
+              etag = `${etag}|${link.hreflang}`;
+            }
+            etag = `${etag}]`;
+            this.encloseSelection(stag, etag);
           },
           markdown() {
             const link = this.elements.link.prompt.call(this);
-            if (link) {
-              const stag = '[';
-              let etag = `](${link.href}`;
-              if (link.title) {
-                etag = `${etag} "${link.title}"`;
-              }
-              etag = `${etag})`;
-
-              this.encloseSelection(stag, etag);
+            if (!link) {
+              return;
             }
+            const stag = '[';
+            let etag = `](${link.href}`;
+            if (link.title) {
+              etag = `${etag} "${link.title}"`;
+            }
+            etag = `${etag})`;
+
+            this.encloseSelection(stag, etag);
           },
         },
         href_prompt: 'Please give page URL:',
@@ -418,21 +403,21 @@ dotclear.jsToolBar = class {
         default_hreflang: '',
         default_title: '',
         prompt(url = '', lang = '', link_title = '') {
-          lang = lang || this.elements.link.default_hreflang;
-          link_title = link_title || this.elements.link.default_title;
-          url = window.prompt(this.elements.link.href_prompt, url);
-          if (!url) {
-            return false;
+          let hreflang = lang || this.elements.link.default_hreflang;
+          let title = link_title || this.elements.link.default_title;
+          const href = window.prompt(this.elements.link.href_prompt, url);
+          if (!href) {
+            return null;
           }
           if (this.mode === 'markdown') {
-            link_title = window.prompt(this.elements.link.title_prompt, link_title);
+            title = window.prompt(this.elements.link.title_prompt, title);
           } else {
-            lang = window.prompt(this.elements.link.hreflang_prompt, lang);
+            hreflang = window.prompt(this.elements.link.hreflang_prompt, hreflang);
           }
           return {
-            href: this.stripBaseURL(url),
-            hreflang: lang,
-            title: link_title,
+            href: this.stripBaseURL(href),
+            hreflang,
+            title,
           };
         },
       },
@@ -534,12 +519,13 @@ dotclear.jsToolBar = class {
   }
 
   keyDown(event) {
-    if (event.keyCode === 27) {
-      //ESC
-      this.hideAllTooltips();
-      event.stopPropagation();
-      event.preventDefault();
+    if (event.keyCode !== 27) {
+      return;
     }
+    //ESC
+    this.hideAllTooltips();
+    event.stopPropagation();
+    event.preventDefault();
   }
 
   singleTag(stag = null, etag = stag) {
@@ -565,16 +551,17 @@ dotclear.jsToolBar = class {
       position = this.textarea.scrollTop;
       selection = this.textarea.value.substring(selstart, selend);
     }
+    let endtag = etag;
     if (selection.match(/ $/)) {
       selection = selection.substring(0, selection.length - 1);
-      etag += ' ';
+      endtag += ' ';
     }
     if (typeof fn === 'function') {
       enclosed = selection ? fn.call(this, selection) : fn('');
     } else {
-      enclosed = selection ? selection : '';
+      enclosed = selection || '';
     }
-    text = stag + enclosed + etag;
+    text = stag + enclosed + endtag;
     if (typeof document.selection !== 'undefined') {
       document.selection.createRange().text = text;
       this.textarea.caretPos -= etag.length;
