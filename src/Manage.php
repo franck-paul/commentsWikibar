@@ -25,6 +25,7 @@ use Dotclear\Helper\Html\Form\Form;
 use Dotclear\Helper\Html\Form\Input;
 use Dotclear\Helper\Html\Form\Label;
 use Dotclear\Helper\Html\Form\Para;
+use Dotclear\Helper\Html\Form\Span;
 use Dotclear\Helper\Html\Form\Submit;
 use Dotclear\Helper\Html\Form\Text;
 use Dotclear\Helper\Html\Html;
@@ -169,19 +170,19 @@ class Manage extends Process
                                 ->label((new Label(__('Disable characters format'), Label::INSIDE_TEXT_AFTER))),
                             (new Para(null, 'span'))->class('jstElements')->extra('aria-hidden="true"')->items([
                                 (new Para(null, 'button'))->disabled(true)->class('jstb_strong')->title(__('Strong emphasis'))
-                                    ->items([(new Text('span', __('Strong emphasis')))->class('sr-only')]),
+                                    ->items([(new Span(__('Strong emphasis')))->class('sr-only')]),
                                 (new Para(null, 'button'))->disabled(true)->class('jstb_em')->title(__('Emphasis'))
-                                    ->items([(new Text('span', __('Emphasis')))->class('sr-only')]),
+                                    ->items([(new Span(__('Emphasis')))->class('sr-only')]),
                                 (new Para(null, 'button'))->disabled(true)->class('jstb_ins')->title(__('Inserted'))
-                                    ->items([(new Text('span', __('Inserted')))->class('sr-only')]),
+                                    ->items([(new Span(__('Inserted')))->class('sr-only')]),
                                 (new Para(null, 'button'))->disabled(true)->class('jstb_del')->title(__('Deleted'))
-                                    ->items([(new Text('span', __('Deleted')))->class('sr-only')]),
+                                    ->items([(new Span(__('Deleted')))->class('sr-only')]),
                                 (new Para(null, 'button'))->disabled(true)->class('jstb_quote')->title(__('Inline quote'))
-                                    ->items([(new Text('span', __('Inline quote')))->class('sr-only')]),
+                                    ->items([(new Span(__('Inline quote')))->class('sr-only')]),
                                 (new Para(null, 'button'))->disabled(true)->class('jstb_code')->title(__('Code'))
-                                    ->items([(new Text('span', __('Code')))->class('sr-only')]),
+                                    ->items([(new Span(__('Code')))->class('sr-only')]),
                                 (new Para(null, 'button'))->disabled(true)->class('jstb_foreign')->title(__('Foreign text'))
-                                    ->items([(new Text('span', __('Foreign text')))->class('sr-only')]),
+                                    ->items([(new Span(__('Foreign text')))->class('sr-only')]),
                             ]),
                         ]),
                         (new Para())->items([
@@ -190,7 +191,7 @@ class Manage extends Process
                                 ->label((new Label(__('Disable breakline'), Label::INSIDE_TEXT_AFTER))),
                             (new Para(null, 'span'))->class('jstElements')->extra('aria-hidden="true"')->items([
                                 (new Para(null, 'button'))->disabled(true)->class('jstb_br')->title(__('Line break'))
-                                    ->items([(new Text('span', __('Line break')))->class('sr-only')]),
+                                    ->items([(new Span(__('Line break')))->class('sr-only')]),
                             ]),
                         ]),
                         (new Para())->items([
@@ -199,9 +200,9 @@ class Manage extends Process
                                 ->label((new Label(__('Disable list'), Label::INSIDE_TEXT_AFTER))),
                             (new Para(null, 'span'))->class('jstElements')->extra('aria-hidden="true"')->items([
                                 (new Para(null, 'button'))->disabled(true)->class('jstb_ul')->title(__('Unordered list'))
-                                    ->items([(new Text('span', __('Unordered list')))->class('sr-only')]),
+                                    ->items([(new Span(__('Unordered list')))->class('sr-only')]),
                                 (new Para(null, 'button'))->disabled(true)->class('jstb_ol')->title(__('Ordered list'))
-                                    ->items([(new Text('span', __('Ordered list')))->class('sr-only')]),
+                                    ->items([(new Span(__('Ordered list')))->class('sr-only')]),
                             ]),
                         ]),
                         (new Para())->items([
@@ -210,7 +211,7 @@ class Manage extends Process
                                 ->label((new Label(__('Disable preformatted text'), Label::INSIDE_TEXT_AFTER))),
                             (new Para(null, 'span'))->class('jstElements')->extra('aria-hidden="true"')->items([
                                 (new Para(null, 'button'))->disabled(true)->class('jstb_pre')->title(__('Preformatted'))
-                                    ->items([(new Text('span', __('Preformatted')))->class('sr-only')]),
+                                    ->items([(new Span(__('Preformatted')))->class('sr-only')]),
                             ]),
                         ]),
                         (new Para())->items([
@@ -219,7 +220,7 @@ class Manage extends Process
                                 ->label((new Label(__('Disable blockquote'), Label::INSIDE_TEXT_AFTER))),
                             (new Para(null, 'span'))->class('jstElements')->extra('aria-hidden="true"')->items([
                                 (new Para(null, 'button'))->disabled(true)->class('jstb_bquote')->title(__('Block quote'))
-                                    ->items([(new Text('span', __('Block quote')))->class('sr-only')]),
+                                    ->items([(new Span(__('Block quote')))->class('sr-only')]),
                             ]),
                         ]),
                         (new Para())->items([
@@ -228,7 +229,7 @@ class Manage extends Process
                                 ->label((new Label(__('Disable link'), Label::INSIDE_TEXT_AFTER))),
                             (new Para(null, 'span'))->class('jstElements')->extra('aria-hidden="true"')->items([
                                 (new Para(null, 'button'))->disabled(true)->class('jstb_link')->title(__('Link'))
-                                    ->items([(new Text('span', __('Link')))->class('sr-only')]),
+                                    ->items([(new Span(__('Link')))->class('sr-only')]),
                             ]),
                         ]),
                     ]),
