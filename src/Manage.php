@@ -168,69 +168,87 @@ class Manage extends Process
                             (new Checkbox('no_format', $no_format))
                                 ->value(1)
                                 ->label((new Label(__('Disable characters format'), Label::INSIDE_TEXT_AFTER))),
-                            (new Para(null, 'span'))->class('jstElements')->extra('aria-hidden="true"')->items([
-                                (new Para(null, 'button'))->disabled(true)->class('jstb_strong')->title(__('Strong emphasis'))
-                                    ->items([(new Span(__('Strong emphasis')))->class('sr-only')]),
-                                (new Para(null, 'button'))->disabled(true)->class('jstb_em')->title(__('Emphasis'))
-                                    ->items([(new Span(__('Emphasis')))->class('sr-only')]),
-                                (new Para(null, 'button'))->disabled(true)->class('jstb_ins')->title(__('Inserted'))
-                                    ->items([(new Span(__('Inserted')))->class('sr-only')]),
-                                (new Para(null, 'button'))->disabled(true)->class('jstb_del')->title(__('Deleted'))
-                                    ->items([(new Span(__('Deleted')))->class('sr-only')]),
-                                (new Para(null, 'button'))->disabled(true)->class('jstb_quote')->title(__('Inline quote'))
-                                    ->items([(new Span(__('Inline quote')))->class('sr-only')]),
-                                (new Para(null, 'button'))->disabled(true)->class('jstb_code')->title(__('Code'))
-                                    ->items([(new Span(__('Code')))->class('sr-only')]),
-                                (new Para(null, 'button'))->disabled(true)->class('jstb_foreign')->title(__('Foreign text'))
-                                    ->items([(new Span(__('Foreign text')))->class('sr-only')]),
-                            ]),
+                            (new Span())
+                                ->class('jstElements')
+                                ->extra('aria-hidden="true"')
+                                ->items([
+                                    (new Para(null, 'button'))->disabled(true)->class('jstb_strong')->title(__('Strong emphasis'))
+                                        ->items([(new Span(__('Strong emphasis')))->class('sr-only')]),
+                                    (new Para(null, 'button'))->disabled(true)->class('jstb_em')->title(__('Emphasis'))
+                                        ->items([(new Span(__('Emphasis')))->class('sr-only')]),
+                                    (new Para(null, 'button'))->disabled(true)->class('jstb_ins')->title(__('Inserted'))
+                                        ->items([(new Span(__('Inserted')))->class('sr-only')]),
+                                    (new Para(null, 'button'))->disabled(true)->class('jstb_del')->title(__('Deleted'))
+                                        ->items([(new Span(__('Deleted')))->class('sr-only')]),
+                                    (new Para(null, 'button'))->disabled(true)->class('jstb_quote')->title(__('Inline quote'))
+                                        ->items([(new Span(__('Inline quote')))->class('sr-only')]),
+                                    (new Para(null, 'button'))->disabled(true)->class('jstb_code')->title(__('Code'))
+                                        ->items([(new Span(__('Code')))->class('sr-only')]),
+                                    (new Para(null, 'button'))->disabled(true)->class('jstb_foreign')->title(__('Foreign text'))
+                                        ->items([(new Span(__('Foreign text')))->class('sr-only')]),
+                                ]),
                         ]),
                         (new Para())->items([
                             (new Checkbox('no_br', $no_br))
                                 ->value(1)
                                 ->label((new Label(__('Disable breakline'), Label::INSIDE_TEXT_AFTER))),
-                            (new Para(null, 'span'))->class('jstElements')->extra('aria-hidden="true"')->items([
-                                (new Para(null, 'button'))->disabled(true)->class('jstb_br')->title(__('Line break'))
-                                    ->items([(new Span(__('Line break')))->class('sr-only')]),
-                            ]),
+                            (new Span())
+                                ->class('jstElements')
+                                ->extra('aria-hidden="true"')
+                                ->items([
+                                    (new Para(null, 'button'))->disabled(true)->class('jstb_br')->title(__('Line break'))
+                                        ->items([(new Span(__('Line break')))->class('sr-only')]),
+                                ]),
                         ]),
                         (new Para())->items([
                             (new Checkbox('no_list', $no_list))
                                 ->value(1)
                                 ->label((new Label(__('Disable list'), Label::INSIDE_TEXT_AFTER))),
-                            (new Para(null, 'span'))->class('jstElements')->extra('aria-hidden="true"')->items([
-                                (new Para(null, 'button'))->disabled(true)->class('jstb_ul')->title(__('Unordered list'))
-                                    ->items([(new Span(__('Unordered list')))->class('sr-only')]),
-                                (new Para(null, 'button'))->disabled(true)->class('jstb_ol')->title(__('Ordered list'))
-                                    ->items([(new Span(__('Ordered list')))->class('sr-only')]),
-                            ]),
+                            (new Span())
+                                ->class('jstElements')
+                                ->extra('aria-hidden="true"')
+                                ->items([
+                                    (new Para(null, 'button'))->disabled(true)->class('jstb_ul')->title(__('Unordered list'))
+                                        ->items([(new Span(__('Unordered list')))->class('sr-only')]),
+                                    (new Para(null, 'button'))->disabled(true)->class('jstb_ol')->title(__('Ordered list'))
+                                        ->items([(new Span(__('Ordered list')))->class('sr-only')]),
+                                ]),
                         ]),
                         (new Para())->items([
                             (new Checkbox('no_pre', $no_pre))
                                 ->value(1)
                                 ->label((new Label(__('Disable preformatted text'), Label::INSIDE_TEXT_AFTER))),
-                            (new Para(null, 'span'))->class('jstElements')->extra('aria-hidden="true"')->items([
-                                (new Para(null, 'button'))->disabled(true)->class('jstb_pre')->title(__('Preformatted'))
-                                    ->items([(new Span(__('Preformatted')))->class('sr-only')]),
-                            ]),
+                            (new Span())
+                                ->class('jstElements')
+                                ->extra('aria-hidden="true"')
+                                ->items([
+                                    (new Para(null, 'button'))->disabled(true)->class('jstb_pre')->title(__('Preformatted'))
+                                        ->items([(new Span(__('Preformatted')))->class('sr-only')]),
+                                ]),
                         ]),
                         (new Para())->items([
                             (new Checkbox('no_quote', $no_quote))
                                 ->value(1)
                                 ->label((new Label(__('Disable blockquote'), Label::INSIDE_TEXT_AFTER))),
-                            (new Para(null, 'span'))->class('jstElements')->extra('aria-hidden="true"')->items([
-                                (new Para(null, 'button'))->disabled(true)->class('jstb_bquote')->title(__('Block quote'))
-                                    ->items([(new Span(__('Block quote')))->class('sr-only')]),
-                            ]),
+                            (new Span())
+                                ->class('jstElements')
+                                ->extra('aria-hidden="true"')
+                                ->items([
+                                    (new Para(null, 'button'))->disabled(true)->class('jstb_bquote')->title(__('Block quote'))
+                                        ->items([(new Span(__('Block quote')))->class('sr-only')]),
+                                ]),
                         ]),
                         (new Para())->items([
                             (new Checkbox('no_url', $no_url))
                                 ->value(1)
                                 ->label((new Label(__('Disable link'), Label::INSIDE_TEXT_AFTER))),
-                            (new Para(null, 'span'))->class('jstElements')->extra('aria-hidden="true"')->items([
-                                (new Para(null, 'button'))->disabled(true)->class('jstb_link')->title(__('Link'))
-                                    ->items([(new Span(__('Link')))->class('sr-only')]),
-                            ]),
+                            (new Span())
+                                ->class('jstElements')
+                                ->extra('aria-hidden="true"')
+                                ->items([
+                                    (new Para(null, 'button'))->disabled(true)->class('jstb_link')->title(__('Link'))
+                                        ->items([(new Span(__('Link')))->class('sr-only')]),
+                                ]),
                         ]),
                     ]),
 
