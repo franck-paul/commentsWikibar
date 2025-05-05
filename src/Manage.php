@@ -19,6 +19,7 @@ use Dotclear\App;
 use Dotclear\Core\Backend\Notices;
 use Dotclear\Core\Backend\Page;
 use Dotclear\Core\Process;
+use Dotclear\Helper\Html\Form\Btn;
 use Dotclear\Helper\Html\Form\Checkbox;
 use Dotclear\Helper\Html\Form\Div;
 use Dotclear\Helper\Html\Form\Form;
@@ -172,20 +173,41 @@ class Manage extends Process
                                 ->class('jstElements')
                                 ->extra('aria-hidden="true"')
                                 ->items([
-                                    (new Para(null, 'button'))->disabled(true)->class('jstb_strong')->title(__('Strong emphasis'))
-                                        ->items([(new Span(__('Strong emphasis')))->class('sr-only')]),
-                                    (new Para(null, 'button'))->disabled(true)->class('jstb_em')->title(__('Emphasis'))
-                                        ->items([(new Span(__('Emphasis')))->class('sr-only')]),
-                                    (new Para(null, 'button'))->disabled(true)->class('jstb_ins')->title(__('Inserted'))
-                                        ->items([(new Span(__('Inserted')))->class('sr-only')]),
-                                    (new Para(null, 'button'))->disabled(true)->class('jstb_del')->title(__('Deleted'))
-                                        ->items([(new Span(__('Deleted')))->class('sr-only')]),
-                                    (new Para(null, 'button'))->disabled(true)->class('jstb_quote')->title(__('Inline quote'))
-                                        ->items([(new Span(__('Inline quote')))->class('sr-only')]),
-                                    (new Para(null, 'button'))->disabled(true)->class('jstb_code')->title(__('Code'))
-                                        ->items([(new Span(__('Code')))->class('sr-only')]),
-                                    (new Para(null, 'button'))->disabled(true)->class('jstb_foreign')->title(__('Foreign text'))
-                                        ->items([(new Span(__('Foreign text')))->class('sr-only')]),
+                                    (new Btn())
+                                        ->disabled(true)
+                                        ->class('jstb_strong')
+                                        ->title(__('Strong emphasis'))
+                                        ->text((new Span(__('Strong emphasis')))->class('sr-only')->render()),
+                                    (new Btn())
+                                        ->disabled(true)
+                                        ->class('jstb_em')
+                                        ->title(__('Emphasis'))
+                                        ->text((new Span(__('Emphasis')))->class('sr-only')->render()),
+                                    (new Btn())
+                                        ->disabled(true)
+                                        ->class('jstb_ins')
+                                        ->title(__('Inserted'))
+                                        ->text((new Span(__('Inserted')))->class('sr-only')->render()),
+                                    (new Btn())
+                                        ->disabled(true)
+                                        ->class('jstb_del')
+                                        ->title(__('Deleted'))
+                                        ->text((new Span(__('Deleted')))->class('sr-only')->render()),
+                                    (new Btn())
+                                        ->disabled(true)
+                                        ->class('jstb_quote')
+                                        ->title(__('Inline quote'))
+                                        ->text((new Span(__('Inline quote')))->class('sr-only')->render()),
+                                    (new Btn())
+                                        ->disabled(true)
+                                        ->class('jstb_code')
+                                        ->title(__('Code'))
+                                        ->text((new Span(__('Code')))->class('sr-only')->render()),
+                                    (new Btn())
+                                        ->disabled(true)
+                                        ->class('jstb_foreign')
+                                        ->title(__('Foreign text'))
+                                        ->text((new Span(__('Foreign text')))->class('sr-only')->render()),
                                 ]),
                         ]),
                         (new Para())->items([
@@ -196,8 +218,11 @@ class Manage extends Process
                                 ->class('jstElements')
                                 ->extra('aria-hidden="true"')
                                 ->items([
-                                    (new Para(null, 'button'))->disabled(true)->class('jstb_br')->title(__('Line break'))
-                                        ->items([(new Span(__('Line break')))->class('sr-only')]),
+                                    (new Btn())
+                                        ->disabled(true)
+                                        ->class('jstb_br')
+                                        ->title(__('Line break'))
+                                        ->text((new Span(__('Line break')))->class('sr-only')->render()),
                                 ]),
                         ]),
                         (new Para())->items([
@@ -208,10 +233,16 @@ class Manage extends Process
                                 ->class('jstElements')
                                 ->extra('aria-hidden="true"')
                                 ->items([
-                                    (new Para(null, 'button'))->disabled(true)->class('jstb_ul')->title(__('Unordered list'))
-                                        ->items([(new Span(__('Unordered list')))->class('sr-only')]),
-                                    (new Para(null, 'button'))->disabled(true)->class('jstb_ol')->title(__('Ordered list'))
-                                        ->items([(new Span(__('Ordered list')))->class('sr-only')]),
+                                    (new Btn())
+                                        ->disabled(true)
+                                        ->class('jstb_ul')
+                                        ->title(__('Unordered list'))
+                                        ->text((new Span(__('Unordered list')))->class('sr-only')->render()),
+                                    (new Btn())
+                                        ->disabled(true)
+                                        ->class('jstb_ol')
+                                        ->title(__('Ordered list'))
+                                        ->text((new Span(__('Ordered list')))->class('sr-only')->render()),
                                 ]),
                         ]),
                         (new Para())->items([
@@ -222,8 +253,11 @@ class Manage extends Process
                                 ->class('jstElements')
                                 ->extra('aria-hidden="true"')
                                 ->items([
-                                    (new Para(null, 'button'))->disabled(true)->class('jstb_pre')->title(__('Preformatted'))
-                                        ->items([(new Span(__('Preformatted')))->class('sr-only')]),
+                                    (new Btn())
+                                        ->disabled(true)
+                                        ->class('jstb_pre')
+                                        ->title(__('Preformatted'))
+                                        ->text((new Span(__('Preformatted')))->class('sr-only')->render()),
                                 ]),
                         ]),
                         (new Para())->items([
@@ -234,8 +268,11 @@ class Manage extends Process
                                 ->class('jstElements')
                                 ->extra('aria-hidden="true"')
                                 ->items([
-                                    (new Para(null, 'button'))->disabled(true)->class('jstb_bquote')->title(__('Block quote'))
-                                        ->items([(new Span(__('Block quote')))->class('sr-only')]),
+                                    (new Btn())
+                                        ->disabled(true)
+                                        ->class('jstb_bquote')
+                                        ->title(__('Block quote'))
+                                        ->text((new Span(__('Block quote')))->class('sr-only')->render()),
                                 ]),
                         ]),
                         (new Para())->items([
@@ -246,8 +283,11 @@ class Manage extends Process
                                 ->class('jstElements')
                                 ->extra('aria-hidden="true"')
                                 ->items([
-                                    (new Para(null, 'button'))->disabled(true)->class('jstb_link')->title(__('Link'))
-                                        ->items([(new Span(__('Link')))->class('sr-only')]),
+                                    (new Btn())
+                                        ->disabled(true)
+                                        ->class('jstb_link')
+                                        ->title(__('Link'))
+                                        ->text((new Span(__('Link')))->class('sr-only')->render()),
                                 ]),
                         ]),
                     ]),
@@ -258,58 +298,68 @@ class Manage extends Process
                     ->title(__('Advanced Options'))
                     ->items([
                         (new Text('h3', __('CSS inclusion'))),
-                        (new Para())->items([
-                            (new Checkbox('wb_add_css', $wb_add_css))
-                                ->value(1)
-                                ->label((new Label(__('Include CSS') . ' ' . __('(recommended)'), Label::INSIDE_TEXT_AFTER))),
-                        ]),
-                        (new Para())->items([
-                            (new Input('custom_css'))
-                                ->size(40)
-                                ->maxlength(128)
-                                ->value($custom_css)
-                                ->label((new Label(__('Use custom CSS:'), Label::OUTSIDE_TEXT_BEFORE))),
-                        ]),
-                        (new Para())->class('form-note')->items([
-                            (new Text(
-                                null,
-                                __('You can use a custom CSS by providing its location.') . '<br>' .
-                                __('A location beginning with a / is treated as absolute, else it is treated as relative to the blog\'s current theme URL'),
-                            )),
-                        ]),
+                        (new Para())
+                            ->items([
+                                (new Checkbox('wb_add_css', $wb_add_css))
+                                    ->value(1)
+                                    ->label((new Label(__('Include CSS') . ' ' . __('(recommended)'), Label::INSIDE_TEXT_AFTER))),
+                            ]),
+                        (new Para())
+                            ->items([
+                                (new Input('custom_css'))
+                                    ->size(40)
+                                    ->maxlength(128)
+                                    ->value($custom_css)
+                                    ->label((new Label(__('Use custom CSS:'), Label::OUTSIDE_TEXT_BEFORE))),
+                            ]),
+                        (new Para())
+                            ->class('form-note')
+                            ->items([
+                                (new Text(
+                                    null,
+                                    __('You can use a custom CSS by providing its location.') . '<br>' .
+                                    __('A location beginning with a / is treated as absolute, else it is treated as relative to the blog\'s current theme URL'),
+                                )),
+                            ]),
                         (new Text('h3', __('Javascript inclusion'))),
-                        (new Para())->items([
-                            (new Checkbox('wb_add_jslib', $wb_add_jslib))
-                                ->value(1)
-                                ->label((new Label(__('Include JS library') . ' ' . __('(recommended)'), Label::INSIDE_TEXT_AFTER))),
-                        ]),
-                        (new Para())->items([
-                            (new Input('custom_jslib'))
-                                ->size(40)
-                                ->maxlength(128)
-                                ->value($custom_jslib)
-                                ->label((new Label(__('Use custom JS library:'), Label::OUTSIDE_TEXT_BEFORE))),
-                        ]),
-                        (new Para())->class('form-note')->items([
-                            (new Text(
-                                null,
-                                __('You can use a custom JS library by providing its location.') . '<br>' .
-                                __('A location beginning with a / is treated as absolute, else it is treated as relative to the blog\'s current theme URL'),
-                            )),
-                        ]),
-                        (new Para())->items([
-                            (new Checkbox('wb_add_jsglue', $wb_add_jsglue))
-                                ->value(1)
-                                ->label((new Label(__('Include JS bootstrap') . ' ' . __('(recommended)'), Label::INSIDE_TEXT_AFTER))),
-                        ]),
+                        (new Para())
+                            ->items([
+                                (new Checkbox('wb_add_jslib', $wb_add_jslib))
+                                    ->value(1)
+                                    ->label((new Label(__('Include JS library') . ' ' . __('(recommended)'), Label::INSIDE_TEXT_AFTER))),
+                            ]),
+                        (new Para())
+                            ->items([
+                                (new Input('custom_jslib'))
+                                    ->size(40)
+                                    ->maxlength(128)
+                                    ->value($custom_jslib)
+                                    ->label((new Label(__('Use custom JS library:'), Label::OUTSIDE_TEXT_BEFORE))),
+                            ]),
+                        (new Para())
+                            ->class('form-note')
+                            ->items([
+                                (new Text(
+                                    null,
+                                    __('You can use a custom JS library by providing its location.') . '<br>' .
+                                    __('A location beginning with a / is treated as absolute, else it is treated as relative to the blog\'s current theme URL'),
+                                )),
+                            ]),
+                        (new Para())
+                            ->items([
+                                (new Checkbox('wb_add_jsglue', $wb_add_jsglue))
+                                    ->value(1)
+                                    ->label((new Label(__('Include JS bootstrap') . ' ' . __('(recommended)'), Label::INSIDE_TEXT_AFTER))),
+                            ]),
                     ]),
 
                 // Actions
-                (new Para())->items([
-                    (new Submit(['saveconfig'], __('Save configuration')))
-                        ->accesskey('s'),
-                    ...My::hiddenFields(),
-                ]),
+                (new Para())
+                    ->items([
+                        (new Submit(['saveconfig'], __('Save configuration')))
+                            ->accesskey('s'),
+                        ...My::hiddenFields(),
+                    ]),
             ])
             ->render();
 
