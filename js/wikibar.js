@@ -24,14 +24,18 @@ dotclear.jsButton = class {
     if (this.className) {
       node.className = this.className;
     }
+
     const label = document.createElement('span');
     label.className = 'sr-only';
     label.appendChild(document.createTextNode(this.title));
     node.appendChild(label);
 
-    if (this.icon !== undefined) {
-      node.style.backgroundImage = `url("${this.icon}")`;
-    }
+    const icon = document.createElement('span');
+    icon.className = 'jstb_icon';
+    icon.addEventListener('mouseover', this.mouseOverChild);
+    icon.addEventListener('mouseLeave', this.mouseLeaveChild);
+    node.appendChild(icon);
+
     node.addEventListener('keydown', this.keyDown);
     node.addEventListener('focus', this.focus);
     node.addEventListener('blur', this.blur);
@@ -99,6 +103,19 @@ dotclear.jsButton = class {
       }, 800);
     }
   }
+  mouseLeaveChild(event) {
+    if (event.target.nodeName === 'SPAN') {
+      if (event.target.classList.contains('jstb_icon')) {
+        const parent = event.target.parentNode;
+        parent.classList.remove('hovered');
+        setTimeout(() => {
+          if (!parent.classList.contains('hovered')) {
+            parent.firstChild.classList.add('sr-only');
+          }
+        }, 800);
+      }
+    }
+  }
   mouseOver(event) {
     if (event.target.nodeName !== 'BUTTON') {
       return;
@@ -106,6 +123,16 @@ dotclear.jsButton = class {
     this.toolbarNode.hideAllTooltips();
     event.target.firstChild.classList.remove('sr-only');
     event.target.classList.add('hovered');
+  }
+  mouseOverChild(event) {
+    if (event.target.nodeName === 'SPAN') {
+      if (event.target.classList.contains('jstb_icon')) {
+        const parent = event.target.parentNode;
+        this.parentNode.toolbarNode.hideAllTooltips();
+        parent.firstChild.classList.remove('sr-only');
+        parent.classList.add('hovered');
+      }
+    }
   }
 };
 
@@ -458,9 +485,6 @@ dotclear.jsToolBar = class {
       return null;
     }
     const btn = new dotclear.jsButton(elt.title, elt.fn[this.mode], this, `jstb_${id}`);
-    if (elt.icon !== undefined) {
-      btn.icon = elt.icon;
-    }
     return btn;
   }
 
@@ -595,6 +619,7 @@ dotclear.jsToolBar = class {
 
   updateTooltipsPos() {
     for (const element of document.querySelectorAll('.jstElements button span')) {
+      if (element.classList.contains('jstb_icon')) continue;
       // move to the left all tooltips that are too close from the right border of the viewport
       const currentPos = element.parentNode.getBoundingClientRect().left;
       element.style.left = '0px'; // we reset all positions
@@ -614,6 +639,7 @@ dotclear.jsToolBar = class {
 
   hideAllTooltips() {
     for (const element of document.querySelectorAll('.jstElements button span')) {
+      if (element.classList.contains('jstb_icon')) continue;
       element.classList.add('sr-only');
     }
   }

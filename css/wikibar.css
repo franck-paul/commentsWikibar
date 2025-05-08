@@ -3,95 +3,104 @@
   gap: 0.125em;
   flex-wrap: wrap;
   margin: 0.125em 0 0.25em;
+
+  .sr-only {
+    clip-path: inset(100%);
+    clip: rect(1px, 1px, 1px, 1px);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+    top: -10000em;
+  }
+  .hidden {
+    visibility: hidden;
+  }
+
+  button {
+    width: 2rem;
+    height: 1.8rem;
+    padding: 0;
+    border: 1px solid light-dark(#767676, #ddd);
+    border-radius: 0.2em;
+    position: relative;
+
+    &:hover,
+    &:focus {
+      border-color: #e905a8;
+    }
+
+    span.jstb_icon {
+      display: inline-block;
+      width: 1.9rem;
+      height: 1.7rem;
+
+      /* Couleur de l'icône (modifiable à volonté) */
+      background-color: currentColor;
+
+      /* Application du masque SVG - voir ci-dessous */
+      mask-image: var(--svg);
+      mask-repeat: no-repeat;
+      mask-position: center;
+    }
+
+    span:not(.jstb_icon) {
+      position: absolute;
+      bottom: 1.75em;
+      color: light-dark(#333, #fafafa);
+      background-color: light-dark(#fff, #333);
+      padding: 0.25em;
+      box-shadow: 0px 0px 3px 0px rgba(112, 112, 112, 1);
+      white-space: nowrap;
+    }
+  }
 }
-.jstElements .sr-only {
-  clip-path: inset(100%);
-  clip: rect(1px, 1px, 1px, 1px);
-  height: 1px;
-  overflow: hidden;
-  position: absolute;
-  white-space: nowrap;
-  width: 1px;
-  top: -10000em;
-}
-.jstElements .hidden {
-  visibility: hidden;
-}
-.jstElements button {
-  color: #ddd;
-  width: 2rem;
-  height: 1.75rem;
-  padding: 0.5em;
-  border: 1px solid light-dark(#ddd, #767676);
-  border-radius: 0.2em;
-  background-color: #555;
-  background-position: 50% 50%;
-  background-repeat: no-repeat;
-  position: relative;
-  outline: 0;
-  filter: brightness(1.25);
-}
-.jstElements button:hover {
-  border-color: #e905a8;
-}
-.jstElements button span {
-  position: absolute;
-  bottom: 1.75em;
-  color: light-dark(#333, #fafafa);
-  background-color: light-dark(#fff, #333);
-  padding: 0.25em;
-  box-shadow: 0px 0px 3px 0px rgba(112, 112, 112, 1);
-  white-space: nowrap;
-}
-.jstElements button:focus {
-  border-color: #e905a8;
-}
-.jstElements button:hover,
-.jstElements button:focus,
-.jstElements button:active {
-  filter: contrast(200%);
-}
+
 .jstSpacer {
   width: 0.25em;
 }
+
 /* Buttons
 -------------------------------------------------------- */
-.jstElements button.jstb_strong {
-  background-image: url('data:image/svg+xml,<svg fill="%23ccc" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M15.6 10.79c.97-.67 1.65-1.77 1.65-2.79 0-2.26-1.75-4-4-4H7v14h7.04c2.09 0 3.71-1.7 3.71-3.79 0-1.52-.86-2.82-2.15-3.42zM10 6.5h3c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5h-3v-3zm3.5 9H10v-3h3.5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
-}
-.jstElements button.jstb_em {
-  background-image: url('data:image/svg+xml,<svg fill="%23ccc" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M10 4v3h2.21l-3.42 8H6v3h8v-3h-2.21l3.42-8H18V4z"/></svg>');
-}
-.jstElements button.jstb_ins {
-  background-image: url('data:image/svg+xml,<svg fill="%23ccc" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 17c3.31 0 6-2.69 6-6V3h-2.5v8c0 1.93-1.57 3.5-3.5 3.5S8.5 12.93 8.5 11V3H6v8c0 3.31 2.69 6 6 6zm-7 2v2h14v-2H5z"/></svg>');
-}
-.jstElements button.jstb_del {
-  background-image: url('data:image/svg+xml,<svg fill="%23ccc" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M10 19h4v-3h-4v3zM5 4v3h5v3h4V7h5V4H5zM3 14h18v-2H3v2z"/></svg>');
-}
-.jstElements button.jstb_quote {
-  background-image: url('data:image/svg+xml,<svg fill="%23ccc" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
-}
-.jstElements button.jstb_code {
-  background-image: url('data:image/svg+xml,<svg fill="%23ccc" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
-}
-.jstElements button.jstb_foreign {
-  background-image: url('data:image/svg+xml,<svg fill="%23ccc" height="24" viewBox="0 0 256 256" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h256v256H0z" fill="none"/><path d="M237.355,213.31641l-56-112a6.00047,6.00047,0,0,0-10.7334,0l-22.28735,44.5747A90.04314,90.04314,0,0,1,96.978,127.1709,101.67176,101.67176,0,0,0,125.80713,62h26.18115a6,6,0,0,0,0-12h-58V32a6,6,0,0,0-12,0V50h-58a6,6,0,0,0,0,12h89.79517a89.72725,89.72725,0,0,1-25.79932,57.21436A89.63846,89.63846,0,0,1,67.11328,85.999a6.00008,6.00008,0,0,0-11.3125,4.00391,101.595,101.595,0,0,0,23.19067,37.18164A89.5437,89.5437,0,0,1,23.98828,146a6,6,0,0,0,0,12,101.51054,101.51054,0,0,0,64.00879-22.64771,102.112,102.112,0,0,0,54.52808,22.157l-27.90357,55.80713a6.00026,6.00026,0,0,0,10.7334,5.36718L139.69678,190h72.583l14.34179,28.68359a6.00026,6.00026,0,0,0,10.7334-5.36718ZM145.69653,178l30.29175-60.584L206.28,178Z"/></svg>');
-}
-.jstElements button.jstb_br {
-  background-image: url('data:image/svg+xml,<svg fill="%23ccc" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M4 19h6v-2H4v2zM20 5H4v2h16V5zm-3 6H4v2h13.25c1.1 0 2 .9 2 2s-.9 2-2 2H15v-2l-3 3 3 3v-2h2c2.21 0 4-1.79 4-4s-1.79-4-4-4z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
-}
-.jstElements button.jstb_ul {
-  background-image: url('data:image/svg+xml,<svg fill="%23ccc" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M4 10.5c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5-.67-1.5-1.5-1.5zm0-6c-.83 0-1.5.67-1.5 1.5S3.17 7.5 4 7.5 5.5 6.83 5.5 6 4.83 4.5 4 4.5zm0 12c-.83 0-1.5.68-1.5 1.5s.68 1.5 1.5 1.5 1.5-.68 1.5-1.5-.67-1.5-1.5-1.5zM7 19h14v-2H7v2zm0-6h14v-2H7v2zm0-8v2h14V5H7z"/><path d="M0 0h24v24H0V0z" fill="none"/></svg>');
-}
-.jstElements button.jstb_ol {
-  background-image: url('data:image/svg+xml,<svg fill="%23ccc" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M2 17h2v.5H3v1h1v.5H2v1h3v-4H2v1zm1-9h1V4H2v1h1v3zm-1 3h1.8L2 13.1v.9h3v-1H3.2L5 10.9V10H2v1zm5-6v2h14V5H7zm0 14h14v-2H7v2zm0-6h14v-2H7v2z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
-}
-.jstElements button.jstb_pre {
-  background-image: url('data:image/svg+xml,<svg fill="%23ccc" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><path d="M24 24H0V0h24v24z" id="a"/></defs><clipPath id="b"><use overflow="visible" xlink:href="%23a"/></clipPath><path clip-path="url(%23b)" d="M2.5 4v3h5v12h3V7h5V4h-13zm19 5h-9v3h3v7h3v-7h3V9z"/></svg>');
-}
-.jstElements button.jstb_bquote {
-  background-image: url('data:image/svg+xml,<svg fill="%23ccc" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
-}
-.jstElements button.jstb_link {
-  background-image: url('data:image/svg+xml,<svg fill="%23ccc" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg>');
+.jstElements button {
+  &.jstb_strong {
+    --svg: url('index.php?pf=commentsWikibar/img/jstb_strong.svg');
+  }
+  &.jstb_em {
+    --svg: url('index.php?pf=commentsWikibar/img/jstb_em.svg');
+  }
+  &.jstb_ins {
+    --svg: url('index.php?pf=commentsWikibar/img/jstb_ins.svg');
+  }
+  &.jstb_del {
+    --svg: url('index.php?pf=commentsWikibar/img/jstb_del.svg');
+  }
+  &.jstb_quote {
+    --svg: url('index.php?pf=commentsWikibar/img/jstb_quote.svg');
+  }
+  &.jstb_code {
+    --svg: url('index.php?pf=commentsWikibar/img/jstb_code.svg');
+  }
+  &.jstb_foreign {
+    --svg: url('index.php?pf=commentsWikibar/img/jstb_foreign.svg');
+  }
+  &.jstb_br {
+    --svg: url('index.php?pf=commentsWikibar/img/jstb_br.svg');
+  }
+  &.jstb_ul {
+    --svg: url('index.php?pf=commentsWikibar/img/jstb_ul.svg');
+  }
+  &.jstb_ol {
+    --svg: url('index.php?pf=commentsWikibar/img/jstb_ol.svg');
+  }
+  &.jstb_pre {
+    --svg: url('index.php?pf=commentsWikibar/img/jstb_pre.svg');
+  }
+  &.jstb_bquote {
+    --svg: url('index.php?pf=commentsWikibar/img/jstb_bquote.svg');
+  }
+  &.jstb_link {
+    --svg: url('index.php?pf=commentsWikibar/img/jstb_link.svg');
+  }
 }
