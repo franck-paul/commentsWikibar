@@ -124,6 +124,8 @@ class Manage extends Process
         $custom_css    = (string) $settings->custom_css;
         $custom_jslib  = (string) $settings->custom_jslib;
 
+        $jstb_icon = (new Span())->class('jstb_icon')->render();
+
         Page::openModule(
             __('Comments Wikibar'),
             My::cssLoad('wikibar.css') .
@@ -177,37 +179,37 @@ class Manage extends Process
                                         ->disabled(true)
                                         ->class('jstb_strong')
                                         ->title(__('Strong emphasis'))
-                                        ->text((new Span(__('Strong emphasis')))->class('sr-only')->render()),
+                                        ->text((new Span(__('Strong emphasis')))->class('sr-only')->render() . $jstb_icon),
                                     (new Btn())
                                         ->disabled(true)
                                         ->class('jstb_em')
                                         ->title(__('Emphasis'))
-                                        ->text((new Span(__('Emphasis')))->class('sr-only')->render()),
+                                        ->text((new Span(__('Emphasis')))->class('sr-only')->render() . $jstb_icon),
                                     (new Btn())
                                         ->disabled(true)
                                         ->class('jstb_ins')
                                         ->title(__('Inserted'))
-                                        ->text((new Span(__('Inserted')))->class('sr-only')->render()),
+                                        ->text((new Span(__('Inserted')))->class('sr-only')->render() . $jstb_icon),
                                     (new Btn())
                                         ->disabled(true)
                                         ->class('jstb_del')
                                         ->title(__('Deleted'))
-                                        ->text((new Span(__('Deleted')))->class('sr-only')->render()),
+                                        ->text((new Span(__('Deleted')))->class('sr-only')->render() . $jstb_icon),
                                     (new Btn())
                                         ->disabled(true)
                                         ->class('jstb_quote')
                                         ->title(__('Inline quote'))
-                                        ->text((new Span(__('Inline quote')))->class('sr-only')->render()),
+                                        ->text((new Span(__('Inline quote')))->class('sr-only')->render() . $jstb_icon),
                                     (new Btn())
                                         ->disabled(true)
                                         ->class('jstb_code')
                                         ->title(__('Code'))
-                                        ->text((new Span(__('Code')))->class('sr-only')->render()),
+                                        ->text((new Span(__('Code')))->class('sr-only')->render() . $jstb_icon),
                                     (new Btn())
                                         ->disabled(true)
                                         ->class('jstb_foreign')
                                         ->title(__('Foreign text'))
-                                        ->text((new Span(__('Foreign text')))->class('sr-only')->render()),
+                                        ->text((new Span(__('Foreign text')))->class('sr-only')->render() . $jstb_icon),
                                 ]),
                         ]),
                         (new Para())->items([
@@ -222,7 +224,7 @@ class Manage extends Process
                                         ->disabled(true)
                                         ->class('jstb_br')
                                         ->title(__('Line break'))
-                                        ->text((new Span(__('Line break')))->class('sr-only')->render()),
+                                        ->text((new Span(__('Line break')))->class('sr-only')->render() . $jstb_icon),
                                 ]),
                         ]),
                         (new Para())->items([
@@ -237,12 +239,12 @@ class Manage extends Process
                                         ->disabled(true)
                                         ->class('jstb_ul')
                                         ->title(__('Unordered list'))
-                                        ->text((new Span(__('Unordered list')))->class('sr-only')->render()),
+                                        ->text((new Span(__('Unordered list')))->class('sr-only')->render() . $jstb_icon),
                                     (new Btn())
                                         ->disabled(true)
                                         ->class('jstb_ol')
                                         ->title(__('Ordered list'))
-                                        ->text((new Span(__('Ordered list')))->class('sr-only')->render()),
+                                        ->text((new Span(__('Ordered list')))->class('sr-only')->render() . $jstb_icon),
                                 ]),
                         ]),
                         (new Para())->items([
@@ -257,7 +259,7 @@ class Manage extends Process
                                         ->disabled(true)
                                         ->class('jstb_pre')
                                         ->title(__('Preformatted'))
-                                        ->text((new Span(__('Preformatted')))->class('sr-only')->render()),
+                                        ->text((new Span(__('Preformatted')))->class('sr-only')->render() . $jstb_icon),
                                 ]),
                         ]),
                         (new Para())->items([
@@ -272,7 +274,7 @@ class Manage extends Process
                                         ->disabled(true)
                                         ->class('jstb_bquote')
                                         ->title(__('Block quote'))
-                                        ->text((new Span(__('Block quote')))->class('sr-only')->render()),
+                                        ->text((new Span(__('Block quote')))->class('sr-only')->render() . $jstb_icon),
                                 ]),
                         ]),
                         (new Para())->items([
@@ -287,7 +289,7 @@ class Manage extends Process
                                         ->disabled(true)
                                         ->class('jstb_link')
                                         ->title(__('Link'))
-                                        ->text((new Span(__('Link')))->class('sr-only')->render()),
+                                        ->text((new Span(__('Link')))->class('sr-only')->render() . $jstb_icon),
                                 ]),
                         ]),
                     ]),
