@@ -57,6 +57,20 @@
   }
 }
 
+/* Hack to display masks when used in combination with the a11yConfig plugin and contrast is enforced/inverted */
+.a42-ac-inv-contrast,
+.a42-ac-high-contrast {
+  button {
+    &:hover,
+    &:focus {
+      border: #e905a8 !important;
+    }
+    span.jstb_icon {
+      background-color: currentColor !important;
+    }
+  }
+}
+
 .jstSpacer {
   width: 0.25em;
 }
