@@ -406,6 +406,12 @@ dotclear.jsToolBar = class {
             if (link.hreflang) {
               etag = `${etag}|${link.hreflang}`;
             }
+            if (link.title) {
+              if (!link.hreflang) {
+                etag = `${etag}|`;
+              }
+              etag = `${etag}|${link.title}`;
+            }
             etag = `${etag}]`;
             this.encloseSelection(stag, etag);
           },
@@ -420,7 +426,9 @@ dotclear.jsToolBar = class {
               etag = `${etag} "${link.title}"`;
             }
             etag = `${etag})`;
-
+            if (link.hreflang) {
+              etag = `${etag}{hreflang=${link.hreflang}}`;
+            }
             this.encloseSelection(stag, etag);
           },
         },
@@ -436,11 +444,8 @@ dotclear.jsToolBar = class {
           if (!href) {
             return null;
           }
-          if (this.mode === 'markdown') {
-            title = window.prompt(this.elements.link.title_prompt, title);
-          } else {
-            hreflang = window.prompt(this.elements.link.hreflang_prompt, hreflang);
-          }
+          title = window.prompt(this.elements.link.title_prompt, title);
+          hreflang = window.prompt(this.elements.link.hreflang_prompt, hreflang);
           return {
             href: this.stripBaseURL(href),
             hreflang,

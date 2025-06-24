@@ -158,6 +158,7 @@ class FrontendBehaviors
                             'href_prompt'     => __('URL?'),
                             'hreflang_prompt' => __('Language?'),
                             'title_prompt'    => __('Title?'),
+                            'default_lang'    => 'en',
                         ],
                     ],
                     'options' => [
