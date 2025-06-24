@@ -596,7 +596,7 @@ dotclear.jsToolBar = class {
       this.textarea.caretPos -= etag.length;
     } else if (typeof this.textarea.setSelectionRange !== 'undefined') {
       this.textarea.value = this.textarea.value.substring(0, selstart) + text + this.textarea.value.substring(selend);
-      if (selection) {
+      if (enclosed.length) {
         this.textarea.setSelectionRange(selstart + text.length, selstart + text.length);
       } else {
         this.textarea.setSelectionRange(selstart + stag.length, selstart + stag.length);
