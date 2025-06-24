@@ -15,9 +15,9 @@ $this->registerModule(
     'Comments Wikibar',
     'Adds a formatting toolbar when public comments use the wiki syntax',
     'Pep, Biou, Franck Paul and contributors',
-    '6.5',
+    '6.6',
     [
-        'date'        => '2025-06-24T19:37:25+0200',
+        'date'        => '2025-06-24T19:50:59+0200',
         'requires'    => [['core', '2.34']],
         'permissions' => 'My',
         'type'        => 'plugin',
