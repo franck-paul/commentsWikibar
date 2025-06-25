@@ -17,9 +17,11 @@ namespace Dotclear\Plugin\commentsWikibar;
 
 use ArrayObject;
 use Dotclear\App;
+use Dotclear\Helper\Html\Form\Input;
 use Dotclear\Helper\Html\Form\Label;
 use Dotclear\Helper\Html\Form\Option;
 use Dotclear\Helper\Html\Form\Select;
+use Dotclear\Helper\Html\Form\Url;
 use Dotclear\Helper\Html\Html;
 use Dotclear\Helper\Html\WikiToHtml;
 use Dotclear\Helper\L10n;
@@ -140,10 +142,33 @@ class FrontendBehaviors
                 foreach ($language_codes as $language_name => $language_code) {
                     $language_options[] = (new Option($language_name, $language_code))->lang($language_code);
                 }
-                $language_select = (new Select('post_lang'))
+                $language_select = (new Select('language'))
                     ->items($language_options)
                     ->translate(false)
-                    ->label(new Label(__('Language:'), Label::OUTSIDE_LABEL_BEFORE))
+                    ->label(new Label(__('Language of this text:'), Label::OL_TF))
+                ->render();
+
+                $href_input = (new Url('link_url'))
+                    ->size(35)
+                    ->maxlength(512)
+                    ->required(true)
+                    ->autocomplete('url')
+                    ->translate(false)
+                    ->label((new Label(__('Link URL:'), Label::OL_TF)))
+                ->render();
+
+                $title_input = (new Input('link_title'))
+                    ->type('text')
+                    ->size(35)
+                    ->maxlength(512)
+                    ->translate(false)
+                    ->label((new Label(__('Link title:'), Label::OL_TF)))
+                ->render();
+
+                $hreflang_select = (new Select('link_language'))
+                    ->items($language_options)
+                    ->translate(false)
+                    ->label(new Label(__('Link language:'), Label::OL_TF))
                 ->render();
 
                 echo
@@ -160,23 +185,13 @@ class FrontendBehaviors
                         'del'     => ['title' => __('Deleted')],
                         'quote'   => ['title' => __('Inline quote')],
                         'code'    => ['title' => __('Code')],
-                        'foreign' => [
-                            'title'        => __('Foreign text'),
-                            'lang_prompt'  => __('Language of this text:'),
-                            'default_lang' => 'en',
-                        ],
-                        'br'     => ['title' => __('Line break')],
-                        'ul'     => ['title' => __('Unordered list')],
-                        'ol'     => ['title' => __('Ordered list')],
-                        'pre'    => ['title' => __('Preformatted')],
-                        'bquote' => ['title' => __('Block quote')],
-                        'link'   => [
-                            'title'           => __('Link'),
-                            'href_prompt'     => __('URL?'),
-                            'hreflang_prompt' => __('Language?'),
-                            'title_prompt'    => __('Title?'),
-                            'default_lang'    => '',
-                        ],
+                        'foreign' => ['title' => __('Foreign text')],
+                        'br'      => ['title' => __('Line break')],
+                        'ul'      => ['title' => __('Unordered list')],
+                        'ol'      => ['title' => __('Ordered list')],
+                        'pre'     => ['title' => __('Preformatted')],
+                        'bquote'  => ['title' => __('Block quote')],
+                        'link'    => ['title' => __('Link')],
                     ],
                     'options' => [
                         'no_format' => $settings->no_format,
@@ -186,10 +201,21 @@ class FrontendBehaviors
                         'no_quote'  => $settings->no_quote,
                         'no_url'    => $settings->no_url,
                     ],
-                    'language_select' => [
-                        'ok'     => __('Ok'),
-                        'cancel' => __('Cancel'),
-                        'select' => $language_select,
+                    'foreign_dialog' => [
+                        'ok'           => __('Ok'),
+                        'cancel'       => __('Cancel'),
+                        'language'     => $language_select,
+                        'default_lang' => 'en',
+                    ],
+                    'link_dialog' => [
+                        'ok'               => __('Ok'),
+                        'cancel'           => __('Cancel'),
+                        'href'             => $href_input,
+                        'default_href'     => '',
+                        'title'            => $title_input,
+                        'default_title'    => '',
+                        'language'         => $hreflang_select,
+                        'default_hreflang' => '',
                     ],
                 ]) .
                 My::jsLoad('bootstrap.js');

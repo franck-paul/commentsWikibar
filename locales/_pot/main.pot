@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Dotclear 2 commentsWikibar module\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-24 11:41+0100\n"
+"POT-Creation-Date: 2025-06-25 19:34+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,8 +18,8 @@ msgstr ""
 
 #: ../git-plugins/commentsWikibar/src/Backend.php:27
 #: ../git-plugins/commentsWikibar/src/Backend.php:45
-#: ../git-plugins/commentsWikibar/src/Manage.php:126
-#: ../git-plugins/commentsWikibar/src/Manage.php:135
+#: ../git-plugins/commentsWikibar/src/Manage.php:130
+#: ../git-plugins/commentsWikibar/src/Manage.php:139
 msgid "Comments Wikibar"
 msgstr ""
 
@@ -27,128 +27,146 @@ msgstr ""
 msgid "Adds a formatting toolbar when public comments use the wiki syntax"
 msgstr ""
 
-#: ../git-plugins/commentsWikibar/src/FrontendBehaviors.php:138
-msgid "Text formatting"
-msgstr ""
-
-#: ../git-plugins/commentsWikibar/src/FrontendBehaviors.php:147
-#: ../git-plugins/commentsWikibar/src/Manage.php:183
-#: ../git-plugins/commentsWikibar/src/Manage.php:184
-msgid "Foreign text"
-msgstr ""
-
 #: ../git-plugins/commentsWikibar/src/FrontendBehaviors.php:148
 msgid "Language of this text:"
 msgstr ""
 
-#: ../git-plugins/commentsWikibar/src/FrontendBehaviors.php:154
+#: ../git-plugins/commentsWikibar/src/FrontendBehaviors.php:157
+msgid "Link URL:"
+msgstr ""
+
+#: ../git-plugins/commentsWikibar/src/FrontendBehaviors.php:165
+msgid "Link title:"
+msgstr ""
+
+#: ../git-plugins/commentsWikibar/src/FrontendBehaviors.php:171
+msgid "Link language:"
+msgstr ""
+
+#: ../git-plugins/commentsWikibar/src/FrontendBehaviors.php:180
+msgid "Text formatting"
+msgstr ""
+
+#: ../git-plugins/commentsWikibar/src/FrontendBehaviors.php:188
+#: ../git-plugins/commentsWikibar/src/Manage.php:211
 #: ../git-plugins/commentsWikibar/src/Manage.php:212
-#: ../git-plugins/commentsWikibar/src/Manage.php:213
+msgid "Foreign text"
+msgstr ""
+
+#: ../git-plugins/commentsWikibar/src/FrontendBehaviors.php:192
+#: ../git-plugins/commentsWikibar/src/Manage.php:261
+#: ../git-plugins/commentsWikibar/src/Manage.php:262
 msgid "Preformatted"
 msgstr ""
 
-#: ../git-plugins/commentsWikibar/src/FrontendBehaviors.php:155
-#: ../git-plugins/commentsWikibar/src/Manage.php:221
-#: ../git-plugins/commentsWikibar/src/Manage.php:222
+#: ../git-plugins/commentsWikibar/src/FrontendBehaviors.php:193
+#: ../git-plugins/commentsWikibar/src/Manage.php:276
+#: ../git-plugins/commentsWikibar/src/Manage.php:277
 msgid "Block quote"
 msgstr ""
 
-#: ../git-plugins/commentsWikibar/src/FrontendBehaviors.php:160
-msgid "Title?"
+#: ../git-plugins/commentsWikibar/src/FrontendBehaviors.php:205
+#: ../git-plugins/commentsWikibar/src/FrontendBehaviors.php:211
+msgid "Ok"
 msgstr ""
 
-#: ../git-plugins/commentsWikibar/src/Manage.php:148
+#: ../git-plugins/commentsWikibar/src/FrontendBehaviors.php:206
+#: ../git-plugins/commentsWikibar/src/FrontendBehaviors.php:212
+msgid "Cancel"
+msgstr ""
+
+#: ../git-plugins/commentsWikibar/src/Manage.php:152
 msgid "Plugin Activation"
 msgstr ""
 
-#: ../git-plugins/commentsWikibar/src/Manage.php:153
+#: ../git-plugins/commentsWikibar/src/Manage.php:157
 msgid "Enable Comments Wikibar"
 msgstr ""
 
-#: ../git-plugins/commentsWikibar/src/Manage.php:158
+#: ../git-plugins/commentsWikibar/src/Manage.php:162
 msgid "Activating this plugin also <strong>enforces</strong> Dotclear wiki syntax in blog comments"
 msgstr ""
 
-#: ../git-plugins/commentsWikibar/src/Manage.php:160
+#: ../git-plugins/commentsWikibar/src/Manage.php:164
 #, php-format
 msgid "It also <strong>enforces</strong> Markdown syntax if it's <a href=\"%s\">enabled</a> for comments"
 msgstr ""
 
-#: ../git-plugins/commentsWikibar/src/Manage.php:165
+#: ../git-plugins/commentsWikibar/src/Manage.php:169
 msgid "Options"
 msgstr ""
 
-#: ../git-plugins/commentsWikibar/src/Manage.php:169
+#: ../git-plugins/commentsWikibar/src/Manage.php:173
 msgid "Disable characters format"
 msgstr ""
 
-#: ../git-plugins/commentsWikibar/src/Manage.php:190
+#: ../git-plugins/commentsWikibar/src/Manage.php:218
 msgid "Disable breakline"
 msgstr ""
 
-#: ../git-plugins/commentsWikibar/src/Manage.php:199
+#: ../git-plugins/commentsWikibar/src/Manage.php:233
 msgid "Disable list"
 msgstr ""
 
-#: ../git-plugins/commentsWikibar/src/Manage.php:210
+#: ../git-plugins/commentsWikibar/src/Manage.php:253
 msgid "Disable preformatted text"
 msgstr ""
 
-#: ../git-plugins/commentsWikibar/src/Manage.php:219
+#: ../git-plugins/commentsWikibar/src/Manage.php:268
 msgid "Disable blockquote"
 msgstr ""
 
-#: ../git-plugins/commentsWikibar/src/Manage.php:228
+#: ../git-plugins/commentsWikibar/src/Manage.php:283
 msgid "Disable link"
 msgstr ""
 
-#: ../git-plugins/commentsWikibar/src/Manage.php:239
+#: ../git-plugins/commentsWikibar/src/Manage.php:300
 msgid "Advanced Options"
 msgstr ""
 
-#: ../git-plugins/commentsWikibar/src/Manage.php:241
+#: ../git-plugins/commentsWikibar/src/Manage.php:302
 msgid "CSS inclusion"
 msgstr ""
 
-#: ../git-plugins/commentsWikibar/src/Manage.php:245
-#: ../git-plugins/commentsWikibar/src/Manage.php:265
-#: ../git-plugins/commentsWikibar/src/Manage.php:284
+#: ../git-plugins/commentsWikibar/src/Manage.php:307
+#: ../git-plugins/commentsWikibar/src/Manage.php:331
+#: ../git-plugins/commentsWikibar/src/Manage.php:354
 msgid "(recommended)"
 msgstr ""
 
-#: ../git-plugins/commentsWikibar/src/Manage.php:245
+#: ../git-plugins/commentsWikibar/src/Manage.php:307
 msgid "Include CSS"
 msgstr ""
 
-#: ../git-plugins/commentsWikibar/src/Manage.php:252
+#: ../git-plugins/commentsWikibar/src/Manage.php:315
 msgid "Use custom CSS:"
 msgstr ""
 
-#: ../git-plugins/commentsWikibar/src/Manage.php:257
+#: ../git-plugins/commentsWikibar/src/Manage.php:322
 msgid "You can use a custom CSS by providing its location."
 msgstr ""
 
-#: ../git-plugins/commentsWikibar/src/Manage.php:258
-#: ../git-plugins/commentsWikibar/src/Manage.php:278
+#: ../git-plugins/commentsWikibar/src/Manage.php:323
+#: ../git-plugins/commentsWikibar/src/Manage.php:347
 msgid "A location beginning with a / is treated as absolute, else it is treated as relative to the blog's current theme URL"
 msgstr ""
 
-#: ../git-plugins/commentsWikibar/src/Manage.php:261
+#: ../git-plugins/commentsWikibar/src/Manage.php:326
 msgid "Javascript inclusion"
 msgstr ""
 
-#: ../git-plugins/commentsWikibar/src/Manage.php:265
+#: ../git-plugins/commentsWikibar/src/Manage.php:331
 msgid "Include JS library"
 msgstr ""
 
-#: ../git-plugins/commentsWikibar/src/Manage.php:272
+#: ../git-plugins/commentsWikibar/src/Manage.php:339
 msgid "Use custom JS library:"
 msgstr ""
 
-#: ../git-plugins/commentsWikibar/src/Manage.php:277
+#: ../git-plugins/commentsWikibar/src/Manage.php:346
 msgid "You can use a custom JS library by providing its location."
 msgstr ""
 
-#: ../git-plugins/commentsWikibar/src/Manage.php:284
+#: ../git-plugins/commentsWikibar/src/Manage.php:354
 msgid "Include JS bootstrap"
 msgstr ""

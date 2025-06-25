@@ -12,12 +12,16 @@ use Dotclear\Helper\L10n;
 
 L10n::$locales['Comments Wikibar'] = '';
 L10n::$locales['Adds a formatting toolbar when public comments use the wiki syntax'] = '';
+L10n::$locales['Language of this text:'] = '';
+L10n::$locales['Link URL:'] = '';
+L10n::$locales['Link title:'] = '';
+L10n::$locales['Link language:'] = '';
 L10n::$locales['Text formatting'] = '';
 L10n::$locales['Foreign text'] = '';
-L10n::$locales['Language of this text:'] = '';
 L10n::$locales['Preformatted'] = '';
 L10n::$locales['Block quote'] = '';
-L10n::$locales['Title?'] = '';
+L10n::$locales['Ok'] = '';
+L10n::$locales['Cancel'] = '';
 L10n::$locales['Plugin Activation'] = '';
 L10n::$locales['Enable Comments Wikibar'] = '';
 L10n::$locales['Activating this plugin also <strong>enforces</strong> Dotclear wiki syntax in blog comments'] = '';

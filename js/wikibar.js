@@ -9,7 +9,7 @@ var dotclear = dotclear || {};
 dotclear.resizeTimer = undefined;
 dotclear.prevWidth = 0;
 
-dotclear.jsLangSelect = class {
+dotclear.jsLanguageDialog = class {
   constructor(confirm, cancel, current, select) {
     this.confirm = confirm || 'Ok';
     this.cancel = cancel || 'Cancel';
@@ -52,13 +52,15 @@ dotclear.jsLangSelect = class {
         dialog.dispatchEvent(new Event('cancel'));
       });
 
-      dialog.addEventListener('cancel', function onCancel() {
+      dialog.addEventListener('cancel', function onCancel(event) {
+        event.preventDefault();
         dialog.removeEventListener('close', onCancel);
         dialog.returnValue = null;
         document.body.removeChild(dialog);
         resolve(null);
       });
-      dialog.addEventListener('close', function onClose() {
+      dialog.addEventListener('close', function onClose(event) {
+        event.preventDefault();
         dialog.removeEventListener('close', onClose);
         const result = dialog.returnValue;
         document.body.removeChild(dialog);
@@ -68,6 +70,114 @@ dotclear.jsLangSelect = class {
       // 4. Display dialog and give focus
       dialog.showModal();
       select.focus();
+    });
+  }
+};
+
+dotclear.jsLinkDialog = class {
+  constructor(confirm, cancel, current_href, href, current_title, title, current_language, language) {
+    this.confirm = confirm || 'Ok';
+    this.cancel = cancel || 'Cancel';
+    this.current_href = current_href || '';
+    this.href = href;
+    this.current_title = current_title || '';
+    this.title = title;
+    this.current_language = current_language || '';
+    this.language = language;
+  }
+  prompt() {
+    return new Promise((resolve) => {
+      // 1. Create dialog HTML
+      const template = document.createElement('template');
+      template.innerHTML = `<dialog class="jstDialog"><form method="dialog"><p class="fieldset">${this.href}</p><p class="fieldset">${this.title}</p><p class="fieldset">${this.language}</p><p class="form-buttons"><button name="cancel" class="reset">${this.cancel}</button><button type="submit" name="confirm" class="submit">${this.confirm}</button></p></form></dialog>`;
+      const dialog = template.content.firstChild;
+
+      // 2. Set default value
+      const href = dialog.querySelector('#link_url');
+      if (this.current_language !== '') {
+        href.value = this.current_href;
+      }
+      const title = dialog.querySelector('#link_title');
+      if (this.current_title !== '') {
+        title.value = this.current_title;
+      }
+      const language = dialog.querySelector('#link_language');
+      if (this.current_language !== '') {
+        language.value = this.current_language;
+      }
+
+      // 2. Add dialog to body
+      document.body.appendChild(dialog);
+
+      // 3. Add event listener to cope with dialog
+      href.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+          event.preventDefault();
+          dialog.returnValue = JSON.stringify({
+            href: href.value,
+            title: title.value,
+            language: language.value,
+          });
+          dialog.close();
+        }
+      });
+      title.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+          event.preventDefault();
+          dialog.returnValue = JSON.stringify({
+            href: href.value,
+            title: title.value,
+            language: language.value,
+          });
+          dialog.close();
+        }
+      });
+      language.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+          event.preventDefault();
+          dialog.returnValue = JSON.stringify({
+            href: href.value,
+            title: title.value,
+            language: language.value,
+          });
+          dialog.close();
+        }
+      });
+
+      const btnConfirm = dialog.querySelector('button[name="confirm"]');
+      btnConfirm.addEventListener('click', (event) => {
+        event.preventDefault();
+        dialog.returnValue = JSON.stringify({
+          href: href.value,
+          title: title.value,
+          language: language.value,
+        });
+        dialog.close();
+      });
+
+      const btnCancel = dialog.querySelector('button[name="cancel"]');
+      btnCancel.addEventListener('click', () => {
+        dialog.dispatchEvent(new Event('cancel'));
+      });
+
+      dialog.addEventListener('cancel', function onCancel(event) {
+        event.preventDefault();
+        dialog.removeEventListener('close', onCancel);
+        dialog.returnValue = null;
+        document.body.removeChild(dialog);
+        resolve(null);
+      });
+      dialog.addEventListener('close', function onClose(event) {
+        event.preventDefault();
+        dialog.removeEventListener('close', onClose);
+        const result = dialog.returnValue;
+        document.body.removeChild(dialog);
+        resolve(result);
+      });
+
+      // 4. Display dialog and give focus to first field
+      dialog.showModal();
+      href.focus();
     });
   }
 };
@@ -258,7 +368,7 @@ dotclear.jsCombo = class {
 };
 
 dotclear.jsToolBar = class {
-  constructor(target, base_url = '', mode = 'wiki', label = '', elts = null, language_select = {}) {
+  constructor(target, base_url = '', mode = 'wiki', label = '', elts = null, language_dialog = {}, link_dialog = {}) {
     if (!document.createElement) {
       return;
     }
@@ -275,7 +385,8 @@ dotclear.jsToolBar = class {
     this.mode = mode;
     this.label = label;
 
-    this.language_select = language_select;
+    this.language_dialog = language_dialog;
+    this.link_dialog = link_dialog;
 
     this.editor = document.createElement('div');
     this.editor.className = 'jstEditor';
@@ -371,30 +482,28 @@ dotclear.jsToolBar = class {
         title: 'Foreign text',
         fn: {
           async wiki() {
-            await this.elements.foreign.prompt.call(this, '', (choice) => {
+            await this.elements.foreign.prompt.call(this, (choice) => {
               const stag = '££';
               const etag = `|${choice}££`;
               this.encloseSelection(stag, etag);
             });
           },
           async markdown() {
-            await this.elements.foreign.prompt.call(this, '', (choice) => {
+            await this.elements.foreign.prompt.call(this, (choice) => {
               const stag = `<i lang="${choice}">`;
               const etag = '</i>';
               this.encloseSelection(stag, etag);
             });
           },
         },
-        lang_prompt: 'Language of this text:',
-        default_lang: '',
-        async prompt(lang = '', callback = null) {
-          const languageSelector = new dotclear.jsLangSelect(
-            this.language_select.ok,
-            this.language_select.cancel,
-            lang || this.elements.foreign.default_lang,
-            this.language_select.select,
+        async prompt(callback = null) {
+          const dialog = new dotclear.jsLanguageDialog(
+            this.language_dialog.ok,
+            this.language_dialog.cancel,
+            this.language_dialog.default_lang,
+            this.language_dialog.language,
           );
-          await languageSelector.prompt().then((choice) => {
+          await dialog.prompt().then((choice) => {
             if (choice && callback) {
               callback(choice);
             }
@@ -466,7 +575,7 @@ dotclear.jsToolBar = class {
         title: 'Link',
         fn: {
           async wiki() {
-            await this.elements.link.prompt.call(this, '', '', '', (link) => {
+            await this.elements.link.prompt.call(this, (link) => {
               if (!link) {
                 return;
               }
@@ -486,7 +595,7 @@ dotclear.jsToolBar = class {
             });
           },
           async markdown() {
-            await this.elements.link.prompt.call(this, '', '', '', (link) => {
+            await this.elements.link.prompt.call(this, (link) => {
               if (!link) {
                 return;
               }
@@ -503,32 +612,26 @@ dotclear.jsToolBar = class {
             });
           },
         },
-        href_prompt: 'Please give page URL:',
-        hreflang_prompt: 'Language of this page:',
-        title_prompt: 'Title:',
-        default_hreflang: '',
-        default_title: '',
-        async prompt(url = '', lang = '', link_title = '', callback = null) {
-          const hreflang = lang || this.elements.link.default_hreflang;
-          let title = link_title || this.elements.link.default_title;
-          const href = window.prompt(this.elements.link.href_prompt, url);
-          if (!href) {
-            return null;
-          }
-          title = window.prompt(this.elements.link.title_prompt, title);
-          const languageSelector = new dotclear.jsLangSelect(
-            this.language_select.ok,
-            this.language_select.cancel,
-            hreflang,
-            this.language_select.select,
+        async prompt(callback = null) {
+          const dialog = new dotclear.jsLinkDialog(
+            this.link_dialog.ok,
+            this.link_dialog.cancel,
+            this.link_dialog.default_href,
+            this.link_dialog.href,
+            this.link_dialog.default_title,
+            this.link_dialog.title,
+            this.link_dialog.default_hreflang,
+            this.link_dialog.language,
           );
-          await languageSelector.prompt().then((choice) => {
-            if (choice !== null && callback) {
-              callback({
-                href: this.stripBaseURL(href),
-                hreflang: choice,
-                title,
-              });
+          await dialog.prompt().then((choice) => {
+            if (choice && callback) {
+              const response = JSON.parse(choice);
+              if (response?.href)
+                callback({
+                  href: this.stripBaseURL(response.href),
+                  hreflang: response.language,
+                  title: response.title,
+                });
             }
           });
         },

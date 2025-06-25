@@ -80,6 +80,12 @@
   gap: 0.125em;
   flex-wrap: wrap;
 
+  .fieldset {
+    display: grid;
+    gap: 0.5em;
+    grid-template-columns: 1fr 2fr;
+  }
+
   .form-buttons {
     display: flex;
     flex-wrap: wrap;

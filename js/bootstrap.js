@@ -13,7 +13,8 @@ window.addEventListener('load', () => {
     data.legend_msg,
     data.label,
     data.elements,
-    data.language_select,
+    data.foreign_dialog,
+    data.link_dialog,
   );
   if (data.options.no_format) {
     commentTb.elements.strong.type = '';
