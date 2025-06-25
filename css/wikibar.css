@@ -75,6 +75,31 @@
   width: 0.25em;
 }
 
+.jstDialog {
+  display: flex;
+  gap: 0.125em;
+  flex-wrap: wrap;
+
+  .form-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5em;
+    align-items: center;
+  }
+
+  button {
+    height: 1.8rem;
+    border: 1px solid light-dark(#767676, #ddd);
+    border-radius: 0.2em;
+    position: relative;
+
+    &:hover,
+    &:focus {
+      border-color: #e905a8;
+    }
+  }
+}
+
 /* Buttons
 -------------------------------------------------------- */
 .jstElements button {

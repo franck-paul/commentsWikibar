@@ -17,8 +17,12 @@ namespace Dotclear\Plugin\commentsWikibar;
 
 use ArrayObject;
 use Dotclear\App;
+use Dotclear\Helper\Html\Form\Label;
+use Dotclear\Helper\Html\Form\Option;
+use Dotclear\Helper\Html\Form\Select;
 use Dotclear\Helper\Html\Html;
 use Dotclear\Helper\Html\WikiToHtml;
+use Dotclear\Helper\L10n;
 
 class FrontendBehaviors
 {
@@ -129,6 +133,19 @@ class FrontendBehaviors
                     $mode = 'markdown';
                 }
 
+                $language_options = [
+                    (new Option('', '')),
+                ];
+                $language_codes = L10n::getISOcodes(true, true);
+                foreach ($language_codes as $language_name => $language_code) {
+                    $language_options[] = (new Option($language_name, $language_code))->lang($language_code);
+                }
+                $language_select = (new Select('post_lang'))
+                    ->items($language_options)
+                    ->translate(false)
+                    ->label(new Label(__('Language:'), Label::OUTSIDE_LABEL_BEFORE))
+                ->render();
+
                 echo
                 Html::jsJson('commentswikibar', [
                     'base_url'   => App::blog()->host(),
@@ -158,7 +175,7 @@ class FrontendBehaviors
                             'href_prompt'     => __('URL?'),
                             'hreflang_prompt' => __('Language?'),
                             'title_prompt'    => __('Title?'),
-                            'default_lang'    => 'en',
+                            'default_lang'    => '',
                         ],
                     ],
                     'options' => [
@@ -168,6 +185,11 @@ class FrontendBehaviors
                         'no_pre'    => $settings->no_pre,
                         'no_quote'  => $settings->no_quote,
                         'no_url'    => $settings->no_url,
+                    ],
+                    'language_select' => [
+                        'ok'     => __('Ok'),
+                        'cancel' => __('Cancel'),
+                        'select' => $language_select,
                     ],
                 ]) .
                 My::jsLoad('bootstrap.js');

@@ -2,10 +2,75 @@
 // support of ARIA toolbar design pattern largely inspired from https://www.w3.org/TR/wai-aria-practices-1.1/examples/toolbar/toolbar.html
 
 /* Dotclear common object */
+// biome-ignore lint/style/noVar: <explanation>
+// biome-ignore lint/correctness/noInvalidUseBeforeDeclaration: <explanation>
 var dotclear = dotclear || {};
 
 dotclear.resizeTimer = undefined;
 dotclear.prevWidth = 0;
+
+dotclear.jsLangSelect = class {
+  constructor(confirm, cancel, current, select) {
+    this.confirm = confirm || 'Ok';
+    this.cancel = cancel || 'Cancel';
+    this.current = current || '';
+    this.select = select;
+  }
+  prompt() {
+    return new Promise((resolve) => {
+      // 1. Create dialog HTML
+      const template = document.createElement('template');
+      template.innerHTML = `<dialog class="jstDialog"><form method="dialog"><p class="fieldset">${this.select}</p><p class="form-buttons"><button name="cancel" class="reset">${this.cancel}</button><button type="submit" name="confirm" class="submit">${this.confirm}</button></p></form></dialog>`;
+      const dialog = template.content.firstChild;
+      const select = dialog.querySelector('select');
+      if (this.current !== '') {
+        // Select default language
+        select.value = this.current;
+      }
+
+      // 2. Add dialog to body
+      document.body.appendChild(dialog);
+
+      // 3. Add event listener to cope with dialog
+      select.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+          event.preventDefault();
+          dialog.returnValue = select.value;
+          dialog.close();
+        }
+      });
+
+      const btnConfirm = dialog.querySelector('button[name="confirm"]');
+      btnConfirm.addEventListener('click', (event) => {
+        event.preventDefault();
+        dialog.returnValue = select.value;
+        dialog.close();
+      });
+
+      const btnCancel = dialog.querySelector('button[name="cancel"]');
+      btnCancel.addEventListener('click', () => {
+        dialog.dispatchEvent(new Event('cancel'));
+      });
+
+      dialog.addEventListener('cancel', function onCancel() {
+        dialog.removeEventListener('close', onCancel);
+        dialog.returnValue = null;
+        document.body.removeChild(dialog);
+        resolve(null);
+      });
+      dialog.addEventListener('close', function onClose() {
+        dialog.removeEventListener('close', onClose);
+        const result = dialog.returnValue;
+        document.body.removeChild(dialog);
+        resolve(result);
+      });
+
+      // 4. Display dialog and give focus
+      dialog.showModal();
+      select.focus();
+    });
+  }
+};
 
 dotclear.jsButton = class {
   constructor(title, fn, scope, className) {
@@ -193,7 +258,7 @@ dotclear.jsCombo = class {
 };
 
 dotclear.jsToolBar = class {
-  constructor(target, base_url = '', mode = 'wiki', label = '', elts = null) {
+  constructor(target, base_url = '', mode = 'wiki', label = '', elts = null, language_select = {}) {
     if (!document.createElement) {
       return;
     }
@@ -209,6 +274,8 @@ dotclear.jsToolBar = class {
     this.base_url = base_url;
     this.mode = mode;
     this.label = label;
+
+    this.language_select = language_select;
 
     this.editor = document.createElement('div');
     this.editor.className = 'jstEditor';
@@ -303,33 +370,35 @@ dotclear.jsToolBar = class {
         type: 'button',
         title: 'Foreign text',
         fn: {
-          wiki() {
-            const lang = this.elements.foreign.prompt.call(this);
-            if (!lang.code) {
-              return;
-            }
-            const stag = '££';
-            const etag = `|${lang.code}££`;
-            this.encloseSelection(stag, etag);
+          async wiki() {
+            await this.elements.foreign.prompt.call(this, '', (choice) => {
+              const stag = '££';
+              const etag = `|${choice}££`;
+              this.encloseSelection(stag, etag);
+            });
           },
-          markdown() {
-            const lang = this.elements.foreign.prompt.call(this);
-            if (!lang.code) {
-              return;
-            }
-            const stag = `<i lang="${lang.code}">`;
-            const etag = '</i>';
-            this.encloseSelection(stag, etag);
+          async markdown() {
+            await this.elements.foreign.prompt.call(this, '', (choice) => {
+              const stag = `<i lang="${choice}">`;
+              const etag = '</i>';
+              this.encloseSelection(stag, etag);
+            });
           },
         },
         lang_prompt: 'Language of this text:',
         default_lang: '',
-        prompt(lang = '') {
-          let language = lang || this.elements.foreign.default_lang;
-          language = window.prompt(this.elements.foreign.lang_prompt, language);
-          return {
-            code: language,
-          };
+        async prompt(lang = '', callback = null) {
+          const languageSelector = new dotclear.jsLangSelect(
+            this.language_select.ok,
+            this.language_select.cancel,
+            lang || this.elements.foreign.default_lang,
+            this.language_select.select,
+          );
+          await languageSelector.prompt().then((choice) => {
+            if (choice && callback) {
+              callback(choice);
+            }
+          });
         },
       },
       br: {
@@ -396,40 +465,42 @@ dotclear.jsToolBar = class {
         type: 'button',
         title: 'Link',
         fn: {
-          wiki() {
-            const link = this.elements.link.prompt.call(this);
-            if (!link) {
-              return;
-            }
-            const stag = '[';
-            let etag = `|${link.href}`;
-            if (link.hreflang) {
-              etag = `${etag}|${link.hreflang}`;
-            }
-            if (link.title) {
-              if (!link.hreflang) {
-                etag = `${etag}|`;
+          async wiki() {
+            await this.elements.link.prompt.call(this, '', '', '', (link) => {
+              if (!link) {
+                return;
               }
-              etag = `${etag}|${link.title}`;
-            }
-            etag = `${etag}]`;
-            this.encloseSelection(stag, etag);
+              const stag = '[';
+              let etag = `|${link.href}`;
+              if (link.hreflang) {
+                etag = `${etag}|${link.hreflang}`;
+              }
+              if (link.title) {
+                if (!link.hreflang) {
+                  etag = `${etag}|`;
+                }
+                etag = `${etag}|${link.title}`;
+              }
+              etag = `${etag}]`;
+              this.encloseSelection(stag, etag);
+            });
           },
-          markdown() {
-            const link = this.elements.link.prompt.call(this);
-            if (!link) {
-              return;
-            }
-            const stag = '[';
-            let etag = `](${link.href}`;
-            if (link.title) {
-              etag = `${etag} "${link.title}"`;
-            }
-            etag = `${etag})`;
-            if (link.hreflang) {
-              etag = `${etag}{hreflang=${link.hreflang}}`;
-            }
-            this.encloseSelection(stag, etag);
+          async markdown() {
+            await this.elements.link.prompt.call(this, '', '', '', (link) => {
+              if (!link) {
+                return;
+              }
+              const stag = '[';
+              let etag = `](${link.href}`;
+              if (link.title) {
+                etag = `${etag} "${link.title}"`;
+              }
+              etag = `${etag})`;
+              if (link.hreflang) {
+                etag = `${etag}{hreflang=${link.hreflang}}`;
+              }
+              this.encloseSelection(stag, etag);
+            });
           },
         },
         href_prompt: 'Please give page URL:',
@@ -437,20 +508,29 @@ dotclear.jsToolBar = class {
         title_prompt: 'Title:',
         default_hreflang: '',
         default_title: '',
-        prompt(url = '', lang = '', link_title = '') {
-          let hreflang = lang || this.elements.link.default_hreflang;
+        async prompt(url = '', lang = '', link_title = '', callback = null) {
+          const hreflang = lang || this.elements.link.default_hreflang;
           let title = link_title || this.elements.link.default_title;
           const href = window.prompt(this.elements.link.href_prompt, url);
           if (!href) {
             return null;
           }
           title = window.prompt(this.elements.link.title_prompt, title);
-          hreflang = window.prompt(this.elements.link.hreflang_prompt, hreflang);
-          return {
-            href: this.stripBaseURL(href),
+          const languageSelector = new dotclear.jsLangSelect(
+            this.language_select.ok,
+            this.language_select.cancel,
             hreflang,
-            title,
-          };
+            this.language_select.select,
+          );
+          await languageSelector.prompt().then((choice) => {
+            if (choice !== null && callback) {
+              callback({
+                href: this.stripBaseURL(href),
+                hreflang: choice,
+                title,
+              });
+            }
+          });
         },
       },
     };
@@ -553,8 +633,6 @@ dotclear.jsToolBar = class {
     }
     //ESC
     this.hideAllTooltips();
-    event.stopPropagation();
-    event.preventDefault();
   }
 
   singleTag(stag = null, etag = stag) {
