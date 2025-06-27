@@ -2,48 +2,58 @@
 // support of ARIA toolbar design pattern largely inspired from https://www.w3.org/TR/wai-aria-practices-1.1/examples/toolbar/toolbar.html
 
 /* Dotclear common object */
-// biome-ignore lint/style/noVar: <explanation>
-// biome-ignore lint/correctness/noInvalidUseBeforeDeclaration: <explanation>
+// biome-ignore lint: dotclear var may already exist and should be global
 var dotclear = dotclear || {};
 
 dotclear.resizeTimer = undefined;
 dotclear.prevWidth = 0;
 
-dotclear.jsLanguageDialog = class {
-  constructor(confirm, cancel, current, select) {
-    this.confirm = confirm || 'Ok';
-    this.cancel = cancel || 'Cancel';
-    this.current = current || '';
-    this.select = select;
+dotclear.jsDialog = class {
+  constructor(options) {
+    this.confirm_label = options?.confirm_label || 'Ok';
+    this.cancel_label = options?.cancel_label || 'Cancel';
+    this.fields = options?.fields;
   }
   prompt() {
     return new Promise((resolve) => {
+      // 0. Check
+      if (!this.fields) resolve(null);
+
       // 1. Create dialog HTML
+      const fields_html = this.fields.reduce(
+        (accumulator, currentValue) => `${accumulator}<p class="fieldset">${currentValue.html}</p>`,
+        '',
+      );
       const template = document.createElement('template');
-      template.innerHTML = `<dialog class="jstDialog"><form method="dialog"><p class="fieldset">${this.select}</p><p class="form-buttons"><button name="cancel" class="reset">${this.cancel}</button><button type="submit" name="confirm" class="submit">${this.confirm}</button></p></form></dialog>`;
+      template.innerHTML = `<dialog class="jstDialog"><form method="dialog">${fields_html}<p class="form-buttons"><button name="cancel" class="reset">${this.cancel_label}</button><button type="submit" name="confirm" class="submit">${this.confirm_label}</button></p></form></dialog>`;
       const dialog = template.content.firstChild;
-      const select = dialog.querySelector('select');
-      if (this.current !== '') {
-        // Select default language
-        select.value = this.current;
+      const fields = dialog.querySelectorAll('.fieldset input, .fieldset select');
+      let index = 0;
+      for (const field of fields) {
+        if (this.fields[index]?.default) field.value = this.fields[index].default;
+        index++;
       }
 
       // 2. Add dialog to body
       document.body.appendChild(dialog);
 
       // 3. Add event listener to cope with dialog
-      select.addEventListener('keydown', (event) => {
-        if (event.key === 'Enter') {
+      const prepareReturn = () => JSON.stringify(Array.from(fields).map((field) => field.value));
+      for (const field of fields) {
+        field.addEventListener('keydown', (event) => {
+          if (event.key !== 'Enter') {
+            return;
+          }
           event.preventDefault();
-          dialog.returnValue = select.value;
+          dialog.returnValue = prepareReturn();
           dialog.close();
-        }
-      });
+        });
+      }
 
       const btnConfirm = dialog.querySelector('button[name="confirm"]');
       btnConfirm.addEventListener('click', (event) => {
         event.preventDefault();
-        dialog.returnValue = select.value;
+        dialog.returnValue = prepareReturn();
         dialog.close();
       });
 
@@ -69,115 +79,7 @@ dotclear.jsLanguageDialog = class {
 
       // 4. Display dialog and give focus
       dialog.showModal();
-      select.focus();
-    });
-  }
-};
-
-dotclear.jsLinkDialog = class {
-  constructor(confirm, cancel, current_href, href, current_title, title, current_language, language) {
-    this.confirm = confirm || 'Ok';
-    this.cancel = cancel || 'Cancel';
-    this.current_href = current_href || '';
-    this.href = href;
-    this.current_title = current_title || '';
-    this.title = title;
-    this.current_language = current_language || '';
-    this.language = language;
-  }
-  prompt() {
-    return new Promise((resolve) => {
-      // 1. Create dialog HTML
-      const template = document.createElement('template');
-      template.innerHTML = `<dialog class="jstDialog"><form method="dialog"><p class="fieldset">${this.href}</p><p class="fieldset">${this.title}</p><p class="fieldset">${this.language}</p><p class="form-buttons"><button name="cancel" class="reset">${this.cancel}</button><button type="submit" name="confirm" class="submit">${this.confirm}</button></p></form></dialog>`;
-      const dialog = template.content.firstChild;
-
-      // 2. Set default value
-      const href = dialog.querySelector('#link_url');
-      if (this.current_language !== '') {
-        href.value = this.current_href;
-      }
-      const title = dialog.querySelector('#link_title');
-      if (this.current_title !== '') {
-        title.value = this.current_title;
-      }
-      const language = dialog.querySelector('#link_language');
-      if (this.current_language !== '') {
-        language.value = this.current_language;
-      }
-
-      // 2. Add dialog to body
-      document.body.appendChild(dialog);
-
-      // 3. Add event listener to cope with dialog
-      href.addEventListener('keydown', (event) => {
-        if (event.key === 'Enter') {
-          event.preventDefault();
-          dialog.returnValue = JSON.stringify({
-            href: href.value,
-            title: title.value,
-            language: language.value,
-          });
-          dialog.close();
-        }
-      });
-      title.addEventListener('keydown', (event) => {
-        if (event.key === 'Enter') {
-          event.preventDefault();
-          dialog.returnValue = JSON.stringify({
-            href: href.value,
-            title: title.value,
-            language: language.value,
-          });
-          dialog.close();
-        }
-      });
-      language.addEventListener('keydown', (event) => {
-        if (event.key === 'Enter') {
-          event.preventDefault();
-          dialog.returnValue = JSON.stringify({
-            href: href.value,
-            title: title.value,
-            language: language.value,
-          });
-          dialog.close();
-        }
-      });
-
-      const btnConfirm = dialog.querySelector('button[name="confirm"]');
-      btnConfirm.addEventListener('click', (event) => {
-        event.preventDefault();
-        dialog.returnValue = JSON.stringify({
-          href: href.value,
-          title: title.value,
-          language: language.value,
-        });
-        dialog.close();
-      });
-
-      const btnCancel = dialog.querySelector('button[name="cancel"]');
-      btnCancel.addEventListener('click', () => {
-        dialog.dispatchEvent(new Event('cancel'));
-      });
-
-      dialog.addEventListener('cancel', function onCancel(event) {
-        event.preventDefault();
-        dialog.removeEventListener('close', onCancel);
-        dialog.returnValue = null;
-        document.body.removeChild(dialog);
-        resolve(null);
-      });
-      dialog.addEventListener('close', function onClose(event) {
-        event.preventDefault();
-        dialog.removeEventListener('close', onClose);
-        const result = dialog.returnValue;
-        document.body.removeChild(dialog);
-        resolve(result);
-      });
-
-      // 4. Display dialog and give focus to first field
-      dialog.showModal();
-      href.focus();
+      fields[0].focus();
     });
   }
 };
@@ -220,7 +122,9 @@ dotclear.jsButton = class {
       node.addEventListener('click', (event) => {
         try {
           this.fn.apply(this.scope, event);
-        } catch (error) {}
+        } catch (error) {
+          console.log(error);
+        }
         return false;
       });
     }
@@ -279,17 +183,16 @@ dotclear.jsButton = class {
     }
   }
   mouseLeaveChild(event) {
-    if (event.target.nodeName === 'SPAN') {
-      if (event.target.classList.contains('jstb_icon')) {
-        const parent = event.target.parentNode;
-        parent.classList.remove('hovered');
-        setTimeout(() => {
-          if (!parent.classList.contains('hovered')) {
-            parent.firstChild.classList.add('sr-only');
-          }
-        }, 800);
-      }
+    if (!(event.target.nodeName === 'SPAN' && event.target.classList.contains('jstb_icon'))) {
+      return;
     }
+    const parent = event.target.parentNode;
+    parent.classList.remove('hovered');
+    setTimeout(() => {
+      if (!parent.classList.contains('hovered')) {
+        parent.firstChild.classList.add('sr-only');
+      }
+    }, 800);
   }
   mouseOver(event) {
     if (event.target.nodeName !== 'BUTTON') {
@@ -300,14 +203,13 @@ dotclear.jsButton = class {
     event.target.classList.add('hovered');
   }
   mouseOverChild(event) {
-    if (event.target.nodeName === 'SPAN') {
-      if (event.target.classList.contains('jstb_icon')) {
-        const parent = event.target.parentNode;
-        this.parentNode.toolbarNode.hideAllTooltips();
-        parent.firstChild.classList.remove('sr-only');
-        parent.classList.add('hovered');
-      }
+    if (!(event.target.nodeName === 'SPAN' && event.target.classList.contains('jstb_icon'))) {
+      return;
     }
+    const parent = event.target.parentNode;
+    this.parentNode.toolbarNode.hideAllTooltips();
+    parent.firstChild.classList.remove('sr-only');
+    parent.classList.add('hovered');
   }
 };
 
@@ -497,15 +399,21 @@ dotclear.jsToolBar = class {
           },
         },
         async prompt(callback = null) {
-          const dialog = new dotclear.jsLanguageDialog(
-            this.language_dialog.ok,
-            this.language_dialog.cancel,
-            this.language_dialog.default_lang,
-            this.language_dialog.language,
-          );
+          const dialog = new dotclear.jsDialog({
+            confirm_label: this.language_dialog.ok,
+            cancel_label: this.language_dialog.cancel,
+            fields: [
+              {
+                // Language select
+                default: this.language_dialog.default_lang,
+                html: this.language_dialog.language,
+              },
+            ],
+          });
           await dialog.prompt().then((choice) => {
             if (choice && callback) {
-              callback(choice);
+              const response = JSON.parse(choice);
+              callback(response[0]);
             }
           });
         },
@@ -613,24 +521,35 @@ dotclear.jsToolBar = class {
           },
         },
         async prompt(callback = null) {
-          const dialog = new dotclear.jsLinkDialog(
-            this.link_dialog.ok,
-            this.link_dialog.cancel,
-            this.link_dialog.default_href,
-            this.link_dialog.href,
-            this.link_dialog.default_title,
-            this.link_dialog.title,
-            this.link_dialog.default_hreflang,
-            this.link_dialog.language,
-          );
+          const dialog = new dotclear.jsDialog({
+            confirm_label: this.language_dialog.ok,
+            cancel_label: this.language_dialog.cancel,
+            fields: [
+              {
+                // Href input
+                default: this.link_dialog.default_href,
+                html: this.link_dialog.href,
+              },
+              {
+                // Title input
+                default: this.link_dialog.default_title,
+                html: this.link_dialog.title,
+              },
+              {
+                // Language (hreflang) select
+                default: this.link_dialog.default_hreflang,
+                html: this.link_dialog.language,
+              },
+            ],
+          });
           await dialog.prompt().then((choice) => {
             if (choice && callback) {
               const response = JSON.parse(choice);
-              if (response?.href)
+              if (response[0])
                 callback({
-                  href: this.stripBaseURL(response.href),
-                  hreflang: response.language,
-                  title: response.title,
+                  href: this.stripBaseURL(response[0]),
+                  title: response[1],
+                  hreflang: response[2],
                 });
             }
           });
@@ -672,8 +591,7 @@ dotclear.jsToolBar = class {
     if (typeof elt.fn[this.mode] !== 'function') {
       return null;
     }
-    const btn = new dotclear.jsButton(elt.title, elt.fn[this.mode], this, `jstb_${id}`);
-    return btn;
+    return new dotclear.jsButton(elt.title, elt.fn[this.mode], this, `jstb_${id}`);
   }
 
   space(id) {
