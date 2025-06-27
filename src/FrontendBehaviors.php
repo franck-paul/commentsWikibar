@@ -135,13 +135,12 @@ class FrontendBehaviors
                     $mode = 'markdown';
                 }
 
-                $language_options = [
-                    (new Option('', '')),
-                ];
-                $language_codes = L10n::getISOcodes(true, true);
+                $language_options = [];
+                $language_codes   = L10n::getISOcodes(true, true);
                 foreach ($language_codes as $language_name => $language_code) {
                     $language_options[] = (new Option($language_name, $language_code))->lang($language_code);
                 }
+
                 $language_select = (new Select('language'))
                     ->items($language_options)
                     ->translate(false)
@@ -164,6 +163,9 @@ class FrontendBehaviors
                     ->translate(false)
                     ->label((new Label(__('Link title:'), Label::OL_TF)))
                 ->render();
+
+                // Add an empty choice
+                array_unshift($language_options, (new Option('', '')));
 
                 $hreflang_select = (new Select('link_language'))
                     ->items($language_options)
