@@ -173,6 +173,21 @@ class FrontendBehaviors
                     ->label(new Label(__('Link language:'), Label::OL_TF))
                 ->render();
 
+                $citeurl_input = (new Url('cite_url'))
+                    ->size(35)
+                    ->maxlength(512)
+                    ->required(true)
+                    ->autocomplete('url')
+                    ->translate(false)
+                    ->label((new Label(__('Quote URL:'), Label::OL_TF)))
+                ->render();
+
+                $citelang_select = (new Select('cite_language'))
+                    ->items($language_options)
+                    ->translate(false)
+                    ->label(new Label(__('Quote language:'), Label::OL_TF))
+                ->render();
+
                 echo
                 Html::jsJson('commentswikibar', [
                     'base_url'   => App::blog()->host(),
@@ -218,6 +233,14 @@ class FrontendBehaviors
                         'default_title'    => '',
                         'language'         => $hreflang_select,
                         'default_hreflang' => '',
+                    ],
+                    'cite_dialog' => [
+                        'ok'           => __('Ok'),
+                        'cancel'       => __('Cancel'),
+                        'url'          => $citeurl_input,
+                        'default_url'  => '',
+                        'language'     => $citelang_select,
+                        'default_lang' => '',
                     ],
                 ]) .
                 My::jsLoad('bootstrap.js');

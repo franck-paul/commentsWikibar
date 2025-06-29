@@ -15,6 +15,7 @@ window.addEventListener('load', () => {
     data.elements,
     data.foreign_dialog,
     data.link_dialog,
+    data.cite_dialog,
   );
   if (data.options.no_format) {
     commentTb.elements.strong.type = '';

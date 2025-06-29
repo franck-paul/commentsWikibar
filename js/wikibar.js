@@ -270,7 +270,16 @@ dotclear.jsCombo = class {
 };
 
 dotclear.jsToolBar = class {
-  constructor(target, base_url = '', mode = 'wiki', label = '', elts = null, language_dialog = {}, link_dialog = {}) {
+  constructor(
+    target,
+    base_url = '',
+    mode = 'wiki',
+    label = '',
+    elts = null,
+    language_dialog = {},
+    link_dialog = {},
+    cite_dialog = {},
+  ) {
     if (!document.createElement) {
       return;
     }
@@ -289,6 +298,7 @@ dotclear.jsToolBar = class {
 
     this.language_dialog = language_dialog;
     this.link_dialog = link_dialog;
+    this.cite_dialog = cite_dialog;
 
     this.editor = document.createElement('div');
     this.editor.className = 'jstEditor';
@@ -359,12 +369,61 @@ dotclear.jsToolBar = class {
         type: 'button',
         title: 'Inline quote',
         fn: {
-          wiki() {
-            this.singleTag('{{', '}}');
+          async wiki() {
+            await this.elements.quote.prompt.call(this, (quote) => {
+              const stag = '{{';
+              let etag = '';
+              if (quote.lang) {
+                etag = `${etag}|${quote.lang}`;
+              }
+              if (quote.cite) {
+                if (!quote.lang) {
+                  etag = `${etag}|`;
+                }
+                etag = `${etag}|${quote.cite}`;
+              }
+              etag = `${etag}}}`;
+              this.encloseSelection(stag, etag);
+            });
           },
-          markdown() {
-            this.singleTag('<q>', '</q>');
+          async markdown() {
+            await this.elements.quote.prompt.call(this, (quote) => {
+              let stag = '<q';
+              const etag = '</q>';
+              stag = quote.cite ? `${stag} cite="${quote.cite}"` : stag;
+              stag = quote.lang ? `${stag} lang="${quote.lang}"` : stag;
+              stag = `${stag}>`;
+
+              this.encloseSelection(stag, etag);
+            });
           },
+        },
+        async prompt(callback = null) {
+          const dialog = new dotclear.jsDialog({
+            confirm_label: this.cite_dialog.ok,
+            cancel_label: this.cite_dialog.cancel,
+            fields: [
+              {
+                // Quote URL input
+                default: this.cite_dialog.default_url,
+                html: this.cite_dialog.url,
+              },
+              {
+                // Language select
+                default: this.cite_dialog.default_lang,
+                html: this.cite_dialog.language,
+              },
+            ],
+          });
+          await dialog.prompt().then((choice) => {
+            if (choice && callback) {
+              const response = JSON.parse(choice);
+              callback({
+                cite: this.stripBaseURL(response[0]),
+                lang: response[1],
+              });
+            }
+          });
         },
       },
       code: {
