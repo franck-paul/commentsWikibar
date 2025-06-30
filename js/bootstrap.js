@@ -1,46 +1,51 @@
 /*global dotclear */
 'use strict';
 
-window.addEventListener('load', () => {
+dotclear?.ready(() => {
   const data = dotclear.getData('commentswikibar');
 
   if (!document.getElementById(data.id)) {
     return;
   }
-  const commentTb = new dotclear.jsToolBar(
+  const comment_toolbar = new dotclear.wikibar.toolbar(
     document.getElementById(data.id),
     data.host,
     data.legend_msg,
     data.label,
     data.elements,
-    data.foreign_dialog,
-    data.link_dialog,
-    data.cite_dialog,
+    {
+      foreign: data.foreign_dialog,
+      link: data.link_dialog,
+      cite: data.cite_dialog,
+    },
   );
+  if (!comment_toolbar) {
+    return;
+  }
   if (data.options.no_format) {
-    commentTb.elements.strong.type = '';
-    commentTb.elements.em.type = '';
-    commentTb.elements.ins.type = '';
-    commentTb.elements.del.type = '';
-    commentTb.elements.quote.type = '';
-    commentTb.elements.code.type = '';
-    commentTb.elements.foreign.type = '';
+    comment_toolbar.elements.strong = undefined;
+    comment_toolbar.elements.em = undefined;
+    comment_toolbar.elements.ins = undefined;
+    comment_toolbar.elements.del = undefined;
+    comment_toolbar.elements.quote = undefined;
+    comment_toolbar.elements.code = undefined;
+    comment_toolbar.elements.foreign = undefined;
   }
   if (data.options.no_br) {
-    commentTb.elements.br.type = '';
+    comment_toolbar.elements.br = undefined;
   }
   if (data.options.no_list) {
-    commentTb.elements.ul.type = '';
-    commentTb.elements.ol.type = '';
+    comment_toolbar.elements.ul = undefined;
+    comment_toolbar.elements.ol = undefined;
   }
   if (data.options.no_pre) {
-    commentTb.elements.pre.type = '';
+    comment_toolbar.elements.pre = undefined;
   }
   if (data.options.no_quote) {
-    commentTb.elements.bquote.type = '';
+    comment_toolbar.elements.bquote = undefined;
   }
   if (data.options.no_url) {
-    commentTb.elements.link.type = '';
+    comment_toolbar.elements.link = undefined;
   }
-  commentTb.draw(data.mode);
+  comment_toolbar.draw(data.mode);
 });
