@@ -415,7 +415,10 @@ dotclear.wikibar = {
                   cite: this.stripBaseURL(response[0]),
                   lang: response[1],
                 });
+
+                return;
               }
+              this.toolbar.querySelector('.jstb_quote').focus();
             });
           },
         },
@@ -465,7 +468,10 @@ dotclear.wikibar = {
                 callback({
                   lang: response[0],
                 });
+
+                return;
               }
+              this.toolbar.querySelector('.jstb_foreign').focus();
             });
           },
         },
@@ -596,14 +602,18 @@ dotclear.wikibar = {
             await dialog.prompt().then((choice) => {
               if (choice && callback) {
                 const response = JSON.parse(choice);
-                if (response[0])
+                if (response[0]) {
                   // We have an URL
                   callback({
                     href: this.stripBaseURL(response[0]),
                     title: response[1],
                     hreflang: response[2],
                   });
+
+                  return;
+                }
               }
+              this.toolbar.querySelector('.jstb_link').focus();
             });
           },
         },
