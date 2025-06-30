@@ -21,13 +21,13 @@ dotclear.wikibar = {
 
           // 1. Create dialog HTML
           const fields_html = this.fields.reduce(
-            (accumulator, currentValue) => `${accumulator}<p class="fieldset">${currentValue.html}</p>`,
+            (accumulator, currentValue) => `${accumulator}<p class="field">${currentValue.html}</p>`,
             '',
           );
           const template = document.createElement('template');
           template.innerHTML = `<dialog class="jstDialog"><form method="dialog">${fields_html}<p class="form-buttons"><button name="cancel" class="reset">${this.cancel_label}</button><button type="submit" name="confirm" class="submit">${this.confirm_label}</button></p></form></dialog>`;
           const dialog = template.content.firstChild;
-          const fields = dialog.querySelectorAll('.fieldset input, .fieldset select');
+          const fields = dialog.querySelectorAll('.field input, .field select');
           let index = 0;
           for (const field of fields) {
             if (this.fields[index]?.default) field.value = this.fields[index].default;
