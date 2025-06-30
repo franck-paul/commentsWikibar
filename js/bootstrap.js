@@ -22,6 +22,7 @@ dotclear?.ready(() => {
   if (!comment_toolbar) {
     return;
   }
+
   if (data.options.no_format) {
     comment_toolbar.elements.strong = undefined;
     comment_toolbar.elements.em = undefined;
@@ -31,21 +32,26 @@ dotclear?.ready(() => {
     comment_toolbar.elements.code = undefined;
     comment_toolbar.elements.foreign = undefined;
   }
+
   if (data.options.no_br) {
     comment_toolbar.elements.br = undefined;
   }
+
   if (data.options.no_list) {
     comment_toolbar.elements.ul = undefined;
     comment_toolbar.elements.ol = undefined;
   }
+
   if (data.options.no_pre) {
     comment_toolbar.elements.pre = undefined;
   }
   if (data.options.no_quote) {
     comment_toolbar.elements.bquote = undefined;
   }
+
   if (data.options.no_url) {
     comment_toolbar.elements.link = undefined;
   }
+
   comment_toolbar.draw(data.mode);
 });

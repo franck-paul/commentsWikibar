@@ -79,11 +79,16 @@
   display: flex;
   gap: 0.125em;
   flex-wrap: wrap;
+  padding: 0.5em 1em;
 
   .field {
     display: grid;
     gap: 0.5em;
     grid-template-columns: 1fr 2fr;
+
+    label {
+      width: inherit;
+    }
   }
 
   .form-buttons {

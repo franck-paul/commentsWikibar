@@ -9,36 +9,52 @@ dotclear.wikibar = {
   previous_width: 0,
   component: {
     dialog: class {
-      constructor(options) {
-        this.confirm_label = options?.confirm_label || 'Ok';
-        this.cancel_label = options?.cancel_label || 'Cancel';
-        this.fields = options?.fields;
+      confirmLabel;
+      cancelLabel;
+      fields;
+      constructor({ confirm_label, cancel_label, fields } = {}) {
+        this.confirm_label = confirm_label ?? 'Ok';
+        this.cancel_label = cancel_label ?? 'Cancel';
+        this.fields = fields;
       }
       prompt() {
-        return new Promise((resolve) => {
-          // 0. Check
-          if (!this.fields) resolve(null);
+        // 0. Check
+        if (!this.fields?.length) return Promise.resolve(null);
 
-          // 1. Create dialog HTML
-          const fields_html = this.fields.reduce(
-            (accumulator, currentValue) => `${accumulator}<p class="field">${currentValue.html}</p>`,
+        // 1. Create dialog HTML
+        const template = document.createElement('template');
+        const fields_html = this.fields.map((field) => `<p class="field">${field.html}</p>`).join('');
+        const html = (strings, ...values) =>
+          strings.reduce(
+            (accumulator, currentValue, currentIndex) => accumulator + currentValue + (values[currentIndex] ?? ''),
             '',
           );
-          const template = document.createElement('template');
-          template.innerHTML = `<dialog class="jstDialog"><form method="dialog">${fields_html}<p class="form-buttons"><button name="cancel" class="reset">${this.cancel_label}</button><button type="submit" name="confirm" class="submit">${this.confirm_label}</button></p></form></dialog>`;
-          const dialog = template.content.firstChild;
-          const fields = dialog.querySelectorAll('.field input, .field select');
-          let index = 0;
-          for (const field of fields) {
-            if (this.fields[index]?.default) field.value = this.fields[index].default;
-            index++;
-          }
+        template.innerHTML = html`
+          <dialog class="jstDialog">
+            <form method="dialog">
+              ${fields_html}
+              <p class="form-buttons">
+                <button name="cancel" class="reset">${this.cancel_label}</button>
+                <button type="submit" name="confirm" class="submit">${this.confirm_label}</button>
+              </p>
+            </form>
+          </dialog>
+        `;
+        const dialog = template.content.firstElementChild;
+        const fields = dialog.querySelectorAll('.field input, .field select');
+        let index = 0;
+        for (const field of fields) {
+          if (this.fields[index]?.default) field.value = this.fields[index].default;
+          index++;
+        }
 
-          // 2. Add dialog to body
-          document.body.appendChild(dialog);
+        // 2. Add dialog to body
+        document.body.appendChild(dialog);
 
+        const getReturnValue = () => JSON.stringify([...fields].map((field) => field.value));
+
+        return new Promise((resolve) => {
           // 3. Add event listener to cope with dialog
-          const getReturnValue = () => JSON.stringify(Array.from(fields).map((field) => field.value));
           for (const field of fields) {
             field.addEventListener('keydown', (event) => {
               if (event.key !== 'Enter') {
@@ -67,7 +83,7 @@ dotclear.wikibar = {
             event.preventDefault();
             dialog.removeEventListener('close', onCancel);
             dialog.returnValue = null;
-            document.body.removeChild(dialog);
+            dialog.remove();
             resolve(null);
           });
 
@@ -76,7 +92,7 @@ dotclear.wikibar = {
             event.preventDefault();
             dialog.removeEventListener('close', onClose);
             const result = dialog.returnValue;
-            document.body.removeChild(dialog);
+            dialog.remove();
             resolve(result);
           });
 
@@ -87,12 +103,16 @@ dotclear.wikibar = {
       }
     },
     button: class {
+      title;
+      fn;
+      scope;
+      className;
+      toolbar_node = null;
       constructor(title, fn, scope, className) {
-        this.title = title || null;
-        this.fn = fn || (() => {});
-        this.scope = scope || null;
-        this.className = className || null;
-        this.toolbar_node = null;
+        this.title = title ?? '';
+        this.fn = fn ?? (() => {});
+        this.scope = scope;
+        this.className = className ?? null;
       }
       draw() {
         if (!this.scope) {
@@ -123,11 +143,10 @@ dotclear.wikibar = {
         if (typeof this.fn === 'function') {
           node.addEventListener('click', (event) => {
             try {
-              this.fn.apply(this.scope, event);
+              this.fn.call(this.scope, event);
             } catch (error) {
               console.log(error);
             }
-            return false;
           });
         }
         return node;
@@ -135,25 +154,25 @@ dotclear.wikibar = {
       keyDown(event) {
         let stop_propagation = false;
 
-        switch (event.keyCode) {
-          case 13: // ENTER
-          case 32: // SPACE
+        switch (event.code) {
+          case 'Enter':
+          case 'Space':
             break;
-          case 39: // RIGHT
-          case 40: // DOWN
+          case 'ArrowRight':
+          case 'ArrowDown':
             this.toolbar_node.moveFocus(this, 'next');
             stop_propagation = true;
             break;
-          case 37: // LEFT
-          case 38: // UP
+          case 'ArrowLeft':
+          case 'ArrowUp':
             this.toolbar_node.moveFocus(this, 'previous');
             stop_propagation = true;
             break;
-          case 36: // HOME
+          case 'Home':
             this.toolbar_node.firstItem.focus();
             stop_propagation = true;
             break;
-          case 35: // END
+          case 'End':
             this.toolbar_node.lastItem.focus();
             stop_propagation = true;
             break;
@@ -215,32 +234,36 @@ dotclear.wikibar = {
       }
     },
     space: class {
+      id = null;
+      width = null;
       constructor(id) {
-        this.id = id || null;
-        this.width = null;
+        this.id = id ?? null;
       }
       draw() {
         const node = document.createElement('span');
-        if (this.id) {
-          node.id = this.id;
-        }
-        node.appendChild(document.createTextNode(String.fromCharCode(160)));
+        node.id = this.id ?? undefined;
+        node.textContent = '\u00A0';
         node.setAttribute('aria-hidden', 'true');
         node.className = 'jstSpacer';
-        if (this.width) {
+        if (this.width !== null) {
           node.style.marginRight = `${this.width}px`;
         }
         return node;
       }
     },
     combo: class {
+      title;
+      options;
+      scope;
+      fn;
+      className;
+      toolbar_node = null;
       constructor(title, options, scope, fn, className) {
-        this.title = title || null;
-        this.options = options || null;
-        this.scope = scope || null;
-        this.fn = fn || (() => {});
-        this.className = className || null;
-        this.toolbar_node = null;
+        this.title = title ?? null;
+        this.options = options;
+        this.scope = scope;
+        this.fn = fn ?? (() => {});
+        this.className = className ?? null;
       }
       draw() {
         if (!this.scope || !this.options) {
@@ -475,6 +498,9 @@ dotclear.wikibar = {
             });
           },
         },
+        space_inline: {
+          type: 'space',
+        },
         br: {
           type: 'button',
           title: 'Line break',
@@ -486,6 +512,9 @@ dotclear.wikibar = {
               this.encloseSelection('  \n', '');
             },
           },
+        },
+        space_br: {
+          type: 'space',
         },
         ul: {
           type: 'button',
@@ -511,6 +540,9 @@ dotclear.wikibar = {
             },
           },
         },
+        space_list: {
+          type: 'space',
+        },
         pre: {
           type: 'button',
           title: 'Preformatted',
@@ -534,6 +566,9 @@ dotclear.wikibar = {
               this.encloseSelection('\n', '', (selection) => `> ${selection.replace(/\r/g, '').replace(/\n/g, '\n> ')}`);
             },
           },
+        },
+        space_block: {
+          type: 'space',
         },
         link: {
           type: 'button',
@@ -624,9 +659,7 @@ dotclear.wikibar = {
       }
 
       window.addEventListener('resize', () => {
-        if (dotclear.resize_timer !== undefined) {
-          clearTimeout(dotclear.resize_timer);
-        }
+        clearTimeout(dotclear.resize_timer);
         dotclear.resize_timer = setTimeout(() => {
           if (document.documentElement.clientWidth !== dotclear.wikibar.previous_width) {
             this.updateTooltipsPos();
@@ -641,7 +674,7 @@ dotclear.wikibar = {
     }
 
     setMode(mode) {
-      this.mode = mode || 'wiki';
+      this.mode = mode ?? 'wiki';
     }
 
     switchMode(mode = 'wiki') {
@@ -681,9 +714,12 @@ dotclear.wikibar = {
       while (this.toolbar.hasChildNodes()) {
         this.toolbar.removeChild(this.toolbar.firstChild);
       }
+      let previous;
+      let nodes = [];
       for (const element in this.elements) {
         const button = this.elements[element];
         const ignore =
+          !button ||
           button.type === undefined ||
           button.type === '' ||
           (button.disabled !== undefined && button.disabled) ||
@@ -693,12 +729,35 @@ dotclear.wikibar = {
           if (element_instance) {
             const node = element_instance.draw();
             if (node) {
-              this.toolbar.appendChild(node);
-              node.toolbar_node = this;
+              if (!(button.type === 'space' && previous?.type === 'space')) {
+                // Do not repeat spaces
+                nodes.push({
+                  type: button.type,
+                  node,
+                });
+                node.toolbar_node = this;
+                previous = button;
+              }
             }
           }
         }
       }
+
+      if (nodes.length === 0) return;
+
+      // Cleanup nodes (no space at beginning or at end)
+      let index = 0;
+      while (nodes.length > 0 && nodes[index].type === 'space') {
+        nodes = nodes.slice(1);
+      }
+      index = nodes.length - 1;
+      while (index >= 0 && index < nodes.length && nodes[index].type === 'space') {
+        nodes = nodes.slice(0, -1);
+        index--;
+      }
+
+      // Add remaining nodes
+      for (const node of nodes) this.toolbar.appendChild(node.node);
 
       this.firstItem = document.querySelector('.jstElements button:first-child');
       this.lastItem = document.querySelector('.jstElements button:last-child');
@@ -708,10 +767,9 @@ dotclear.wikibar = {
     }
 
     keyDown(event) {
-      if (event.keyCode !== 27) {
+      if (event.code !== 'Escape') {
         return;
       }
-      //ESC
       this.hideAllTooltips();
     }
 
