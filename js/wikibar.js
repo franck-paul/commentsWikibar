@@ -420,7 +420,7 @@ dotclear.wikibar = {
           },
           async prompt(callback = null) {
             const dialog = new dotclear.wikibar.component.dialog({
-              title: this.cite_dialog?.title,
+              title: this.cite_dialog?.title || this.title,
               confirm_label: this.cite_dialog.ok,
               cancel_label: this.cite_dialog.cancel,
               fields: [
@@ -479,7 +479,7 @@ dotclear.wikibar = {
           },
           async prompt(callback = null) {
             const dialog = new dotclear.wikibar.component.dialog({
-              title: this.foreign_dialog?.title,
+              title: this.foreign_dialog?.title || this.title,
               confirm_label: this.foreign_dialog.ok,
               cancel_label: this.foreign_dialog.cancel,
               fields: [
@@ -620,7 +620,7 @@ dotclear.wikibar = {
           },
           async prompt(callback = null) {
             const dialog = new dotclear.wikibar.component.dialog({
-              title: this.link_dialog?.title,
+              title: this.link_dialog?.title || this.title,
               confirm_label: this.link_dialog.ok,
               cancel_label: this.link_dialog.cancel,
               fields: [
