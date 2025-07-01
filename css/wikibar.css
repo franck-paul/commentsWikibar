@@ -79,7 +79,14 @@
   display: flex;
   gap: 0.125em;
   flex-wrap: wrap;
+  flex-direction: column;
   padding: 0.5em 1em;
+
+  h1 {
+    font-size: 1.125em;
+    font-weight: bold;
+    border-bottom: 1px solid;
+  }
 
   .field {
     display: grid;

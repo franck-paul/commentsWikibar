@@ -12,12 +12,9 @@ use Dotclear\Helper\L10n;
 
 L10n::$locales['Comments Wikibar'] = '';
 L10n::$locales['Adds a formatting toolbar when public comments use the wiki syntax'] = '';
-L10n::$locales['Language of this text:'] = '';
-L10n::$locales['Link URL:'] = '';
-L10n::$locales['Link title:'] = '';
-L10n::$locales['Link language:'] = '';
-L10n::$locales['Quote URL:'] = '';
-L10n::$locales['Quote language:'] = '';
+L10n::$locales['Language:'] = '';
+L10n::$locales['URL:'] = '';
+L10n::$locales['Title:'] = '';
 L10n::$locales['Text formatting'] = '';
 L10n::$locales['Foreign text'] = '';
 L10n::$locales['Preformatted'] = '';

@@ -9,10 +9,12 @@ dotclear.wikibar = {
   previous_width: 0,
   component: {
     dialog: class {
+      title;
       confirmLabel;
       cancelLabel;
       fields;
-      constructor({ confirm_label, cancel_label, fields } = {}) {
+      constructor({ title, confirm_label, cancel_label, fields } = {}) {
+        this.title = title;
         this.confirm_label = confirm_label ?? 'Ok';
         this.cancel_label = cancel_label ?? 'Cancel';
         this.fields = fields;
@@ -29,8 +31,10 @@ dotclear.wikibar = {
             (accumulator, currentValue, currentIndex) => accumulator + currentValue + (values[currentIndex] ?? ''),
             '',
           );
+        const title = this.title ? `<h1>${this.title}</h1>` : '';
         template.innerHTML = html`
           <dialog class="jstDialog">
+            ${title}
             <form method="dialog">
               ${fields_html}
               <p class="form-buttons">
@@ -416,18 +420,19 @@ dotclear.wikibar = {
           },
           async prompt(callback = null) {
             const dialog = new dotclear.wikibar.component.dialog({
+              title: this.cite_dialog?.title,
               confirm_label: this.cite_dialog.ok,
               cancel_label: this.cite_dialog.cancel,
               fields: [
                 {
                   // Quote URL input
-                  default: this.cite_dialog.default_url,
-                  html: this.cite_dialog.url,
+                  default: this.cite_dialog.fields.default_url,
+                  html: this.cite_dialog.fields.url,
                 },
                 {
                   // Language select
-                  default: this.cite_dialog.default_lang,
-                  html: this.cite_dialog.language,
+                  default: this.cite_dialog.fields.default_lang,
+                  html: this.cite_dialog.fields.language,
                 },
               ],
             });
@@ -474,13 +479,14 @@ dotclear.wikibar = {
           },
           async prompt(callback = null) {
             const dialog = new dotclear.wikibar.component.dialog({
+              title: this.foreign_dialog?.title,
               confirm_label: this.foreign_dialog.ok,
               cancel_label: this.foreign_dialog.cancel,
               fields: [
                 {
                   // Language select
-                  default: this.foreign_dialog.default_lang,
-                  html: this.foreign_dialog.language,
+                  default: this.foreign_dialog.fields.default_lang,
+                  html: this.foreign_dialog.fields.language,
                 },
               ],
             });
@@ -614,23 +620,24 @@ dotclear.wikibar = {
           },
           async prompt(callback = null) {
             const dialog = new dotclear.wikibar.component.dialog({
+              title: this.link_dialog?.title,
               confirm_label: this.link_dialog.ok,
               cancel_label: this.link_dialog.cancel,
               fields: [
                 {
                   // Href input
-                  default: this.link_dialog.default_href,
-                  html: this.link_dialog.href,
+                  default: this.link_dialog.fields.default_href,
+                  html: this.link_dialog.fields.href,
                 },
                 {
                   // Title input
-                  default: this.link_dialog.default_title,
-                  html: this.link_dialog.title,
+                  default: this.link_dialog.fields.default_title,
+                  html: this.link_dialog.fields.title,
                 },
                 {
                   // Language (hreflang) select
-                  default: this.link_dialog.default_hreflang,
-                  html: this.link_dialog.language,
+                  default: this.link_dialog.fields.default_hreflang,
+                  html: this.link_dialog.fields.language,
                 },
               ],
             });

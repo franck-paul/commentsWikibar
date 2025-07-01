@@ -144,7 +144,7 @@ class FrontendBehaviors
                 $language_select = (new Select('language'))
                     ->items($language_options)
                     ->translate(false)
-                    ->label(new Label(__('Language of this text:'), Label::OL_TF))
+                    ->label(new Label(__('Language:'), Label::OL_TF))
                 ->render();
 
                 $href_input = (new Url('link_url'))
@@ -153,7 +153,7 @@ class FrontendBehaviors
                     ->required(true)
                     ->autocomplete('url')
                     ->translate(false)
-                    ->label((new Label(__('Link URL:'), Label::OL_TF)))
+                    ->label((new Label(__('URL:'), Label::OL_TF)))
                 ->render();
 
                 $title_input = (new Input('link_title'))
@@ -161,7 +161,7 @@ class FrontendBehaviors
                     ->size(35)
                     ->maxlength(512)
                     ->translate(false)
-                    ->label((new Label(__('Link title:'), Label::OL_TF)))
+                    ->label((new Label(__('Title:'), Label::OL_TF)))
                 ->render();
 
                 // Add an empty choice
@@ -170,7 +170,7 @@ class FrontendBehaviors
                 $hreflang_select = (new Select('link_language'))
                     ->items($language_options)
                     ->translate(false)
-                    ->label(new Label(__('Link language:'), Label::OL_TF))
+                    ->label(new Label(__('Language:'), Label::OL_TF))
                 ->render();
 
                 $citeurl_input = (new Url('cite_url'))
@@ -179,13 +179,13 @@ class FrontendBehaviors
                     ->required(true)
                     ->autocomplete('url')
                     ->translate(false)
-                    ->label((new Label(__('Quote URL:'), Label::OL_TF)))
+                    ->label((new Label(__('URL:'), Label::OL_TF)))
                 ->render();
 
                 $citelang_select = (new Select('cite_language'))
                     ->items($language_options)
                     ->translate(false)
-                    ->label(new Label(__('Quote language:'), Label::OL_TF))
+                    ->label(new Label(__('Language:'), Label::OL_TF))
                 ->render();
 
                 echo
@@ -219,28 +219,37 @@ class FrontendBehaviors
                         'no_url'    => $settings->no_url,
                     ],
                     'foreign_dialog' => [
-                        'ok'           => __('Ok'),
-                        'cancel'       => __('Cancel'),
-                        'language'     => $language_select,
-                        'default_lang' => 'en',
+                        'title'  => __('Foreign text'),
+                        'ok'     => __('Ok'),
+                        'cancel' => __('Cancel'),
+                        'fields' => [
+                            'language'     => $language_select,
+                            'default_lang' => 'en',
+                        ],
                     ],
                     'link_dialog' => [
-                        'ok'               => __('Ok'),
-                        'cancel'           => __('Cancel'),
-                        'href'             => $href_input,
-                        'default_href'     => '',
-                        'title'            => $title_input,
-                        'default_title'    => '',
-                        'language'         => $hreflang_select,
-                        'default_hreflang' => '',
+                        'title'  => __('Link'),
+                        'ok'     => __('Ok'),
+                        'cancel' => __('Cancel'),
+                        'fields' => [
+                            'href'             => $href_input,
+                            'default_href'     => '',
+                            'title'            => $title_input,
+                            'default_title'    => '',
+                            'language'         => $hreflang_select,
+                            'default_hreflang' => '',
+                        ],
                     ],
                     'cite_dialog' => [
-                        'ok'           => __('Ok'),
-                        'cancel'       => __('Cancel'),
-                        'url'          => $citeurl_input,
-                        'default_url'  => '',
-                        'language'     => $citelang_select,
-                        'default_lang' => '',
+                        'title'  => __('Inline quote'),
+                        'ok'     => __('Ok'),
+                        'cancel' => __('Cancel'),
+                        'fields' => [
+                            'url'          => $citeurl_input,
+                            'default_url'  => '',
+                            'language'     => $citelang_select,
+                            'default_lang' => '',
+                        ],
                     ],
                 ]) .
                 My::jsLoad('bootstrap.js');

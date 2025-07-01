@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Dotclear 2 commentsWikibar module\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-29 23:09+0200\n"
+"POT-Creation-Date: 2025-07-01 09:50+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,27 +28,18 @@ msgid "Adds a formatting toolbar when public comments use the wiki syntax"
 msgstr ""
 
 #: ../git-plugins/commentsWikibar/src/FrontendBehaviors.php:147
-msgid "Language of this text:"
+#: ../git-plugins/commentsWikibar/src/FrontendBehaviors.php:173
+#: ../git-plugins/commentsWikibar/src/FrontendBehaviors.php:188
+msgid "Language:"
 msgstr ""
 
 #: ../git-plugins/commentsWikibar/src/FrontendBehaviors.php:156
-msgid "Link URL:"
+#: ../git-plugins/commentsWikibar/src/FrontendBehaviors.php:182
+msgid "URL:"
 msgstr ""
 
 #: ../git-plugins/commentsWikibar/src/FrontendBehaviors.php:164
-msgid "Link title:"
-msgstr ""
-
-#: ../git-plugins/commentsWikibar/src/FrontendBehaviors.php:173
-msgid "Link language:"
-msgstr ""
-
-#: ../git-plugins/commentsWikibar/src/FrontendBehaviors.php:182
-msgid "Quote URL:"
-msgstr ""
-
-#: ../git-plugins/commentsWikibar/src/FrontendBehaviors.php:188
-msgid "Quote language:"
+msgid "Title:"
 msgstr ""
 
 #: ../git-plugins/commentsWikibar/src/FrontendBehaviors.php:197
@@ -56,6 +47,7 @@ msgid "Text formatting"
 msgstr ""
 
 #: ../git-plugins/commentsWikibar/src/FrontendBehaviors.php:205
+#: ../git-plugins/commentsWikibar/src/FrontendBehaviors.php:222
 #: ../git-plugins/commentsWikibar/src/Manage.php:211
 #: ../git-plugins/commentsWikibar/src/Manage.php:212
 msgid "Foreign text"
@@ -73,15 +65,15 @@ msgstr ""
 msgid "Block quote"
 msgstr ""
 
-#: ../git-plugins/commentsWikibar/src/FrontendBehaviors.php:222
-#: ../git-plugins/commentsWikibar/src/FrontendBehaviors.php:228
-#: ../git-plugins/commentsWikibar/src/FrontendBehaviors.php:238
+#: ../git-plugins/commentsWikibar/src/FrontendBehaviors.php:223
+#: ../git-plugins/commentsWikibar/src/FrontendBehaviors.php:232
+#: ../git-plugins/commentsWikibar/src/FrontendBehaviors.php:245
 msgid "Ok"
 msgstr ""
 
-#: ../git-plugins/commentsWikibar/src/FrontendBehaviors.php:223
-#: ../git-plugins/commentsWikibar/src/FrontendBehaviors.php:229
-#: ../git-plugins/commentsWikibar/src/FrontendBehaviors.php:239
+#: ../git-plugins/commentsWikibar/src/FrontendBehaviors.php:224
+#: ../git-plugins/commentsWikibar/src/FrontendBehaviors.php:233
+#: ../git-plugins/commentsWikibar/src/FrontendBehaviors.php:246
 msgid "Cancel"
 msgstr ""
 
