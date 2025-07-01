@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Dotclear 2 commentsWikibar module\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-29 23:09+0200\n"
+"POT-Creation-Date: 2025-07-01 09:50+0200\n"
 "PO-Revision-Date: 2023-05-24 05:51+0000\n"
 "Last-Translator: Franck Paul <carnet.franck.paul@gmail.com>, 2025\n"
 "Language-Team: French (https://app.transifex.com/open-time/teams/109573/fr/)\n"
@@ -28,23 +28,14 @@ msgstr ""
 "Ajoute une barre d'outils de formatage pour les commentaires publics "
 "utilisant la syntaxe wiki"
 
-msgid "Language of this text:"
-msgstr "Langue du texte :"
+msgid "Language:"
+msgstr "Langue :"
 
-msgid "Link URL:"
-msgstr "URL du lien :"
+msgid "URL:"
+msgstr "URL :"
 
-msgid "Link title:"
-msgstr "Titre du lien :"
-
-msgid "Link language:"
-msgstr "Langue du lien :"
-
-msgid "Quote URL:"
-msgstr "URL de la citation :"
-
-msgid "Quote language:"
-msgstr "Langue de la citation :"
+msgid "Title:"
+msgstr "Titre :"
 
 msgid "Text formatting"
 msgstr "Formatage de texte"
