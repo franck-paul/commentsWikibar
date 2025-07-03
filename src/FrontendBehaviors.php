@@ -176,7 +176,6 @@ class FrontendBehaviors
                 $citeurl_input = (new Url('cite_url'))
                     ->size(35)
                     ->maxlength(512)
-                    ->required(true)
                     ->autocomplete('url')
                     ->translate(false)
                     ->label((new Label(__('URL:'), Label::OL_TF)))
