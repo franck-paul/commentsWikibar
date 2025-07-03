@@ -10,8 +10,8 @@ dotclear.wikibar = {
   component: {
     dialog: class {
       title;
-      confirmLabel;
-      cancelLabel;
+      confirm_label;
+      cancel_label;
       fields;
       constructor({ title, confirm_label, cancel_label, fields } = {}) {
         this.title = title;
