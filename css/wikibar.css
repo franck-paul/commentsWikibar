@@ -47,7 +47,7 @@
 
     span:not(.jstb_icon) {
       position: absolute;
-      bottom: 1.75em;
+      bottom: 2rem;
       color: light-dark(#333, #fafafa);
       background-color: light-dark(#fff, #333);
       padding: 0.25em;
