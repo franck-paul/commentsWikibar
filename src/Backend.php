@@ -17,10 +17,12 @@ namespace Dotclear\Plugin\commentsWikibar;
 
 use Dotclear\App;
 use Dotclear\Core\Backend\Favorites;
-use Dotclear\Core\Process;
+use Dotclear\Helper\Process\TraitProcess;
 
-class Backend extends Process
+class Backend
 {
+    use TraitProcess;
+
     public static function init(): bool
     {
         // dead but useful code, in order to have translations
