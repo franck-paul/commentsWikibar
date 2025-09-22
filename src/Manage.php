@@ -16,8 +16,6 @@ declare(strict_types=1);
 namespace Dotclear\Plugin\commentsWikibar;
 
 use Dotclear\App;
-use Dotclear\Core\Backend\Notices;
-use Dotclear\Core\Backend\Page;
 use Dotclear\Helper\Html\Form\Btn;
 use Dotclear\Helper\Html\Form\Checkbox;
 use Dotclear\Helper\Html\Form\Div;
@@ -91,7 +89,7 @@ class Manage
 
                 App::blog()->triggerBlog();
 
-                Notices::addSuccessNotice(__('Configuration successfully updated.'));
+                App::backend()->notices()->addSuccessNotice(__('Configuration successfully updated.'));
                 My::redirect();
             } catch (Exception $e) {
                 App::error()->add($e->getMessage());
@@ -128,20 +126,20 @@ class Manage
 
         $jstb_icon = (new Span())->class('jstb_icon')->render();
 
-        Page::openModule(
+        App::backend()->page()->openModule(
             __('Comments Wikibar'),
             My::cssLoad('wikibar.css') .
             My::cssLoad('admin.css') .
-            Page::jsPageTabs('')
+            App::backend()->page()->jsPageTabs('')
         );
 
-        echo Page::breadcrumb(
+        echo App::backend()->page()->breadcrumb(
             [
                 Html::escapeHTML(App::blog()->name()) => '',
                 __('Comments Wikibar')                => '',
             ]
         );
-        echo Notices::getNotices();
+        echo App::backend()->notices()->getNotices();
 
         // Form
         echo (new Form('options-form'))
@@ -367,6 +365,6 @@ class Manage
             ])
             ->render();
 
-        Page::closeModule();
+        App::backend()->page()->closeModule();
     }
 }
