@@ -24,7 +24,6 @@ use Dotclear\Helper\Html\Form\Select;
 use Dotclear\Helper\Html\Form\Url;
 use Dotclear\Helper\Html\Html;
 use Dotclear\Helper\Html\WikiToHtml;
-use Dotclear\Helper\L10n;
 
 class FrontendBehaviors
 {
@@ -136,7 +135,7 @@ class FrontendBehaviors
                 }
 
                 $language_options = [];
-                $language_codes   = L10n::getISOcodes(true, true);
+                $language_codes   = App::lang()->getISOcodes(true, true);
                 foreach ($language_codes as $language_name => $language_code) {
                     $language_options[] = (new Option($language_name, $language_code))->lang($language_code);
                 }
