@@ -1,6 +1,6 @@
 .jstElements {
   display: flex;
-  gap: 0.125em;
+  gap: 0.5em;
   flex-wrap: wrap;
   margin: 0.125em 0 0.25em;
 
@@ -16,6 +16,17 @@
   }
   .hidden {
     visibility: hidden;
+  }
+
+  .jstGroup {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.125em;
   }
 
   button {

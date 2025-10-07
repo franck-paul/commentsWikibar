@@ -336,6 +336,7 @@ dotclear.wikibar = {
 
       this.elements = {
         strong: {
+          group: 'format',
           type: 'button',
           title: 'Strong emphasis',
           fn: {
@@ -348,6 +349,7 @@ dotclear.wikibar = {
           },
         },
         em: {
+          group: 'format',
           type: 'button',
           title: 'Emphasis',
           fn: {
@@ -360,6 +362,7 @@ dotclear.wikibar = {
           },
         },
         ins: {
+          group: 'format',
           type: 'button',
           title: 'Inserted',
           fn: {
@@ -372,6 +375,7 @@ dotclear.wikibar = {
           },
         },
         del: {
+          group: 'format',
           type: 'button',
           title: 'Deleted',
           fn: {
@@ -384,6 +388,7 @@ dotclear.wikibar = {
           },
         },
         quote: {
+          group: 'format',
           type: 'button',
           title: 'Inline quote',
           fn: {
@@ -451,6 +456,7 @@ dotclear.wikibar = {
           },
         },
         code: {
+          group: 'format',
           type: 'button',
           title: 'Code',
           fn: {
@@ -463,6 +469,7 @@ dotclear.wikibar = {
           },
         },
         foreign: {
+          group: 'format',
           type: 'button',
           title: 'Foreign text',
           fn: {
@@ -504,10 +511,8 @@ dotclear.wikibar = {
             });
           },
         },
-        space_inline: {
-          type: 'space',
-        },
         br: {
+          group: 'br',
           type: 'button',
           title: 'Line break',
           fn: {
@@ -519,10 +524,8 @@ dotclear.wikibar = {
             },
           },
         },
-        space_br: {
-          type: 'space',
-        },
         ul: {
+          group: 'block',
           type: 'button',
           title: 'Unordered list',
           fn: {
@@ -535,6 +538,7 @@ dotclear.wikibar = {
           },
         },
         ol: {
+          group: 'block',
           type: 'button',
           title: 'Ordered list',
           fn: {
@@ -546,10 +550,8 @@ dotclear.wikibar = {
             },
           },
         },
-        space_list: {
-          type: 'space',
-        },
         pre: {
+          group: 'block',
           type: 'button',
           title: 'Preformatted',
           fn: {
@@ -562,6 +564,7 @@ dotclear.wikibar = {
           },
         },
         bquote: {
+          group: 'block',
           type: 'button',
           title: 'Block quote',
           fn: {
@@ -573,10 +576,8 @@ dotclear.wikibar = {
             },
           },
         },
-        space_block: {
-          type: 'space',
-        },
         link: {
+          group: 'link',
           type: 'button',
           title: 'Link',
           fn: {
@@ -718,53 +719,84 @@ dotclear.wikibar = {
 
     draw(mode) {
       this.setMode(mode);
+
+      // Empty toolbar
       while (this.toolbar.hasChildNodes()) {
         this.toolbar.removeChild(this.toolbar.firstChild);
       }
-      let previous;
-      let nodes = [];
-      for (const element in this.elements) {
-        const button = this.elements[element];
-        const ignore =
-          !button ||
-          button.type === undefined ||
-          button.type === '' ||
-          (button.disabled !== undefined && button.disabled) ||
-          (button.context !== undefined && button.context != null && button.context !== this.context);
-        if (!ignore && typeof this[button.type] === 'function') {
-          const element_instance = this[button.type](element);
-          if (element_instance) {
-            const node = element_instance.draw();
-            if (node) {
-              if (!(button.type === 'space' && previous?.type === 'space')) {
-                // Do not repeat spaces
-                nodes.push({
-                  type: button.type,
-                  node,
-                });
-                node.toolbar_node = this;
-                previous = button;
+      this.toolNodes = {}; // vide les raccourcis DOM/**/
+
+      // Draw toolbar elements
+      let element;
+      let tool;
+      let newTool;
+      let currentGroup;
+      const groupTemplate = new DOMParser().parseFromString(`<div class="jstGroup"></div>`, 'text/html').body.firstChild;
+      const groups = [];
+
+      // Create a first group of elements
+      currentGroup = groupTemplate.cloneNode(true);
+      for (const name in this.elements) {
+        element = this.elements[name];
+
+        const disabled =
+          element.type === undefined ||
+          element.type === '' ||
+          (element.disabled !== undefined && element.disabled) ||
+          (element.context !== undefined && element.context != null && element.context !== this.context);
+
+        if (!disabled && typeof this[element.type] === 'function') {
+          newTool = false;
+          const groupName = element?.group;
+          tool = this[element.type](name);
+          if (tool) {
+            if (element.type !== 'space') {
+              newTool = tool.draw();
+              newTool.toolbar_node = this;
+            } else {
+              // Check if current group is not empty and if then add it to the list of groups
+              if (currentGroup.childElementCount > 0) groups.push(currentGroup);
+              // Then crate a new group
+              currentGroup = groupTemplate.cloneNode(true);
+            }
+          }
+          if (newTool) {
+            this.toolNodes[name] = newTool; //mémorise l'accès DOM pour usage éventuel ultérieur ???
+
+            // Search if a group with the same group name already exist
+            for (const group of groups) {
+              if (group.getAttribute('name') === `jstg_${groupName}`) {
+                // Group found, add tool to it
+                group.appendChild(newTool);
+                newTool = false;
+                break;
               }
+            }
+
+            // If gid not found in existing group, add to the current group
+            if (newTool) {
+              // Check if the current group already have a name and it's the same as the element
+              if (currentGroup.getAttribute('name') !== null && currentGroup.getAttribute('name') !== `jstg_${groupName}`) {
+                // Need to put element in another new group, store the current one
+                groups.push(currentGroup);
+                // Then crate a new group
+                currentGroup = groupTemplate.cloneNode(true);
+              }
+              currentGroup.appendChild(newTool);
+              if (groupName !== undefined && groupName !== '' && currentGroup.getAttribute('name') === null)
+                currentGroup.setAttribute('name', `jstg_${groupName}`);
             }
           }
         }
       }
 
-      if (nodes.length === 0) return;
+      // Check if last group is not empty and if then add it to the list of groups
+      if (currentGroup.childElementCount > 0) groups.push(currentGroup);
 
-      // Cleanup nodes (no space at beginning or at end)
-      let index = 0;
-      while (nodes.length > 0 && nodes[index].type === 'space') {
-        nodes = nodes.slice(1);
+      // Add all non empty group to toolbar
+      for (const group of groups) {
+        if (group.childElementCount > 0) this.toolbar.appendChild(group);
       }
-      index = nodes.length - 1;
-      while (index >= 0 && index < nodes.length && nodes[index].type === 'space') {
-        nodes = nodes.slice(0, -1);
-        index--;
-      }
-
-      // Add remaining nodes
-      for (const node of nodes) this.toolbar.appendChild(node.node);
 
       this.firstItem = document.querySelector('.jstElements button:first-child');
       this.lastItem = document.querySelector('.jstElements button:last-child');
