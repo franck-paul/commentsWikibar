@@ -305,7 +305,7 @@ dotclear.wikibar = {
       if (!target) {
         return;
       }
-      if (typeof document.selection === 'undefined' && typeof target.setSelectionRange === 'undefined') {
+      if (document.selection === undefined && target.setSelectionRange === undefined) {
         return;
       }
 
@@ -828,9 +828,9 @@ dotclear.wikibar = {
       let position;
       let text;
       let enclosed;
-      if (typeof document.selection !== 'undefined') {
+      if (document.selection !== undefined) {
         selection = document.selection.createRange().text;
-      } else if (typeof this.textarea.setSelectionRange !== 'undefined') {
+      } else if (this.textarea.setSelectionRange !== undefined) {
         selection_start = this.textarea.selectionStart;
         selection_end = this.textarea.selectionEnd;
         position = this.textarea.scrollTop;
@@ -847,10 +847,10 @@ dotclear.wikibar = {
         enclosed = selection || '';
       }
       text = start_tag + enclosed + end_tag_final;
-      if (typeof document.selection !== 'undefined') {
+      if (document.selection !== undefined) {
         document.selection.createRange().text = text;
         this.textarea.caretPos -= end_tag.length;
-      } else if (typeof this.textarea.setSelectionRange !== 'undefined') {
+      } else if (this.textarea.setSelectionRange !== undefined) {
         this.textarea.value =
           this.textarea.value.substring(0, selection_start) + text + this.textarea.value.substring(selection_end);
         if (enclosed.length) {
