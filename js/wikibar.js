@@ -740,6 +740,7 @@ dotclear.wikibar = {
         element = this.elements[name];
 
         const disabled =
+          element === undefined ||
           element.type === undefined ||
           element.type === '' ||
           (element.disabled !== undefined && element.disabled) ||
