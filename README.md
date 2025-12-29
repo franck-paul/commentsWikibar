@@ -10,11 +10,23 @@ Adds a formatting toolbar when public comments use the Dotclear wiki syntax in D
 
 Note: The markdown syntax is also take into account if the according syntax is installed and selected for public comments.
 
-## Build production files
+## Additional URL types
 
-Run `tools/build.sh` from main directory of the plugin
+The plugin will cope with post and page standard URLs. If you need more contexts, you should use the `initCommentsWikibar` behavior and adding your URL type to the given parameter.
 
-Note: minify (nodejs) must be installed to build production js/css (see <https://www.npmjs.com/package/minify>)
+Example for a new 'Entry' URL type :
+
+```php
+/**
+ * @param  ArrayObject<array-key, string> $supported_modes
+ */
+public static function initCommentsWikibar(ArrayObject $supported_modes): string
+{
+    $supported_modes->append('Entry');
+
+    return '';
+}
+```
 
 ## Support
 
