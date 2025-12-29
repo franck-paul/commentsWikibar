@@ -31,7 +31,7 @@ class FrontendBehaviors
     {
         $settings = My::settings();
         if ($settings->active && App::blog()->settings()->system->wiki_comments) {
-            $supported_modes = new ArrayObject(['post', 'pages', 'gal', 'galitem']);
+            $supported_modes = new ArrayObject(['post', 'pages', 'gal', 'galitem', 'FrontendSession']);
             App::behavior()->callBehavior('initCommentsWikibar', $supported_modes);
             if (in_array(App::url()->getType(), (array) $supported_modes)) {
                 return true;
@@ -81,7 +81,7 @@ class FrontendBehaviors
         return '';
     }
 
-    public static function publicHeadContent(): string
+    public static function publicHeadContentHelper(?string $field = 'c_content'): void
     {
         if (self::canActivate()) {
             $settings = My::settings();
@@ -189,7 +189,7 @@ class FrontendBehaviors
                 echo
                 Html::jsJson('commentswikibar', [
                     'base_url'   => App::blog()->host(),
-                    'id'         => 'c_content',
+                    'id'         => $field,
                     'mode'       => $mode,
                     'legend_msg' => __('You can use the following shortcuts to format your text.'),
                     'label'      => __('Text formatting'),
@@ -253,6 +253,11 @@ class FrontendBehaviors
                 My::jsLoad('bootstrap.js');
             }
         }
+    }
+
+    public static function publicHeadContent(): string
+    {
+        self::publicHeadContentHelper();
 
         return '';
     }
