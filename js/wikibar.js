@@ -2,7 +2,7 @@
 // support of ARIA toolbar design pattern largely inspired from https://www.w3.org/TR/wai-aria-practices-1.1/examples/toolbar/toolbar.html
 
 /* Create dotclear global object if necessary */
-if (window.dotclear === undefined) window.dotclear = {};
+if (globalThis.dotclear === undefined) globalThis.dotclear = {};
 
 dotclear.wikibar = {
   resize_timer: undefined,
@@ -289,7 +289,7 @@ dotclear.wikibar = {
           try {
             combo.fn.call(combo.scope, this.value);
           } catch (error) {
-            window.alert(error);
+            globalThis.alert(error);
           }
           return false;
         };
@@ -530,10 +530,10 @@ dotclear.wikibar = {
           title: 'Unordered list',
           fn: {
             wiki() {
-              this.encloseSelection('', '', (selection) => `* ${selection.replace(/\r/g, '').replace(/\n/g, '\n* ')}`);
+              this.encloseSelection('', '', (selection) => `* ${selection.replaceAll('\r', '').replaceAll('\n', '\n* ')}`);
             },
             markdown() {
-              this.encloseSelection('', '', (selection) => `* ${selection.replace(/\r/g, '').replace(/\n/g, '\n* ')}`);
+              this.encloseSelection('', '', (selection) => `* ${selection.replaceAll('\r', '').replaceAll('\n', '\n* ')}`);
             },
           },
         },
@@ -543,10 +543,10 @@ dotclear.wikibar = {
           title: 'Ordered list',
           fn: {
             wiki() {
-              this.encloseSelection('', '', (selection) => `# ${selection.replace(/\r/g, '').replace(/\n/g, '\n# ')}`);
+              this.encloseSelection('', '', (selection) => `# ${selection.replaceAll('\r', '').replaceAll('\n', '\n# ')}`);
             },
             markdown() {
-              this.encloseSelection('', '', (selection) => `1. ${selection.replace(/\r/g, '').replace(/\n/g, '\n1. ')}`);
+              this.encloseSelection('', '', (selection) => `1. ${selection.replaceAll('\r', '').replaceAll('\n', '\n1. ')}`);
             },
           },
         },
@@ -556,10 +556,10 @@ dotclear.wikibar = {
           title: 'Preformatted',
           fn: {
             wiki() {
-              this.encloseSelection('', '', (selection) => ` ${selection.replace(/\r/g, '').replace(/\n/g, '\n ')}`);
+              this.encloseSelection('', '', (selection) => ` ${selection.replaceAll('\r', '').replaceAll('\n', '\n ')}`);
             },
             markdown() {
-              this.encloseSelection('\n', '', (selection) => `    ${selection.replace(/\r/g, '').replace(/\n/g, '\n    ')}`);
+              this.encloseSelection('\n', '', (selection) => `    ${selection.replaceAll('\r', '').replaceAll('\n', '\n    ')}`);
             },
           },
         },
@@ -569,10 +569,10 @@ dotclear.wikibar = {
           title: 'Block quote',
           fn: {
             wiki() {
-              this.encloseSelection('', '', (selection) => `> ${selection.replace(/\r/g, '').replace(/\n/g, '\n> ')}`);
+              this.encloseSelection('', '', (selection) => `> ${selection.replaceAll('\r', '').replaceAll('\n', '\n> ')}`);
             },
             markdown() {
-              this.encloseSelection('\n', '', (selection) => `> ${selection.replace(/\r/g, '').replace(/\n/g, '\n> ')}`);
+              this.encloseSelection('\n', '', (selection) => `> ${selection.replaceAll('\r', '').replaceAll('\n', '\n> ')}`);
             },
           },
         },
@@ -722,7 +722,7 @@ dotclear.wikibar = {
 
       // Empty toolbar
       while (this.toolbar.hasChildNodes()) {
-        this.toolbar.removeChild(this.toolbar.firstChild);
+        this.toolbar.firstChild.remove();
       }
       this.toolNodes = {}; // vide les raccourcis DOM/**/
 
@@ -751,14 +751,14 @@ dotclear.wikibar = {
           const groupName = element?.group;
           tool = this[element.type](name);
           if (tool) {
-            if (element.type !== 'space') {
-              newTool = tool.draw();
-              newTool.toolbar_node = this;
-            } else {
+            if (element.type === 'space') {
               // Check if current group is not empty and if then add it to the list of groups
               if (currentGroup.childElementCount > 0) groups.push(currentGroup);
               // Then crate a new group
               currentGroup = groupTemplate.cloneNode(true);
+            } else {
+              newTool = tool.draw();
+              newTool.toolbar_node = this;
             }
           }
           if (newTool) {
