@@ -31,7 +31,7 @@ class FrontendBehaviors
     {
         $settings = My::settings();
         if ($settings->active && App::blog()->settings()->system->wiki_comments) {
-            $supported_modes = new ArrayObject(['post', 'pages', 'gal', 'galitem', 'FrontendSession']);
+            $supported_modes = new ArrayObject(['post', 'pages', 'gal', 'galitem', 'FrontendSession', 'Discussion']);
             App::behavior()->callBehavior('initCommentsWikibar', $supported_modes);
             if (in_array(App::url()->getType(), (array) $supported_modes)) {
                 return true;
