@@ -42,6 +42,46 @@
       border-color: #e905a8;
     }
 
+    &.jstb_strong {
+      --svg: url('index.php?pf=commentsWikibar/img/jstb_strong.svg');
+    }
+    &.jstb_em {
+      --svg: url('index.php?pf=commentsWikibar/img/jstb_em.svg');
+    }
+    &.jstb_ins {
+      --svg: url('index.php?pf=commentsWikibar/img/jstb_ins.svg');
+    }
+    &.jstb_del {
+      --svg: url('index.php?pf=commentsWikibar/img/jstb_del.svg');
+    }
+    &.jstb_quote {
+      --svg: url('index.php?pf=commentsWikibar/img/jstb_quote.svg');
+    }
+    &.jstb_code {
+      --svg: url('index.php?pf=commentsWikibar/img/jstb_code.svg');
+    }
+    &.jstb_foreign {
+      --svg: url('index.php?pf=commentsWikibar/img/jstb_foreign.svg');
+    }
+    &.jstb_br {
+      --svg: url('index.php?pf=commentsWikibar/img/jstb_br.svg');
+    }
+    &.jstb_ul {
+      --svg: url('index.php?pf=commentsWikibar/img/jstb_ul.svg');
+    }
+    &.jstb_ol {
+      --svg: url('index.php?pf=commentsWikibar/img/jstb_ol.svg');
+    }
+    &.jstb_pre {
+      --svg: url('index.php?pf=commentsWikibar/img/jstb_pre.svg');
+    }
+    &.jstb_bquote {
+      --svg: url('index.php?pf=commentsWikibar/img/jstb_bquote.svg');
+    }
+    &.jstb_link {
+      --svg: url('index.php?pf=commentsWikibar/img/jstb_link.svg');
+    }
+
     span.jstb_icon {
       display: inline-block;
       width: 1.9rem;
@@ -50,7 +90,7 @@
       /* Couleur de l'icône (modifiable à volonté) */
       background-color: currentColor;
 
-      /* Application du masque SVG - voir ci-dessous */
+      /* Application du masque SVG - voir ci-dessus */
       mask-image: var(--svg);
       mask-repeat: no-repeat;
       mask-position: center;
@@ -127,49 +167,5 @@
     &:focus {
       border-color: #e905a8;
     }
-  }
-}
-
-/* Buttons
--------------------------------------------------------- */
-.jstElements button {
-  &.jstb_strong {
-    --svg: url('index.php?pf=commentsWikibar/img/jstb_strong.svg');
-  }
-  &.jstb_em {
-    --svg: url('index.php?pf=commentsWikibar/img/jstb_em.svg');
-  }
-  &.jstb_ins {
-    --svg: url('index.php?pf=commentsWikibar/img/jstb_ins.svg');
-  }
-  &.jstb_del {
-    --svg: url('index.php?pf=commentsWikibar/img/jstb_del.svg');
-  }
-  &.jstb_quote {
-    --svg: url('index.php?pf=commentsWikibar/img/jstb_quote.svg');
-  }
-  &.jstb_code {
-    --svg: url('index.php?pf=commentsWikibar/img/jstb_code.svg');
-  }
-  &.jstb_foreign {
-    --svg: url('index.php?pf=commentsWikibar/img/jstb_foreign.svg');
-  }
-  &.jstb_br {
-    --svg: url('index.php?pf=commentsWikibar/img/jstb_br.svg');
-  }
-  &.jstb_ul {
-    --svg: url('index.php?pf=commentsWikibar/img/jstb_ul.svg');
-  }
-  &.jstb_ol {
-    --svg: url('index.php?pf=commentsWikibar/img/jstb_ol.svg');
-  }
-  &.jstb_pre {
-    --svg: url('index.php?pf=commentsWikibar/img/jstb_pre.svg');
-  }
-  &.jstb_bquote {
-    --svg: url('index.php?pf=commentsWikibar/img/jstb_bquote.svg');
-  }
-  &.jstb_link {
-    --svg: url('index.php?pf=commentsWikibar/img/jstb_link.svg');
   }
 }
