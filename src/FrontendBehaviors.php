@@ -31,7 +31,8 @@ class FrontendBehaviors
     {
         $settings = My::settings();
         if ($settings->active && App::blog()->settings()->system->wiki_comments) {
-            $supported_modes = new ArrayObject(['post', 'pages', 'gal', 'galitem', 'FrontendSession', 'Discussion']);
+            $supported_modes = new ArrayObject(['post', 'pages']);
+
             App::behavior()->callBehavior('initCommentsWikibar', $supported_modes);
             if (in_array(App::url()->getType(), (array) $supported_modes)) {
                 return true;
@@ -81,6 +82,11 @@ class FrontendBehaviors
         return '';
     }
 
+    /**
+     * publicHeadContent behavior helper
+     *
+     * @param  string $field Optional id of field
+     */
     public static function publicHeadContentHelper(?string $field = 'c_content'): void
     {
         if (self::canActivate()) {
