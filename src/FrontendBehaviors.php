@@ -8,7 +8,7 @@
  *
  * @author Franck Paul and contributors
  *
- * @copyright Franck Paul carnet.franck.paul@gmail.com
+ * @copyright Franck Paul contact@open-time.net
  * @copyright GPL-2.0 https://www.gnu.org/licenses/gpl-2.0.html
  */
 declare(strict_types=1);
@@ -93,19 +93,25 @@ class FrontendBehaviors
             $settings = My::settings();
             // CSS
             if ($settings->add_css) {
-                $custom_css = trim((string) $settings->custom_css);
+                $css        = '';
+                $custom_css = trim(is_string($custom_css = $settings->custom_css) ? $custom_css : '');
                 if ($custom_css !== '') {
+                    $css_file = '';
                     if (str_starts_with($custom_css, '/') || preg_match('!^https?://.+!', $custom_css)) {
                         // Absolute URL
                         $css_file = $custom_css;
                     } else {
                         // Relative URL
-                        $css_file = App::blog()->settings()->system->themes_url . '/' .
-                        App::blog()->settings()->system->theme . '/' .
-                            $custom_css;
+                        $theme      = is_string($theme = App::blog()->settings()->system->theme) ? $theme : '';
+                        $themes_url = is_string($themes_url = App::blog()->settings()->system->themes_url) ? $themes_url : '';
+                        if ($theme !== '') {
+                            $css_file = $themes_url . '/' . $theme . '/' . $custom_css;
+                        }
                     }
 
-                    $css = App::plugins()->cssLoad($css_file);
+                    if ($css_file !== '') {
+                        $css = App::plugins()->cssLoad($css_file);
+                    }
                 } else {
                     $css = My::cssLoad('wikibar.css');
                 }
@@ -115,17 +121,23 @@ class FrontendBehaviors
 
             // JS
             if ($settings->add_jslib) {
-                $custom_jslib = trim((string) $settings->custom_jslib);
+                $custom_jslib = trim(is_string($custom_jslib = $settings->custom_jslib) ? $custom_jslib : '');
+                $js           = '';
                 if ($custom_jslib !== '') {
+                    $js_file = '';
                     if (str_starts_with($custom_jslib, '/') || preg_match('!^https?://.+!', $custom_jslib)) {
                         $js_file = $custom_jslib;
                     } else {
-                        $js_file = App::blog()->settings()->system->themes_url . '/' .
-                        App::blog()->settings()->system->theme . '/' .
-                            $custom_jslib;
+                        $theme      = is_string($theme = App::blog()->settings()->system->theme) ? $theme : '';
+                        $themes_url = is_string($themes_url = App::blog()->settings()->system->themes_url) ? $themes_url : '';
+                        if ($theme !== '') {
+                            $js_file = $themes_url . '/' . $theme . '/' . $custom_jslib;
+                        }
                     }
 
-                    $js = App::plugins()->jsLoad($js_file);
+                    if ($js_file !== '') {
+                        $js = App::plugins()->jsLoad($js_file);
+                    }
                 } else {
                     $js = My::jsLoad('wikibar.js');
                 }

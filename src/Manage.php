@@ -8,7 +8,7 @@
  *
  * @author Franck Paul and contributors
  *
- * @copyright Franck Paul carnet.franck.paul@gmail.com
+ * @copyright Franck Paul contact@open-time.net
  * @copyright GPL-2.0 https://www.gnu.org/licenses/gpl-2.0.html
  */
 declare(strict_types=1);
@@ -65,8 +65,8 @@ class Manage
                 $wb_add_css    = !empty($_POST['wb_add_css']);
                 $wb_add_jslib  = !empty($_POST['wb_add_jslib']);
                 $wb_add_jsglue = !empty($_POST['wb_add_jsglue']);
-                $custom_css    = (empty($_POST['custom_css'])) ? '' : Html::sanitizeURL($_POST['custom_css']);
-                $custom_jslib  = (empty($_POST['custom_jslib'])) ? '' : Html::sanitizeURL($_POST['custom_jslib']);
+                $custom_css    = !empty($_POST['custom_css'])   && is_string($_POST['custom_css']) ? Html::sanitizeURL($_POST['custom_css']) : '';
+                $custom_jslib  = !empty($_POST['custom_jslib']) && is_string($_POST['custom_jslib']) ? Html::sanitizeURL($_POST['custom_jslib']) : '';
 
                 $settings->put('active', $active, App::blogWorkspace()::NS_BOOL);
                 $settings->put('no_format', $no_format, App::blogWorkspace()::NS_BOOL);
@@ -121,8 +121,8 @@ class Manage
         $wb_add_css    = (bool) $settings->add_css;
         $wb_add_jslib  = (bool) $settings->add_jslib;
         $wb_add_jsglue = (bool) $settings->add_jsglue;
-        $custom_css    = (string) $settings->custom_css;
-        $custom_jslib  = (string) $settings->custom_jslib;
+        $custom_css    = is_string($custom_css = $settings->custom_css) ? $custom_css : '';
+        $custom_jslib  = is_string($custom_jslib = $settings->custom_jslib) ? $custom_jslib : '';
 
         $jstb_icon = (new Span())->class('jstb_icon')->render();
 
