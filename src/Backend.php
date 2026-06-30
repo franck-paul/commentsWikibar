@@ -45,11 +45,11 @@ class Backend
         App::behavior()->addBehaviors([
             'adminDashboardFavoritesV2' => static function (Favorites $favs): string {
                 $favs->register('commentsWikibar', [
-                    'title'       => __('Comments Wikibar'),
-                    'url'         => My::manageUrl(),
-                    'small-icon'  => My::icons(),
-                    'large-icon'  => My::icons(),
-                    'permissions' => My::checkContext(My::MENU),
+                    'title'          => __('Comments Wikibar'),
+                    'url'            => My::manageUrl(),
+                    'menu-icon'      => My::icon(),
+                    'dashboard-icon' => My::icon(),
+                    'permissions'    => My::checkContext(My::MENU),
                 ]);
 
                 return '';
