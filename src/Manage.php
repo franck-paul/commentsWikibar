@@ -82,9 +82,9 @@ class Manage
                 $settings->put('custom_jslib', $custom_jslib, App::blogWorkspace()::NS_STRING);
 
                 // Active wikibar enforces wiki syntax in blog comments
-                $wiki_comments = (bool) App::blog()->settings()->system->wiki_comments;
+                $wiki_comments = (bool) App::blog()->settings()->get('system')->getBool('wiki_comments');
                 if ($active && !$wiki_comments) {
-                    App::blog()->settings()->system->put('wiki_comments', true, App::blogWorkspace()::NS_BOOL);
+                    App::blog()->settings()->get('system')->put('wiki_comments', true, App::blogWorkspace()::NS_BOOL);
                 }
 
                 App::blog()->triggerBlog();
@@ -111,18 +111,18 @@ class Manage
         $settings = My::settings();
 
         // Getting current parameters
-        $active        = (bool) $settings->active;
-        $no_format     = (bool) $settings->no_format;
-        $no_br         = (bool) $settings->no_br;
-        $no_list       = (bool) $settings->no_list;
-        $no_pre        = (bool) $settings->no_pre;
-        $no_quote      = (bool) $settings->no_quote;
-        $no_url        = (bool) $settings->no_url;
-        $wb_add_css    = (bool) $settings->add_css;
-        $wb_add_jslib  = (bool) $settings->add_jslib;
-        $wb_add_jsglue = (bool) $settings->add_jsglue;
-        $custom_css    = is_string($custom_css = $settings->custom_css) ? $custom_css : '';
-        $custom_jslib  = is_string($custom_jslib = $settings->custom_jslib) ? $custom_jslib : '';
+        $active        = $settings->getBool('active', false);
+        $no_format     = $settings->getBool('no_format', false);
+        $no_br         = $settings->getBool('no_br', false);
+        $no_list       = $settings->getBool('no_list', false);
+        $no_pre        = $settings->getBool('no_pre', false);
+        $no_quote      = $settings->getBool('no_quote', false);
+        $no_url        = $settings->getBool('no_url', false);
+        $wb_add_css    = $settings->getBool('add_css', false);
+        $wb_add_jslib  = $settings->getBool('add_jslib', false);
+        $wb_add_jsglue = $settings->getBool('add_jsglue', false);
+        $custom_css    = $settings->getStr('custom_css', false);
+        $custom_jslib  = $settings->getStr('custom_jslib', false);
 
         $jstb_icon = (new Span())->class('jstb_icon')->render();
 

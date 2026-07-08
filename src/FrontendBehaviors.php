@@ -30,7 +30,7 @@ class FrontendBehaviors
     protected static function canActivate(): bool
     {
         $settings = My::settings();
-        if ($settings->active && App::blog()->settings()->system->wiki_comments) {
+        if ($settings->getBool('active') && App::blog()->settings()->get('system')->getBool('wiki_comments')) {
             $supported_modes = new ArrayObject(['post', 'pages']);
 
             App::behavior()->callBehavior('initCommentsWikibar', $supported_modes);
@@ -46,7 +46,7 @@ class FrontendBehaviors
     {
         if (self::canActivate()) {
             $settings = My::settings();
-            if ($settings->no_format) {
+            if ($settings->getBool('no_format')) {
                 $wiki->setOpt('active_strong', 0);
                 $wiki->setOpt('active_em', 0);
                 $wiki->setOpt('active_ins', 0);
@@ -56,25 +56,25 @@ class FrontendBehaviors
                 $wiki->setOpt('active_i', 0);
             }
 
-            if ($settings->no_br) {
+            if ($settings->getBool('no_br')) {
                 $wiki->setOpt('active_br', 0);
             }
 
-            if ($settings->no_list) {
+            if ($settings->getBool('no_list')) {
                 $wiki->setOpt('active_lists', 0);
             }
 
-            if ($settings->no_pre) {
+            if ($settings->getBool('no_pre')) {
                 $wiki->setOpt('active_pre', 0);
             }
 
-            if ($settings->no_quote) {
+            if ($settings->getBool('no_quote')) {
                 $wiki->setOpt('active_quote', 0);
-            } elseif (App::blog()->settings()->system->wiki_comments) {
+            } elseif (App::blog()->settings()->get('system')->getBool('wiki_comments')) {
                 $wiki->setOpt('active_quote', 1);
             }
 
-            if ($settings->no_url) {
+            if ($settings->getBool('no_url')) {
                 $wiki->setOpt('active_urls', 0);
             }
         }
@@ -92,9 +92,9 @@ class FrontendBehaviors
         if (self::canActivate()) {
             $settings = My::settings();
             // CSS
-            if ($settings->add_css) {
+            if ($settings->getBool('add_css')) {
                 $css        = '';
-                $custom_css = trim(is_string($custom_css = $settings->custom_css) ? $custom_css : '');
+                $custom_css = trim((string) $settings->getStr('custom_css', false));
                 if ($custom_css !== '') {
                     $css_file = '';
                     if (str_starts_with($custom_css, '/') || preg_match('!^https?://.+!', $custom_css)) {
@@ -102,8 +102,8 @@ class FrontendBehaviors
                         $css_file = $custom_css;
                     } else {
                         // Relative URL
-                        $theme      = is_string($theme = App::blog()->settings()->system->theme) ? $theme : '';
-                        $themes_url = is_string($themes_url = App::blog()->settings()->system->themes_url) ? $themes_url : '';
+                        $theme      = App::blog()->settings()->get('system')->getStr('theme', false);
+                        $themes_url = App::blog()->settings()->get('system')->getStr('themes_url', false);
                         if ($theme !== '') {
                             $css_file = $themes_url . '/' . $theme . '/' . $custom_css;
                         }
@@ -120,16 +120,16 @@ class FrontendBehaviors
             }
 
             // JS
-            if ($settings->add_jslib) {
-                $custom_jslib = trim(is_string($custom_jslib = $settings->custom_jslib) ? $custom_jslib : '');
+            if ($settings->getBool('add_jslib')) {
+                $custom_jslib = trim((string) $settings->getStr('custom_jslib', false));
                 $js           = '';
                 if ($custom_jslib !== '') {
                     $js_file = '';
                     if (str_starts_with($custom_jslib, '/') || preg_match('!^https?://.+!', $custom_jslib)) {
                         $js_file = $custom_jslib;
                     } else {
-                        $theme      = is_string($theme = App::blog()->settings()->system->theme) ? $theme : '';
-                        $themes_url = is_string($themes_url = App::blog()->settings()->system->themes_url) ? $themes_url : '';
+                        $theme      = App::blog()->settings()->get('system')->getStr('theme', false);
+                        $themes_url = App::blog()->settings()->get('system')->getStr('themes_url', false);
                         if ($theme !== '') {
                             $js_file = $themes_url . '/' . $theme . '/' . $custom_jslib;
                         }
@@ -145,10 +145,10 @@ class FrontendBehaviors
                 echo $js;
             }
 
-            if ($settings->add_jsglue) {
+            if ($settings->getBool('add_jsglue')) {
                 $mode = 'wiki';
                 // Formatting Markdown activated
-                if (App::blog()->settings()->system->markdown_comments) {
+                if (App::blog()->settings()->get('system')->getBool('markdown_comments')) {
                     $mode = 'markdown';
                 }
 
@@ -227,12 +227,12 @@ class FrontendBehaviors
                         'link'    => ['title' => __('Link')],
                     ],
                     'options' => [
-                        'no_format' => $settings->no_format,
-                        'no_br'     => $settings->no_br,
-                        'no_list'   => $settings->no_list,
-                        'no_pre'    => $settings->no_pre,
-                        'no_quote'  => $settings->no_quote,
-                        'no_url'    => $settings->no_url,
+                        'no_format' => $settings->getBool('no_format', false),
+                        'no_br'     => $settings->getBool('no_br', false),
+                        'no_list'   => $settings->getBool('no_list', false),
+                        'no_pre'    => $settings->getBool('no_pre', false),
+                        'no_quote'  => $settings->getBool('no_quote', false),
+                        'no_url'    => $settings->getBool('no_url', false),
                     ],
                     'foreign_dialog' => [
                         'title'  => __('Foreign text'),
