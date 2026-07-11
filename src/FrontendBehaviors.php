@@ -34,7 +34,7 @@ class FrontendBehaviors
             $supported_modes = new ArrayObject(['post', 'pages']);
 
             App::behavior()->callBehavior('initCommentsWikibar', $supported_modes);
-            if (in_array(App::url()->getType(), (array) $supported_modes)) {
+            if (App::url()->isType($supported_modes->getArrayCopy())) {
                 return true;
             }
         }
