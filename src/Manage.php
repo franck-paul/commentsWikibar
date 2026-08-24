@@ -173,7 +173,7 @@ class Manage
                                 ->label((new Label(__('Disable characters format'), Label::INSIDE_TEXT_AFTER))),
                             (new Span())
                                 ->class('jstElements')
-                                ->extra('aria-hidden="true"')
+                                ->ariaHidden(true)
                                 ->items([
                                     (new Btn())
                                         ->disabled(true)
@@ -218,7 +218,7 @@ class Manage
                                 ->label((new Label(__('Disable breakline'), Label::INSIDE_TEXT_AFTER))),
                             (new Span())
                                 ->class('jstElements')
-                                ->extra('aria-hidden="true"')
+                                ->ariaHidden(true)
                                 ->items([
                                     (new Btn())
                                         ->disabled(true)
@@ -233,7 +233,7 @@ class Manage
                                 ->label((new Label(__('Disable list'), Label::INSIDE_TEXT_AFTER))),
                             (new Span())
                                 ->class('jstElements')
-                                ->extra('aria-hidden="true"')
+                                ->ariaHidden(true)
                                 ->items([
                                     (new Btn())
                                         ->disabled(true)
@@ -253,7 +253,7 @@ class Manage
                                 ->label((new Label(__('Disable preformatted text'), Label::INSIDE_TEXT_AFTER))),
                             (new Span())
                                 ->class('jstElements')
-                                ->extra('aria-hidden="true"')
+                                ->ariaHidden(true)
                                 ->items([
                                     (new Btn())
                                         ->disabled(true)
@@ -268,7 +268,7 @@ class Manage
                                 ->label((new Label(__('Disable blockquote'), Label::INSIDE_TEXT_AFTER))),
                             (new Span())
                                 ->class('jstElements')
-                                ->extra('aria-hidden="true"')
+                                ->ariaHidden(true)
                                 ->items([
                                     (new Btn())
                                         ->disabled(true)
@@ -283,7 +283,7 @@ class Manage
                                 ->label((new Label(__('Disable link'), Label::INSIDE_TEXT_AFTER))),
                             (new Span())
                                 ->class('jstElements')
-                                ->extra('aria-hidden="true"')
+                                ->ariaHidden(true)
                                 ->items([
                                     (new Btn())
                                         ->disabled(true)
