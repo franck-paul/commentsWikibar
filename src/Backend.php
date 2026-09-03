@@ -43,8 +43,8 @@ class Backend
 
         /* Register favorite */
         App::behavior()->addBehaviors([
-            'adminDashboardFavoritesV2' => static function (Favorites $favs): string {
-                $favs->register('commentsWikibar', [
+            'adminDashboardFavoritesV2' => static function (Favorites $favorites): string {
+                $favorites->register('commentsWikibar', [
                     'title'          => __('Comments Wikibar'),
                     'url'            => My::manageUrl(),
                     'menu-icon'      => My::icon(),

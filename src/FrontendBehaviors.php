@@ -31,10 +31,10 @@ class FrontendBehaviors
     {
         $settings = My::settings();
         if ($settings->getBool('active') && App::blog()->settings()->get('system')->getBool('wiki_comments')) {
-            $supported_modes = new ArrayObject(['post', 'pages']);
+            $arrayObject = new ArrayObject(['post', 'pages']);
 
-            App::behavior()->callBehavior('initCommentsWikibar', $supported_modes);
-            if (App::url()->isType($supported_modes->getArrayCopy())) {
+            App::behavior()->callBehavior('initCommentsWikibar', $arrayObject);
+            if (App::url()->isType($arrayObject->getArrayCopy())) {
                 return true;
             }
         }
@@ -42,40 +42,40 @@ class FrontendBehaviors
         return false;
     }
 
-    public static function coreInitWikiComment(WikiToHtml $wiki): string
+    public static function coreInitWikiComment(WikiToHtml $wikiToHtml): string
     {
         if (self::canActivate()) {
             $settings = My::settings();
             if ($settings->getBool('no_format')) {
-                $wiki->setOpt('active_strong', 0);
-                $wiki->setOpt('active_em', 0);
-                $wiki->setOpt('active_ins', 0);
-                $wiki->setOpt('active_del', 0);
-                $wiki->setOpt('active_q', 0);
-                $wiki->setOpt('active_code', 0);
-                $wiki->setOpt('active_i', 0);
+                $wikiToHtml->setOpt('active_strong', 0);
+                $wikiToHtml->setOpt('active_em', 0);
+                $wikiToHtml->setOpt('active_ins', 0);
+                $wikiToHtml->setOpt('active_del', 0);
+                $wikiToHtml->setOpt('active_q', 0);
+                $wikiToHtml->setOpt('active_code', 0);
+                $wikiToHtml->setOpt('active_i', 0);
             }
 
             if ($settings->getBool('no_br')) {
-                $wiki->setOpt('active_br', 0);
+                $wikiToHtml->setOpt('active_br', 0);
             }
 
             if ($settings->getBool('no_list')) {
-                $wiki->setOpt('active_lists', 0);
+                $wikiToHtml->setOpt('active_lists', 0);
             }
 
             if ($settings->getBool('no_pre')) {
-                $wiki->setOpt('active_pre', 0);
+                $wikiToHtml->setOpt('active_pre', 0);
             }
 
             if ($settings->getBool('no_quote')) {
-                $wiki->setOpt('active_quote', 0);
+                $wikiToHtml->setOpt('active_quote', 0);
             } elseif (App::blog()->settings()->get('system')->getBool('wiki_comments')) {
-                $wiki->setOpt('active_quote', 1);
+                $wikiToHtml->setOpt('active_quote', 1);
             }
 
             if ($settings->getBool('no_url')) {
-                $wiki->setOpt('active_urls', 0);
+                $wikiToHtml->setOpt('active_urls', 0);
             }
         }
 

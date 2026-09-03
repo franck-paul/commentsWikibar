@@ -46,9 +46,9 @@ class Install
                 }
 
                 // Change settings names (remove commentswikibar_ prefix in them)
-                $rename = static function (string $name, BlogWorkspaceInterface $settings): void {
-                    if ($settings->settingExists('commentswikibar_' . $name, true)) {
-                        $settings->rename('commentswikibar_' . $name, $name);
+                $rename = static function (string $name, BlogWorkspaceInterface $blogWorkspace): void {
+                    if ($blogWorkspace->settingExists('commentswikibar_' . $name, true)) {
+                        $blogWorkspace->rename('commentswikibar_' . $name, $name);
                     }
                 };
 
