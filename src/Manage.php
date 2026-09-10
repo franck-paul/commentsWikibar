@@ -22,6 +22,7 @@ use Dotclear\Helper\Html\Form\Div;
 use Dotclear\Helper\Html\Form\Form;
 use Dotclear\Helper\Html\Form\Input;
 use Dotclear\Helper\Html\Form\Label;
+use Dotclear\Helper\Html\Form\Note;
 use Dotclear\Helper\Html\Form\Para;
 use Dotclear\Helper\Html\Form\Span;
 use Dotclear\Helper\Html\Form\Submit;
@@ -156,16 +157,13 @@ class Manage
                                 ->value(1)
                                 ->label((new Label(__('Enable Comments Wikibar'), Label::INSIDE_TEXT_AFTER))),
                         ]),
-                        (new Para())->class('form-note')->items([
-                            (new Text(
-                                null,
-                                __('Activating this plugin also <strong>enforces</strong> Dotclear wiki syntax in blog comments') . '<br>' .
+                        (new Note())
+                            ->class('form-note')
+                            ->text(__('Activating this plugin also <strong>enforces</strong> Dotclear wiki syntax in blog comments') . '<br>' .
                                 sprintf(
                                     __('It also <strong>enforces</strong> Markdown syntax if it\'s <a href="%s">enabled</a> for comments'),
                                     App::backend()->url()->get('admin.blog.pref') . '#params.legacy_markdown'
-                                )
-                            )),
-                        ]),
+                                )),
                         (new Text('h3', __('Options'))),
                         (new Para())->items([
                             (new Checkbox('no_format', $no_format))
@@ -314,15 +312,9 @@ class Manage
                                     ->value($custom_css)
                                     ->label((new Label(__('Use custom CSS:'), Label::OUTSIDE_TEXT_BEFORE))),
                             ]),
-                        (new Para())
+                        (new Note())
                             ->class('form-note')
-                            ->items([
-                                (new Text(
-                                    null,
-                                    __('You can use a custom CSS by providing its location.') . '<br>' .
-                                    __('A location beginning with a / is treated as absolute, else it is treated as relative to the blog\'s current theme URL'),
-                                )),
-                            ]),
+                            ->text(__('You can use a custom CSS by providing its location.') . '<br>' . __('A location beginning with a / is treated as absolute, else it is treated as relative to the blog\'s current theme URL')),
                         (new Text('h3', __('Javascript inclusion'))),
                         (new Para())
                             ->items([
@@ -338,15 +330,9 @@ class Manage
                                     ->value($custom_jslib)
                                     ->label((new Label(__('Use custom JS library:'), Label::OUTSIDE_TEXT_BEFORE))),
                             ]),
-                        (new Para())
+                        (new Note())
                             ->class('form-note')
-                            ->items([
-                                (new Text(
-                                    null,
-                                    __('You can use a custom JS library by providing its location.') . '<br>' .
-                                    __('A location beginning with a / is treated as absolute, else it is treated as relative to the blog\'s current theme URL'),
-                                )),
-                            ]),
+                            ->text(__('You can use a custom JS library by providing its location.') . '<br>' . __('A location beginning with a / is treated as absolute, else it is treated as relative to the blog\'s current theme URL')),
                         (new Para())
                             ->items([
                                 (new Checkbox('wb_add_jsglue', $wb_add_jsglue))
