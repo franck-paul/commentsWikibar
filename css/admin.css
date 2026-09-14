@@ -1,10 +1,10 @@
 .jstElements {
   display: inline-flex;
   font-size: 2em;
-  padding-left: 0.75em;
+  padding-inline-start: 0.75em;
 
   button {
-    width: 1.2em;
-    height: 1.2em;
+    inline-size: 1.2em;
+    block-size: 1.2em;
   }
 }

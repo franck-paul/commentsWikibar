@@ -250,7 +250,7 @@ dotclear.wikibar = {
         node.setAttribute('aria-hidden', 'true');
         node.className = 'jstSpacer';
         if (this.width !== null) {
-          node.style.marginRight = `${this.width}px`;
+          node.style.marginInlineEnd = `${this.width}px`;
         }
         return node;
       }
@@ -559,7 +559,11 @@ dotclear.wikibar = {
               this.encloseSelection('', '', (selection) => ` ${selection.replaceAll('\r', '').replaceAll('\n', '\n ')}`);
             },
             markdown() {
-              this.encloseSelection('\n', '', (selection) => `    ${selection.replaceAll('\r', '').replaceAll('\n', '\n    ')}`);
+              this.encloseSelection(
+                '\n',
+                '',
+                (selection) => `    ${selection.replaceAll('\r', '').replaceAll('\n', '\n    ')}`,
+              );
             },
           },
         },
@@ -884,7 +888,7 @@ dotclear.wikibar = {
         if (element.classList.contains('jstb_icon')) continue;
         // move to the left all tooltips that are too close from the right border of the viewport
         const currentPos = element.parentNode.getBoundingClientRect().left;
-        element.style.left = '0px'; // we reset all positions
+        element.style.insetInlineStart = '0px'; // we reset all positions
 
         // we need to switch between sr-only and hidden to be able to get the width of the tooltips
         element.classList.add('hidden');
@@ -894,7 +898,7 @@ dotclear.wikibar = {
         element.classList.remove('hidden');
         if (width + currentPos > document.documentElement.clientWidth - 15) {
           const diff = Math.trunc(-1 * (width + currentPos - document.documentElement.clientWidth + 15));
-          element.style.left = `${diff}px`;
+          element.style.insetInlineStart = `${diff}px`;
         }
       }
     }

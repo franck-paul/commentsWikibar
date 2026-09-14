@@ -2,17 +2,19 @@
   display: flex;
   gap: 0.5em;
   flex-wrap: wrap;
-  margin: 0.125em 0 0.25em;
+  margin-block-start: 0.125em;
+  margin-block-end: 0.25em;
+  margin-inline: 0;
 
   .sr-only {
     clip-path: inset(100%);
     clip: rect(1px, 1px, 1px, 1px);
-    height: 1px;
+    block-size: 1px;
     overflow: hidden;
     position: absolute;
     white-space: nowrap;
-    width: 1px;
-    top: -10000em;
+    inline-size: 1px;
+    inset-block-start: -10000em;
   }
   .hidden {
     visibility: hidden;
@@ -30,8 +32,8 @@
   }
 
   button {
-    width: 2rem;
-    height: 1.8rem;
+    inline-size: 2rem;
+    block-size: 1.8rem;
     padding: 0;
     border: 1px solid light-dark(#767676, #ddd);
     border-radius: 0.2em;
@@ -84,8 +86,8 @@
 
     span.jstb_icon {
       display: inline-block;
-      width: 1.9rem;
-      height: 1.7rem;
+      inline-size: 1.9rem;
+      block-size: 1.7rem;
 
       /* Couleur de l'icône (modifiable à volonté) */
       background-color: currentColor;
@@ -98,7 +100,7 @@
 
     span:not(.jstb_icon) {
       position: absolute;
-      bottom: 2rem;
+      inset-block-end: 2rem;
       color: light-dark(#333, #fafafa);
       background-color: light-dark(#fff, #333);
       padding: 0.25em;
@@ -123,7 +125,7 @@
 }
 
 .jstSpacer {
-  width: 0.25em;
+  inline-size: 0.25em;
 }
 
 .jstDialog {
@@ -136,7 +138,7 @@
   h1 {
     font-size: 1.125em;
     font-weight: bold;
-    border-bottom: 1px solid;
+    border-block-end: 1px solid;
   }
 
   .field {
@@ -145,7 +147,7 @@
     grid-template-columns: 1fr 2fr;
 
     label {
-      width: inherit;
+      inline-size: inherit;
     }
   }
 
@@ -158,7 +160,7 @@
   }
 
   button {
-    height: 1.8rem;
+    block-size: 1.8rem;
     border: 1px solid light-dark(#767676, #ddd);
     border-radius: 0.2em;
     position: relative;
