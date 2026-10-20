@@ -3,7 +3,7 @@
 [![Release](https://img.shields.io/github/v/release/franck-paul/commentsWikibar)](https://github.com/franck-paul/commentsWikibar/releases)
 [![Date](https://img.shields.io/github/release-date/franck-paul/commentsWikibar)](https://github.com/franck-paul/commentsWikibar/releases)
 [![Issues](https://img.shields.io/github/issues/franck-paul/commentsWikibar)](https://github.com/franck-paul/commentsWikibar/issues)
-[![License](https://img.shields.io/github/license/franck-paul/commentsWikibar)](https://github.com/franck-paul/commentsWikibar/blob/master/LICENSE)
+[![License](https://img.shields.io/github/license/franck-paul/commentsWikibar)](https://github.com/franck-paul/commentsWikibar/blob/main/LICENSE)
 
 Adds a formatting toolbar when public comments use the Dotclear wiki syntax in Dotclear blog.
 
