@@ -94,7 +94,7 @@ class FrontendBehaviors
             // CSS
             if ($settings->getBool('add_css')) {
                 $css        = '';
-                $custom_css = trim((string) $settings->getStr('custom_css', false));
+                $custom_css = trim($settings->getStr('custom_css', false));
                 if ($custom_css !== '') {
                     $css_file = '';
                     if (str_starts_with($custom_css, '/') || preg_match('!^https?://.+!', $custom_css)) {
@@ -121,7 +121,7 @@ class FrontendBehaviors
 
             // JS
             if ($settings->getBool('add_jslib')) {
-                $custom_jslib = trim((string) $settings->getStr('custom_jslib', false));
+                $custom_jslib = trim($settings->getStr('custom_jslib', false));
                 $js           = '';
                 if ($custom_jslib !== '') {
                     $js_file = '';
