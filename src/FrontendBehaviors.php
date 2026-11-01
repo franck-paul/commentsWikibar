@@ -30,7 +30,7 @@ class FrontendBehaviors
     protected static function canActivate(): bool
     {
         $settings = My::settings();
-        if ($settings->getBool('active') && App::blog()->settings()->get('system')->getBool('wiki_comments')) {
+        if ($settings->getBool('active', false) && App::blog()->settings()->get('system')->getBool('wiki_comments', false)) {
             $arrayObject = new ArrayObject(['post', 'pages']);
 
             App::behavior()->callBehavior('initCommentsWikibar', $arrayObject);
@@ -46,7 +46,7 @@ class FrontendBehaviors
     {
         if (self::canActivate()) {
             $settings = My::settings();
-            if ($settings->getBool('no_format')) {
+            if ($settings->getBool('no_format', false)) {
                 $wikiToHtml->setOpt('active_strong', 0);
                 $wikiToHtml->setOpt('active_em', 0);
                 $wikiToHtml->setOpt('active_ins', 0);
@@ -56,25 +56,25 @@ class FrontendBehaviors
                 $wikiToHtml->setOpt('active_i', 0);
             }
 
-            if ($settings->getBool('no_br')) {
+            if ($settings->getBool('no_br', false)) {
                 $wikiToHtml->setOpt('active_br', 0);
             }
 
-            if ($settings->getBool('no_list')) {
+            if ($settings->getBool('no_list', false)) {
                 $wikiToHtml->setOpt('active_lists', 0);
             }
 
-            if ($settings->getBool('no_pre')) {
+            if ($settings->getBool('no_pre', false)) {
                 $wikiToHtml->setOpt('active_pre', 0);
             }
 
-            if ($settings->getBool('no_quote')) {
+            if ($settings->getBool('no_quote', false)) {
                 $wikiToHtml->setOpt('active_quote', 0);
-            } elseif (App::blog()->settings()->get('system')->getBool('wiki_comments')) {
+            } elseif (App::blog()->settings()->get('system')->getBool('wiki_comments', false)) {
                 $wikiToHtml->setOpt('active_quote', 1);
             }
 
-            if ($settings->getBool('no_url')) {
+            if ($settings->getBool('no_url', false)) {
                 $wikiToHtml->setOpt('active_urls', 0);
             }
         }
@@ -92,12 +92,12 @@ class FrontendBehaviors
         if (self::canActivate()) {
             $settings = My::settings();
             // CSS
-            if ($settings->getBool('add_css')) {
+            if ($settings->getBool('add_css', false)) {
                 $css        = '';
                 $custom_css = trim($settings->getStr('custom_css', false));
                 if ($custom_css !== '') {
                     $css_file = '';
-                    if (str_starts_with($custom_css, '/') || preg_match('!^https?://.+!', $custom_css)) {
+                    if (str_starts_with($custom_css, '/') || (bool) preg_match('!^https?://.+!', $custom_css)) {
                         // Absolute URL
                         $css_file = $custom_css;
                     } else {
@@ -120,12 +120,12 @@ class FrontendBehaviors
             }
 
             // JS
-            if ($settings->getBool('add_jslib')) {
+            if ($settings->getBool('add_jslib', false)) {
                 $custom_jslib = trim($settings->getStr('custom_jslib', false));
                 $js           = '';
                 if ($custom_jslib !== '') {
                     $js_file = '';
-                    if (str_starts_with($custom_jslib, '/') || preg_match('!^https?://.+!', $custom_jslib)) {
+                    if (str_starts_with($custom_jslib, '/') || (bool) preg_match('!^https?://.+!', $custom_jslib)) {
                         $js_file = $custom_jslib;
                     } else {
                         $theme      = App::blog()->settings()->get('system')->getStr('theme', false);
@@ -145,10 +145,10 @@ class FrontendBehaviors
                 echo $js;
             }
 
-            if ($settings->getBool('add_jsglue')) {
+            if ($settings->getBool('add_jsglue', false)) {
                 $mode = 'wiki';
                 // Formatting Markdown activated
-                if (App::blog()->settings()->get('system')->getBool('markdown_comments')) {
+                if (App::blog()->settings()->get('system')->getBool('markdown_comments', false)) {
                     $mode = 'markdown';
                 }
 
